@@ -2,15 +2,17 @@
 Global configuration variables for accessing the Echo Nest web API.
 """
 
-API_KEY = 'Replace this text with your Echo Nest API key.'
-"""
-Replace this text with your own API key.
-You may obtain yours from 
-http://developer.echonest.com/account/register/
-"""
+ECHO_NEST_API_KEY = None
 
 __version__ = "$Revision: 0 $"
 # $Source$
+
+import os
+
+if(os.environ['ECHO_NEST_API_KEY']):
+    ECHO_NEST_API_KEY = os.environ['ECHO_NEST_API_KEY']
+else:
+    ECHO_NEST_API_KEY = None
 
 
 API_HOST = 'developer.echonest.com'
