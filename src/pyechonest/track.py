@@ -6,7 +6,7 @@ http://developer.echonest.com/ for details.
 """
 
 from pyechonest.decorators import memoized
-from pyechonest import util
+from pyechonest import util, config
 import os
 
 class Track(object):
@@ -39,7 +39,6 @@ class Track(object):
         params = {'id': self.identifier}
         return parseToFloat(util.call('get_duration', params).findall("analysis/duration"))
         
-
     @property
     @memoized
     def end_of_fade_in(self):
@@ -84,7 +83,7 @@ class Track(object):
 
     @property
     def identifier(self):
-        """A unique identifier for an artist.
+        """A unique identifier for a track.
         See http://developer.echonest.com/docs/datatypes/
         for more information"""
         return self._identifier
@@ -103,13 +102,17 @@ class Track(object):
 TRUTH = {True: 'Y', False: 'N'}
 
 def upload(filename_or_url, wait=False):
-    if os.path.isfile( filename_or_url ) : 
-        # If file, upload using POST
-        response = util.postChunked( host = config.API_HOST, 
+    if not filename_or_url.startswith("http://"):
+        if os.path.isfile( filename_or_url ) : 
+            # If file, upload using POST
+            response = util.postChunked( host = config.API_HOST, 
                                      selector = config.API_SELECTOR + "upload",
                                      fields = {"api_key":config.ECHO_NEST_API_KEY, "wait":TRUTH[wait], 'version': 3}, 
-                                     files = (( 'file', open(filename, 'rb')), )
+                                     files = (( 'file', open(filename_or_url, 'rb')), )
                                      )
+            response = util.parse_http_response(response).findall("track")
+        else:
+            raise Exception("File " + filename_or_url + " not found.")
     else :
         # Assume the filename is a URL. Call the upload method w/o a post.
         response = util.call('upload',{'url':filename_or_url, "wait":TRUTH[wait]}, POST=True).findall("track")

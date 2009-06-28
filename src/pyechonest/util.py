@@ -22,6 +22,8 @@ SUCCESS_STATUS_CODES = ( 0, )
 FAILURE_THING_ID_STATUS_CODES = (7, 6)
 FAILURE_API_KEY_STATUS_CODES = (12,)
 
+def parse_http_response(response):
+    return check_status(fromstring(response))
 
 def call(method, params, POST=False): 
     params.update({'api_key': config.ECHO_NEST_API_KEY, 'version': 3})
@@ -32,7 +34,7 @@ def call(method, params, POST=False):
     else:
         url = 'http://%s%s%s?%s' % (config.API_HOST, config.API_SELECTOR, method, params)
         f = urllib.urlopen(url)
-    return check_status(fromstring(f.read()))
+    return parse_http_response(f.read())
 
 def check_status(etree):
     code = int(etree._children[0]._children[0].text)
@@ -70,30 +72,6 @@ class EchoNestAPIThingIDError(EchoNestAPIError):
     pass
 
 
-def parseXMLString( xmlString ) :
-    """
-    This function is meant to modularize the handling of XML strings
-    returned by the web API.  Overriding this method will change how
-    the entire package parses XML strings.
-
-    :param xmlString: The plaintext string of XML to parse.
-
-    :return: An object representation of the XML string, in this case a
-        xml.dom.minidom representation.
-    """
-    doc = xml.dom.minidom.parseString(xmlString)
-    status_code = int(doc.getElementsByTagName('code')[0].firstChild.data)
-    if status_code not in SUCCESS_STATUS_CODES :
-        status_message = doc.getElementsByTagName('message')[0].firstChild.data
-        if status_code in FAILURE_API_KEY_STATUS_CODES:
-            raise EchoNestAPIKeyError(status_code, status_message)
-        elif status_code in FAILURE_THING_ID_STATUS_CODES:
-            raise EchoNestAPIThingIDError(status_code, status_message)
-        else:
-            raise EchoNestAPIError(status_code, status_message)
-    return doc
-
-
 def postChunked(host, selector, fields, files):
     """
     Attempt to replace postMultipart() with nearly-identical interface.
@@ -116,18 +94,7 @@ def postChunked(host, selector, fields, files):
     return result
     
     
-def trackFunctionPrototype( method, id) : 
-    """
-    This function is the basis for most of the 'get_xxx' functions in this package.
-    """
-    # Check if ID is an MD5 string, if so, use that instead of ID.
-    if(len(id)<32):
-        params = urllib.urlencode({'id': id, 'api_key': config.ECHO_NEST_API_KEY})
-    else:
-        params = urllib.urlencode({'md5': id, 'api_key': config.ECHO_NEST_API_KEY})
-    url = 'http://%s%s%s?%s' % (config.API_HOST, config.API_SELECTOR, method, params)
-    f = urllib.urlopen( url )
-    return parseXMLString(f.read())
+
     
     
     
