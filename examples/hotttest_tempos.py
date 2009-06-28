@@ -27,7 +27,7 @@ def main():
         # Get the latest 15 mp3 files EN's crawlers have found
         for audio in a.audio:
             try:
-                # Analyze the URL of the file (note: this does not upload anything from your computer)
+                # Analyze the URL of the file 
                 t = track.upload(audio["url"])
                 # And print the BPM
                 print audio["title"] + " -- " + str(t.tempo["value"])  + " bpm"  # show the tempo
