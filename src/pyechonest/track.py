@@ -15,6 +15,8 @@ class Track(object):
             identifier = 'music://id.echonest.com/~/TR/' + identifier
         self._identifier = identifier
 
+    # These guys are all list of events (beats, etc)
+    
     @property
     @memoized
     def bars(self):
@@ -33,6 +35,9 @@ class Track(object):
         params = {'id': self.identifier}
         return parseToListOfEvents(util.call('get_tatums', params).findall("analysis/tatum"))
 
+
+    # These guys are all single float #s    
+    
     @property
     @memoized
     def duration(self):
@@ -81,6 +86,69 @@ class Track(object):
         params = {'id': self.identifier}
         return parseToFloat(util.call('get_time_signature', params).findall("analysis/time_signature"),with_confidence=True)
 
+
+    # And now the "special ones"
+    
+    @property
+    @memoized
+    def sections(self):
+        params = {'id':self.identifier}
+        tree = util.call('get_sections', params)
+        output = []
+        nodes = tree.findall('analysis/section')
+        for n in nodes:
+            start = float(n.attrib.get('start'))
+            duration = float(n.attrib.get('duration'))
+            output.append({"start":start,"duration":duration})
+        return output
+
+    @property
+    @memoized
+    def metadata(self):
+        params = {'id':self.identifier}
+        tree = util.call('get_metadata', params)
+        output = {}
+        for n in tree.findall("analysis")[0].getchildren():
+            output[n.tag] = n.text
+        return output
+
+    @property
+    @memoized
+    def segments(self):
+        params = {'id':self.identifier}
+        tree = util.call('get_segments', params)
+        output = []
+        nodes = tree.findall('analysis/segment')
+        for n in nodes:
+            start = float(n.attrib.get('start'))
+            duration = float(n.attrib.get('duration'))
+
+            loudnessnodes = n.findall('loudness/dB')
+            loudness_end = None
+            for l in loudnessnodes:
+                if 'type' in l.attrib:
+                    time_loudness_max = float(l.attrib.get('time'))
+                    loudness_max = float(l.text)
+                else:
+                    if float(l.attrib.get('time'))!=0:
+                        loudness_end = float(l.text)
+                    else:
+                        loudness_begin = float(l.text)
+
+            pitchnodes = n.findall('pitches/pitch')
+            pitches=[]
+            for p in pitchnodes:
+                pitches.append(float(p.text))
+
+            timbrenodes = n.findall('timbre/coeff')
+            timbre=[]
+            for t in timbrenodes:
+                timbre.append(float(t.text))
+
+            output.append({"start":start,"duration":duration,"pitches":pitches,"timbre":timbre,"loudness_begin":loudness_begin,
+                            "loudness_max":loudness_max,"time_loudness_max":time_loudness_max,"loudness_end":loudness_end})
+        return output
+        
     @property
     def identifier(self):
         """A unique identifier for a track.
@@ -101,7 +169,10 @@ class Track(object):
 
 TRUTH = {True: 'Y', False: 'N'}
 
-def upload(filename_or_url, wait=False):
+def upload(filename_or_url, wait=True):
+    """
+    Upload a file or give a URL to the EN analyze API. If you call this with wait=False it will return immediately.
+    """
     if not filename_or_url.startswith("http://"):
         if os.path.isfile( filename_or_url ) : 
             # If file, upload using POST
@@ -121,10 +192,11 @@ def upload(filename_or_url, wait=False):
         return Track(response[0].attrib.get("id"))
     else:
         return None
-    
-
 
 def parseToListOfEvents(evs):
+    """
+    parser for the list of events type calls
+    """    
     events = []
     for x in evs:
         event = {}
@@ -134,11 +206,13 @@ def parseToListOfEvents(evs):
     return events
     
 def parseToFloat(evs, with_confidence=False):
+    """
+    parser for the single float-type calls
+    """
     ret = {}
     if(len(evs)):
         if(with_confidence):
             return {"value":float(evs[0].text), "confidence":float(evs[0].attrib.get("confidence"))}
         else:
             return {"value":float(evs[0].text)}
-    
 
