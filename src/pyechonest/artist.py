@@ -11,11 +11,11 @@ from pyechonest import util
 
 
 class Artist(object):
-    def __init__(self, identifier):
+    def __init__(self, identifier, name=None):
         if len(identifier)==18:
             identifier = 'music://id.echonest.com/~/AR/' + identifier
         self._identifier = identifier
-        self._name = None
+        self._name = name
         self.audio = document.WebDocumentSet(identifier, 'get_audio')
         self.blogs = document.WebDocumentSet(identifier, 'get_blogs')
         self.news = document.WebDocumentSet(identifier, 'get_news')
@@ -89,7 +89,7 @@ def search_artists(name, exact=False, sounds_like=True, rows=15):
     params = {'query': name, 'exact': TRUTH[exact], 
                 'sounds_like': TRUTH[sounds_like], 'rows': rows}
     response = util.call('search_artists', params).findall('artists/artist')
-    return [Artist(a.findtext('id')) for a in response]
+    return [Artist(a.findtext('id'), a.findtext('name')) for a in response]
 
 
 @memoized
@@ -97,7 +97,7 @@ def get_top_hottt_artists(rows=15):
     """Retrieves a list of the top hottt artists.
     Do not request this more than once an hour."""
     response = util.call('get_top_hottt_artists', {'rows': rows}).findall('artists/artist')
-    return [Artist(a.findtext('id')) for a in response]
+    return [Artist(a.findtext('id'), a.findtext('name')) for a in response]
 
 
 @memoized
@@ -153,5 +153,5 @@ class SimilarDocumentSet(document.DocumentSet):
         return items
 
     def _parse_element(self, element):
-        return Artist(element.findtext('id'))
+        return Artist(element.findtext('id'), element.findtext('name'));
 
