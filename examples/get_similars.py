@@ -26,7 +26,7 @@ usage:
 def main(artist_name):	
     alist = artist.search_artists(name)
     if (len(alist) > 0):
-        print 'Artists similar to ', alist[0].name
+        print 'Artists similar to', alist[0].name
         for sim in alist[0].similar:
             print sim.name
     else :
