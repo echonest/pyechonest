@@ -30,3 +30,9 @@ MP3_BITRATE = 192
 Default bitrate for MP3 output. Conventionally an
 integer divisible by 32kbits/sec.
 """
+
+CACHE = True
+"""
+You may change this to False to prevent local caching
+of API results.
+"""

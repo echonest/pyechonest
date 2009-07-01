@@ -34,26 +34,26 @@ def main(artist_name):
         print "Hotttnesss:", a.hotttnesss
 
         print "Similars:"
-        for sim in a.similar:
+        for sim in a.similar():
             print "   ", sim.name
 
         print "Audio:"
-        for audio in a.audio[0:15]:
+        for audio in a.audio():
             if 'url' in audio:
                 print "   ", audio['url']
 
         print "Blogs:"
-        for blog in a.blogs[0:15]:
+        for blog in a.blogs():
             if 'name' in blog:
                 print "   ", blog['name']
 
         print "News:"
-        for news in a.news[0:15]:
+        for news in a.news():
             if 'name' in news:
                 print "   ", news['name']
 
         print "Reviews:"
-        for review in a.reviews[0:15]:
+        for review in a.reviews():
             if 'name' in review:
                 print "   ", review['name']
 
@@ -62,7 +62,7 @@ def main(artist_name):
             print "   ", name, url[0:30];
 
         print "Videos:"
-        for v in a.video[0:15]:
+        for v in a.video():
             if 'site' in v and 'title' in v:
                 print "   ", v['site'],  v['title']
 

@@ -5,7 +5,7 @@ A Python interface to the The Echo Nest's web API.  See
 http://developer.echonest.com/ for details.
 """
 
-from pyechonest.decorators import memoized
+from pyechonest.config import CACHE
 from pyechonest import document
 from pyechonest import util
 
@@ -16,33 +16,74 @@ class Artist(object):
             identifier = 'music://id.echonest.com/~/AR/' + identifier
         self._identifier = identifier
         self._name = name
-        self.audio = document.WebDocumentSet(identifier, 'get_audio')
-        self.blogs = document.WebDocumentSet(identifier, 'get_blogs')
-        self.news = document.WebDocumentSet(identifier, 'get_news')
-        self.reviews = document.WebDocumentSet(identifier, 'get_reviews')
-        self.similar = SimilarDocumentSet(identifier)
-        self.video = document.WebDocumentSet(identifier, 'get_video')
+        self._audio = document.WebDocumentSet(identifier, 'get_audio')
+        self._blogs = document.WebDocumentSet(identifier, 'get_blogs')
+        self._news = document.WebDocumentSet(identifier, 'get_news')
+        self._reviews = document.WebDocumentSet(identifier, 'get_reviews')
+        self._similar = SimilarDocumentSet(identifier)
+        self._video = document.WebDocumentSet(identifier, 'get_video')
+        self._familiarity = None
+        self._hotttnesss = None
+        self._urls = None
+        self._terms = None
+
+    def audio(self, rows=15, start=0, refresh=False):
+        if refresh or not CACHE:
+            self._audio = document.WebDocumentSet(self._identifier, 'get_audio')
+        return self._audio[start:rows]
+
+    def blogs(self, rows=15, start=0, refresh=False):
+        if refresh or not CACHE:
+            self._blogs = document.WebDocumentSet(self._identifier, 'get_blogs')
+        return self._blogs[start:rows]
+        
+    def news(self, rows=15, start=0, refresh=False):
+        if refresh or not CACHE:
+            self._news = document.WebDocumentSet(self._identifier, 'get_news')
+        return self._news[start:rows]
+    
+    def reviews(self, rows=15, start=0, refresh=False):
+        if refresh or not CACHE:
+            self._reviews = document.WebDocumentSet(self._identifier, 'get_reviews')
+        return self._reviews[start:rows]
+    
+    def similar(self, rows=15, start=0, refresh=False):
+        if refresh or not CACHE:
+            self._similar = SimilarDocumentSet(self._identifier)
+        return self._similar[start:rows]
+    
+    def video(self, rows=15, start=0, refresh=False):
+        if refresh or not CACHE:
+            self._video = document.WebDocumentSet(self._identifier, 'get_video')
+        return self._video[start:rows]
 
     @property
-    @memoized
     def familiarity(self):
         """Returns our numerical estimation of how 
         familiar an artist currently is to the world."""
-        return float(util.call('get_familiarity', {'id': self.identifier}).findtext('artist/familiarity'))
+        if self._familiarity is None or not CACHE:
+            try:
+                self._familiarity = float(util.call('get_familiarity', {'id': self.identifier}).findtext('artist/familiarity'))
+            except:
+                self.familiarity = 0
+        return self._familiarity
 
     @property
-    @memoized
     def hotttnesss(self):
         """Returns our numerical description of how 
         hottt an artist currently is."""
-        params = {'id': self.identifier}
-        response = util.call('get_hotttnesss', params).findtext('artist/hotttnesss')
-        return float(response)
+        if self._hotttnesss is None or not CACHE:
+            try:
+                params = {'id': self.identifier}
+                response = util.call('get_hotttnesss', params).findtext('artist/hotttnesss')
+                self._hotttnesss = float(response)
+            except:
+                self._hotttnesss = 0
+        return self._hotttnesss
 
     @property
-    @memoized
     def name(self):
-        if self._name is None:
+        if self._name is None or not CACHE:
             self._name = util.call('get_profile', {'id': self.identifier}).findtext('artist/name')
         return self._name
         
@@ -58,18 +99,20 @@ class Artist(object):
         return self._identifier.split('/')[-1]
     
     @property
-    @memoized
     def urls(self):
         """Get links to the artist's official site, MusicBrainz site, 
         MySpace site, Wikipedia article, Amazon list, and iTunes page."""
-        response = util.call('get_urls', {'id': self.identifier}).find('artist').getchildren()
-        return dict((url.tag[:-4], url.text) for url in response if url.tag[-4:] == '_url')
+        if self._urls is None or not CACHE:
+            response = util.call('get_urls', {'id': self.identifier}).find('artist').getchildren()
+            self._urls =  dict((url.tag[:-4], url.text) for url in response if url.tag[-4:] == '_url')
+        return self._urls
 
     @property
-    @memoized
     def terms(self):
-        response = util.call('get_top_terms', {'id': self.identifier}).findall('terms/term')
-        return [e.text for e in response]
+        if self._terms is None or not CACHE:
+            response = util.call('get_top_terms', {'id': self.identifier}).findall('terms/term')
+            self._terms = [e.text for e in response]
+        return self._terms
 
 
     def __repr__(self):
@@ -77,42 +120,63 @@ class Artist(object):
     
     def __str__(self):
         return self.name
+        
+    def clear_cache(self):
+        pass
 
 
 TRUTH = {True: 'Y', False: 'N'}
 
-@memoized
-def search_artists(name, exact=False, sounds_like=True, rows=15):
+SEARCH_ARTISTS_CACHE = {}
+
+def search_artists(name, exact=False, sounds_like=True, rows=15, refresh=False):
     """Search for an artist using a query on the artist name.
     This may perform a sounds-like search to correct common 
     spelling mistakes."""
+    global SEARCH_ARTISTS_CACHE
+    if CACHE and not refresh:
+        try:
+            return SEARCH_ARTISTS_CACHE[(name, exact, sounds_like, rows)]
+        except KeyError:
+            pass
     params = {'query': name, 'exact': TRUTH[exact], 
                 'sounds_like': TRUTH[sounds_like], 'rows': rows}
     response = util.call('search_artists', params).findall('artists/artist')
-    return [Artist(a.findtext('id'), a.findtext('name')) for a in response]
+    value = [Artist(a.findtext('id'), a.findtext('name')) for a in response]
+    SEARCH_ARTISTS_CACHE[(name, exact, sounds_like, rows)] = value
+    return value
 
 
-@memoized
-def get_top_hottt_artists(rows=15):
+TOP_HOTTT_ARTISTS_CACHE = []
+def get_top_hottt_artists(rows=15, refresh=False):
     """Retrieves a list of the top hottt artists.
     Do not request this more than once an hour."""
-    response = util.call('get_top_hottt_artists', {'rows': rows}).findall('artists/artist')
-    return [Artist(a.findtext('id'), a.findtext('name')) for a in response]
+    global TOP_HOTTT_ARTISTS_CACHE
+    if TOP_HOTTT_ARTISTS_CACHE==[] or refresh or not CACHE:
+        response = util.call('get_top_hottt_artists', {'rows': rows}).findall('artists/artist')
+        TOP_HOTTT_ARTISTS_CACHE = [Artist(a.findtext('id'), a.findtext('name')) for a in response]
+    return TOP_HOTTT_ARTISTS_CACHE
 
 
-@memoized
-def search_tracks(name, start=0, rows=15):
+SEARCH_TRACKS_CACHE = {}
+def search_tracks(name, start=0, rows=15, refresh=False):
     """Search for audio using a query on the track, album, or artist name."""
+    global SEARCH_TRACKS_CACHE
+    if CACHE and not refresh:
+        try:
+            return SEARCH_TRACKS_CACHE[(name, start, rows)]
+        except KeyError:
+            pass
     params = {'query': name, 'start': start, 'rows':rows}
     response = util.call('search_tracks', params).findall('results/doc')
     tracks = []
     for element in response:
         parsed = dict((e.tag, e.text) for e in element.getchildren())
-        print parsed
         if element.attrib.has_key('id'):
             parsed.update({'id': element.attrib['id']})
         tracks.append(parsed)
-    return tracks
+    SEARCH_TRACKS_CACHE[(name, start, rows)] = tracks
+    return SEARCH_TRACKS_CACHE[(name, start, rows)]
 
 
 def get_top_hottt_tracks():
