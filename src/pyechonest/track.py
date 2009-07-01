@@ -12,8 +12,15 @@ import os
 class Track(object):
     def __init__(self, identifier):
         if len(identifier)==18:
-            identifier = 'music://id.echonest.com/~/TR/' + identifier
-        self._identifier = identifier
+            self._identifier = 'music://id.echonest.com/~/TR/' + identifier
+            self._md5 = None
+        elif len(identifier)==32:
+            self._md5 = identifier
+            self._identifier = None
+        else:
+            self._identifier = identifier
+            self._md5 = None
+        self._name = None
 
     # These guys are all list of events (beats, etc)
     
@@ -105,7 +112,10 @@ class Track(object):
     @property
     @memoized
     def metadata(self):
-        params = {'id':self.identifier}
+        if self._identifier is not None:
+            params = {'id':self._identifier}
+        else:
+            params = {'md5':self._md5}
         tree = util.call('get_metadata', params)
         output = {}
         for n in tree.findall("analysis")[0].getchildren():
@@ -154,17 +164,58 @@ class Track(object):
         """A unique identifier for a track.
         See http://developer.echonest.com/docs/datatypes/
         for more information"""
+        if self._identifier is None:
+            self._identifier = self.metadata['id']
         return self._identifier
 
     @property
+    def name(self):
+        if self._name is None:
+            self._name = self.metadata['title']
+        return self._name
+
+    @property
     def thing_id(self):
-        return self._identifier.split('/')[-1]
+        return self.identifier.split('/')[-1]
 
     def __repr__(self):
         return "<Track '%s'>" % self.name
     
     def __str__(self):
         return self.name
+
+
+SEARCH_TRACKS_CACHE = {}
+def search_tracks(name, start=0, rows=15, refresh=False):
+    """Search for audio using a query on the track, album, or artist name."""
+    global SEARCH_TRACKS_CACHE
+    if config.CACHE and not refresh:
+        try:
+            return SEARCH_TRACKS_CACHE[(name, start, rows)]
+        except KeyError:
+            pass
+    params = {'query': name, 'start': start, 'rows':rows}
+    response = util.call('search_tracks', params).findall('results/doc')
+    tracks = []
+    for element in response:
+        parsed = dict((e.tag, e.text) for e in element.getchildren())
+        if element.attrib.has_key('id'):
+            parsed.update({'id': element.attrib['id']})
+        tracks.append(parsed)
+    SEARCH_TRACKS_CACHE[(name, start, rows)] = tracks
+    return SEARCH_TRACKS_CACHE[(name, start, rows)]
+
+
+def get_top_hottt_tracks():
+    response = util.call('get_top_hottt_tracks', {}).findall('results/doc')
+    tracks = []
+    for element in response:
+        parsed = dict((e.tag, e.text) for e in element.getchildren())
+        print parsed
+        if element.attrib.has_key('id'):
+            parsed.update({'id': element.attrib['id']})
+        tracks.append(parsed)
+    return tracks
 
 
 TRUTH = {True: 'Y', False: 'N'}
