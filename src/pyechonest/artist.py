@@ -30,46 +30,46 @@ class Artist(object):
     def audio(self, rows=15, start=0, refresh=False):
         if refresh or not CACHE:
             self._audio = document.WebDocumentSet(self._identifier, 'get_audio')
-        return self._audio[start:rows]
+        return self._audio[start:start + rows]
 
     def blogs(self, rows=15, start=0, refresh=False):
         if refresh or not CACHE:
             self._blogs = document.WebDocumentSet(self._identifier, 'get_blogs')
-        return self._blogs[start:rows]
+        return self._blogs[start:start + rows]
         
     def news(self, rows=15, start=0, refresh=False):
         if refresh or not CACHE:
             self._news = document.WebDocumentSet(self._identifier, 'get_news')
-        return self._news[start:rows]
+        return self._news[start:start + rows]
     
     def reviews(self, rows=15, start=0, refresh=False):
         if refresh or not CACHE:
             self._reviews = document.WebDocumentSet(self._identifier, 'get_reviews')
-        return self._reviews[start:rows]
+        return self._reviews[start:start + rows]
     
     def similar(self, rows=15, start=0, refresh=False):
         if refresh or not CACHE:
             self._similar = SimilarDocumentSet(self._identifier)
-        return self._similar[start:rows]
+        return self._similar[start:start + rows]
     
     def video(self, rows=15, start=0, refresh=False):
         if refresh or not CACHE:
             self._video = document.WebDocumentSet(self._identifier, 'get_video')
-        return self._video[start:rows]
+        return self._video[start:start + rows]
 
-    @property
-    def familiarity(self):
+    def familiarity(self, refresh=True):
         """Returns our numerical estimation of how 
         familiar an artist currently is to the world."""
         if self._familiarity is None or not CACHE:
             try:
-                self._familiarity = float(util.call('get_familiarity', {'id': self.identifier}).findtext('artist/familiarity'))
+                params = {'id': self.identifier}
+                response = util.call('get_familiarity', params).findtext('artist/familiarity')
+                self._familiarity = float(response)
             except:
                 self.familiarity = 0
         return self._familiarity
 
-    @property
-    def hotttnesss(self):
+    def hotttnesss(self, refresh=True):
         """Returns our numerical description of how 
         hottt an artist currently is."""
         if self._hotttnesss is None or not CACHE:
@@ -107,7 +107,6 @@ class Artist(object):
             self._urls =  dict((url.tag[:-4], url.text) for url in response if url.tag[-4:] == '_url')
         return self._urls
 
-    @property
     def terms(self):
         if self._terms is None or not CACHE:
             response = util.call('get_top_terms', {'id': self.identifier}).findall('terms/term')
