@@ -36,3 +36,10 @@ CACHE = True
 You may change this to False to prevent local caching
 of API results.
 """
+OBEY_RATE_LIMIT = True
+"""
+The Echo Nest limits users to 120 api calls per minute.
+By default, pyechonest enforces this limit locally. Set this
+variable to False to turn of local enforcement. The Echo Nest
+api will still throttle you.
+"""

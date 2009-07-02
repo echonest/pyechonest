@@ -6,26 +6,29 @@ module is not meant for other uses and should not be used unless
 modifying or extending the package.
 """
 
-
+import time
 import urllib
-
+import urllib2
+import xml.dom.minidom
 from xml.etree.ElementTree import fromstring
 
 from pyechonest import config
-
-import urllib2_file, urllib2
-
-import xml.dom.minidom
+import urllib2_file
 
 
 SUCCESS_STATUS_CODES = ( 0, )
 FAILURE_THING_ID_STATUS_CODES = (7, 6)
 FAILURE_API_KEY_STATUS_CODES = (12,)
 
+CALL_LOG = []
+
 def parse_http_response(response):
     return check_status(fromstring(response))
 
-def call(method, params, POST=False): 
+def call(method, params, POST=False):
+    if not check_call_log():
+        # raise some kind of error
+        raise EchoNestAPIError(1,"Rate limit exceeded. You've already made 120 API calls in the last minute.")
     params.update({'api_key': config.ECHO_NEST_API_KEY, 'version': 3})
     params = urllib.urlencode(params)
     if(POST):
@@ -35,6 +38,15 @@ def call(method, params, POST=False):
         url = 'http://%s%s%s?%s' % (config.API_HOST, config.API_SELECTOR, method, params)
         f = urllib.urlopen(url)
     return parse_http_response(f.read())
+
+def check_call_log():
+    global CALL_LOG
+    CALL_LOG = filter(lambda x: x > (time.time() - 60), CALL_LOG)
+    print "You've made %i calls in the last minute" % len(CALL_LOG)
+    if len(CALL_LOG) >= 120:
+        return False
+    CALL_LOG.append(time.time())
+    return True
 
 def check_status(etree):
     code = int(etree._children[0]._children[0].text)
