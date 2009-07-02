@@ -9,7 +9,7 @@ __version__ = "$Revision: 0 $"
 
 import os
 
-if(os.environ['ECHO_NEST_API_KEY']):
+if('ECHO_NEST_API_KEY' in os.environ):
     ECHO_NEST_API_KEY = os.environ['ECHO_NEST_API_KEY']
 else:
     ECHO_NEST_API_KEY = None
