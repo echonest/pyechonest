@@ -28,14 +28,16 @@ def parse_http_response(response):
 def call(method, params, POST=False):
     if not check_call_log():
         # raise some kind of error
-        raise EchoNestAPIError(1,"Rate limit exceeded. You've already made 120 API calls in the last minute.")
+        raise EchoNestAPIError(1,"Rate limit exceeded. You've already made "\
+                                "120 API calls in the last minute.")
     params.update({'api_key': config.ECHO_NEST_API_KEY, 'version': 3})
     params = urllib.urlencode(params)
     if(POST):
         url = 'http://%s%s%s' % (config.API_HOST, config.API_SELECTOR, method)
         f = urllib.urlopen(url, params)
     else:
-        url = 'http://%s%s%s?%s' % (config.API_HOST, config.API_SELECTOR, method, params)
+        url = 'http://%s%s%s?%s' % (config.API_HOST, config.API_SELECTOR, 
+                                    method, params)
         f = urllib.urlopen(url)
     return parse_http_response(f.read())
 
