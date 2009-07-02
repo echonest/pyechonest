@@ -42,7 +42,6 @@ def call(method, params, POST=False):
 def check_call_log():
     global CALL_LOG
     CALL_LOG = filter(lambda x: x > (time.time() - 60), CALL_LOG)
-    print "You've made %i calls in the last minute" % len(CALL_LOG)
     if len(CALL_LOG) >= 120:
         return False
     CALL_LOG.append(time.time())
