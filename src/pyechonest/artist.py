@@ -157,39 +157,6 @@ def get_top_hottt_artists(rows=15, refresh=False):
     return TOP_HOTTT_ARTISTS_CACHE
 
 
-SEARCH_TRACKS_CACHE = {}
-def search_tracks(name, start=0, rows=15, refresh=False):
-    """Search for audio using a query on the track, album, or artist name."""
-    global SEARCH_TRACKS_CACHE
-    if CACHE and not refresh:
-        try:
-            return SEARCH_TRACKS_CACHE[(name, start, rows)]
-        except KeyError:
-            pass
-    params = {'query': name, 'start': start, 'rows':rows}
-    response = util.call('search_tracks', params).findall('results/doc')
-    tracks = []
-    for element in response:
-        parsed = dict((e.tag, e.text) for e in element.getchildren())
-        if element.attrib.has_key('id'):
-            parsed.update({'id': element.attrib['id']})
-        tracks.append(parsed)
-    SEARCH_TRACKS_CACHE[(name, start, rows)] = tracks
-    return SEARCH_TRACKS_CACHE[(name, start, rows)]
-
-
-def get_top_hottt_tracks():
-    response = util.call('get_top_hottt_tracks', {}).findall('results/doc')
-    tracks = []
-    for element in response:
-        parsed = dict((e.tag, e.text) for e in element.getchildren())
-        print parsed
-        if element.attrib.has_key('id'):
-            parsed.update({'id': element.attrib['id']})
-        tracks.append(parsed)
-    return tracks
-
-
 class SimilarDocumentSet(document.DocumentSet):
     def __init__(self, identifier):
         super(SimilarDocumentSet, self).__init__(identifier, 'get_similar', 'similar/artist')
