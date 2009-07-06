@@ -15,17 +15,17 @@ from pyechonest import track, artist, config, util
 Show the tempos of the tracks by the hotttest artists. 
 """
 
-
-# you have to do this in your code, OR set the environment variable ECHO_NEST_API_KEY
-# if you set the environment variable comment this line out.
-config.ECHO_NEST_API_KEY="YOUR API KEY HERE" 
+# How to set your ECHO_NEST_API_KEY:
+#   1) Set the environment variable 'ECHO_NEST_API_KEY' to be your key, or
+#   2) Uncomment the next line and add your key between the quotes
+#config.ECHO_NEST_API_KEY="YOUR API KEY HERE" 
 
 def main():	
     # For each hottt artist...
     for a in artist.get_top_hottt_artists():
         print a.name
         # Get the latest 15 mp3 files EN's crawlers have found
-        for audio in a.audio:
+        for audio in a.audio():
             try:
                 # Analyze the URL of the file 
                 t = track.upload(audio["url"])
@@ -35,7 +35,6 @@ def main():
             except util.EchoNestAPIError:
                 print "Problem analyzing " + audio["url"]
                 pass
-
 
 if __name__ == '__main__':
 	main()

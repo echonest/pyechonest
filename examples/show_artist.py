@@ -19,8 +19,9 @@ usage = """
 usage:
     python get_similars.py artist name
 """
-# you have to do this in your code, OR set the environment variable ECHO_NEST_API_KEY
-# if you set the environment variable comment this line out.
+# How to set your ECHO_NEST_API_KEY:
+#   1) Set the environment variable 'ECHO_NEST_API_KEY' to be your key, or
+#   2) Uncomment the next line and add your key between the quotes
 #config.ECHO_NEST_API_KEY="YOUR API KEY HERE" 
 
 def main(artist_name):	
@@ -30,8 +31,8 @@ def main(artist_name):
 
         print "Name:", a.name
         print "id:", a.identifier
-        print "Familiarity:", a.familiarity
-        print "Hotttnesss:", a.hotttnesss
+        print "Familiarity:", a.familiarity()
+        print "Hotttnesss:", a.hotttnesss()
 
         print "Similars:"
         for sim in a.similar():
@@ -65,10 +66,8 @@ def main(artist_name):
         for v in a.video():
             if 'site' in v and 'title' in v:
                 print "   ", v['site'],  v['title']
-
-
     else :
-        print "Can't find ", decode(artist_name.name)
+        print "Can't find ", artist_name
 
 if __name__ == '__main__':
     if len(sys.argv) >= 2:
