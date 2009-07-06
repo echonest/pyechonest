@@ -17,8 +17,12 @@ class Track(object):
         elif len(identifier)==32:
             self._md5 = identifier
             self._identifier = None
-        else:
+        elif identifier.startswith('music://'):
             self._identifier = identifier
+            self._md5 = None            
+        else:
+            # But what if the url is 32 characters long? or 18?
+            self._identifier = _upload(identifier)
             self._md5 = None
         self._name = None
 
@@ -120,6 +124,8 @@ class Track(object):
         output = {}
         for n in tree.findall("analysis")[0].getchildren():
             output[n.tag] = n.text
+        if output.has_key('status') and output['status']=='UNKNOWN':
+            raise util.EchoNestAPIThingIDError(1, "Unknown track. Please upload.")
         return output
 
     @property
@@ -177,6 +183,12 @@ class Track(object):
     @property
     def thing_id(self):
         return self.identifier.split('/')[-1]
+        
+    @property
+    def md5(self):
+        if self._md5 is None:
+            self._md5 = self.metadata['md5']
+        return self._md5
 
     def __repr__(self):
         return "<Track '%s'>" % self.name
@@ -244,6 +256,30 @@ def upload(filename_or_url, wait=True):
     else:
         return None
 
+def _upload(filename_or_url, wait=True):
+    """
+    Upload a file or give a URL to the EN analyze API. If you call this with wait=False it will return immediately.
+    """
+    if not filename_or_url.startswith("http://"):
+        if os.path.isfile( filename_or_url ) : 
+            # If file, upload using POST
+            response = util.postChunked( host = config.API_HOST, 
+                                     selector = config.API_SELECTOR + "upload",
+                                     fields = {"api_key":config.ECHO_NEST_API_KEY, "wait":TRUTH[wait], 'version': 3}, 
+                                     files = (( 'file', open(filename_or_url, 'rb')), )
+                                     )
+            response = util.parse_http_response(response).findall("track")
+        else:
+            raise Exception("File " + filename_or_url + " not found.")
+    else :
+        # Assume the filename is a URL. Call the upload method w/o a post.
+        response = util.call('upload',{'url':filename_or_url, "wait":TRUTH[wait]}, POST=True).findall("track")
+    
+    if len(response)>0:
+        return response[0].attrib.get("id")
+    else:
+        return
+
 def parseToListOfEvents(evs):
     """
     parser for the list of events type calls
@@ -265,5 +301,5 @@ def parseToFloat(evs, with_confidence=False):
         if(with_confidence):
             return {"value":float(evs[0].text), "confidence":float(evs[0].attrib.get("confidence"))}
         else:
-            return {"value":float(evs[0].text)}
+            return float(evs[0].text)
 
