@@ -7,7 +7,7 @@ http://developer.echonest.com/ for details.
 
 from pyechonest.config import CACHE
 from pyechonest import document
-from pyechonest import util
+import pyechonest.util as util
 
 
 class Artist(object):

@@ -10,7 +10,7 @@ import time
 import urllib
 import urllib2
 import xml.dom.minidom
-from xml.etree.ElementTree import fromstring
+import xml.etree.ElementTree
 
 from pyechonest import config
 import urllib2_file
@@ -22,8 +22,6 @@ FAILURE_API_KEY_STATUS_CODES = (12,)
 
 CALL_LOG = []
 
-def parse_http_response(response):
-    return check_status(fromstring(response))
 
 def call(method, params, POST=False):
     if not check_call_log():
@@ -39,7 +37,8 @@ def call(method, params, POST=False):
         url = 'http://%s%s%s?%s' % (config.API_HOST, config.API_SELECTOR, 
                                     method, params)
         f = urllib.urlopen(url)
-    return parse_http_response(f.read())
+    response = xml.etree.ElementTree.fromstring(f.read())
+    return check_status(response)
 
 def check_call_log():
     global CALL_LOG
