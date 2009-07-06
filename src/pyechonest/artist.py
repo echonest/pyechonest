@@ -93,10 +93,6 @@ class Artist(object):
         See http://developer.echonest.com/docs/datatypes/
         for more information"""
         return self._identifier
-
-    @property
-    def thing_id(self):
-        return self._identifier.split('/')[-1]
     
     @property
     def urls(self):

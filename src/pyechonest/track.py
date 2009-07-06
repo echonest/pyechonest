@@ -181,10 +181,6 @@ class Track(object):
         return self._name
 
     @property
-    def thing_id(self):
-        return self.identifier.split('/')[-1]
-        
-    @property
     def md5(self):
         if self._md5 is None:
             self._md5 = self.metadata['md5']
