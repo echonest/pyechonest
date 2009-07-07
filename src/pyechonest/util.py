@@ -45,6 +45,8 @@ def call(method, params, POST=False):
     return check_status(response)
 
 def check_call_log():
+    if not config.OBEY_RATE_LIMIT:
+        return True
     global CALL_LOG
     CALL_LOG = filter(lambda x: x > (time.time() - 60), CALL_LOG)
     if len(CALL_LOG) >= 120:
