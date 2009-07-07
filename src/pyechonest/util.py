@@ -28,10 +28,10 @@ def parse_http_response(response):
     return check_status(response)
 
 def call(method, params, POST=False):
-    if not check_call_log():
-        # raise some kind of error
-        raise EchoNestAPIError(1,"Rate limit exceeded. You've already made "\
-                                "120 API calls in the last minute.")
+    rate_limit_exceeded = not check_call_log()
+    while rate_limit_exceeded:
+        time.sleep(0.5)
+        rate_limit_exceeded = not check_call_log()
     params.update({'api_key': config.ECHO_NEST_API_KEY, 'version': 3})
     params = urllib.urlencode(params)
     if(POST):
