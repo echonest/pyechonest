@@ -25,26 +25,24 @@ class Track(object):
             self._identifier = _upload(identifier)
             self._md5 = None
         self._name = None
+        self.params = {'md5': self.md5}
 
     # These guys are all list of events (beats, etc)
     
     @property
     @memoized
     def bars(self):
-        params = {'id': self.identifier}
-        return parseToListOfEvents(util.call('get_bars', params).findall("analysis/bar"))
+        return parseToListOfEvents(util.call('get_bars', self.params).findall("analysis/bar"))
 
     @property
     @memoized
     def beats(self):
-        params = {'id': self.identifier}
-        return parseToListOfEvents(util.call('get_beats', params).findall("analysis/beat"))
+        return parseToListOfEvents(util.call('get_beats', self.params).findall("analysis/beat"))
 
     @property
     @memoized
     def tatums(self):
-        params = {'id': self.identifier}
-        return parseToListOfEvents(util.call('get_tatums', params).findall("analysis/tatum"))
+        return parseToListOfEvents(util.call('get_tatums', self.params).findall("analysis/tatum"))
 
 
     # These guys are all single float #s    
@@ -52,50 +50,48 @@ class Track(object):
     @property
     @memoized
     def duration(self):
-        params = {'id': self.identifier}
-        return parseToFloat(util.call('get_duration', params).findall("analysis/duration"))
+        return parseToFloat(util.call('get_duration', self.params).findall("analysis/duration"))
         
     @property
     @memoized
     def end_of_fade_in(self):
-        params = {'id': self.identifier}
-        return parseToFloat(util.call('get_end_of_fade_in', params).findall("analysis/end_of_fade_in"))
+        return parseToFloat(util.call('get_end_of_fade_in', self.params).findall("analysis/end_of_fade_in"))
         
     @property
     @memoized
     def key(self):
-        params = {'id': self.identifier}
-        return parseToFloat(util.call('get_key', params).findall("analysis/key"),with_confidence=True)
+        res = parseToFloat(util.call('get_key', self.params).findall("analysis/key"),with_confidence=True)
+        res['value'] = int(res['value'])
+        return res
 
     @property
     @memoized
     def loudness(self):
-        params = {'id': self.identifier}
-        return parseToFloat(util.call('get_loudness', params).findall("analysis/loudness"))
+        return parseToFloat(util.call('get_loudness', self.params).findall("analysis/loudness"))
 
     @property
     @memoized
     def mode(self):
-        params = {'id': self.identifier}
-        return parseToFloat(util.call('get_mode', params).findall("analysis/mode"),with_confidence=True)
+        res = parseToFloat(util.call('get_mode', self.params).findall("analysis/mode"),with_confidence=True)
+        res['value'] = int(res['value'])
+        return res
 
     @property
     @memoized
     def start_of_fade_out(self):
-        params = {'id': self.identifier}
-        return parseToFloat(util.call('get_start_of_fade_out', params).findall("analysis/start_of_fade_out"))
+        return parseToFloat(util.call('get_start_of_fade_out', self.params).findall("analysis/start_of_fade_out"))
 
     @property
     @memoized
     def tempo(self):
-        params = {'id': self.identifier}
-        return parseToFloat(util.call('get_tempo', params).findall("analysis/tempo"),with_confidence=True)
+        return parseToFloat(util.call('get_tempo', self.params).findall("analysis/tempo"),with_confidence=True)
 
     @property
     @memoized
     def time_signature(self):
-        params = {'id': self.identifier}
-        return parseToFloat(util.call('get_time_signature', params).findall("analysis/time_signature"),with_confidence=True)
+        res = parseToFloat(util.call('get_time_signature', self.params).findall("analysis/time_signature"),with_confidence=True)
+        res['value'] = int(res['value'])
+        return res
 
 
     # And now the "special ones"
@@ -103,8 +99,7 @@ class Track(object):
     @property
     @memoized
     def sections(self):
-        params = {'id':self.identifier}
-        tree = util.call('get_sections', params)
+        tree = util.call('get_sections', self.params)
         output = []
         nodes = tree.findall('analysis/section')
         for n in nodes:
@@ -131,8 +126,7 @@ class Track(object):
     @property
     @memoized
     def segments(self):
-        params = {'id':self.identifier}
-        tree = util.call('get_segments', params)
+        tree = util.call('get_segments', self.params)
         output = []
         nodes = tree.findall('analysis/segment')
         for n in nodes:

@@ -12,6 +12,7 @@ import urllib2
 import xml.dom.minidom
 import xml.etree.ElementTree
 
+
 from pyechonest import config
 import urllib2_file
 
@@ -22,6 +23,9 @@ FAILURE_API_KEY_STATUS_CODES = (12,)
 
 CALL_LOG = []
 
+def parse_http_response(response):
+    response = xml.etree.ElementTree.fromstring(response)
+    return check_status(response)
 
 def call(method, params, POST=False):
     if not check_call_log():
@@ -104,9 +108,5 @@ def postChunked(host, selector, fields, files):
     result = u.read()
     [fp.close() for (key, fp) in files]
     return result
-    
-    
-
-    
     
     
