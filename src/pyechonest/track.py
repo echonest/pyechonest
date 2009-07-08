@@ -171,7 +171,10 @@ class Track(object):
     @property
     def name(self):
         if self._name is None:
-            self._name = self.metadata['title']
+            try:
+                self._name = self.metadata['title']
+            except KeyError:
+                self._name = ""
         return self._name
 
     @property
