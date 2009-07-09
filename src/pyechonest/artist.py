@@ -5,9 +5,9 @@ A Python interface to the The Echo Nest's web API.  See
 http://developer.echonest.com/ for details.
 """
 
-from pyechonest.config import CACHE
-from pyechonest import document
-import pyechonest.util as util
+from config import CACHE
+import document
+import util
 
 
 class Artist(object):

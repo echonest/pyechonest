@@ -4,10 +4,11 @@
 A Python interface to the The Echo Nest's web API.  See
 http://developer.echonest.com/ for details.
 """
-
-from pyechonest.decorators import memoized
-from pyechonest import util, config
 import os
+
+from decorators import memoized
+import config
+import util
 
 class Track(object):
     def __init__(self, identifier):

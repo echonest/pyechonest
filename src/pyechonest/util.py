@@ -13,7 +13,7 @@ import xml.dom.minidom
 import xml.etree.ElementTree
 
 
-from pyechonest import config
+import config
 import urllib2_file
 
 

@@ -10,8 +10,8 @@ Copyright (c) 2009 __MyCompanyName__. All rights reserved.
 import math
 import urllib
 
-from pyechonest import config
-from pyechonest.util import call
+import config
+from util import call
 
 class DocumentSetCache(object):
     def __init__(self, document_set, identifier, method):
