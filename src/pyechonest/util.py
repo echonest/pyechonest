@@ -33,6 +33,9 @@ def call(method, params, POST=False):
         time.sleep(0.5)
         rate_limit_exceeded = not check_call_log()
     params.update({'api_key': config.ECHO_NEST_API_KEY, 'version': 3})
+    for k,v in params.items():
+        if isinstance(v, unicode):
+            params[k] = v.encode('utf-8')
     params = urllib.urlencode(params)
     if(POST):
         url = 'http://%s%s%s' % (config.API_HOST, config.API_SELECTOR, method)
@@ -61,7 +64,6 @@ def check_status(etree):
         raise EchoNestAPIError(code, message)
     else:
         return etree
-
 
 class EchoNestAPIError(Exception):
     """
@@ -110,5 +112,4 @@ def postChunked(host, selector, fields, files):
     result = u.read()
     [fp.close() for (key, fp) in files]
     return result
-    
     
