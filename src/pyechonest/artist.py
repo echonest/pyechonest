@@ -111,10 +111,10 @@ class Artist(object):
 
 
     def __repr__(self):
-        return "<Artist '%s'>" % self.name
+        return "<Artist '%s'>" % str(self)
     
     def __str__(self):
-        return self.name
+        return self.name if isinstance(self.name, str) else self.name.encode('utf-8')
         
     def clear_cache(self):
         pass
