@@ -149,12 +149,18 @@ class Track(object):
             pitchnodes = n.findall('pitches/pitch')
             pitches=[]
             for p in pitchnodes:
-                pitches.append(float(p.text))
+                try:
+                    pitches.append(float(p.text))
+                except Exception:
+                    pitches.append(0)
 
             timbrenodes = n.findall('timbre/coeff')
             timbre=[]
             for t in timbrenodes:
-                timbre.append(float(t.text))
+                try:
+                    timbre.append(float(t.text))
+                except Exception:
+                    timbre.append(0)
 
             output.append({"start":start,"duration":duration,"pitches":pitches,"timbre":timbre,"loudness_begin":loudness_begin,
                             "loudness_max":loudness_max,"time_loudness_max":time_loudness_max,"loudness_end":loudness_end})
