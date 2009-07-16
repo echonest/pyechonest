@@ -10,6 +10,8 @@ Copyright (c) 2009 The Echo Nest Corporation. All rights reserved.
 import sys
 import os
 import random
+import urllib
+import socket
 
 from pyechonest import artist, config
 
@@ -27,18 +29,39 @@ def wander(seed, max=10):
     played = []
     while max:
         if seed.audio():
-            audio = random.choice(seed.audio())
-            if audio['url'] not in played:
-                play(audio)
-                played.append(audio['url'])
-            max -= 1
+            audio = select_random_live_audio(seed.audio())
+            if audio and audio['url'] not in played:
+                if play(audio):
+                    played.append(audio['url'])
+                    max -= 1
         seed = random.choice(seed.similar())
 
 def play(audio):
     if 'title' in audio and 'artist' in audio and 'url' in audio:
         print audio['title'],  "by", audio['artist'] 
+        if  'link' in audio:
+            print "   ", "From", audio['link'] 
         print "   ", audio['url'], "\n"
+        return True
+    return False
 
+def select_random_live_audio(audio_list):
+    random.shuffle(audio_list)
+    for audio in audio_list:
+        if is_live(audio['url']):
+            return audio
+    return None
+
+def is_live(url):
+    try:
+        socket.setdefaulttimeout(5)
+        f = urllib.urlopen(url)
+        is_audio = f.info().gettype().find("audio") >= 0
+        f.close()
+        return is_audio
+    except IOError:
+        return False
+        
 
 if __name__ == '__main__':
     if len(sys.argv) >= 3:
