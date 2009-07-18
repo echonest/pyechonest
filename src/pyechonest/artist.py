@@ -57,7 +57,7 @@ class Artist(object):
             self._video = document.WebDocumentSet(self._identifier, 'get_video')
         return self._video[start:start + rows]
 
-    def familiarity(self, refresh=True):
+    def familiarity(self, refresh=False):
         """Returns our numerical estimation of how 
         familiar an artist currently is to the world."""
         if self._familiarity is None or not CACHE:
@@ -66,10 +66,10 @@ class Artist(object):
                 response = util.call('get_familiarity', params).findtext('artist/familiarity')
                 self._familiarity = float(response)
             except:
-                self.familiarity = 0
+                self._familiarity = 0
         return self._familiarity
 
-    def hotttnesss(self, refresh=True):
+    def hotttnesss(self, refresh=False):
         """Returns our numerical description of how 
         hottt an artist currently is."""
         if self._hotttnesss is None or not CACHE:
