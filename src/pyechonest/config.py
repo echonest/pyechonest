@@ -43,3 +43,8 @@ By default, pyechonest enforces this limit locally. Set this
 variable to False to turn of local enforcement. The Echo Nest
 api will still throttle you.
 """
+
+TRACE_API_CALLS = False
+"""
+If true, API calls will be traced to the console
+"""

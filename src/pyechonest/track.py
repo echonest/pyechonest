@@ -5,14 +5,16 @@ A Python interface to the The Echo Nest's web API.  See
 http://developer.echonest.com/ for details.
 """
 import os
+import hashlib
 
 from decorators import memoized
 import config
 import util
 
+
 class Track(object):
     def __init__(self, identifier):
-        if len(identifier)==18:
+        if len(identifier)==18 and identifier.startswith('TR'):
             self._identifier = 'music://id.echonest.com/~/TR/' + identifier
             self._md5 = None
         elif len(identifier)==32:
@@ -23,8 +25,20 @@ class Track(object):
             self._md5 = None            
         else:
             # But what if the url is 32 characters long? or 18?
-            self._identifier = _upload(identifier)
-            self._md5 = None
+
+            # see if we already know about this track from the md5
+            found = True
+            md5 = calc_md5(identifier)
+            if md5:
+                try:
+                   meta_data = get_metadata(md5)
+                   self._md5 = meta_data['md5'] 
+                   self._identifier = meta_data['id'] 
+                except util.EchoNestAPIError:
+                    found = False
+            if not found:
+                self._identifier = _upload(identifier)
+                self._md5 = None
         self._name = None
         self.params = {'md5': self.md5}
 
@@ -229,6 +243,27 @@ def get_top_hottt_tracks():
         tracks.append(parsed)
     return tracks
 
+def get_metadata(id_or_md5):
+    is_id = False
+    if len(id_or_md5)==18 and id_or_md5.startswith('TR'):
+        is_id = True;
+        id_or_md5 = 'music://id.echonest.com/~/TR/' + id_or_md5 
+    elif id_or_md5.startswith('music://'):
+        is_id = True;
+    elif len(id_or_md5) == 32:
+        is_id = False
+    else:
+        raise util.EchoNestAPIThingIDError(1, "bad ID or MD5")
+    if is_id:
+        params = {'id':id_or_md5}
+    else:
+        params = {'md5':id_or_md5}
+    tree = util.call('get_metadata', params)
+    output = {}
+    for n in tree.findall("analysis")[0].getchildren():
+        output[n.tag] = n.text
+    return output
+
 
 TRUTH = {True: 'Y', False: 'N'}
 
@@ -279,6 +314,12 @@ def _upload(filename_or_url, wait=True):
         return response[0].attrib.get("id")
     else:
         return
+
+def calc_md5(filename):
+    try:
+       return hashlib.md5(file(filename, 'rb').read()).hexdigest()
+    except:
+        return None
 
 def parseToListOfEvents(evs):
     """

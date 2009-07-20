@@ -44,6 +44,8 @@ def call(method, params, POST=False):
         url = 'http://%s%s%s?%s' % (config.API_HOST, config.API_SELECTOR, 
                                     method, params)
         f = urllib.urlopen(url)
+    if config.TRACE_API_CALLS:
+        print url
     response = xml.etree.ElementTree.fromstring(f.read())
     return check_status(response)
 
