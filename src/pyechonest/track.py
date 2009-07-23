@@ -262,6 +262,8 @@ def get_metadata(id_or_md5):
     output = {}
     for n in tree.findall("analysis")[0].getchildren():
         output[n.tag] = n.text
+    if output.has_key('status') and output['status']=='UNKNOWN':
+        raise util.EchoNestAPIError(1, "Unknown track. Please upload.")
     return output
 
 
