@@ -10,7 +10,10 @@ import time
 import urllib
 import urllib2
 import xml.dom.minidom
-import xml.etree.ElementTree
+try:
+    from xml.etree.cElementTree import fromstring
+except ImportError:
+    from xml.etree.ElementTree import fromstring
 
 
 import config
@@ -24,7 +27,7 @@ FAILURE_API_KEY_STATUS_CODES = (12,)
 CALL_LOG = []
 
 def parse_http_response(response):
-    response = xml.etree.ElementTree.fromstring(response)
+    response = fromstring(response)
     return check_status(response)
 
 def call(method, params, POST=False):
@@ -46,7 +49,7 @@ def call(method, params, POST=False):
         f = urllib.urlopen(url)
     if config.TRACE_API_CALLS:
         print url
-    response = xml.etree.ElementTree.fromstring(f.read())
+    response = fromstring(f.read())
     return check_status(response)
 
 def check_call_log():
@@ -60,8 +63,8 @@ def check_call_log():
     return True
 
 def check_status(etree):
-    code = int(etree._children[0]._children[0].text)
-    message = etree._children[0]._children[1].text
+    code = int(etree.getchildren()[0].getchildren()[0].text)
+    message = etree.getchildren()[0].getchildren()[1].text
     if code!=0:
         raise EchoNestAPIError(code, message)
     else:
