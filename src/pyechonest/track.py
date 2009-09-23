@@ -13,7 +13,7 @@ import util
 
 
 class Track(object):
-    def __init__(self, identifier):
+    def __init__(self, identifier, analysis_version = 1):
         if len(identifier)==18 and identifier.startswith('TR'):
             self._identifier = 'music://id.echonest.com/~/TR/' + identifier
             self._md5 = None
@@ -40,7 +40,7 @@ class Track(object):
                 self._identifier = _upload(identifier)
                 self._md5 = None
         self._name = None
-        self.params = {'md5': self.md5}
+        self.params = {'md5': self.md5, 'analysis_version':analysis_version }
 
     # These guys are all list of events (beats, etc)
     
@@ -269,7 +269,7 @@ def get_metadata(id_or_md5):
 
 TRUTH = {True: 'Y', False: 'N'}
 
-def upload(filename_or_url, wait=True):
+def upload(filename_or_url, wait=True, analysis_version = 1 ):
     """
     Upload a file or give a URL to the EN analyze API. If you call this with wait=False it will return immediately.
     """
@@ -278,7 +278,7 @@ def upload(filename_or_url, wait=True):
             # If file, upload using POST
             response = util.postChunked( host = config.API_HOST, 
                                      selector = config.API_SELECTOR + "upload",
-                                     fields = {"api_key":config.ECHO_NEST_API_KEY, "wait":TRUTH[wait], 'version': 3}, 
+                                     fields = {"api_key":config.ECHO_NEST_API_KEY, "wait":TRUTH[wait], 'version': 3, 'analysis_version':analysis_version}, 
                                      files = (( 'file', open(filename_or_url, 'rb')), )
                                      )
             response = util.parse_http_response(response).findall("track")
@@ -286,14 +286,14 @@ def upload(filename_or_url, wait=True):
             raise Exception("File " + filename_or_url + " not found.")
     else :
         # Assume the filename is a URL. Call the upload method w/o a post.
-        response = util.call('upload',{'url':filename_or_url, "wait":TRUTH[wait]}, POST=True).findall("track")
+        response = util.call('upload',{'url':filename_or_url, "wait":TRUTH[wait], 'analysis_version':analysis_version}, POST=True).findall("track")
     
     if(len(response)>0):
-        return Track(response[0].attrib.get("id"))
+        return Track(response[0].attrib.get("id"), analysis_version=analysis_version)
     else:
         return None
 
-def _upload(filename_or_url, wait=True):
+def _upload(filename_or_url, wait=True, analysis_version = 1):
     """
     Upload a file or give a URL to the EN analyze API. If you call this with wait=False it will return immediately.
     """
@@ -302,7 +302,7 @@ def _upload(filename_or_url, wait=True):
             # If file, upload using POST
             response = util.postChunked( host = config.API_HOST, 
                                      selector = config.API_SELECTOR + "upload",
-                                     fields = {"api_key":config.ECHO_NEST_API_KEY, "wait":TRUTH[wait], 'version': 3}, 
+                                     fields = {"api_key":config.ECHO_NEST_API_KEY, "wait":TRUTH[wait], 'version': 3, 'analysis_version':analysis_version}, 
                                      files = (( 'file', open(filename_or_url, 'rb')), )
                                      )
             response = util.parse_http_response(response).findall("track")
@@ -310,7 +310,7 @@ def _upload(filename_or_url, wait=True):
             raise Exception("File " + filename_or_url + " not found.")
     else :
         # Assume the filename is a URL. Call the upload method w/o a post.
-        response = util.call('upload',{'url':filename_or_url, "wait":TRUTH[wait]}, POST=True).findall("track")
+        response = util.call('upload',{'url':filename_or_url, "wait":TRUTH[wait], 'analysis_version':analysis_version}, POST=True).findall("track")
     
     if len(response)>0:
         return response[0].attrib.get("id")
