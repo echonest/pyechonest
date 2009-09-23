@@ -44,7 +44,12 @@ variable to False to turn of local enforcement. The Echo Nest
 api will still throttle you.
 """
 
-TRACE_API_CALLS = False
+TRACE_API_CALLS = True
 """
 If true, API calls will be traced to the console
+"""
+
+ANALYSIS_VERSION = 3
+"""
+Analysis version (1 or 3)
 """
