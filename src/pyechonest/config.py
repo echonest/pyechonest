@@ -49,7 +49,7 @@ TRACE_API_CALLS = True
 If true, API calls will be traced to the console
 """
 
-ANALYSIS_VERSION = 1
+ANALYSIS_VERSION = 3
 """
 Analysis version (1 or 3)
 """
