@@ -4,8 +4,9 @@
 A Python interface to the The Echo Nest's web API.  See
 http://developer.echonest.com/ for details.
 """
-import os
 import hashlib
+import os
+import time
 
 from decorators import memoized
 import config
@@ -42,22 +43,40 @@ class Track(object):
         self._name = None
         self.params = {'md5': self.md5, 'analysis_version':config.ANALYSIS_VERSION }
 
-    # These guys are all list of events (beats, etc)
+    def analyze(self, wait=False):
+        """
+        Re-analyze a previously uploaded track.
+        """
+        response = util.call('analyze', self.params, POST=True)
+        metadata = self.metadata
+        while wait:
+            time.sleep(10)
+            metadata = self.metadata
+            if metadata.get('status')=='COMPLETE':
+                wait = False
+            else:
+                wait = True
+        return metadata
+    
+    # These are all lists of events (beats, etc)
     
     @property
     @memoized
     def bars(self):
-        return parseToListOfEvents(util.call('get_bars', self.params).findall("analysis/bar"))
+        return parseToListOfEvents(util.call('get_bars', 
+                                self.params).findall("analysis/bar"))
 
     @property
     @memoized
     def beats(self):
-        return parseToListOfEvents(util.call('get_beats', self.params).findall("analysis/beat"))
+        return parseToListOfEvents(util.call('get_beats', 
+                                self.params).findall("analysis/beat"))
 
     @property
     @memoized
     def tatums(self):
-        return parseToListOfEvents(util.call('get_tatums', self.params).findall("analysis/tatum"))
+        return parseToListOfEvents(util.call('get_tatums', 
+                                self.params).findall("analysis/tatum"))
 
 
     # These guys are all single float #s    
@@ -65,46 +84,58 @@ class Track(object):
     @property
     @memoized
     def duration(self):
-        return parseToFloat(util.call('get_duration', self.params).findall("analysis/duration"))
+        return parseToFloat(util.call('get_duration', 
+                                self.params).findall("analysis/duration"))
         
     @property
     @memoized
     def end_of_fade_in(self):
-        return parseToFloat(util.call('get_end_of_fade_in', self.params).findall("analysis/end_of_fade_in"))
+        return parseToFloat(util.call('get_end_of_fade_in', 
+                                self.params).findall("analysis/end_of_fade_in"))
         
     @property
     @memoized
     def key(self):
-        res = parseToFloat(util.call('get_key', self.params).findall("analysis/key"),with_confidence=True)
+        res = parseToFloat(util.call('get_key', 
+                            self.params).findall("analysis/key"), 
+                            with_confidence=True)
         res['value'] = int(res['value'])
         return res
 
     @property
     @memoized
     def loudness(self):
-        return parseToFloat(util.call('get_loudness', self.params).findall("analysis/loudness"))
+        return parseToFloat(util.call('get_loudness', 
+                            self.params).findall("analysis/loudness"))
 
     @property
     @memoized
     def mode(self):
-        res = parseToFloat(util.call('get_mode', self.params).findall("analysis/mode"),with_confidence=True)
+        res = parseToFloat(util.call('get_mode', 
+                            self.params).findall("analysis/mode"), 
+                            with_confidence=True)
         res['value'] = int(res['value'])
         return res
 
     @property
     @memoized
     def start_of_fade_out(self):
-        return parseToFloat(util.call('get_start_of_fade_out', self.params).findall("analysis/start_of_fade_out"))
+        return parseToFloat(util.call('get_start_of_fade_out', 
+                            self.params).findall("analysis/start_of_fade_out"))
 
     @property
     @memoized
     def tempo(self):
-        return parseToFloat(util.call('get_tempo', self.params).findall("analysis/tempo"),with_confidence=True)
+        return parseToFloat(util.call('get_tempo', 
+                            self.params).findall("analysis/tempo"), 
+                            with_confidence=True)
 
     @property
     @memoized
     def time_signature(self):
-        res = parseToFloat(util.call('get_time_signature', self.params).findall("analysis/time_signature"),with_confidence=True)
+        res = parseToFloat(util.call('get_time_signature', 
+                            self.params).findall("analysis/time_signature"), 
+                            with_confidence=True)
         res['value'] = int(res['value'])
         return res
 
@@ -124,8 +155,22 @@ class Track(object):
         return output
 
     @property
-    @memoized
+    #@memoized
     def metadata(self):
+        if self._identifier is not None:
+            params = {'id':self._identifier}
+        else:
+            params = {'md5':self._md5}
+        params.update({'analysis_version':config.ANALYSIS_VERSION})
+        tree = util.call('get_metadata', params)
+        output = {}
+        for n in tree.findall("analysis")[0].getchildren():
+            output[n.tag] = n.text
+        if output.has_key('status') and output['status']=='UNKNOWN':
+            raise util.EchoNestAPIThingIDError(1, "Unknown track. Please upload.")
+        return output
+
+    def _metadata(self):
         if self._identifier is not None:
             params = {'id':self._identifier}
         else:
@@ -177,8 +222,12 @@ class Track(object):
                 except Exception:
                     timbre.append(0)
 
-            output.append({"start":start,"duration":duration,"pitches":pitches,"timbre":timbre,"loudness_begin":loudness_begin,
-                            "loudness_max":loudness_max,"time_loudness_max":time_loudness_max,"loudness_end":loudness_end})
+            output.append({"start":start, "duration":duration, 
+                            "pitches":pitches, "timbre":timbre,
+                            "loudness_begin":loudness_begin,
+                            "loudness_max":loudness_max,
+                            "time_loudness_max":time_loudness_max,
+                            "loudness_end":loudness_end})
         return output
         
     @property
@@ -269,18 +318,45 @@ def get_metadata(id_or_md5):
     return output
 
 
+def _analyze(md5_or_trackID, wait=True):
+    """
+    Re-analyze a previously uploaded track.
+    """
+    params = {'api_key':config.ECHO_NEST_API_KEY, 
+                'version': 3, 
+                'analysis_version':config.ANALYSIS_VERSION}
+    if len(md5_or_trackID)==18 and identifier.startswith('TR'):
+        params['id'] = 'music://id.echonest.com/~/TR/' + md5_or_trackID
+    elif md5_or_trackID.startswith('music://'):
+        params['id'] = md5_or_trackID
+    elif len(md5_or_trackID)==32:
+        params['md5'] = md5_or_trackID
+    response = util.call('analyze', params, POST=True)
+    return response
+    print response
+    response = response.findall("track")
+    print response
+    if(len(response)>0):
+        return Track(response[0].attrib.get("id"))
+    else:
+        return None
+
+
 TRUTH = {True: 'Y', False: 'N'}
 
 def upload(filename_or_url, wait=True):
     """
-    Upload a file or give a URL to the EN analyze API. If you call this with wait=False it will return immediately.
+    Upload a file or give a URL to the EN analyze API.
+    If you call this with wait=False it will return immediately.
     """
     if not filename_or_url.startswith("http://"):
         if os.path.isfile( filename_or_url ) : 
             # If file, upload using POST
             response = util.postChunked( host = config.API_HOST, 
                                      selector = config.API_SELECTOR + "upload",
-                                     fields = {"api_key":config.ECHO_NEST_API_KEY, "wait":TRUTH[wait], 'version': 3, 'analysis_version':config.ANALYSIS_VERSION}, 
+                                     fields = {"api_key":config.ECHO_NEST_API_KEY, 
+                                                "wait":TRUTH[wait], 'version': 3, 
+                                                'analysis_version':config.ANALYSIS_VERSION}, 
                                      files = (( 'file', open(filename_or_url, 'rb')), )
                                      )
             response = util.parse_http_response(response).findall("track")
@@ -288,7 +364,9 @@ def upload(filename_or_url, wait=True):
             raise Exception("File " + filename_or_url + " not found.")
     else :
         # Assume the filename is a URL. Call the upload method w/o a post.
-        response = util.call('upload',{'url':filename_or_url, "wait":TRUTH[wait], 'analysis_version':config.ANALYSIS_VERSION}, POST=True).findall("track")
+        response = util.call('upload',{'url':filename_or_url, "wait":TRUTH[wait], 
+                                        'analysis_version':config.ANALYSIS_VERSION}, 
+                                        POST=True).findall("track")
     
     if(len(response)>0):
         return Track(response[0].attrib.get("id"))
@@ -297,14 +375,17 @@ def upload(filename_or_url, wait=True):
 
 def _upload(filename_or_url, wait=True):
     """
-    Upload a file or give a URL to the EN analyze API. If you call this with wait=False it will return immediately.
+    Upload a file or give a URL to the EN analyze API.
+    If you call this with wait=False it will return immediately.
     """
     if not filename_or_url.startswith("http://"):
         if os.path.isfile( filename_or_url ) : 
             # If file, upload using POST
             response = util.postChunked( host = config.API_HOST, 
                                      selector = config.API_SELECTOR + "upload",
-                                     fields = {"api_key":config.ECHO_NEST_API_KEY, "wait":TRUTH[wait], 'version': 3, 'analysis_version':config.ANALYSIS_VERSION}, 
+                                     fields = {"api_key":config.ECHO_NEST_API_KEY, 
+                                                "wait":TRUTH[wait], 'version': 3, 
+                                                'analysis_version':config.ANALYSIS_VERSION}, 
                                      files = (( 'file', open(filename_or_url, 'rb')), )
                                      )
             response = util.parse_http_response(response).findall("track")
@@ -312,7 +393,9 @@ def _upload(filename_or_url, wait=True):
             raise Exception("File " + filename_or_url + " not found.")
     else :
         # Assume the filename is a URL. Call the upload method w/o a post.
-        response = util.call('upload',{'url':filename_or_url, "wait":TRUTH[wait], 'analysis_version':config.ANALYSIS_VERSION}, POST=True).findall("track")
+        response = util.call('upload',{'url':filename_or_url, "wait":TRUTH[wait], 
+                                        'analysis_version':config.ANALYSIS_VERSION}, 
+                                        POST=True).findall("track")
     
     if len(response)>0:
         return response[0].attrib.get("id")
@@ -344,7 +427,8 @@ def parseToFloat(evs, with_confidence=False):
     ret = {}
     if(len(evs)):
         if(with_confidence):
-            return {"value":float(evs[0].text), "confidence":float(evs[0].attrib.get("confidence"))}
+            return {"value":float(evs[0].text), 
+                    "confidence":float(evs[0].attrib.get("confidence"))}
         else:
             return float(evs[0].text)
 
