@@ -25,14 +25,15 @@ class Track(object):
             self._identifier = identifier
             self._md5 = None            
         else:
-            # But what if the url is 32 characters long? or 18?
-
             # see if we already know about this track from the md5
             found = True
+            analyzed = True
             md5 = calc_md5(identifier)
             if md5:
                 try:
                    meta_data = get_metadata(md5)
+                   if meta_data['status']=='UNAVAILABLE':
+                       analyzed = False
                    self._md5 = meta_data['md5'] 
                    self._identifier = meta_data['id'] 
                 except util.EchoNestAPIError:
@@ -40,6 +41,9 @@ class Track(object):
             if not found:
                 self._identifier = _upload(identifier)
                 self._md5 = None
+            elif not analyzed:
+                self.params = {'md5': self._md5, 'analysis_version':config.ANALYSIS_VERSION}
+                meta_data = self.analyze(wait=True)
         self._name = None
         self.params = {'md5': self.md5, 'analysis_version':config.ANALYSIS_VERSION }
 
@@ -346,30 +350,11 @@ TRUTH = {True: 'Y', False: 'N'}
 
 def upload(filename_or_url, wait=True):
     """
-    Upload a file or give a URL to the EN analyze API.
-    If you call this with wait=False it will return immediately.
+    Create a Track object based on the results of _upload().
     """
-    if not filename_or_url.startswith("http://"):
-        if os.path.isfile( filename_or_url ) : 
-            # If file, upload using POST
-            response = util.postChunked( host = config.API_HOST, 
-                                     selector = config.API_SELECTOR + "upload",
-                                     fields = {"api_key":config.ECHO_NEST_API_KEY, 
-                                                "wait":TRUTH[wait], 'version': 3, 
-                                                'analysis_version':config.ANALYSIS_VERSION}, 
-                                     files = (( 'file', open(filename_or_url, 'rb')), )
-                                     )
-            response = util.parse_http_response(response).findall("track")
-        else:
-            raise Exception("File " + filename_or_url + " not found.")
-    else :
-        # Assume the filename is a URL. Call the upload method w/o a post.
-        response = util.call('upload',{'url':filename_or_url, "wait":TRUTH[wait], 
-                                        'analysis_version':config.ANALYSIS_VERSION}, 
-                                        POST=True).findall("track")
-    
-    if(len(response)>0):
-        return Track(response[0].attrib.get("id"))
+    result = _upload(filename_or_url, wait=wait)
+    if result is not None:
+        return Track(result)
     else:
         return None
 
