@@ -25,7 +25,7 @@ You may change this to be a user agent string of your
 own choosing.
 """
 
-MP3_BITRATE = 192
+MP3_BITRATE = 128
 """
 Default bitrate for MP3 output. Conventionally an
 integer divisible by 32kbits/sec.
