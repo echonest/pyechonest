@@ -15,16 +15,7 @@ import util
 
 class Track(object):
     def __init__(self, identifier):
-        if len(identifier)==18 and identifier.startswith('TR'):
-            self._identifier = 'music://id.echonest.com/~/TR/' + identifier
-            self._md5 = None
-        elif len(identifier)==32:
-            self._md5 = identifier
-            self._identifier = None
-        elif identifier.startswith('music://'):
-            self._identifier = identifier
-            self._md5 = None            
-        else:
+        if os.path.isfile(identifier):
             # see if we already know about this track from the md5
             found = True
             analyzed = True
@@ -44,6 +35,17 @@ class Track(object):
             elif not analyzed:
                 self.params = {'md5': self._md5, 'analysis_version':config.ANALYSIS_VERSION}
                 meta_data = self.analyze(wait=True)
+        elif len(identifier)==18 and identifier.startswith('TR'):
+            self._identifier = 'music://id.echonest.com/~/TR/' + identifier
+            self._md5 = None
+        elif len(identifier)==32:
+            self._md5 = identifier
+            self._identifier = None
+        elif identifier.startswith('music://'):
+            self._identifier = identifier
+            self._md5 = None
+        else:
+            raise TypeError("Invalid identifier. Please supply filename, md5, or track ID.")
         self._name = None
         self.params = {'md5': self.md5, 'analysis_version':config.ANALYSIS_VERSION }
 
