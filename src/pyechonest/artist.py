@@ -17,6 +17,7 @@ class Artist(object):
         self._identifier = identifier
         self._name = name
         self._audio = document.WebDocumentSet(identifier, 'get_audio')
+        self._image = document.WebDocumentSet(identifier, 'get_images')
         self._blogs = document.WebDocumentSet(identifier, 'get_blogs')
         self._news = document.WebDocumentSet(identifier, 'get_news')
         self._reviews = document.WebDocumentSet(identifier, 'get_reviews')
@@ -31,6 +32,11 @@ class Artist(object):
         if refresh or not CACHE:
             self._audio = document.WebDocumentSet(self._identifier, 'get_audio')
         return self._audio[start:start + rows]
+
+    def images(self, rows=15, start=0, refresh=False):
+        if refresh or not CACHE:
+            self._images = document.WebDocumentSet(self._identifier, 'get_images')
+        return self._image[start:start + rows]
 
     def blogs(self, rows=15, start=0, refresh=False):
         if refresh or not CACHE:
