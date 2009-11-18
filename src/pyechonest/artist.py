@@ -171,24 +171,41 @@ class SimilarDocumentSet(document.DocumentSet):
 
     def __len__(self):
         if self._len is None:
-            self._len = 15
+            self._len = 100
         return self._len
 
     def __getitem__(self, k):
-        if isinstance(k, (int, long)):
-            if k > 15:
-                raise util.EchoNestAPIError(5, 'Invalid parameter: "rows" must be less than or equal to 15')
-            return self._parse_element(self._cache[0].findall(self.element_path)[k])
-        elif not isinstance(k, slice):
-            raise TypeError
-        if k.stop > 15:
-            raise util.EchoNestAPIError(5, 'Invalid parameter: "rows" must be less than or equal to 15')
-        start = k.start or 0
-        stop = k.stop or len(self)
+        if k.stop > 100:
+            raise util.EchoNestAPIError(5, 'Invalid parameter: "rows" must be less than or equal to 100')
+        chunk_and_index = lambda i: (i / self._cache.chunk_size, i % self._cache.chunk_size)
+        start, start_chunk, start_index, stop = self.chunk_magic(k)
+        if (stop + 1) > self._cache.chunk_size:
+            self.__init__(self.identifier)
+            self._cache.chunk_size = stop + 1
+            chunk_and_index = lambda i: (i / self._cache.chunk_size, i % self._cache.chunk_size)
+            start, start_chunk, start_index, stop = self.chunk_magic(k)
+        stop_chunk, stop_index = chunk_and_index(stop)
         items = []
-        elements = self._cache[0].findall(self.element_path)[start:stop]
-        items.extend([self._parse_element(e) for e in elements])
+        for chunk in xrange(start_chunk, stop_chunk + 1):
+            elements = self._cache[chunk].findall(self.element_path)
+            if chunk == start_chunk and chunk == stop_chunk:
+                elements = elements[start_index:stop_index + 1]
+            elif chunk == start_chunk:
+                elements = elements[start_index:]
+            elif chunk == stop_chunk:
+                elements = elements[:stop_index + 1]
+            items.extend([self._parse_element(e) for e in elements])
         return items
+
+    def chunk_magic(self, k):
+        chunk_and_index = lambda i: (i / self._cache.chunk_size, i % self._cache.chunk_size)
+        if not isinstance(k, slice):
+            raise TypeError
+        start = k.start or 0
+        start_chunk, start_index = chunk_and_index(start)
+        stop = min(k.stop or len(self), len(self)) - 1 # use inclusive to simplify logic
+        return start, start_chunk, start_index, stop
+
 
     def _parse_element(self, element):
         return Artist(element.findtext('id'), element.findtext('name'));
