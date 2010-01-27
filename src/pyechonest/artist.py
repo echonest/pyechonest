@@ -107,7 +107,9 @@ class Artist(object):
                         ['audio', 'urls', 'images', 'biographies', 'blogs', 
                         'familiarity', 'hotttnesss', 'news', 'reviews', 'video']
         @param refresh=False : refresh the cache"""
-        if self._profile is None or not CACHE or refresh:
+        make_the_call = (self._profile is None) or (not CACHE) or refresh or \
+                        any([x for x in buckets if not x in self._profile.keys()])
+        if make_the_call:
             response = util.call('get_profile', {'id':self.identifier}, buckets=buckets)
             result = response.find('artist')
             self._profile = dictify(result)
