@@ -30,7 +30,7 @@ def parse_http_response(response):
     response = fromstring(response)
     return check_status(response)
 
-def call(method, params, POST=False):
+def call(method, params, POST=False, buckets=[]):
     rate_limit_exceeded = not check_call_log()
     while rate_limit_exceeded:
         time.sleep(0.5)
@@ -46,6 +46,9 @@ def call(method, params, POST=False):
     else:
         url = 'http://%s%s%s?%s' % (config.API_HOST, config.API_SELECTOR, 
                                     method, params)
+        # hack to add buckets
+        for bucket in buckets:
+            url += '&bucket='+bucket
         f = urllib.urlopen(url)
     if config.TRACE_API_CALLS:
         print url

@@ -28,12 +28,13 @@ class Artist(object):
         self._hotttnesss = None
         self._urls = None
         self._terms = None
-
+        self._profile = None
+    
     def audio(self, rows=15, start=0, refresh=False):
         if refresh or not CACHE:
             self._audio = document.WebDocumentSet(self._identifier, 'get_audio')
         return self._audio[start:start + rows]
-
+    
     def images(self, rows=15, start=0, refresh=False):
         if refresh or not CACHE:
             self._images = document.WebDocumentSet(self._identifier, 'get_images')
@@ -43,12 +44,12 @@ class Artist(object):
         if refresh or not CACHE:
             self._biographies = document.WebDocumentSet(self._identifier, 'get_biographies')
         return self._biographies[start:start + rows]
-
+    
     def blogs(self, rows=15, start=0, refresh=False):
         if refresh or not CACHE:
             self._blogs = document.WebDocumentSet(self._identifier, 'get_blogs')
         return self._blogs[start:start + rows]
-        
+    
     def news(self, rows=15, start=0, refresh=False):
         if refresh or not CACHE:
             self._news = document.WebDocumentSet(self._identifier, 'get_news')
@@ -68,7 +69,7 @@ class Artist(object):
         if refresh or not CACHE:
             self._video = document.WebDocumentSet(self._identifier, 'get_video')
         return self._video[start:start + rows]
-
+    
     def familiarity(self, refresh=False):
         """Returns our numerical estimation of how 
         familiar an artist currently is to the world."""
@@ -80,7 +81,7 @@ class Artist(object):
             except:
                 self._familiarity = 0
         return self._familiarity
-
+    
     def hotttnesss(self, refresh=False):
         """Returns our numerical description of how 
         hottt an artist currently is."""
@@ -92,13 +93,47 @@ class Artist(object):
             except:
                 self._hotttnesss = 0
         return self._hotttnesss
-
+    
     @property
     def name(self):
         if self._name is None or not CACHE:
             self._name = util.call('get_profile', {'id': self.identifier}).findtext('artist/name')
         return self._name
-        
+    
+    def profile(self, buckets=[], refresh=False):
+        """make a "get_profile" call to the echonest
+        @param buckets : a list of bucket terms to append to the call
+                        valid values include 
+                        ['audio', 'urls', 'images', 'biographies', 'blogs', 
+                        'familiarity', 'hotttnesss', 'news', 'reviews', 'video']
+        @param refresh=False : refresh the cache"""
+        if self._profile is None or not CACHE or refresh:
+            response = util.call('get_profile', {'id':self.identifier}, buckets=buckets)
+            result = response.find('artist')
+            self._profile = dictify(result)
+            for bucket in buckets:
+                if bucket in ['images']: 
+                    results = response.findall('artist/%s' % bucket)
+                    self._profile.update({bucket: []})
+                    for result in results:
+                        self._profile[bucket].append(dictify(result))
+                elif bucket in ['audio', 'video', 'news', 'blogs']: 
+                    results = response.findall('artist/%s/doc' % bucket)
+                    self._profile.update({bucket: []})
+                    for result in results:
+                        self._profile[bucket].append(dictify(result))
+                elif bucket in ['biographies']:
+                    results = response.findall('artist/%s/biography' % bucket)
+                    self._profile.update({bucket: []})
+                    for result in results:
+                        self._profile[bucket].append(dictify(result))
+                elif bucket in ['familiarity', 'hotttnesss']:
+                    self._profile.update({bucket : response.findtext('artist/%s' % bucket)})
+                else:
+                    result = response.find('artist/%s' % bucket)
+                    self._profile.update({bucket : dictify(result)})
+        return self._profile
+    
     @property
     def identifier(self):
         """A unique identifier for an artist.
@@ -114,22 +149,26 @@ class Artist(object):
             response = util.call('get_urls', {'id': self.identifier}).find('artist').getchildren()
             self._urls =  dict((url.tag[:-4], url.text) for url in response if url.tag[-4:] == '_url')
         return self._urls
-
+    
     def terms(self):
         if self._terms is None or not CACHE:
             response = util.call('get_top_terms', {'id': self.identifier}).findall('terms/term')
             self._terms = [e.text for e in response]
         return self._terms
-
-
+    
     def __repr__(self):
         return "<Artist '%s'>" % str(self)
     
     def __str__(self):
         return self.name if isinstance(self.name, str) else self.name.encode('utf-8')
-        
+    
     def clear_cache(self):
         pass
+    
+
+
+def dictify(result):
+    return dict((element.tag, element.text)for element in result.getchildren())
 
 
 TRUTH = {True: 'Y', False: 'N'}
@@ -168,12 +207,12 @@ def get_top_hottt_artists(rows=15, refresh=False):
 class SimilarDocumentSet(document.DocumentSet):
     def __init__(self, identifier):
         super(SimilarDocumentSet, self).__init__(identifier, 'get_similar', 'similar/artist')
-
+    
     def __len__(self):
         if self._len is None:
             self._len = 100
         return self._len
-
+    
     def __getitem__(self, k):
         if k.stop > 100:
             raise util.EchoNestAPIError(5, 'Invalid parameter: "rows" must be less than or equal to 100')
@@ -196,7 +235,7 @@ class SimilarDocumentSet(document.DocumentSet):
                 elements = elements[:stop_index + 1]
             items.extend([self._parse_element(e) for e in elements])
         return items
-
+    
     def chunk_magic(self, k):
         chunk_and_index = lambda i: (i / self._cache.chunk_size, i % self._cache.chunk_size)
         if not isinstance(k, slice):
@@ -205,8 +244,7 @@ class SimilarDocumentSet(document.DocumentSet):
         start_chunk, start_index = chunk_and_index(start)
         stop = min(k.stop or len(self), len(self)) - 1 # use inclusive to simplify logic
         return start, start_chunk, start_index, stop
-
-
+    
     def _parse_element(self, element):
         return Artist(element.findtext('id'), element.findtext('name'));
-
+    
