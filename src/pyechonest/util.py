@@ -30,7 +30,7 @@ def parse_http_response(response):
     response = fromstring(response)
     return check_status(response)
 
-def call(method, params, POST=False, buckets=[]):
+def call(method, params, POST=False, buckets=[], check_status=True):
     rate_limit_exceeded = not check_call_log()
     while rate_limit_exceeded:
         time.sleep(0.5)
@@ -52,6 +52,8 @@ def call(method, params, POST=False, buckets=[]):
         f = urllib.urlopen(url)
     if config.TRACE_API_CALLS:
         print url
+    if not check_status:
+        return f.read()
     response = fromstring(f.read())
     return check_status(response)
 
