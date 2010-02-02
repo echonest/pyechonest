@@ -30,7 +30,6 @@ def get_blog_terms(blogs = [], refresh=False):
             terms.append( (name, score))
         result['terms'] = terms
         results.append(result)
-        print results
     return results
 
 if __name__ == "__main__":
