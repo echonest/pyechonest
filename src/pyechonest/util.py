@@ -30,7 +30,7 @@ def parse_http_response(response):
     response = fromstring(response)
     return check_status(response)
 
-def call(method, params, POST=False, buckets=[], check_status=True):
+def call(method, params, POST=False, buckets=[], checkstatus=True):
     rate_limit_exceeded = not check_call_log()
     while rate_limit_exceeded:
         time.sleep(0.5)
@@ -52,7 +52,39 @@ def call(method, params, POST=False, buckets=[], check_status=True):
         f = urllib.urlopen(url)
     if config.TRACE_API_CALLS:
         print url
-    if not check_status:
+    if not checkstatus:
+        return f.read()
+    response = fromstring(f.read())
+    return check_status(response)
+
+
+def callm(method, params, POST=False, buckets=[], checkstatus=True):
+    ''' supports calling with multiple ordered params. Params should be an 
+        ordered list of k,v tuples 
+    '''
+    rate_limit_exceeded = not check_call_log()
+    while rate_limit_exceeded:
+        time.sleep(0.5)
+        rate_limit_exceeded = not check_call_log()
+    params.append(('api_key', config.ECHO_NEST_API_KEY))
+    params.append(('version', 3))
+    for k,v in params:
+        if isinstance(v, unicode):
+            params[k] = v.encode('utf-8')
+    params = urllib.urlencode(params)
+    if(POST):
+        url = 'http://%s%s%s' % (config.API_HOST, config.API_SELECTOR, method)
+        f = urllib.urlopen(url, params)
+    else:
+        url = 'http://%s%s%s?%s' % (config.API_HOST, config.API_SELECTOR, 
+                                    method, params)
+        # hack to add buckets
+        for bucket in buckets:
+            url += '&bucket='+bucket
+        f = urllib.urlopen(url)
+    if config.TRACE_API_CALLS:
+        print url
+    if not checkstatus:
         return f.read()
     response = fromstring(f.read())
     return check_status(response)
