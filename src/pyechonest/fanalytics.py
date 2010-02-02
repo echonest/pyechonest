@@ -4,19 +4,14 @@
 A Python interface to the The Echo Nest's web API.  See
 http://developer.echonest.com/ for details.
 """
-
 import config
 import document
 import util as util
 
-from elementtree.ElementTree import Element, SubElement, dump
-
-config.TRACE_API_CALLS = True
-config.API_HOST = 'developer2.echonest.com'
-
 def get_blog_terms(blogs = [], refresh=False):
-    """Return a list of weighted musical terms (styles, genres) that
-    describe the type of music that the blog covers. """
+    """  Return a list of weighted musical terms (styles, genres) that
+         describe the type of music that the blog covers. 
+    """
 
     params = []
     for b in blogs:
@@ -39,6 +34,7 @@ def get_blog_terms(blogs = [], refresh=False):
     return results
 
 if __name__ == "__main__":
-   # get_blog_terms(blogs=['http://music.for-robots.com', 'http://www.fluxblog.org'])
-    get_blog_terms(blogs=['http://music.for-robots.com', 'http://fluxblog.org', 'http://echonest.com'])
+    config.API_HOST = 'developer2.echonest.com'
+    get_blog_terms(blogs=['http://music.for-robots.com', 'http://fluxblog.org', 
+        'http://echonest.com'])
     
