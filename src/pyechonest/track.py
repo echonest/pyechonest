@@ -331,7 +331,7 @@ def _analyze(md5_or_trackID, wait=True):
     params = {'api_key':config.ECHO_NEST_API_KEY, 
                 'version': 3, 
                 'analysis_version':config.ANALYSIS_VERSION}
-    if len(md5_or_trackID)==18 and identifier.startswith('TR'):
+    if len(md5_or_trackID)==18 and md5_or_trackID.startswith('TR'):
         params['id'] = 'music://id.echonest.com/~/TR/' + md5_or_trackID
     elif md5_or_trackID.startswith('music://'):
         params['id'] = md5_or_trackID
