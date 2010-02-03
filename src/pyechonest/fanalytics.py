@@ -33,7 +33,6 @@ def get_blog_terms(blogs = [], refresh=False):
     return results
 
 if __name__ == "__main__":
-    config.API_HOST = 'developer2.echonest.com'
     get_blog_terms(blogs=['http://music.for-robots.com', 'http://fluxblog.org', 
         'http://echonest.com'])
     
