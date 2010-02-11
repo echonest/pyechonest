@@ -47,12 +47,11 @@ class Track(object):
         else:
             raise TypeError("Invalid identifier. Please supply filename, md5, or track ID.")
         self._name = None
-        self.params = {'md5': self.md5, 'analysis_version':config.ANALYSIS_VERSION }
-
+        #self.params = {'md5': self.md5, 'analysis_version':config.ANALYSIS_VERSION }
+        self.params = {'id': self.identifier, 'analysis_version':config.ANALYSIS_VERSION }
+    
     def analyze(self, wait=False):
-        """
-        Re-analyze a previously uploaded track.
-        """
+        """Re-analyze a previously uploaded track."""
         response = util.call('analyze', self.params, POST=True)
         metadata = self.metadata
         while wait:
@@ -65,40 +64,37 @@ class Track(object):
         return metadata
     
     # These are all lists of events (beats, etc)
-    
     @property
     @memoized
     def bars(self):
         return parseToListOfEvents(util.call('get_bars', 
                                 self.params).findall("analysis/bar"))
-
+    
     @property
     @memoized
     def beats(self):
         return parseToListOfEvents(util.call('get_beats', 
                                 self.params).findall("analysis/beat"))
-
+    
     @property
     @memoized
     def tatums(self):
         return parseToListOfEvents(util.call('get_tatums', 
                                 self.params).findall("analysis/tatum"))
-
-
-    # These guys are all single float #s    
     
+    # These guys are all single float #s
     @property
     @memoized
     def duration(self):
         return parseToFloat(util.call('get_duration', 
                                 self.params).findall("analysis/duration"))
-        
+    
     @property
     @memoized
     def end_of_fade_in(self):
         return parseToFloat(util.call('get_end_of_fade_in', 
                                 self.params).findall("analysis/end_of_fade_in"))
-        
+    
     @property
     @memoized
     def key(self):
@@ -107,13 +103,13 @@ class Track(object):
                             with_confidence=True)
         res['value'] = int(res['value'])
         return res
-
+    
     @property
     @memoized
     def loudness(self):
         return parseToFloat(util.call('get_loudness', 
                             self.params).findall("analysis/loudness"))
-
+    
     @property
     @memoized
     def mode(self):
@@ -122,20 +118,20 @@ class Track(object):
                             with_confidence=True)
         res['value'] = int(res['value'])
         return res
-
+    
     @property
     @memoized
     def start_of_fade_out(self):
         return parseToFloat(util.call('get_start_of_fade_out', 
                             self.params).findall("analysis/start_of_fade_out"))
-
+    
     @property
     @memoized
     def tempo(self):
         return parseToFloat(util.call('get_tempo', 
                             self.params).findall("analysis/tempo"), 
                             with_confidence=True)
-
+    
     @property
     @memoized
     def time_signature(self):
@@ -144,10 +140,8 @@ class Track(object):
                             with_confidence=True)
         res['value'] = int(res['value'])
         return res
-
-
-    # And now the "special ones"
     
+    # And now the "special ones"
     @property
     @memoized
     def sections(self):
@@ -159,7 +153,7 @@ class Track(object):
             duration = float(n.attrib.get('duration'))
             output.append({"start":start,"duration":duration})
         return output
-
+    
     @property
     #@memoized
     def metadata(self):
@@ -175,7 +169,7 @@ class Track(object):
         if output.has_key('status') and output['status']=='UNKNOWN':
             raise util.EchoNestAPIThingIDError(1, "Unknown track. Please upload.")
         return output
-
+    
     def _metadata(self):
         if self._identifier is not None:
             params = {'id':self._identifier}
@@ -189,7 +183,7 @@ class Track(object):
         if output.has_key('status') and output['status']=='UNKNOWN':
             raise util.EchoNestAPIThingIDError(1, "Unknown track. Please upload.")
         return output
-
+    
     @property
     @memoized
     def segments(self):
@@ -211,7 +205,6 @@ class Track(object):
                         loudness_end = float(l.text)
                     else:
                         loudness_begin = float(l.text)
-
             pitchnodes = n.findall('pitches/pitch')
             pitches=[]
             for p in pitchnodes:
@@ -219,7 +212,6 @@ class Track(object):
                     pitches.append(float(p.text))
                 except Exception:
                     pitches.append(0)
-
             timbrenodes = n.findall('timbre/coeff')
             timbre=[]
             for t in timbrenodes:
@@ -227,7 +219,6 @@ class Track(object):
                     timbre.append(float(t.text))
                 except Exception:
                     timbre.append(0)
-
             output.append({"start":start, "duration":duration, 
                             "pitches":pitches, "timbre":timbre,
                             "loudness_begin":loudness_begin,
@@ -235,37 +226,34 @@ class Track(object):
                             "time_loudness_max":time_loudness_max,
                             "loudness_end":loudness_end})
         return output
-        
+    
     @property
     def identifier(self):
         """A unique identifier for a track.
         See http://developer.echonest.com/docs/datatypes/
         for more information"""
         if self._identifier is None:
-            self._identifier = self.metadata['id']
+            self._identifier = self.metadata.get('id')
         return self._identifier
-
+    
     @property
     def name(self):
         if self._name is None:
-            try:
-                self._name = self.metadata['title']
-            except KeyError:
-                self._name = ""
+            self._name = self.metadata.get('title','')
         return self._name
-
+    
     @property
     def md5(self):
         if self._md5 is None:
-            self._md5 = self.metadata['md5']
+            self._md5 = self.metadata.get('md5')
         return self._md5
-
+    
     def __repr__(self):
         return "<Track '%s'>" % self.name
     
     def __str__(self):
         return self.name
-
+    
 
 SEARCH_TRACKS_CACHE = {}
 def search_tracks(name, start=0, rows=15, refresh=False):
@@ -286,7 +274,6 @@ def search_tracks(name, start=0, rows=15, refresh=False):
         tracks.append(parsed)
     SEARCH_TRACKS_CACHE[(name, start, rows)] = tracks
     return SEARCH_TRACKS_CACHE[(name, start, rows)]
-
 
 def get_top_hottt_tracks():
     response = util.call('get_top_hottt_tracks', {}).findall('results/doc')
@@ -323,7 +310,6 @@ def get_metadata(id_or_md5):
         raise util.EchoNestAPIError(1, "Unknown track. Please upload.")
     return output
 
-
 def _analyze(md5_or_trackID, wait=True):
     """
     Re-analyze a previously uploaded track.
@@ -346,7 +332,6 @@ def _analyze(md5_or_trackID, wait=True):
         return Track(response[0].attrib.get("id"))
     else:
         return None
-
 
 TRUTH = {True: 'Y', False: 'N'}
 
@@ -383,7 +368,6 @@ def _upload(filename_or_url, wait=True):
         response = util.call('upload',{'url':filename_or_url, "wait":TRUTH[wait], 
                                         'analysis_version':config.ANALYSIS_VERSION}, 
                                         POST=True).findall("track")
-    
     if len(response)>0:
         return response[0].attrib.get("id")
     else:
@@ -406,7 +390,7 @@ def parseToListOfEvents(evs):
         event["confidence"] = float(x.attrib.get("confidence"))
         events.append(event)
     return events
-    
+
 def parseToFloat(evs, with_confidence=False):
     """
     parser for the single float-type calls
