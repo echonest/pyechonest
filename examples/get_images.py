@@ -24,8 +24,6 @@ as part of a slideshow or screensaver are copied to a subfolder made in the curr
 directory called "big".
 
 Optionally download images only for a given artist.
-
-
 """
 
 usage = """
@@ -37,8 +35,20 @@ usage:
     
     If you do specify an artist name, all images for that artist will be downloaded.
 """
+# Maintain a record of artists that we already have images for, to avoid multiple downloads.
+artists_with_images = set()
 
-
+def has_images(artist_id):
+    """Check to see if we've already downloaded an image for the given artist_id"""
+    global artists_with_images
+    if not artists_with_images:
+        # See what images we've already got.
+        # f: AR00B1I1187FB433EB_00.jpg -> AR00B1I1187FB433EB
+        f = lambda x : x[:x.index('_')] 
+        files = [i for i in os.listdir('.') if i.startswith('AR') and '_' in i]
+        artists_with_images = set(map(f, files))
+    return artist_id in artists_with_images
+    
 def copy_big(path='.', threshold=1000):
     """Copies the big images into a subfolder called 'big'. Creative, right?"""
     big = os.path.join(path, 'big')
@@ -80,6 +90,10 @@ def find_artist(artist_name):
 def get_images(artist):
     """Retrieve all images for the given pyechonest artist."""
     enid = get_id(artist)
+    if has_images(enid):
+        print "skipping %s, already have images" % artist
+        return
+        
     images = safe(list, artist.images)() 
     for i, img in enumerate(images):
         try:
@@ -94,6 +108,8 @@ def get_images(artist):
         except Exception, e:
             print e
             print "skipping %d" % i
+    global artists_with_images
+    artists_with_images.add(artist)
 
 def download_hottt(count=1000):
     """Warning, downloading all these images takes a long time."""
