@@ -11,6 +11,6 @@ try:
 except ImportError:
     import simplejson as json
 
-def search_tracks(artist=None, title=None, sort=None, query=None):
-    response = util.call('alpha_search_tracks', {'query':query, 'sort':sort }, checkstatus=False)
+def search_tracks(artist=None, title=None, sort=None, query=None, count=20):
+    response = util.call('alpha_search_tracks', {'query':query, 'sort':sort, 'results':count }, checkstatus=False)
     return json.loads(response)
