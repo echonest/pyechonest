@@ -14,9 +14,6 @@ import urllib
 from pyechonest.artist import get_top_hottt_artists as hottt
 from pyechonest.artist import search_artists
 
-# Image comes from PIL, whic you can get here: http://www.pythonware.com/products/pil/
-import Image # only used for copy_big
-
 """
 Download images for the Echo Nest's top 1000 hottt artists, and 15 similar artists for each artist.
 Files are named by Echo Nest Artist ID. All images that are large enough to look reasonable 
@@ -51,6 +48,10 @@ def has_images(artist_id):
     
 def copy_big(path='.', threshold=1000):
     """Copies the big images into a subfolder called 'big'. Creative, right?"""
+    try:
+        import Image
+    except ImportError:
+        sys.exit("copy_big requires PIL to work. Get it here: http://www.pythonware.com/products/pil/");
     big = os.path.join(path, 'big')
     if not os.path.exists(big):
         os.mkdir(big)
@@ -114,7 +115,7 @@ def get_images(artist):
 def download_hottt(count=1000):
     """Warning, downloading all these images takes a long time."""
     hottest = hottt(rows=count)
-    for i, a in enumerate(hottest): 
+    for i, a in enumerate(hottest):
         print "Processing artist %d of %d" % (i, count)
         get_images(a)
         similars = safe(list, a.similar)()
