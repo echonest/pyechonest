@@ -12,7 +12,22 @@ import os
 
 from pyechonest import track as track_api
 from pyechonest import config
-import matplotlib.pyplot as plt
+try:
+    import matplotlib.pyplot as plt
+except ImportError:
+    print """
+click_plot.py requires matplotlib. 
+
+You can get it here: 
+
+    http://matplotlib.sourceforge.net/.
+
+Instructions for installing matplotlib are here:
+
+    http://matplotlib.sourceforge.net/users/installing.html
+
+"""
+    sys.exit(1)
 
 # How to set your ECHO_NEST_API_KEY:
 #   1) Set the environment variable 'ECHO_NEST_API_KEY' to be your key, or
