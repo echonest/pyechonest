@@ -254,27 +254,6 @@ class Track(object):
     def __str__(self):
         return self.name
     
-
-SEARCH_TRACKS_CACHE = {}
-def search_tracks(name, start=0, rows=15, refresh=False):
-    """Search for audio using a query on the track, album, or artist name."""
-    global SEARCH_TRACKS_CACHE
-    if config.CACHE and not refresh:
-        try:
-            return SEARCH_TRACKS_CACHE[(name, start, rows)]
-        except KeyError:
-            pass
-    params = {'query': name, 'start': start, 'rows':rows}
-    response = util.call('search_tracks', params).findall('results/doc')
-    tracks = []
-    for element in response:
-        parsed = dict((e.tag, e.text) for e in element.getchildren())
-        if element.attrib.has_key('id'):
-            parsed.update({'id': element.attrib['id']})
-        tracks.append(parsed)
-    SEARCH_TRACKS_CACHE[(name, start, rows)] = tracks
-    return SEARCH_TRACKS_CACHE[(name, start, rows)]
-
 def get_metadata(id_or_md5):
     is_id = False
     if len(id_or_md5)==18 and id_or_md5.startswith('TR'):
