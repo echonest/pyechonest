@@ -78,7 +78,7 @@ class Artist(object):
                 params = {'id': self.identifier}
                 response = util.call('get_familiarity', params).findtext('artist/familiarity')
                 self._familiarity = float(response)
-            except:
+            except Exception:
                 self._familiarity = 0
         return self._familiarity
     
@@ -90,7 +90,7 @@ class Artist(object):
                 params = {'id': self.identifier}
                 response = util.call('get_hotttnesss', params).findtext('artist/hotttnesss')
                 self._hotttnesss = float(response)
-            except:
+            except Exception:
                 self._hotttnesss = 0
         return self._hotttnesss
     

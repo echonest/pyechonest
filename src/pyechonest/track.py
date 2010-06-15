@@ -344,7 +344,7 @@ def _upload(filename_or_url, wait=True):
 def calc_md5(filename):
     try:
        return hashlib.md5(file(filename, 'rb').read()).hexdigest()
-    except:
+    except Exception:
         return None
 
 def parseToListOfEvents(evs):
