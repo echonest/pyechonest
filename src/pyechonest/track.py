@@ -275,17 +275,6 @@ def search_tracks(name, start=0, rows=15, refresh=False):
     SEARCH_TRACKS_CACHE[(name, start, rows)] = tracks
     return SEARCH_TRACKS_CACHE[(name, start, rows)]
 
-def get_top_hottt_tracks():
-    response = util.call('get_top_hottt_tracks', {}).findall('results/doc')
-    tracks = []
-    for element in response:
-        parsed = dict((e.tag, e.text) for e in element.getchildren())
-        print parsed
-        if element.attrib.has_key('id'):
-            parsed.update({'id': element.attrib['id']})
-        tracks.append(parsed)
-    return tracks
-
 def get_metadata(id_or_md5):
     is_id = False
     if len(id_or_md5)==18 and id_or_md5.startswith('TR'):
