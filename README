@@ -1,0 +1,52 @@
+Welcome to pyechonest, a python wrapper around the Beta Echo Nest API (v4).
+
+This wrapper should allow you to get started using the Beta Echo Nest API quickly and easily. The only requirement is a developer API key, which you can get for free from http://developer.echonest.com/account/register/.
+
+For documentation questions, please refer to the official beta api docs, which are available at http://beta.developer.echonest.com/.
+
+IMPORTANT: You must let pyechonest know about your API key before you use it. There are two ways to let pyechonest know about your API key:
+	
+	1. Set the variable ECHO_NEST_API_KEY in your environment to your key.
+		(bourne-like shells) 	$ export ECHO_NEST_API_KEY=YOUR_API_KEY
+		(c-like shells)			$ setenv ECHO_NEST_API_KEY YOUR_API_KEY
+	
+	2. In Python, do this:
+		>>> from pyechonest import config
+		>>> config.ECHO_NEST_API_KEY = YOUR_API_KEY
+
+***Note that pyechonest currently only supports artist and song methods in the new API***
+
+Examples:
+	Search for artist:
+		>>> from pyechonest import artist
+		>>> weezer_results = artist.search(query='weezer')
+		>>> weezer = weezer_results[0]
+		>>> weezer_blogs = weezer.blogs
+		>>> print 'Blogs about weezer:', [blog.url for blog in weezer_blogs]
+		
+	Get an artist from their Musicbrainz ID:
+		>>> from pyechonest import artist
+		>>> a = artist.Artist('musicbrainz:artist:a74b1b7f-71a5-4011-9441-d0b5e4122711')
+    	>>> print a.name
+
+	Get the top hottt artists:
+		>>> from pyechonest import artist
+		>>> for hottt_artist in artist.top_hottt():
+		>>>     print hottt_artist.name, hottt_artist.hotttnesss
+    
+	Search for songs:
+		>>> from pyechonest import song
+		>>> rkp_results = song.search(artist='radiohead', title='karma police')
+		>>> karma_police = rkp_results[0]
+		>>> print karma_police.artist_location
+		>>> print karma_police.audio_summary.tempo, karma_police.audio_summary.duration
+
+	Get a song's audio_url and analysis_url:
+		>>> from pyechonest import song
+		>>> wn_results = song.search(combined='the national - wasp nest')
+		>>> wasp_nest = wn_results[0]
+		>>> wn_tracks = wasp_nest.tracks
+		>>> print wn_tracks[0].audio_url
+		>>> print wn_tracks[0].analysis_url
+	
+
