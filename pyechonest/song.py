@@ -207,43 +207,43 @@ def search(title=None, artist=None, artist_id=None, combined=None, description=N
         kwargs['combined'] = combined
     if description:
         kwargs['description'] = description
-    if results:
+    if results is not None:
         kwargs['results'] = results
-    if max_tempo:
+    if max_tempo is not None:
         kwargs['max_tempo'] = max_tempo
-    if min_tempo:
+    if min_tempo is not None:
         kwargs['min_tempo'] = min_tempo
-    if max_duration:
+    if max_duration is not None:
         kwargs['max_duration'] = max_duration
-    if min_duration:
+    if min_duration is not None:
         kwargs['min_duration'] = min_duration
-    if max_loudness:
+    if max_loudness is not None:
         kwargs['max_loudness'] = max_loudness
-    if min_loudness:
+    if min_loudness is not None:
         kwargs['min_loudness'] = min_loudness
-    if artist_max_familiarity:
+    if artist_max_familiarity is not None:
         kwargs['artist_max_familiarity'] = artist_max_familiarity
-    if artist_min_familiarity:
+    if artist_min_familiarity is not None:
         kwargs['artist_min_familiarity'] = artist_min_familiarity
-    if artist_max_hotttnesss:
+    if artist_max_hotttnesss is not None:
         kwargs['artist_max_hotttnesss'] = artist_max_hotttnesss
-    if artist_min_hotttnesss:
+    if artist_min_hotttnesss is not None:
         kwargs['artist_min_hotttnesss'] = artist_min_hotttnesss
-    if song_max_hotttnesss:
+    if song_max_hotttnesss is not None:
         kwargs['song_max_hotttnesss'] = song_max_hotttnesss
-    if song_min_hotttnesss:
+    if song_min_hotttnesss is not None:
         kwargs['song_min_hotttnesss'] = song_min_hotttnesss
-    if mode:
+    if mode is not None:
         kwargs['mode'] = mode
-    if key:
+    if key is not None:
         kwargs['key'] = key
-    if max_latitude:
+    if max_latitude is not None:
         kwargs['max_latitude'] = max_latitude
-    if min_latitude:
+    if min_latitude is not None:
         kwargs['min_latitude'] = min_latitude
-    if max_longitude:
+    if max_longitude is not None:
         kwargs['max_longitude'] = max_longitude
-    if min_longitude:
+    if min_longitude is not None:
         kwargs['min_longitude'] = min_longitude
     if sort:
         kwargs['sort'] = sort
