@@ -209,7 +209,7 @@ class Artist(ArtistProxy):
     
     reviews = property(get_reviews)
     
-    def get_similar(self, results=15, start=0, cache=True, max_familiarity=None, min_familiarity=None, \
+    def get_similar(self, results=15, start=0, buckets=None, limit=None, cache=True, max_familiarity=None, min_familiarity=None, \
                     max_hotttnesss=None, min_hotttnesss=None):
         """Return similar artists to this one
         
@@ -217,6 +217,8 @@ class Artist(ArtistProxy):
             cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
             results: An integer number of results to return
             start: An integer starting value for the result set
+            buckets: A list of strings specifying which buckets to retrieve
+            limit: A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
             max_familiarity: A float specifying the max familiarity of artists to search for
             min_familiarity: A float specifying the min familiarity of artists to search for
             max_hotttnesss: A float specifying the max hotttnesss of artists to search for
@@ -224,6 +226,7 @@ class Artist(ArtistProxy):
         Returns:
             A list of similar Artist objects
         """
+        buckets = buckets or []
         kwargs = {}
         if max_familiarity:
             kwargs['max_familiarity'] = max_familiarity
@@ -233,6 +236,10 @@ class Artist(ArtistProxy):
             kwargs['max_hotttnesss'] = max_hotttnesss
         if min_hotttnesss:
             kwargs['min_hotttnesss'] = min_hotttnesss
+        if buckets:
+            kwargs['bucket'] = buckets
+        if limit:
+            kwargs['limit'] = 'true'
 
         # we need this to fix up all the dict keys to be strings, not unicode objects    
         fix = lambda x : dict((str(k), v) for (k,v) in x.iteritems())
@@ -331,7 +338,7 @@ def search(name=None, description=None, results=15, buckets = None, limit=False,
         name: the name of an artist
         description: A string describing the artist
         results: An integer number of results to return
-        buckets: A list of strings specifying which buck
+        buckets: A list of strings specifying which buckets to retrieve
         limit: A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
         fuzzy_match: A boolean indicating whether or not to search for similar sounding matches (only works with name)
         max_familiarity: A float specifying the max familiarity of artists to search for
@@ -379,7 +386,7 @@ def top_hottt(start=0, results=15, buckets = None, limit=False):
     Args:
         results: An integer number of results to return
         start: An integer starting value for the result set
-        buckets: A list of strings specifying which buck
+        buckets: A list of strings specifying which buckets to retrieve
         limit: A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
         
     Returns:
@@ -431,7 +438,7 @@ def similar(names=None, ids=None, start=0, results=15, buckets = None, limit=Fal
         name: An artist name or list of names
         results: An integer number of results to return
         start: An integer starting value for the result set
-        buckets: A list of strings specifying which buck
+        buckets: A list of strings specifying which buckets to retrieve
         limit: A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
         max_familiarity: A float specifying the max familiarity of artists to search for
         min_familiarity: A float specifying the min familiarity of artists to search for
