@@ -38,7 +38,7 @@ class Track(TrackProxy):
     start_of_fade_out       a float
     status                  ex. 'complete'
     tatums                  a list of dicts
-    tempo                   a float
+    tempo                   a flat
     tempo_confidence        a float
     title                   ex. 'Interiors' or None
     """

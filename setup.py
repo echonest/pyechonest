@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-__version__ = "$Revision: 4.2 $"
+__version__ = "4.2"
 
 # $Source$
 from sys import version
-from distutils.core import setup
+from setuptools import setup
 
 if version < '2.6':
     requires=['urllib', 'urllib2', 'simplejson']

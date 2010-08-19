@@ -5,7 +5,7 @@
 Copyright (c) 2010 The Echo Nest. All rights reserved.
 Created by Tyler Williams on 2010-04-25.
 
-The Song module loosely covers http://beta.developer.echonest.com/song.html
+The Song module loosely covers http://developer.echonest.com/docs/v4/song.html
 Refer to the official api documentation if you are unsure about something.
 """
 
@@ -155,7 +155,10 @@ def identify(filename=None, query_obj=None, code=None, artist=None, title=None, 
     has_data = False
     if filename:
         query_obj = util.codegen(filename, start=codegen_start, duration=codegen_duration)
-        
+
+    if not isinstance(query_obj, list):
+        query_obj = [query_obj]
+
     if code:
         has_data = True
         kwargs['code'] = code
@@ -173,15 +176,16 @@ def identify(filename=None, query_obj=None, code=None, artist=None, title=None, 
     # TODO -- this is a temp debug param should be taken out for release
     if alt:
         if query_obj:
-            query_obj['alt'] = True
+            query_obj[0]['alt'] = True
 
-    if query_obj:
+    if query_obj and any(query_obj):
         has_data = True
         kwargs['query'] = json.dumps(query_obj)
         post = True
 
     if has_data:
         result = util.callm("%s/%s" % ('song', 'identify'), kwargs, POST=post)
+        print str(result)
         fix = lambda x : dict((str(k), v) for (k,v) in x.iteritems())
         return [Song(**fix(s_dict)) for s_dict in result['response'].get('songs',[])]
     else:

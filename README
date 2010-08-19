@@ -1,8 +1,8 @@
-Welcome to pyechonest, a python wrapper around the Beta Echo Nest API (v4).
+Welcome to pyechonest, a python wrapper around the Echo Nest API (v4).
 
-This wrapper should allow you to get started using the Beta Echo Nest API quickly and easily. The only requirement is a developer API key, which you can get for free from http://developer.echonest.com/account/register/.
+This wrapper should allow you to get started using the Echo Nest API quickly and easily. The only requirement is a developer API key, which you can get for free from http://developer.echonest.com/account/register/.
 
-For documentation questions, please refer to the official beta api docs, which are available at http://beta.developer.echonest.com/.
+For documentation questions, please refer to the official api docs, which are available at http://developer.echonest.com/.
 
 IMPORTANT: You must let pyechonest know about your API key before you use it. There are two ways to let pyechonest know about your API key:
 	
@@ -27,7 +27,7 @@ Examples:
 	Get an artist from their Musicbrainz ID:
 		>>> from pyechonest import artist
 		>>> a = artist.Artist('musicbrainz:artist:a74b1b7f-71a5-4011-9441-d0b5e4122711')
-    	>>> print a.name
+		>>> print a.name
 
 	Get the top hottt artists:
 		>>> from pyechonest import artist

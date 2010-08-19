@@ -6,7 +6,6 @@ Copyright (c) 2010 The Echo Nest. All rights reserved.
 Created by Tyler Williams on 2010-04-25.
 """
 
-import util
 import logging
 from util import attrdict
 

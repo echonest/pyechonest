@@ -8,9 +8,7 @@ Created by Tyler Williams on 2010-04-25.
 Global configuration variables for accessing the Echo Nest web API.
 """
 
-__version__ = "$Revision: 4.2 $"
-
-# $Source$
+__version__ = "4.2"
 
 import os
 

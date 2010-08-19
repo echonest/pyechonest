@@ -7,15 +7,15 @@ Created by Tyler Williams on 2010-04-25.
 """
 
 import util
-from util import attrdict
 
-class GenericProxy(attrdict):
+class GenericProxy(object):
     def __init__(self):
         self.cache = {}
     
     def get_attribute(self, method_name, **kwargs):
         result = util.callm("%s/%s" % (self.type, method_name), kwargs)
         return result['response']
+    
 
 
 class ArtistProxy(GenericProxy):
@@ -39,7 +39,8 @@ class ArtistProxy(GenericProxy):
             kwargs['id'] = self.id
         else:
             kwargs['name'] = self.id
-        return super(ArtistProxy, self).get_attribute(*args, **kwargs) 
+        return super(ArtistProxy, self).get_attribute(*args, **kwargs)
+    
 
 class SongProxy(GenericProxy):
     def __init__(self, identifier, buckets = None, **kwargs):
@@ -52,6 +53,10 @@ class SongProxy(GenericProxy):
         # BAW -- this is debug output from identify that returns a track_id. i am not sure where else to access this..
         if kwargs.has_key("track_id"):
             self.track_id = kwargs["track_id"]
+        if kwargs.has_key("tag"):
+            self.tag = kwargs["tag"]
+        if kwargs.has_key("score"):
+            self.score = kwargs["score"]
 
         # the following are integral to all song objects... the rest is up to you!
         core_attrs = ['title', 'artist_name', 'artist_id']

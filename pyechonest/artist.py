@@ -5,13 +5,14 @@
 Copyright (c) 2010 The Echo Nest. All rights reserved.
 Created by Tyler Williams on 2010-04-25.
 
-The Artist module loosely covers http://beta.developer.echonest.com/artist.html
+The Artist module loosely covers http://developer.echonest.com/docs/v4/artist.html
 Refer to the official api documentation if you are unsure about something.
 """
 
 import util
 from proxies import ArtistProxy
 from results import Result
+import song
 
 class Artist(ArtistProxy):
     """
@@ -108,7 +109,7 @@ class Artist(ArtistProxy):
     
     biographies = property(get_biographies)    
     
-    def get_blogs(self, results=15, start=0, cache=True):
+    def get_blogs(self, results=15, start=0, cache=True, high_relevance=False):
         """Get a list of blog articles related to an artist
         Args:
             cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
@@ -118,10 +119,11 @@ class Artist(ArtistProxy):
         Returns:
             A list of blog document Result objects
         """
-        if cache and ('blogs' in self.cache) and results==15 and start==0:
+        if cache and ('blogs' in self.cache) and results==15 and start==0 and not high_relevance:
             return [Result('blogs', a) for a in self.cache['blogs']]
         else:
-            response = self.get_attribute('blogs', results=results, start=start)
+            high_relevance = 'true' if high_relevance else 'false'
+            response = self.get_attribute('blogs', results=results, start=start, high_relevance=high_relevance)
             if results==15 and start==0:
                 self.cache['blogs'] = response['blogs']
             return [Result('blogs', a) for a in response['blogs']]
@@ -166,7 +168,7 @@ class Artist(ArtistProxy):
     
     images = property(get_images)    
     
-    def get_news(self, results=15, start=0, cache=True):
+    def get_news(self, results=15, start=0, cache=True, high_relevance=False):
         """Get a list of news articles found on the web related to an artist
         
         Args:
@@ -177,10 +179,11 @@ class Artist(ArtistProxy):
         Returns:
             A list of news document Result objects
         """
-        if cache and ('news' in self.cache) and results==15 and start==0:
+        if cache and ('news' in self.cache) and results==15 and start==0 and not high_relevance:
             return [Result('news', a) for a in self.cache['news']]
         else:
-            response = self.get_attribute('news', results=results, start=start)
+            high_relevance = 'true' if high_relevance else 'false'
+            response = self.get_attribute('news', results=results, start=start, high_relevance=high_relevance)
             if results==15 and start==0:
                 self.cache['news'] = response['news']
             return [Result('news', a) for a in response['news']]
@@ -209,20 +212,19 @@ class Artist(ArtistProxy):
     
     reviews = property(get_reviews)
     
-    def get_similar(self, results=15, start=0, buckets=None, limit=None, cache=True, max_familiarity=None, min_familiarity=None, \
-                    max_hotttnesss=None, min_hotttnesss=None):
+    def get_similar(self, results=15, start=0, buckets=None, limit=False, cache=True, max_familiarity=None, min_familiarity=None, \
+                    max_hotttnesss=None, min_hotttnesss=None, min_results=None, reverse=False):
         """Return similar artists to this one
         
         Args:
             cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
             results: An integer number of results to return
             start: An integer starting value for the result set
-            buckets: A list of strings specifying which buckets to retrieve
-            limit: A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
             max_familiarity: A float specifying the max familiarity of artists to search for
             min_familiarity: A float specifying the min familiarity of artists to search for
             max_hotttnesss: A float specifying the max hotttnesss of artists to search for
             min_hotttnesss: A float specifying the max hotttnesss of artists to search for
+            reverse: A boolean indicating whether or not to return dissimilar artists (wrecommender). Defaults to False.
         Returns:
             A list of similar Artist objects
         """
@@ -236,10 +238,14 @@ class Artist(ArtistProxy):
             kwargs['max_hotttnesss'] = max_hotttnesss
         if min_hotttnesss:
             kwargs['min_hotttnesss'] = min_hotttnesss
+        if min_results:
+            kwargs['min_results'] = min_results
         if buckets:
             kwargs['bucket'] = buckets
         if limit:
             kwargs['limit'] = 'true'
+        if reverse:
+            kwargs['reverse'] = 'true'
 
         # we need this to fix up all the dict keys to be strings, not unicode objects    
         fix = lambda x : dict((str(k), v) for (k,v) in x.iteritems())
@@ -255,6 +261,30 @@ class Artist(ArtistProxy):
     
     similar = property(get_similar)    
     
+    def get_songs(self, cache=True):
+        """Get the songs associated with an artist
+        
+        Args:
+            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            
+        Results:
+            A list of Song objects
+        """
+        if cache and ('songs' in self.cache):
+            songs = []
+            for start in range(0,len(self.cache['songs']),10):
+                songs.extend(song.profile(self.cache['songs'][start:start+10]))
+            return songs
+        else:
+            response = self.get_attribute('songs')
+            self.cache['songs'] = response['songs']
+            songs = []
+            for start in range(0,len(self.cache['songs']),10):
+                songs.extend(song.profile(self.cache['songs'][start:start+10]))
+            return songs
+    
+    songs = property(get_songs)
+
     def get_terms(self, sort='weight', cache=True):
         """Get the terms associated with an artist
         
@@ -363,13 +393,13 @@ def search(name=None, description=None, results=15, buckets = None, limit=False,
         kwargs['limit'] = 'true'
     if fuzzy_match:
         kwargs['fuzzy_match'] = 'true'
-    if max_familiarity:
+    if max_familiarity is not None:
         kwargs['max_familiarity'] = max_familiarity
-    if min_familiarity:
+    if min_familiarity is not None:
         kwargs['min_familiarity'] = min_familiarity
-    if max_hotttnesss:
+    if max_hotttnesss is not None:
         kwargs['max_hotttnesss'] = max_hotttnesss
-    if min_hotttnesss:
+    if min_hotttnesss is not None:
         kwargs['min_hotttnesss'] = min_hotttnesss
     if sort:
         kwargs['sort'] = sort
@@ -429,7 +459,7 @@ def top_terms(results=15):
     return [Result('term', a_dict) for a_dict in result['response']['terms']]
 
 
-def similar(names=None, ids=None, start=0, results=15, buckets = None, limit=False, max_familiarity=None, min_familiarity=None,
+def similar(names=None, ids=None, start=0, results=15, buckets=None, limit=False, max_familiarity=None, min_familiarity=None,
             max_hotttnesss=None, min_hotttnesss=None):
     """Return similar artists to this one
     
@@ -437,6 +467,8 @@ def similar(names=None, ids=None, start=0, results=15, buckets = None, limit=Fal
         id: An artist id or list of ids
         name: An artist name or list of names
         results: An integer number of results to return
+        buckets: A list of strings specifying which buckets to retrieve
+        limit: A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
         start: An integer starting value for the result set
         buckets: A list of strings specifying which buckets to retrieve
         limit: A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
@@ -459,13 +491,13 @@ def similar(names=None, ids=None, start=0, results=15, buckets = None, limit=Fal
         if not isinstance(names, list):
             names = [names]
         kwargs['name'] = names
-    if max_familiarity:
+    if max_familiarity is not None:
         kwargs['max_familiarity'] = max_familiarity
-    if min_familiarity:
+    if min_familiarity is not None:
         kwargs['min_familiarity'] = min_familiarity
-    if max_hotttnesss:
+    if max_hotttnesss is not None:
         kwargs['max_hotttnesss'] = max_hotttnesss
-    if min_hotttnesss:
+    if min_hotttnesss is not None:
         kwargs['min_hotttnesss'] = min_hotttnesss
     if start:
         kwargs['start'] = start
