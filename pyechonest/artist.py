@@ -102,7 +102,7 @@ class Artist(ArtistProxy):
         if cache and ('biographies' in self.cache) and results==15 and start==0 and license=='unknown':
             return [Result('biographies', a) for a in self.cache['biographies']]
         else:
-            response = self.get_attribute('biographies', results=results, start=start)
+            response = self.get_attribute('biographies', results=results, start=start, license=license)
             if results==15 and start==0 and license=='unknown':
                 self.cache['biographies'] = response['biographies']
             return [Result('biographies', a) for a in response['biographies']]
@@ -161,7 +161,7 @@ class Artist(ArtistProxy):
         if cache and ('images' in self.cache) and results==15 and start==0 and license=='unknown':
             return [Result('images', a) for a in self.cache['images']]
         else:
-            response = self.get_attribute('images', results=results, start=start)
+            response = self.get_attribute('images', results=results, start=start, license=license)
             if results==15 and start==0 and license=='unknown':
                 self.cache['images'] = response['images']
             return [Result('images', a) for a in response['images']]
@@ -271,16 +271,12 @@ class Artist(ArtistProxy):
             A list of Song objects
         """
         if cache and ('songs' in self.cache):
-            songs = []
-            for start in range(0,len(self.cache['songs']),10):
-                songs.extend(song.profile(self.cache['songs'][start:start+10]))
+            songs = self.cache['songs']
             return songs
         else:
             response = self.get_attribute('songs')
-            self.cache['songs'] = response['songs']
-            songs = []
-            for start in range(0,len(self.cache['songs']),10):
-                songs.extend(song.profile(self.cache['songs'][start:start+10]))
+            songs = song.profile(response['songs'])
+            self.cache['songs'] = songs
             return songs
     
     songs = property(get_songs)

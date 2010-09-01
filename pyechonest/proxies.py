@@ -16,7 +16,10 @@ class GenericProxy(object):
         result = util.callm("%s/%s" % (self.type, method_name), kwargs)
         return result['response']
     
-
+    def post_attribute(self, method_name, **kwargs):
+        result = util.callm("%s/%s" % (self.type, method_name), kwargs, POST=True)
+        return result['response']
+    
 
 class ArtistProxy(GenericProxy):
     def __init__(self, identifier, buckets = None, **kwargs):
@@ -33,13 +36,34 @@ class ArtistProxy(GenericProxy):
             kwargs.update(profile.get('artist'))
         [self.__dict__.update({ca:kwargs.pop(ca)}) for ca in core_attrs+['id'] if ca in kwargs]        
         self.cache.update(kwargs)
-
+    
     def get_attribute(self, *args, **kwargs):
         if util.short_regex.match(self.id) or util.long_regex.match(self.id) or util.foreign_regex.match(self.id):
             kwargs['id'] = self.id
         else:
             kwargs['name'] = self.id
         return super(ArtistProxy, self).get_attribute(*args, **kwargs)
+
+    
+
+class PlaylistProxy(GenericProxy):
+    def __init__(self, session_id, buckets = None, **kwargs):
+        super(PlaylistProxy, self).__init__()
+        buckets = buckets or []
+        self.type = 'playlist'
+        kwargs = dict((str(k), v) for (k,v) in kwargs.iteritems())
+        if session_id:
+            kwargs['session_id'] = session_id
+        # the following are integral to all playlist objects... the rest is up to you!
+        core_attrs = ['session_id']
+        if not all(ca in kwargs for ca in core_attrs):
+            profile = self.get_attribute('dynamic', **kwargs)
+            kwargs.update(profile)
+        [self.__dict__.update({ca:kwargs.pop(ca)}) for ca in core_attrs if ca in kwargs]        
+        self.cache.update(kwargs)
+    
+    def get_attribute(self, *args, **kwargs):
+        return super(PlaylistProxy, self).get_attribute(*args, **kwargs)
     
 
 class SongProxy(GenericProxy):
@@ -49,7 +73,7 @@ class SongProxy(GenericProxy):
         self.id = identifier
         self.type = 'song'
         kwargs = dict((str(k), v) for (k,v) in kwargs.iteritems())
-
+        
         # BAW -- this is debug output from identify that returns a track_id. i am not sure where else to access this..
         if kwargs.has_key("track_id"):
             self.track_id = kwargs["track_id"]
@@ -57,19 +81,24 @@ class SongProxy(GenericProxy):
             self.tag = kwargs["tag"]
         if kwargs.has_key("score"):
             self.score = kwargs["score"]
-
+        if kwargs.has_key('audio'):
+            self.audio = kwargs['audio']
+        if kwargs.has_key('release_image'):
+            self.release_image = kwargs['release_image']
+        
         # the following are integral to all song objects... the rest is up to you!
         core_attrs = ['title', 'artist_name', 'artist_id']
         
         if not all(ca in kwargs for ca in core_attrs):
             profile = self.get_attribute('profile', **{'id':self.id, 'bucket':buckets})
             kwargs.update(profile.get('songs')[0])
-        [self.__dict__.update({ca:kwargs.pop(ca)}) for ca in core_attrs]        
+        [self.__dict__.update({ca:kwargs.pop(ca)}) for ca in core_attrs]
         self.cache.update(kwargs)
-
+    
     def get_attribute(self, *args, **kwargs):
         kwargs['id'] = self.id
         return super(SongProxy, self).get_attribute(*args, **kwargs)
+    
 
 class TrackProxy(GenericProxy):
     def __init__(self, identifier, md5, properties):
@@ -83,4 +112,4 @@ class TrackProxy(GenericProxy):
         self.md5 = md5
         self.type = 'track'
         self.__dict__.update(properties)
-
+    

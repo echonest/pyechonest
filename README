@@ -1,6 +1,6 @@
-Welcome to pyechonest, a python wrapper around the Echo Nest API (v4).
+Welcome to pyechonest, a python wrapper around the Beta Echo Nest API (v4).
 
-This wrapper should allow you to get started using the Echo Nest API quickly and easily. The only requirement is a developer API key, which you can get for free from http://developer.echonest.com/account/register/.
+This wrapper should allow you to get started using the Beta Echo Nest API quickly and easily. The only requirement is a developer API key, which you can get for free from http://developer.echonest.com/account/register/.
 
 For documentation questions, please refer to the official api docs, which are available at http://developer.echonest.com/.
 

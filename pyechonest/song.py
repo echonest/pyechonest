@@ -129,25 +129,32 @@ class Song(SongProxy):
     
     artist_location = property(get_artist_location)
     
-    def get_tracks(self, catalog, limit=False):
+    def get_tracks(self, catalog, limit=False, cache=True):
         """Get the tracks for a song given a catalog.
         
         Args:
             catalog: a string representing the catalog whose track you want to retrieve.
         
         Returns:
-            A list of Track IDs.
+            A list of Track dicts.
         """
-        kwargs = {
-            'method_name':'profile',
-            'bucket':['tracks', 'id:%s' % catalog],
-        }
-
-        if limit:
-            kwargs['limit'] = 'true'
-        
-        response = self.get_attribute(**kwargs)
-        return response['songs'][0].get('tracks', [])
+        if not (cache and ('tracks' in self.cache) and (catalog in [td['catalog'] for td in self.cache['tracks']])):
+            kwargs = {
+                'bucket':['tracks', 'id:%s' % catalog],
+            }
+            
+            if limit:
+                kwargs['limit'] = 'true'
+            
+            response = self.get_attribute('profile', **kwargs)
+            if not 'tracks' in self.cache:
+                self.cache['tracks'] = []
+            # don't blow away the cache for other catalogs
+            potential_tracks = response['songs'][0].get('tracks', [])
+            existing_track_ids = [tr['foreign_id'] for tr in self.cache['tracks']]
+            new_tds = filter(lambda tr: tr['foreign_id'] not in existing_track_ids, potential_tracks)
+            self.cache['tracks'].extend(new_tds)
+        return filter(lambda tr: tr['catalog']==catalog, self.cache['tracks'])
 
 def identify(filename=None, query_obj=None, code=None, artist=None, title=None, release=None, duration=None, genre=None, buckets=None, alt=None, codegen_start=0, codegen_duration=30):
     kwargs = {}

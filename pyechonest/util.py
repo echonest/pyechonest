@@ -17,12 +17,9 @@ import re
 import time
 import os
 import subprocess
+import traceback
 from types import StringType, UnicodeType
-from hashlib import md5
-try:
-    import cPickle as pickle
-except:
-    import pickle
+
 
 try:
     import json
@@ -73,6 +70,7 @@ def get_successful_response(raw_json):
         del response_dict['response']['status']
         return response_dict
     except ValueError:
+        logging.debug(traceback.format_exc())
         raise EchoNestAPIError(-1, "Unknown error.")
 
 
@@ -208,42 +206,4 @@ class attrdict(dict):
         dict.__init__(self, *args, **kwargs)
         self.__dict__ = self
 
-class memoize(object):
-    """
-        Caches the result of a class method inside the instance.
-        big ups to: http://eoyilmaz.blogspot.com/2009/09/python-function-decorators-caching.html
-    """
-    def __init__(self, method):        
-        if not isinstance( method, property ):
-            self._method = method
-            self._name = method.__name__
-            self._isProperty = False
-        else:
-            self._method = method.fget
-            self._name = method.fget.__name__
-            self._isProperty = True
-        self._obj = None
-
-    def __get__(self, inst, cls):
-        self._obj = inst
-        if self._isProperty:
-            return self.__call__()
-        else:
-            return self
-
-    def __call__(self, *args, **kwargs):
-        print 'args: %s, kwargs %s' % (args, kwargs)
-        key = self._name+md5(pickle.dumps(args, 2)).hexdigest()+md5(pickle.dumps(kwargs, 2)).hexdigest()
-        print 'key is: %s' % (key,)
-        # call the function and store the result as a cache
-        if not hasattr(self._obj, key) or getattr(self._obj, key ) == None:
-            data = self._method(self._obj, *args, **kwargs )
-            setattr( self._obj, key, data )
-
-        return getattr( self._obj, key )
-
-    def __repr__(self):
-        """Return the function's representation
-        """
-        return self._obj.__repr__()
 

@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="pyechonest.html"><font color="#ffffff">pyechonest</font></a>.proxies</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/tylerw/Documents/echonest/projects/pyechonest/branches/wiry-wildebeest/pyechonest/proxies.py">/Users/tylerw/Documents/echonest/projects/pyechonest/branches/wiry-wildebeest/pyechonest/proxies.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/tylerw/Desktop/pyechonest/pyechonest/proxies.py">/Users/tylerw/Desktop/pyechonest/pyechonest/proxies.py</a></font></td></tr></table>
     <p><tt>Copyright&nbsp;(c)&nbsp;2010&nbsp;The&nbsp;Echo&nbsp;Nest.&nbsp;All&nbsp;rights&nbsp;reserved.<br>
 Created&nbsp;by&nbsp;Tyler&nbsp;Williams&nbsp;on&nbsp;2010-04-25.</tt></p>
 <p>
@@ -34,6 +34,7 @@ Created&nbsp;by&nbsp;Tyler&nbsp;Williams&nbsp;on&nbsp;2010-04-25.</tt></p>
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="pyechonest.proxies.html#ArtistProxy">ArtistProxy</a>
+</font></dt><dt><font face="helvetica, arial"><a href="pyechonest.proxies.html#PlaylistProxy">PlaylistProxy</a>
 </font></dt><dt><font face="helvetica, arial"><a href="pyechonest.proxies.html#SongProxy">SongProxy</a>
 </font></dt><dt><font face="helvetica, arial"><a href="pyechonest.proxies.html#TrackProxy">TrackProxy</a>
 </font></dt></dl>
@@ -60,6 +61,10 @@ Methods defined here:<br>
 <dl><dt><a name="ArtistProxy-get_attribute"><strong>get_attribute</strong></a>(self, *args, **kwargs)</dt></dl>
 
 <hr>
+Methods inherited from <a href="pyechonest.proxies.html#GenericProxy">GenericProxy</a>:<br>
+<dl><dt><a name="ArtistProxy-post_attribute"><strong>post_attribute</strong></a>(self, method_name, **kwargs)</dt></dl>
+
+<hr>
 Data descriptors inherited from <a href="pyechonest.proxies.html#GenericProxy">GenericProxy</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
@@ -79,8 +84,40 @@ Data descriptors inherited from <a href="pyechonest.proxies.html#GenericProxy">G
 
 <dl><dt><a name="GenericProxy-get_attribute"><strong>get_attribute</strong></a>(self, method_name, **kwargs)</dt></dl>
 
+<dl><dt><a name="GenericProxy-post_attribute"><strong>post_attribute</strong></a>(self, method_name, **kwargs)</dt></dl>
+
 <hr>
 Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PlaylistProxy">class <strong>PlaylistProxy</strong></a>(<a href="pyechonest.proxies.html#GenericProxy">GenericProxy</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="pyechonest.proxies.html#PlaylistProxy">PlaylistProxy</a></dd>
+<dd><a href="pyechonest.proxies.html#GenericProxy">GenericProxy</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="PlaylistProxy-__init__"><strong>__init__</strong></a>(self, session_id, buckets<font color="#909090">=None</font>, **kwargs)</dt></dl>
+
+<dl><dt><a name="PlaylistProxy-get_attribute"><strong>get_attribute</strong></a>(self, *args, **kwargs)</dt></dl>
+
+<hr>
+Methods inherited from <a href="pyechonest.proxies.html#GenericProxy">GenericProxy</a>:<br>
+<dl><dt><a name="PlaylistProxy-post_attribute"><strong>post_attribute</strong></a>(self, method_name, **kwargs)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="pyechonest.proxies.html#GenericProxy">GenericProxy</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
@@ -104,6 +141,10 @@ Methods defined here:<br>
 <dl><dt><a name="SongProxy-__init__"><strong>__init__</strong></a>(self, identifier, buckets<font color="#909090">=None</font>, **kwargs)</dt></dl>
 
 <dl><dt><a name="SongProxy-get_attribute"><strong>get_attribute</strong></a>(self, *args, **kwargs)</dt></dl>
+
+<hr>
+Methods inherited from <a href="pyechonest.proxies.html#GenericProxy">GenericProxy</a>:<br>
+<dl><dt><a name="SongProxy-post_attribute"><strong>post_attribute</strong></a>(self, method_name, **kwargs)</dt></dl>
 
 <hr>
 Data descriptors inherited from <a href="pyechonest.proxies.html#GenericProxy">GenericProxy</a>:<br>
@@ -134,6 +175,8 @@ Let's&nbsp;always&nbsp;get&nbsp;the&nbsp;bucket&nbsp;`audio_summary`</tt></dd></
 <hr>
 Methods inherited from <a href="pyechonest.proxies.html#GenericProxy">GenericProxy</a>:<br>
 <dl><dt><a name="TrackProxy-get_attribute"><strong>get_attribute</strong></a>(self, method_name, **kwargs)</dt></dl>
+
+<dl><dt><a name="TrackProxy-post_attribute"><strong>post_attribute</strong></a>(self, method_name, **kwargs)</dt></dl>
 
 <hr>
 Data descriptors inherited from <a href="pyechonest.proxies.html#GenericProxy">GenericProxy</a>:<br>

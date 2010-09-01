@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="pyechonest.html"><font color="#ffffff">pyechonest</font></a>.song</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/tylerw/Documents/echonest/projects/pyechonest/branches/wiry-wildebeest/pyechonest/song.py">/Users/tylerw/Documents/echonest/projects/pyechonest/branches/wiry-wildebeest/pyechonest/song.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/tylerw/Desktop/pyechonest/pyechonest/song.py">/Users/tylerw/Desktop/pyechonest/pyechonest/song.py</a></font></td></tr></table>
     <p><tt>Copyright&nbsp;(c)&nbsp;2010&nbsp;The&nbsp;Echo&nbsp;Nest.&nbsp;All&nbsp;rights&nbsp;reserved.<br>
 Created&nbsp;by&nbsp;Tyler&nbsp;Williams&nbsp;on&nbsp;2010-04-25.<br>
 &nbsp;<br>
@@ -116,13 +116,13 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;float&nbsp;representing&nbsp;hotttnesss.</tt></dd></dl>
 
-<dl><dt><a name="Song-get_tracks"><strong>get_tracks</strong></a>(self, catalog, limit<font color="#909090">=False</font>)</dt><dd><tt>Get&nbsp;the&nbsp;tracks&nbsp;for&nbsp;a&nbsp;song&nbsp;given&nbsp;a&nbsp;catalog.<br>
+<dl><dt><a name="Song-get_tracks"><strong>get_tracks</strong></a>(self, catalog, limit<font color="#909090">=False</font>, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;the&nbsp;tracks&nbsp;for&nbsp;a&nbsp;song&nbsp;given&nbsp;a&nbsp;catalog.<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;catalog:&nbsp;a&nbsp;string&nbsp;representing&nbsp;the&nbsp;catalog&nbsp;whose&nbsp;track&nbsp;you&nbsp;want&nbsp;to&nbsp;retrieve.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;Track&nbsp;IDs.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;Track&nbsp;dicts.</tt></dd></dl>
 
 <hr>
 Data descriptors defined here:<br>
@@ -174,6 +174,10 @@ Returns:<br>
 <hr>
 Methods inherited from <a href="pyechonest.proxies.html#SongProxy">pyechonest.proxies.SongProxy</a>:<br>
 <dl><dt><a name="Song-get_attribute"><strong>get_attribute</strong></a>(self, *args, **kwargs)</dt></dl>
+
+<hr>
+Methods inherited from <a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a>:<br>
+<dl><dt><a name="Song-post_attribute"><strong>post_attribute</strong></a>(self, method_name, **kwargs)</dt></dl>
 
 <hr>
 Data descriptors inherited from <a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a>:<br>
