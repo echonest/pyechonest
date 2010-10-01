@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-__version__ = "4.2.5"
+__version__ = "4.2"
 
 # $Source$
 from sys import version
@@ -16,7 +16,7 @@ else:
     requires=['urllib', 'urllib2']
 
 setup(name='pyechonest',
-      version='4.2.5',
+      version='4.2',
       description='Python interface to The Echo Nest APIs.',
       author='Tyler Williams',
       author_email='tyler@echonest.com',

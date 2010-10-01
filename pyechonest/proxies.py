@@ -5,7 +5,6 @@
 Copyright (c) 2010 The Echo Nest. All rights reserved.
 Created by Tyler Williams on 2010-04-25.
 """
-
 import util
 
 class GenericProxy(object):
@@ -13,11 +12,12 @@ class GenericProxy(object):
         self.cache = {}
     
     def get_attribute(self, method_name, **kwargs):
-        result = util.callm("%s/%s" % (self.type, method_name), kwargs)
+        result = util.callm("%s/%s" % (self._object_type, method_name), kwargs)
         return result['response']
     
     def post_attribute(self, method_name, **kwargs):
-        result = util.callm("%s/%s" % (self.type, method_name), kwargs, POST=True)
+        data = kwargs.pop('data') if 'data' in kwargs else {}
+        result = util.callm("%s/%s" % (self._object_type, method_name), kwargs, POST=True, data=data)
         return result['response']
     
 
@@ -26,7 +26,7 @@ class ArtistProxy(GenericProxy):
         super(ArtistProxy, self).__init__()
         buckets = buckets or []
         self.id = identifier
-        self.type = 'artist'
+        self._object_type = 'artist'
         kwargs = dict((str(k), v) for (k,v) in kwargs.iteritems())
         # the following are integral to all artist objects... the rest is up to you!
         core_attrs = ['name']
@@ -43,6 +43,7 @@ class ArtistProxy(GenericProxy):
         else:
             kwargs['name'] = self.id
         return super(ArtistProxy, self).get_attribute(*args, **kwargs)
+    
 
     
 
@@ -50,7 +51,7 @@ class PlaylistProxy(GenericProxy):
     def __init__(self, session_id, buckets = None, **kwargs):
         super(PlaylistProxy, self).__init__()
         buckets = buckets or []
-        self.type = 'playlist'
+        self._object_type = 'playlist'
         kwargs = dict((str(k), v) for (k,v) in kwargs.iteritems())
         if session_id:
             kwargs['session_id'] = session_id
@@ -71,7 +72,7 @@ class SongProxy(GenericProxy):
         super(SongProxy, self).__init__()
         buckets = buckets or []
         self.id = identifier
-        self.type = 'song'
+        self._object_type = 'song'
         kwargs = dict((str(k), v) for (k,v) in kwargs.iteritems())
         
         # BAW -- this is debug output from identify that returns a track_id. i am not sure where else to access this..
@@ -110,6 +111,6 @@ class TrackProxy(GenericProxy):
         super(TrackProxy, self).__init__()
         self.id = identifier
         self.md5 = md5
-        self.type = 'track'
+        self._object_type = 'track'
         self.__dict__.update(properties)
     

@@ -15,15 +15,15 @@ from util import attrdict
 #   should handle lists
 class Result(attrdict):
     def __init__(self, result_type, result_dict):
-        self.type = result_type
+        self._object_type = result_type
         assert(isinstance(result_dict,dict))
         self.__dict__.update(result_dict)
     
     def __repr__(self):
-        return "<Result - %s>" % (self.type)
+        return "<Result - %s>" % (self._object_type)
     
     def __str__(self):
-        return "<Result - %s>" % (self.type)
+        return "<Result - %s>" % (self._object_type)
 
 def make_results(result_type, response, accessor_function):
     try:

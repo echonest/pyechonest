@@ -8,7 +8,7 @@ Created by Tyler Williams on 2010-04-25.
 The Song module loosely covers http://developer.echonest.com/docs/v4/song.html
 Refer to the official api documentation if you are unsure about something.
 """
-
+import os
 import util
 from proxies import SongProxy
 from results import Result
@@ -43,7 +43,7 @@ class Song(SongProxy):
         super(Song, self).__init__(id, buckets, **kwargs)
     
     def __repr__(self):
-        return "<%s - %s>" % (self.type.encode('utf-8'), self.title.encode('utf-8'))
+        return "<%s - %s>" % (self._object_type.encode('utf-8'), self.title.encode('utf-8'))
     
     def __str__(self):
         return self.title.encode('utf-8')
@@ -160,12 +160,19 @@ def identify(filename=None, query_obj=None, code=None, artist=None, title=None, 
     kwargs = {}
     post = False
     has_data = False
+    data = None
+    
     if filename:
-        query_obj = util.codegen(filename, start=codegen_start, duration=codegen_duration)
-
-    if not isinstance(query_obj, list):
+        if os.path.exists(filename):
+            query_obj = util.codegen(filename, start=codegen_start, duration=codegen_duration)
+        else:
+            raise Exception("The filename specified: %s does not exist." % (filename,))
+    if query_obj and not isinstance(query_obj, list):
         query_obj = [query_obj]
 
+    if not (filename or query_obj or code):
+        raise Exception("Not enough information to identify song.")
+    
     if code:
         has_data = True
         kwargs['code'] = code
@@ -180,18 +187,13 @@ def identify(filename=None, query_obj=None, code=None, artist=None, title=None, 
     if buckets:
         kwargs['bucket'] = buckets
 
-    # TODO -- this is a temp debug param should be taken out for release
-    if alt:
-        if query_obj:
-            query_obj[0]['alt'] = True
-
     if query_obj and any(query_obj):
         has_data = True
-        kwargs['query'] = json.dumps(query_obj)
+        data = {'query':json.dumps(query_obj)}
         post = True
 
     if has_data:
-        result = util.callm("%s/%s" % ('song', 'identify'), kwargs, POST=post)
+        result = util.callm("%s/%s" % ('song', 'identify'), kwargs, POST=post, data=data)
         print str(result)
         fix = lambda x : dict((str(k), v) for (k,v) in x.iteritems())
         return [Song(**fix(s_dict)) for s_dict in result['response'].get('songs',[])]

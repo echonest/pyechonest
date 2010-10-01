@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="pyechonest.html"><font color="#ffffff">pyechonest</font></a>.util</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/tylerw/Desktop/pyechonest/pyechonest/util.py">/Users/tylerw/Desktop/pyechonest/pyechonest/util.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/pyechonest/util.py">/pyechonest/util.py</a></font></td></tr></table>
     <p><tt>Copyright&nbsp;(c)&nbsp;2010&nbsp;The&nbsp;Echo&nbsp;Nest.&nbsp;All&nbsp;rights&nbsp;reserved.<br>
 Created&nbsp;by&nbsp;Tyler&nbsp;Williams&nbsp;on&nbsp;2010-04-25.<br>
 &nbsp;<br>
@@ -23,15 +23,16 @@ Utility&nbsp;functions&nbsp;to&nbsp;support&nbsp;the&nbsp;Echo&nbsp;Nest&nbsp;we
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="pyechonest.config.html">pyechonest.config</a><br>
 <a href="httplib.html">httplib</a><br>
 <a href="json.html">json</a><br>
-</td><td width="25%" valign=top><a href="logging.html">logging</a><br>
-<a href="os.html">os</a><br>
+<a href="logging.html">logging</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+<a href="cPickle.html">cPickle</a><br>
 <a href="re.html">re</a><br>
-</td><td width="25%" valign=top><a href="socket.html">socket</a><br>
-<a href="subprocess.html">subprocess</a><br>
+<a href="socket.html">socket</a><br>
+</td><td width="25%" valign=top><a href="subprocess.html">subprocess</a><br>
 <a href="time.html">time</a><br>
-</td><td width="25%" valign=top><a href="traceback.html">traceback</a><br>
+<a href="traceback.html">traceback</a><br>
 <a href="urllib.html">urllib</a><br>
-<a href="urllib2.html">urllib2</a><br>
+</td><td width="25%" valign=top><a href="urllib2.html">urllib2</a><br>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
@@ -46,10 +47,28 @@ Utility&nbsp;functions&nbsp;to&nbsp;support&nbsp;the&nbsp;Echo&nbsp;Nest&nbsp;we
 <dt><font face="helvetica, arial"><a href="pyechonest.util.html#attrdict">attrdict</a>
 </font></dt></dl>
 </dd>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="pyechonest.util.html#memoize">memoize</a>
+</font></dt></dl>
+</dd>
 <dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>(<a href="exceptions.html#BaseException">exceptions.BaseException</a>)
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="pyechonest.util.html#EchoNestAPIError">EchoNestAPIError</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="pyechonest.util.html#MyBaseHandler">MyBaseHandler</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="urllib2.html#HTTPErrorProcessor">urllib2.HTTPErrorProcessor</a>(<a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="pyechonest.util.html#MyErrorProcessor">MyErrorProcessor</a>
 </font></dt></dl>
 </dd>
 </dl>
@@ -72,10 +91,6 @@ Utility&nbsp;functions&nbsp;to&nbsp;support&nbsp;the&nbsp;Echo&nbsp;Nest&nbsp;we
 Methods defined here:<br>
 <dl><dt><a name="EchoNestAPIError-__init__"><strong>__init__</strong></a>(self, code, message)</dt></dl>
 
-<dl><dt><a name="EchoNestAPIError-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
-
-<dl><dt><a name="EchoNestAPIError-__str__"><strong>__str__</strong></a>(self)</dt></dl>
-
 <hr>
 Data descriptors defined here:<br>
 <dl><dt><strong>__weakref__</strong></dt>
@@ -83,7 +98,7 @@ Data descriptors defined here:<br>
 </dl>
 <hr>
 Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x100119f80&gt;<dd><tt>T.<a href="#EchoNestAPIError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x100119f80&gt;<dd><tt>T.<a href="#EchoNestAPIError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
 <hr>
 Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
@@ -99,9 +114,13 @@ Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd
 
 <dl><dt><a name="EchoNestAPIError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
 
+<dl><dt><a name="EchoNestAPIError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#EchoNestAPIError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
 <dl><dt><a name="EchoNestAPIError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#EchoNestAPIError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
 
 <dl><dt><a name="EchoNestAPIError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="EchoNestAPIError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#EchoNestAPIError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
 
 <dl><dt><a name="EchoNestAPIError-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
 
@@ -113,6 +132,60 @@ Data descriptors inherited from <a href="exceptions.html#BaseException">exceptio
 </dl>
 <dl><dt><strong>message</strong></dt>
 </dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MyBaseHandler">class <strong>MyBaseHandler</strong></a>(<a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="MyBaseHandler-default_open"><strong>default_open</strong></a>(self, request)</dt></dl>
+
+<hr>
+Methods inherited from <a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>:<br>
+<dl><dt><a name="MyBaseHandler-__lt__"><strong>__lt__</strong></a>(self, other)</dt></dl>
+
+<dl><dt><a name="MyBaseHandler-add_parent"><strong>add_parent</strong></a>(self, parent)</dt></dl>
+
+<dl><dt><a name="MyBaseHandler-close"><strong>close</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>:<br>
+<dl><dt><strong>handler_order</strong> = 500</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MyErrorProcessor">class <strong>MyErrorProcessor</strong></a>(<a href="urllib2.html#HTTPErrorProcessor">urllib2.HTTPErrorProcessor</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="pyechonest.util.html#MyErrorProcessor">MyErrorProcessor</a></dd>
+<dd><a href="urllib2.html#HTTPErrorProcessor">urllib2.HTTPErrorProcessor</a></dd>
+<dd><a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="MyErrorProcessor-http_response"><strong>http_response</strong></a>(self, request, response)</dt></dl>
+
+<hr>
+Methods inherited from <a href="urllib2.html#HTTPErrorProcessor">urllib2.HTTPErrorProcessor</a>:<br>
+<dl><dt><a name="MyErrorProcessor-https_response"><strong>https_response</strong></a> = http_response(self, request, response)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="urllib2.html#HTTPErrorProcessor">urllib2.HTTPErrorProcessor</a>:<br>
+<dl><dt><strong>handler_order</strong> = 1000</dl>
+
+<hr>
+Methods inherited from <a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>:<br>
+<dl><dt><a name="MyErrorProcessor-__lt__"><strong>__lt__</strong></a>(self, other)</dt></dl>
+
+<dl><dt><a name="MyErrorProcessor-add_parent"><strong>add_parent</strong></a>(self, parent)</dt></dl>
+
+<dl><dt><a name="MyErrorProcessor-close"><strong>close</strong></a>(self)</dt></dl>
+
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -208,11 +281,38 @@ In&nbsp;either&nbsp;case,&nbsp;this&nbsp;is&nbsp;followed&nbsp;by:&nbsp;for&nbsp
 Data and other attributes inherited from <a href="__builtin__.html#dict">__builtin__.dict</a>:<br>
 <dl><dt><strong>__hash__</strong> = None</dl>
 
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x1001222a0&gt;<dd><tt>T.<a href="#attrdict-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x1001222a0&gt;<dd><tt>T.<a href="#attrdict-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
 
-<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0x101401e00&gt;<dd><tt><a href="__builtin__.html#dict">dict</a>.<a href="#attrdict-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;<a href="__builtin__.html#dict">dict</a>&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
+<dl><dt><strong>fromkeys</strong> = &lt;built-in method fromkeys of type object at 0x1002037f0&gt;<dd><tt><a href="__builtin__.html#dict">dict</a>.<a href="#attrdict-fromkeys">fromkeys</a>(S[,v])&nbsp;-&gt;&nbsp;New&nbsp;<a href="__builtin__.html#dict">dict</a>&nbsp;with&nbsp;keys&nbsp;from&nbsp;S&nbsp;and&nbsp;values&nbsp;equal&nbsp;to&nbsp;v.<br>
 v&nbsp;defaults&nbsp;to&nbsp;None.</tt></dl>
 
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="memoize">class <strong>memoize</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Caches&nbsp;the&nbsp;result&nbsp;of&nbsp;a&nbsp;class&nbsp;method&nbsp;inside&nbsp;the&nbsp;instance.<br>
+big&nbsp;ups&nbsp;to:&nbsp;<a href="http://eoyilmaz.blogspot.com/2009/09/python-function-decorators-caching.html">http://eoyilmaz.blogspot.com/2009/09/python-function-decorators-caching.html</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="memoize-__call__"><strong>__call__</strong></a>(self, *args, **kwargs)</dt></dl>
+
+<dl><dt><a name="memoize-__get__"><strong>__get__</strong></a>(self, inst, cls)</dt></dl>
+
+<dl><dt><a name="memoize-__init__"><strong>__init__</strong></a>(self, method)</dt></dl>
+
+<dl><dt><a name="memoize-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;the&nbsp;function's&nbsp;representation</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#eeaa77">
@@ -227,6 +327,7 @@ put&nbsp;them&nbsp;in&nbsp;a&nbsp;list.<br>
 **&nbsp;note,&nbsp;if&nbsp;we&nbsp;require&nbsp;2.6,&nbsp;we&nbsp;can&nbsp;get&nbsp;rid&nbsp;of&nbsp;this&nbsp;timeout&nbsp;munging.</tt></dd></dl>
  <dl><dt><a name="-codegen"><strong>codegen</strong></a>(filename, start<font color="#909090">=0</font>, duration<font color="#909090">=30</font>)</dt></dl>
  <dl><dt><a name="-get_successful_response"><strong>get_successful_response</strong></a>(raw_json)</dt></dl>
+ <dl><dt><a name="-md5"><strong>md5</strong></a> = openssl_md5(...)</dt><dd><tt>Returns&nbsp;a&nbsp;md5&nbsp;hash&nbsp;<a href="__builtin__.html#object">object</a>;&nbsp;optionally&nbsp;initialized&nbsp;with&nbsp;a&nbsp;string</tt></dd></dl>
  <dl><dt><a name="-postChunked"><strong>postChunked</strong></a>(host, selector, fields, files)</dt><dd><tt>Attempt&nbsp;to&nbsp;replace&nbsp;postMultipart()&nbsp;with&nbsp;nearly-identical&nbsp;interface.<br>
 (The&nbsp;files&nbsp;tuple&nbsp;no&nbsp;longer&nbsp;requires&nbsp;the&nbsp;filename,&nbsp;and&nbsp;we&nbsp;only&nbsp;return<br>
 the&nbsp;response&nbsp;body.)&nbsp;<br>
@@ -248,10 +349,10 @@ basis&nbsp;on&nbsp;urllib2).</tt></dd></dl>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><strong>TYPENAMES</strong> = (('AR', 'artist'), ('SO', 'song'), ('RE', 'release'), ('TR', 'track'), ('PE', 'person'), ('DE', 'device'), ('LI', 'listener'), ('ED', 'editor'), ('TW', 'tweditor'))<br>
-<strong>foreign_regex</strong> = &lt;_sre.SRE_Pattern object at 0x101025040&gt;<br>
-<strong>headers</strong> = [('User-Agent', 'Pyechonest 4.2.5')]<br>
-<strong>logger</strong> = &lt;logging.Logger instance at 0x1007bc248&gt;<br>
-<strong>long_regex</strong> = &lt;_sre.SRE_Pattern object at 0x101025cd0&gt;<br>
-<strong>opener</strong> = &lt;urllib2.OpenerDirector instance at 0x1007b1b00&gt;<br>
-<strong>short_regex</strong> = &lt;_sre.SRE_Pattern object at 0x101017a10&gt;</td></tr></table>
+<strong>foreign_regex</strong> = &lt;_sre.SRE_Pattern object at 0x101028ed0&gt;<br>
+<strong>headers</strong> = [('User-Agent', 'Pyechonest 4.2')]<br>
+<strong>logger</strong> = &lt;logging.Logger instance at 0x1007c1560&gt;<br>
+<strong>long_regex</strong> = &lt;_sre.SRE_Pattern object at 0x10102a000&gt;<br>
+<strong>opener</strong> = &lt;urllib2.OpenerDirector instance at 0x1007bf098&gt;<br>
+<strong>short_regex</strong> = &lt;_sre.SRE_Pattern object at 0x101016b80&gt;</td></tr></table>
 </body></html>

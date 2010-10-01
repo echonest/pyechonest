@@ -12,7 +12,8 @@ Refer to the official api documentation if you are unsure about something.
 import util
 from proxies import ArtistProxy
 from results import Result
-import song
+from song import Song
+
 
 class Artist(ArtistProxy):
     """
@@ -43,10 +44,13 @@ class Artist(ArtistProxy):
         super(Artist, self).__init__(id, **kwargs)
     
     def __repr__(self):
-        return "<%s - %s>" % (self.type.encode('utf-8'), self.name.encode('utf-8'))
+        return "<%s - %s>" % (self._object_type.encode('utf-8'), self.name.encode('utf-8'))
     
     def __str__(self):
         return self.name.encode('utf-8')
+    
+    def __cmp__(self, other):
+        return cmp(self.id, other.id)
      
     def get_hotttnesss(self, cache=True):
         """Get our numerical description of how hottt an artist currently is
@@ -261,22 +265,29 @@ class Artist(ArtistProxy):
     
     similar = property(get_similar)    
     
-    def get_songs(self, cache=True):
+    def get_songs(self, cache=True, results=15, start=0):
         """Get the songs associated with an artist
         
         Args:
             cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            results: An integer number of results to return
+            start: An integer starting value for the result set
             
         Results:
             A list of Song objects
         """
-        if cache and ('songs' in self.cache):
-            songs = self.cache['songs']
-            return songs
+        # we need this to fix up all the dict keys to be strings, not unicode objects    
+        fix = lambda x : dict((str(k), v) for (k,v) in x.iteritems())
+        
+        if cache and ('songs' in self.cache) and results==15 and start==0:
+            return self.cache['songs']
         else:
-            response = self.get_attribute('songs')
-            songs = song.profile(response['songs'])
-            self.cache['songs'] = songs
+            response = self.get_attribute('songs', results=results, start=start)
+            for s in response['songs']:
+                s.update({'artist_id':self.id, 'artist_name':self.name})
+            songs = [Song(**fix(s)) for s in response['songs']]
+            if results==15 and start==0:
+                self.cache['songs'] = songs
             return songs
     
     songs = property(get_songs)
@@ -355,7 +366,7 @@ class Artist(ArtistProxy):
         return cval[0].get('foreign_id') if cval else None
     
 
-def search(name=None, description=None, results=15, buckets = None, limit=False, \
+def search(name=None, description=None, results=15, buckets=None, limit=False, \
             fuzzy_match=False, sort=None, max_familiarity=None, min_familiarity=None, \
             max_hotttnesss=None, min_hotttnesss=None):
     """Search for artists by name, description, or constraint.

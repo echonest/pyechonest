@@ -1,6 +1,6 @@
-Welcome to pyechonest, a python wrapper around the Beta Echo Nest API (v4).
+Welcome to pyechonest, a python wrapper around the Echo Nest API (v4).
 
-This wrapper should allow you to get started using the Beta Echo Nest API quickly and easily. The only requirement is a developer API key, which you can get for free from http://developer.echonest.com/account/register/.
+This client library should allow you to get started using the Echo Nest API quickly and easily. The only requirement is a developer API key, which you can get for free from http://developer.echonest.com/account/register/.
 
 For documentation questions, please refer to the official api docs, which are available at http://developer.echonest.com/.
 
@@ -8,13 +8,12 @@ IMPORTANT: You must let pyechonest know about your API key before you use it. Th
 	
 	1. Set the variable ECHO_NEST_API_KEY in your environment to your key.
 		(bourne-like shells) 	$ export ECHO_NEST_API_KEY=YOUR_API_KEY
-		(c-like shells)			$ setenv ECHO_NEST_API_KEY YOUR_API_KEY
+		(c-like shells)		$ setenv ECHO_NEST_API_KEY YOUR_API_KEY
 	
 	2. In Python, do this:
 		>>> from pyechonest import config
 		>>> config.ECHO_NEST_API_KEY = YOUR_API_KEY
 
-***Note that pyechonest currently only supports artist and song methods in the new API***
 
 Examples:
 	Search for artist:
@@ -23,7 +22,12 @@ Examples:
 		>>> weezer = weezer_results[0]
 		>>> weezer_blogs = weezer.blogs
 		>>> print 'Blogs about weezer:', [blog.url for blog in weezer_blogs]
-		
+	
+	Get an artist by name:
+	    >>> from pyechonest import artist
+	    >>> a = artist.Artist('lady gaga')
+	    >>> print a.id
+	
 	Get an artist from their Musicbrainz ID:
 		>>> from pyechonest import artist
 		>>> a = artist.Artist('musicbrainz:artist:a74b1b7f-71a5-4011-9441-d0b5e4122711')

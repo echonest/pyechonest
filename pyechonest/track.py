@@ -11,41 +11,47 @@ class Track(TrackProxy):
     """
     Represents an audio analysis from The Echo Nest.
 
+    All methods in this module return Track objects.
+
     The track object will have the following properties:
-    analysis_channels       an int
-    analysis_sample_rate    a float
-    analyzer_version        ex. '3.01a'
-    artist                  ex. 'The Sea and Cake' or None
-    bars                    a list of dicts
-    beats                   a list of dicts
-    bitrate                 an int
-    duration                a float
-    end_of_fade_in          a float
-    id                      ex. 'TRTOBXJ1296BCDA33B'
-    key                     an int
-    key_confidence          a float
-    loudness                a float
-    md5                     ex. '17162ff555969cfed222e127837acd1a'
-    meta                    a dict of analyzer data
-    mode                    an int (0 or 1)
-    mode_confidence         a float
-    num_samples             an int
-    release                 the album name, or None
-    sample_md5              '4bf222fb6af22ba0226734bb978bac14'
-    samplerate              an int
-    sections                a list of dicts
-    segments                a list of dicts
-    start_of_fade_out       a float
-    status                  ex. 'complete'
-    tatums                  a list of dicts
-    tempo                   a flat
-    tempo_confidence        a float
-    title                   ex. 'Interiors' or None
+
+    analysis_channels       int: the number of audio channels used during analysis
+    analysis_sample_rate    float: the sample rate used during analysis
+    analyzer_version        str: ex. '3.01a'
+    artist                  str or None: artist name
+    bars                    list of dicts: timing of each measure
+    beats                   list of dicts: timing of each beat
+    bitrate                 int: the bitrate of the input mp3 (or other file)
+    duration                float: length of track in seconds
+    end_of_fade_in          float: time in seconds track where fade-in ends
+    id                      str: Echo Nest Track ID, ex. 'TRTOBXJ1296BCDA33B'
+    key                     int: between 0 (key of C) and 11 (key of B flat) inclusive
+    key_confidence          float: confidence that key detection was accurate
+    loudness                float: overall loudness in decibels (dB)
+    md5                     str: 32-character checksum of the input mp3
+    meta                    dict: other track metainfo
+    mode                    int: 0 (major) or 1 (minor)
+    mode_confidence         float: confidence that mode detection was accurate
+    num_samples             int: total samples in the decoded track
+    release                 str or None: the album name
+    sample_md5              str: 32-character checksum of the decoded audio file
+    samplerate              int: sample rate of input mp3
+    sections                list of dicts: larger sections of song (chorus, bridge, solo, etc.)
+    segments                list of dicts: timing, pitch, loudness and timbre for each segment
+    start_of_fade_out       float: time in seconds where fade out begins
+    status                  str: analysis status, ex. 'complete', 'pending', 'error'
+    tatums                  list of dicts: the smallest metrical unit (subdivision of a beat)
+    tempo                   float: overall BPM (beats per minute)
+    tempo_confidence        float: confidence that tempo detection was accurate
+    title                   str: or None: song title
+
+    Each bar, beat, section, segment and tatum has a start time, a duration, and a confidence,
+    in addition to whatever other data is given.    
     """
 
     def __repr__(self):
         try:
-            return "<%s - %s>" % (self.type.encode('utf-8'), self.title.encode('utf-8'))
+            return "<%s - %s>" % (self._object_type.encode('utf-8'), self.title.encode('utf-8'))
         except AttributeError:
             # the title is None
             return "< Track >"
@@ -67,6 +73,8 @@ def _track_from_response(response):
             raise Exception('there was an error analyzing the track')
         if status == 'pending':
             raise Exception('the track is still being analyzed')
+        if status == 'forbidden':
+            raise Exception('analysis of this track is forbidden')
     else:
         track = result['track']
         identifier      = track.pop('id') 
@@ -115,49 +123,71 @@ def _track_from_string(audio_data, filetype):
 
 def track_from_file(file_object, filetype):
     """
-    Convenience function for creating a track object from a file-like object
+    Create a track object from a file-like object.
+
+    Args:
+        file_object: a file-like Python object
+        filetype: the file type (ex. mp3, ogg, wav)
     """
     return _track_from_string(file_object.read(), filetype)
 
 def track_from_filename(filename, filetype = None):
     """
-    Convenience function for creating a track object from a file path
-    if the filetype is none, we will get it from the extension
+    Create a track object from a filename.
+
+    Args:
+        filename: A string containing the path to the input file.
+        filetype: A string indicating the filetype; Defaults to None (type determined by file extension).
     """
     filetype = filetype or filename.split('.')[-1]
     return track_from_file(open(filename), filetype)
 
 def track_from_url(url):
     """
-    Convenience function for creating a track object from a public http url 
+    Create a track object from a public http URL.
+
+    Args:
+        url: A string giving the URL to read from. This must be on a public machine accessible by HTTP.
     """
     param_dict = dict(url = url)
     return _upload(param_dict) 
      
 def track_from_id(identifier):
     """
-    Convenience function for creating a track object from an id, like TRXXHTJ1294CD8F3B3
+    Create a track object from an Echo Nest track ID.
+
+    Args:
+        identifier: A string containing the ID of a track already analyzed (looks like "TRLMNOP12345678901").
     """
     param_dict = dict(id = identifier)
     return _profile(param_dict)
 
 def track_from_md5(md5):
     """
-    Convenience function for creating a track object from an md5
+    Create a track object from an md5 hash.
+
+    Args:
+        md5: A string 32 characters long giving the md5 checksum of a track already analyzed.
     """
     param_dict = dict(md5 = md5)
     return _profile(param_dict)
 
 def track_from_reanalyzing_id(identifier):
     """
-    Convenience function for reanalzying an already uploaded track
+    Create a track object from an Echo Nest track ID, reanalyzing the track first.
+
+    Args:
+        identifier: A string containing the ID of a track already analyzed (looks like "TRLMNOP12345678901").
     """
     param_dict = dict(id = identifier)
     return _analyze(param_dict)
 
 def track_from_reanalyzing_md5(md5):
     """
-    Convenience function for reanalzying an already uploaded track
+    Create a track object from an md5 hash, reanalyzing the track first.
+
+    Args:
+        md5: A string containing the md5 of a track already analyzed (looks like "TRLMNOP12345678901").
     """
     param_dict = dict(md5 = md5)
     return _analyze(param_dict)

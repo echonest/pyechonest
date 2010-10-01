@@ -19,7 +19,11 @@ import os
 import subprocess
 import traceback
 from types import StringType, UnicodeType
-
+from hashlib import md5
+try:
+    import cPickle as pickle
+except:
+    import pickle
 
 try:
     import json
@@ -43,7 +47,25 @@ foreign_regex = re.compile(r'^.+?:(%s):([^^]+)\^?([0-9\.]+)?' % r'|'.join(n[1] f
 short_regex = re.compile(r'^((%s)[0-9A-Z]{16})\^?([0-9\.]+)?' % r'|'.join(n[0] for n in TYPENAMES))
 long_regex = re.compile(r'music://id.echonest.com/.+?/(%s)/(%s)[0-9A-Z]{16}\^?([0-9\.]+)?' % (r'|'.join(n[0] for n in TYPENAMES), r'|'.join(n[0] for n in TYPENAMES)))
 headers = [('User-Agent', 'Pyechonest %s' % (config.__version__,))]
-opener = urllib2.build_opener()
+
+class MyBaseHandler(urllib2.BaseHandler):
+    def default_open(self, request):
+        if config.TRACE_API_CALLS:
+            logger.info("%s" % (request.get_full_url(),))
+        request.start_time = time.time()
+        return None
+        
+class MyErrorProcessor(urllib2.HTTPErrorProcessor):
+    def http_response(self, request, response):
+        code = response.code
+        if config.TRACE_API_CALLS:
+            logger.info("took %2.2fs: (%i)" % (time.time()-request.start_time,code))
+        if code in [200, 400, 403, 500]:
+            return response
+        else:
+            urllib2.HTTPErrorProcessor.http_response(self, request, response)
+
+opener = urllib2.build_opener(MyBaseHandler(), MyErrorProcessor())
 opener.addheaders = headers
 
 class EchoNestAPIError(Exception):
@@ -51,12 +73,7 @@ class EchoNestAPIError(Exception):
     Generic API errors. 
     """
     def __init__(self, code, message):
-        self.code = code
-        self._message = message
-    def __str__(self):
-        return repr(self)
-    def __repr__(self):
-        return 'Echo Nest API Error %d: %s' % (self.code, self._message)
+        self.args = ('Echo Nest API Error %d: %s' % (code, message),)
 
 def get_successful_response(raw_json):
     try:
@@ -70,7 +87,7 @@ def get_successful_response(raw_json):
         del response_dict['response']['status']
         return response_dict
     except ValueError:
-        logging.debug(traceback.format_exc())
+        logger.debug(traceback.format_exc())
         raise EchoNestAPIError(-1, "Unknown error.")
 
 
@@ -116,7 +133,7 @@ def codegen(filename, start=0, duration=30):
     try:
         return json.loads(json_block)
     except ValueError:
-        logging.debug("No JSON object came out of codegen: error was %s" % (errs))
+        logger.debug("No JSON object came out of codegen: error was %s" % (errs))
         return None
 
 
@@ -142,15 +159,21 @@ def callm(method, param_dict, POST=False, socket_timeout=None, data=None):
             param_list.append( (key,val) )
     params = urllib.urlencode(param_list)
     socket.setdefaulttimeout(socket_timeout)
-    tic=time.time()
 
     if(POST):
-        if (not method == 'track/upload') or (param_dict.has_key('url')):
+        if not method == 'track/upload':
             """
             this is a normal POST call
             """
-            url = 'http://%s/%s/%s/%s' % (config.API_HOST, config.API_SELECTOR, config.API_VERSION, method)
-            f = opener.open(url, params)
+            url = 'http://%s/%s/%s/%s' % (config.API_HOST, config.API_SELECTOR, 
+                                        config.API_VERSION, method)
+            
+            if data is None:
+                data = {}
+            data.update(param_dict)
+            data = urllib.urlencode(data)
+            
+            f = opener.open(url, data=data)
         else:
             """
             upload with a local file is special, as the body of the request is the content of the file,
@@ -158,6 +181,8 @@ def callm(method, param_dict, POST=False, socket_timeout=None, data=None):
             """
             url = '/%s/%s/%s?%s' % (config.API_SELECTOR, config.API_VERSION, 
                                         method, params)
+            if config.TRACE_API_CALLS:
+                logger.info("%s/%s" % (config.API_HOST, url,))
             conn = httplib.HTTPConnection(config.API_HOST, port = 80)
             conn.request('POST', url, body = data, headers = dict([('Content-Type', 'application/octet-stream')]+headers))
             f = conn.getresponse()
@@ -168,12 +193,10 @@ def callm(method, param_dict, POST=False, socket_timeout=None, data=None):
         """
         url = 'http://%s/%s/%s/%s?%s' % (config.API_HOST, config.API_SELECTOR, config.API_VERSION, 
                                         method, params)
-        f = opener.open(url)
 
-    toc=time.time()
+        f = opener.open(url)
+            
     socket.setdefaulttimeout(None)
-    if config.TRACE_API_CALLS:
-        logging.info("%2.2fs : %s" % (toc-tic, url))
     
     # try/except
     response_dict = get_successful_response(f.read())
@@ -206,4 +229,42 @@ class attrdict(dict):
         dict.__init__(self, *args, **kwargs)
         self.__dict__ = self
 
+class memoize(object):
+    """
+        Caches the result of a class method inside the instance.
+        big ups to: http://eoyilmaz.blogspot.com/2009/09/python-function-decorators-caching.html
+    """
+    def __init__(self, method):        
+        if not isinstance( method, property ):
+            self._method = method
+            self._name = method.__name__
+            self._isProperty = False
+        else:
+            self._method = method.fget
+            self._name = method.fget.__name__
+            self._isProperty = True
+        self._obj = None
+
+    def __get__(self, inst, cls):
+        self._obj = inst
+        if self._isProperty:
+            return self.__call__()
+        else:
+            return self
+
+    def __call__(self, *args, **kwargs):
+        print 'args: %s, kwargs %s' % (args, kwargs)
+        key = self._name+md5(pickle.dumps(args, 2)).hexdigest()+md5(pickle.dumps(kwargs, 2)).hexdigest()
+        print 'key is: %s' % (key,)
+        # call the function and store the result as a cache
+        if not hasattr(self._obj, key) or getattr(self._obj, key ) == None:
+            data = self._method(self._obj, *args, **kwargs )
+            setattr( self._obj, key, data )
+
+        return getattr( self._obj, key )
+
+    def __repr__(self):
+        """Return the function's representation
+        """
+        return self._obj.__repr__()
 

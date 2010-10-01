@@ -1,0 +1,151 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module pyechonest.urllib2_file</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="pyechonest.html"><font color="#ffffff">pyechonest</font></a>.urllib2_file</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/tylerw/Documents/echonest/projects/beta_pyechonest/trunk/pyechonest/urllib2_file.py">/Users/tylerw/Documents/echonest/projects/beta_pyechonest/trunk/pyechonest/urllib2_file.py</a></font></td></tr></table>
+    <p><tt>enable&nbsp;to&nbsp;upload&nbsp;files&nbsp;using&nbsp;multipart/form-data<br>
+&nbsp;<br>
+idea&nbsp;from:<br>
+upload&nbsp;files&nbsp;in&nbsp;python:<br>
+&nbsp;<a href="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/146306">http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/146306</a><br>
+&nbsp;<br>
+timeoutsocket.py:&nbsp;overriding&nbsp;Python&nbsp;socket&nbsp;API:<br>
+&nbsp;<a href="http://www.timo-tasi.org/python/timeoutsocket.py">http://www.timo-tasi.org/python/timeoutsocket.py</a><br>
+&nbsp;<a href="http://mail.python.org/pipermail/python-announce-list/2001-December/001095.html">http://mail.python.org/pipermail/python-announce-list/2001-December/001095.html</a><br>
+&nbsp;<br>
+import&nbsp;urllib2_files<br>
+import&nbsp;urllib2<br>
+u&nbsp;=&nbsp;urllib2.urlopen('<a href="http://site.com/path">http://site.com/path</a>'&nbsp;[,&nbsp;data])<br>
+&nbsp;<br>
+data&nbsp;can&nbsp;be&nbsp;a&nbsp;mapping&nbsp;object&nbsp;or&nbsp;a&nbsp;sequence&nbsp;of&nbsp;two-elements&nbsp;tuples<br>
+(like&nbsp;in&nbsp;original&nbsp;urllib2.urlopen())<br>
+varname&nbsp;still&nbsp;need&nbsp;to&nbsp;be&nbsp;a&nbsp;string&nbsp;and<br>
+value&nbsp;can&nbsp;be&nbsp;string&nbsp;of&nbsp;a&nbsp;file&nbsp;object<br>
+eg:<br>
+&nbsp;&nbsp;((varname,&nbsp;value),<br>
+&nbsp;&nbsp;&nbsp;(varname2,&nbsp;value),<br>
+&nbsp;&nbsp;)<br>
+&nbsp;&nbsp;or<br>
+&nbsp;&nbsp;{&nbsp;name:&nbsp;&nbsp;value,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name2:&nbsp;value2<br>
+&nbsp;&nbsp;}</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="httplib.html">httplib</a><br>
+<a href="mimetools.html">mimetools</a><br>
+<a href="mimetypes.html">mimetypes</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+<a href="socket.html">socket</a><br>
+<a href="stat.html">stat</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+<a href="urllib.html">urllib</a><br>
+<a href="urllib2.html">urllib2</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="pyechonest.urllib2_file.html#newHTTPHandler">newHTTPHandler</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="pyechonest.urllib2_file.html#newHTTPSHandler">newHTTPSHandler</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="newHTTPHandler">class <strong>newHTTPHandler</strong></a>(<a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>#&nbsp;mainly&nbsp;a&nbsp;copy&nbsp;of&nbsp;HTTPHandler&nbsp;from&nbsp;urllib2<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="newHTTPHandler-do_open"><strong>do_open</strong></a>(self, http_class, req)</dt></dl>
+
+<dl><dt><a name="newHTTPHandler-http_open"><strong>http_open</strong></a>(self, req)</dt></dl>
+
+<hr>
+Methods inherited from <a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>:<br>
+<dl><dt><a name="newHTTPHandler-__lt__"><strong>__lt__</strong></a>(self, other)</dt></dl>
+
+<dl><dt><a name="newHTTPHandler-add_parent"><strong>add_parent</strong></a>(self, parent)</dt></dl>
+
+<dl><dt><a name="newHTTPHandler-close"><strong>close</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>:<br>
+<dl><dt><strong>handler_order</strong> = 500</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="newHTTPSHandler">class <strong>newHTTPSHandler</strong></a>(<a href="pyechonest.urllib2_file.html#newHTTPHandler">newHTTPHandler</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="pyechonest.urllib2_file.html#newHTTPSHandler">newHTTPSHandler</a></dd>
+<dd><a href="pyechonest.urllib2_file.html#newHTTPHandler">newHTTPHandler</a></dd>
+<dd><a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="newHTTPSHandler-https_open"><strong>https_open</strong></a>(self, req)</dt></dl>
+
+<hr>
+Methods inherited from <a href="pyechonest.urllib2_file.html#newHTTPHandler">newHTTPHandler</a>:<br>
+<dl><dt><a name="newHTTPSHandler-do_open"><strong>do_open</strong></a>(self, http_class, req)</dt></dl>
+
+<dl><dt><a name="newHTTPSHandler-http_open"><strong>http_open</strong></a>(self, req)</dt></dl>
+
+<hr>
+Methods inherited from <a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>:<br>
+<dl><dt><a name="newHTTPSHandler-__lt__"><strong>__lt__</strong></a>(self, other)</dt></dl>
+
+<dl><dt><a name="newHTTPSHandler-add_parent"><strong>add_parent</strong></a>(self, parent)</dt></dl>
+
+<dl><dt><a name="newHTTPSHandler-close"><strong>close</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>:<br>
+<dl><dt><strong>handler_order</strong> = 500</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-get_content_type"><strong>get_content_type</strong></a>(filename)</dt></dl>
+ <dl><dt><a name="-send_data"><strong>send_data</strong></a>(v_vars, v_files, boundary, sock<font color="#909090">=None</font>)</dt><dd><tt>#&nbsp;if&nbsp;sock&nbsp;is&nbsp;None,&nbsp;juste&nbsp;return&nbsp;the&nbsp;estimate&nbsp;size</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>CHUNK_SIZE</strong> = 65536</td></tr></table>
+</body></html>

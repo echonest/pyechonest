@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="pyechonest.html"><font color="#ffffff">pyechonest</font></a>.artist</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/tylerw/Desktop/pyechonest/pyechonest/artist.py">/Users/tylerw/Desktop/pyechonest/pyechonest/artist.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/pyechonest/artist.py">/pyechonest/artist.py</a></font></td></tr></table>
     <p><tt>Copyright&nbsp;(c)&nbsp;2010&nbsp;The&nbsp;Echo&nbsp;Nest.&nbsp;All&nbsp;rights&nbsp;reserved.<br>
 Created&nbsp;by&nbsp;Tyler&nbsp;Williams&nbsp;on&nbsp;2010-04-25.<br>
 &nbsp;<br>
@@ -21,9 +21,8 @@ Refer&nbsp;to&nbsp;the&nbsp;official&nbsp;api&nbsp;documentation&nbsp;if&nbsp;yo
 <font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="pyechonest.song.html">pyechonest.song</a><br>
-</td><td width="25%" valign=top><a href="pyechonest.util.html">pyechonest.util</a><br>
-</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="pyechonest.util.html">pyechonest.util</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -76,6 +75,8 @@ Attributes:&nbsp;(**attributes**&nbsp;are&nbsp;guaranteed&nbsp;to&nbsp;exist&nbs
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="Artist-__cmp__"><strong>__cmp__</strong></a>(self, other)</dt></dl>
+
 <dl><dt><a name="Artist-__init__"><strong>__init__</strong></a>(self, id, **kwargs)</dt></dl>
 
 <dl><dt><a name="Artist-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
@@ -180,10 +181,12 @@ Args:<br>
 Returns:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;similar&nbsp;<a href="#Artist">Artist</a>&nbsp;objects</tt></dd></dl>
 
-<dl><dt><a name="Artist-get_songs"><strong>get_songs</strong></a>(self, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;the&nbsp;songs&nbsp;associated&nbsp;with&nbsp;an&nbsp;artist<br>
+<dl><dt><a name="Artist-get_songs"><strong>get_songs</strong></a>(self, cache<font color="#909090">=True</font>, results<font color="#909090">=15</font>, start<font color="#909090">=0</font>)</dt><dd><tt>Get&nbsp;the&nbsp;songs&nbsp;associated&nbsp;with&nbsp;an&nbsp;artist<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;cache:&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results:&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start:&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
 Results:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;Song&nbsp;objects</tt></dd></dl>
@@ -321,6 +324,8 @@ Returns:<br>
 &nbsp;<br>
 Args:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;cache:&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results:&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start:&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<br>
 Results:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;Song&nbsp;objects</tt></dd>
