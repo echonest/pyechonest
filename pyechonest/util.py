@@ -161,7 +161,7 @@ def callm(method, param_dict, POST=False, socket_timeout=None, data=None):
     socket.setdefaulttimeout(socket_timeout)
 
     if(POST):
-        if not method == 'track/upload':
+        if (not method == 'track/upload') or ((method == 'track/upload') and 'url' in param_dict):
             """
             this is a normal POST call
             """
