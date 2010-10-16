@@ -23,19 +23,29 @@ class Song(SongProxy):
     A Song object
     
     Create a song object like so:
-        s = song.Song('SOXZYYG127F3E1B7A2')
     
-    Attributes: (**attributes** are guaranteed to exist as soon as an artist object exists)
-        **id**: Echo Nest Song ID
-        **title**: Song Title
+    >>> s = song.Song('SOXZYYG127F3E1B7A2')
+    
+    Attributes: 
+        **id** (str): Echo Nest Song ID
+        
+        **title** (str): Song Title
+        
         **artist_name**: Artist Name
+        
         **artist_id**: Artist ID
-        audio_summary: An Audio Summary Result object
-        song_hotttnesss: A float representing a song's hotttnesss
-        artist_hotttnesss: A float representing a song's parent artist's hotttnesss
-        artist_familiarity: A float representing a song's parent artist's familiarity
-        artist_location: A string specifying a song's parent artist's location
-        tracks: A list of track result objects
+        
+        **audio_summary**: An Audio Summary Result object
+        
+        **song_hotttnesss**: A float representing a song's hotttnesss
+        
+        **artist_hotttnesss**: A float representing a song's parent artist's hotttnesss
+        
+        **artist_familiarity**: A float representing a song's parent artist's familiarity
+        
+        **artist_location**: A string specifying a song's parent artist's location
+        
+        **tracks**: A list of track result objects
     
     """
     def __init__(self, id, buckets = None, **kwargs):
@@ -50,13 +60,13 @@ class Song(SongProxy):
     
         
     def get_audio_summary(self, cache=True):
-        """Get an audio summary of a song containing mode, tempo, key, duration, time signature, loudness, and analysis_url.
+        """Get an audio summary of a song containing mode, tempo, key, duration, time signature, loudness, danceability, energy, and analysis_url.
         
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
         
         Returns:
-            A dictionary containing mode, tempo, key, duration, time signature, loudness, and analysis_url keys.
+            A dictionary containing mode, tempo, key, duration, time signature, loudness, danceability, energy and analysis_url keys.
         """
         if not (cache and ('audio_summary' in self.cache)):
             response = self.get_attribute('profile', bucket='audio_summary')
@@ -69,7 +79,7 @@ class Song(SongProxy):
         """Get our numerical description of how hottt a song currently is
         
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
         
         Returns:
             A float representing hotttnesss.
@@ -85,7 +95,7 @@ class Song(SongProxy):
         """Get our numerical description of how hottt a song's artist currently is
         
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
         
         Returns:
             A float representing hotttnesss.
@@ -101,7 +111,7 @@ class Song(SongProxy):
         """Get our numerical estimation of how familiar a song's artist currently is to the world
         
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
         
         Returns:
             A float representing familiarity.
@@ -117,7 +127,7 @@ class Song(SongProxy):
         """Get the location of a song's artist.
         
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
         
         Returns:
             An artist location object.
@@ -129,11 +139,11 @@ class Song(SongProxy):
     
     artist_location = property(get_artist_location)
     
-    def get_tracks(self, catalog, limit=False, cache=True):
+    def get_tracks(self, catalog, cache=True):
         """Get the tracks for a song given a catalog.
         
         Args:
-            catalog: a string representing the catalog whose track you want to retrieve.
+            **catalog** (str): a string representing the catalog whose track you want to retrieve.
         
         Returns:
             A list of Track dicts.
@@ -143,8 +153,7 @@ class Song(SongProxy):
                 'bucket':['tracks', 'id:%s' % catalog],
             }
             
-            if limit:
-                kwargs['limit'] = 'true'
+            kwargs['limit'] = 'true'
             
             response = self.get_attribute('profile', **kwargs)
             if not 'tracks' in self.cache:
@@ -157,22 +166,20 @@ class Song(SongProxy):
         return filter(lambda tr: tr['catalog']==catalog, self.cache['tracks'])
 
 def identify(filename=None, query_obj=None, code=None, artist=None, title=None, release=None, duration=None, genre=None, buckets=None, alt=None, codegen_start=0, codegen_duration=30):
-    kwargs = {}
-    post = False
-    has_data = False
-    data = None
+    post, has_data, data = False, False, False
     
     if filename:
         if os.path.exists(filename):
             query_obj = util.codegen(filename, start=codegen_start, duration=codegen_duration)
         else:
-            raise Exception("The filename specified: %s does not exist." % (filename,))
+            raise Exception("The filename specified: %s does not exist." % filename)
     if query_obj and not isinstance(query_obj, list):
         query_obj = [query_obj]
-
+    
     if not (filename or query_obj or code):
         raise Exception("Not enough information to identify song.")
     
+    kwargs = {}
     if code:
         has_data = True
         kwargs['code'] = code
@@ -186,26 +193,23 @@ def identify(filename=None, query_obj=None, code=None, artist=None, title=None, 
         kwargs['genre'] = genre
     if buckets:
         kwargs['bucket'] = buckets
-
+    
     if query_obj and any(query_obj):
         has_data = True
         data = {'query':json.dumps(query_obj)}
         post = True
-
+    
     if has_data:
         result = util.callm("%s/%s" % ('song', 'identify'), kwargs, POST=post, data=data)
-        print str(result)
         fix = lambda x : dict((str(k), v) for (k,v) in x.iteritems())
         return [Song(**fix(s_dict)) for s_dict in result['response'].get('songs',[])]
-    else:
-        return None
-    
-    
-    
+
+
 def search(title=None, artist=None, artist_id=None, combined=None, description=None, results=None, max_tempo=None, \
                 min_tempo=None, max_duration=None, min_duration=None, max_loudness=None, min_loudness=None, \
                 artist_max_familiarity=None, artist_min_familiarity=None, artist_max_hotttnesss=None, \
                 artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, mode=None, \
+                min_energy=None, max_energy=None, min_danceability=None, max_danceability=None, \
                 key=None, max_latitude=None, min_latitude=None, max_longitude=None, min_longitude=None, \
                 sort=None, buckets = None, limit=False):
     """search for songs"""
@@ -246,6 +250,14 @@ def search(title=None, artist=None, artist_id=None, combined=None, description=N
         kwargs['song_max_hotttnesss'] = song_max_hotttnesss
     if song_min_hotttnesss is not None:
         kwargs['song_min_hotttnesss'] = song_min_hotttnesss
+    if min_danceability is not None:
+        kwargs['min_danceability'] = min_danceability
+    if max_danceability is not None:
+        kwargs['max_danceability'] = max_danceability
+    if max_energy is not None:
+        kwargs['max_energy'] = max_energy
+    if max_energy is not None:
+        kwargs['max_energy'] = max_energy
     if mode is not None:
         kwargs['mode'] = mode
     if key is not None:

@@ -1,0 +1,178 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Catalog – catalog methods &mdash; pyechonest v4 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyechonest v4 documentation" href="index.html" />
+    <link rel="next" title="Util – utility functions" href="util.html" />
+    <link rel="prev" title="Playlist – playlist methods" href="playlist.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="util.html" title="Util – utility functions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="playlist.html" title="Playlist – playlist methods"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyechonest v4 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="catalog-catalog-methods">
+<h1>Catalog &#8211; catalog methods<a class="headerlink" href="#catalog-catalog-methods" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyechonest.catalog.Catalog">
+<em class="property">class </em><tt class="descclassname">pyechonest.catalog.</tt><tt class="descname">Catalog</tt><big>(</big><em>id</em>, <em>type=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Catalog object</p>
+<p>Create an catalog object like so.
+&gt;&gt;&gt; c = catalog.Catalog(&#8216;CAXGEJB12AAA95CBF1&#8217;)
+&gt;&gt;&gt; c = catalog.Catalog(&#8216;test1&#8217;)</p>
+<dl class="docutils">
+<dt>Attributes: (<strong>attributes</strong> are guaranteed to exist as soon as a catalog object exists)</dt>
+<dd><p class="first"><strong>id</strong> (str): Catalog ID</p>
+<p class="last"><strong>name</strong> (str): Catalog Name</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>id</em>, <em>type=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a catalog object</p>
+<p>if a catalog by that name for this API key does not exist, create a new one</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.__repr__">
+<tt class="descname">__repr__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.__str__">
+<tt class="descname">__str__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.delete">
+<tt class="descname">delete</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes the entire catalog</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.profile">
+<tt class="descname">profile</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the status of a catalog update</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.read">
+<tt class="descname">read</tt><big>(</big><em>buckets=None</em>, <em>results=15</em>, <em>start=0</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all of the data in the catalog; also returns info requested via bucket</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.status">
+<tt class="descname">status</tt><big>(</big><em>ticket</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the status of a catalog update</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.update">
+<tt class="descname">update</tt><big>(</big><em>items</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a catalog object</p>
+<p>items is a list of dicts describing update data and action codes (see api docs)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="playlist.html"
+                        title="previous chapter">Playlist &#8211; playlist methods</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="util.html"
+                        title="next chapter">Util &#8211; utility functions</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/catalog.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="util.html" title="Util – utility functions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="playlist.html" title="Playlist – playlist methods"
+             >previous</a> |</li>
+        <li><a href="index.html">pyechonest v4 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, The Echo Nest.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.4.
+    </div>
+  </body>
+</html>

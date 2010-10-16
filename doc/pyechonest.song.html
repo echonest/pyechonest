@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="pyechonest.html"><font color="#ffffff">pyechonest</font></a>.song</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/pyechonest/song.py">/pyechonest/song.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file: pyechonest/song.py"> pyechonest/song.py</a></font></td></tr></table>
     <p><tt>Copyright&nbsp;(c)&nbsp;2010&nbsp;The&nbsp;Echo&nbsp;Nest.&nbsp;All&nbsp;rights&nbsp;reserved.<br>
 Created&nbsp;by&nbsp;Tyler&nbsp;Williams&nbsp;on&nbsp;2010-04-25.<br>
 &nbsp;<br>
@@ -49,19 +49,29 @@ Refer&nbsp;to&nbsp;the&nbsp;official&nbsp;api&nbsp;documentation&nbsp;if&nbsp;yo
 <td colspan=2><tt>A&nbsp;<a href="#Song">Song</a>&nbsp;object<br>
 &nbsp;<br>
 Create&nbsp;a&nbsp;song&nbsp;object&nbsp;like&nbsp;so:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;s&nbsp;=&nbsp;song.<a href="#Song">Song</a>('SOXZYYG127F3E1B7A2')<br>
 &nbsp;<br>
-Attributes:&nbsp;(**attributes**&nbsp;are&nbsp;guaranteed&nbsp;to&nbsp;exist&nbsp;as&nbsp;soon&nbsp;as&nbsp;an&nbsp;artist&nbsp;object&nbsp;exists)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**id**:&nbsp;Echo&nbsp;Nest&nbsp;<a href="#Song">Song</a>&nbsp;ID<br>
-&nbsp;&nbsp;&nbsp;&nbsp;**title**:&nbsp;<a href="#Song">Song</a>&nbsp;Title<br>
+&gt;&gt;&gt;&nbsp;s&nbsp;=&nbsp;song.<a href="#Song">Song</a>('SOXZYYG127F3E1B7A2')<br>
+&nbsp;<br>
+Attributes:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**id**&nbsp;(str):&nbsp;Echo&nbsp;Nest&nbsp;<a href="#Song">Song</a>&nbsp;ID<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**title**&nbsp;(str):&nbsp;<a href="#Song">Song</a>&nbsp;Title<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**artist_name**:&nbsp;Artist&nbsp;Name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;**artist_id**:&nbsp;Artist&nbsp;ID<br>
-&nbsp;&nbsp;&nbsp;&nbsp;audio_summary:&nbsp;An&nbsp;Audio&nbsp;Summary&nbsp;Result&nbsp;object<br>
-&nbsp;&nbsp;&nbsp;&nbsp;song_hotttnesss:&nbsp;A&nbsp;float&nbsp;representing&nbsp;a&nbsp;song's&nbsp;hotttnesss<br>
-&nbsp;&nbsp;&nbsp;&nbsp;artist_hotttnesss:&nbsp;A&nbsp;float&nbsp;representing&nbsp;a&nbsp;song's&nbsp;parent&nbsp;artist's&nbsp;hotttnesss<br>
-&nbsp;&nbsp;&nbsp;&nbsp;artist_familiarity:&nbsp;A&nbsp;float&nbsp;representing&nbsp;a&nbsp;song's&nbsp;parent&nbsp;artist's&nbsp;familiarity<br>
-&nbsp;&nbsp;&nbsp;&nbsp;artist_location:&nbsp;A&nbsp;string&nbsp;specifying&nbsp;a&nbsp;song's&nbsp;parent&nbsp;artist's&nbsp;location<br>
-&nbsp;&nbsp;&nbsp;&nbsp;tracks:&nbsp;A&nbsp;list&nbsp;of&nbsp;track&nbsp;result&nbsp;objects<br>&nbsp;</tt></td></tr>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**audio_summary**:&nbsp;An&nbsp;Audio&nbsp;Summary&nbsp;Result&nbsp;object<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**song_hotttnesss**:&nbsp;A&nbsp;float&nbsp;representing&nbsp;a&nbsp;song's&nbsp;hotttnesss<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**artist_hotttnesss**:&nbsp;A&nbsp;float&nbsp;representing&nbsp;a&nbsp;song's&nbsp;parent&nbsp;artist's&nbsp;hotttnesss<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**artist_familiarity**:&nbsp;A&nbsp;float&nbsp;representing&nbsp;a&nbsp;song's&nbsp;parent&nbsp;artist's&nbsp;familiarity<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**artist_location**:&nbsp;A&nbsp;string&nbsp;specifying&nbsp;a&nbsp;song's&nbsp;parent&nbsp;artist's&nbsp;location<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**tracks**:&nbsp;A&nbsp;list&nbsp;of&nbsp;track&nbsp;result&nbsp;objects<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="pyechonest.song.html#Song">Song</a></dd>
@@ -80,7 +90,7 @@ Methods defined here:<br>
 <dl><dt><a name="Song-get_artist_familiarity"><strong>get_artist_familiarity</strong></a>(self, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;our&nbsp;numerical&nbsp;estimation&nbsp;of&nbsp;how&nbsp;familiar&nbsp;a&nbsp;song's&nbsp;artist&nbsp;currently&nbsp;is&nbsp;to&nbsp;the&nbsp;world<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;cache:&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**cache**&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;float&nbsp;representing&nbsp;familiarity.</tt></dd></dl>
@@ -88,7 +98,7 @@ Returns:<br>
 <dl><dt><a name="Song-get_artist_hotttnesss"><strong>get_artist_hotttnesss</strong></a>(self, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;our&nbsp;numerical&nbsp;description&nbsp;of&nbsp;how&nbsp;hottt&nbsp;a&nbsp;song's&nbsp;artist&nbsp;currently&nbsp;is<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;cache:&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**cache**&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;float&nbsp;representing&nbsp;hotttnesss.</tt></dd></dl>
@@ -96,31 +106,31 @@ Returns:<br>
 <dl><dt><a name="Song-get_artist_location"><strong>get_artist_location</strong></a>(self, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;the&nbsp;location&nbsp;of&nbsp;a&nbsp;song's&nbsp;artist.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;cache:&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**cache**&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;An&nbsp;artist&nbsp;location&nbsp;object.</tt></dd></dl>
 
-<dl><dt><a name="Song-get_audio_summary"><strong>get_audio_summary</strong></a>(self, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;an&nbsp;audio&nbsp;summary&nbsp;of&nbsp;a&nbsp;song&nbsp;containing&nbsp;mode,&nbsp;tempo,&nbsp;key,&nbsp;duration,&nbsp;time&nbsp;signature,&nbsp;loudness,&nbsp;and&nbsp;analysis_url.<br>
+<dl><dt><a name="Song-get_audio_summary"><strong>get_audio_summary</strong></a>(self, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;an&nbsp;audio&nbsp;summary&nbsp;of&nbsp;a&nbsp;song&nbsp;containing&nbsp;mode,&nbsp;tempo,&nbsp;key,&nbsp;duration,&nbsp;time&nbsp;signature,&nbsp;loudness,&nbsp;danceability,&nbsp;energy,&nbsp;and&nbsp;analysis_url.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;cache:&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**cache**&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dictionary&nbsp;containing&nbsp;mode,&nbsp;tempo,&nbsp;key,&nbsp;duration,&nbsp;time&nbsp;signature,&nbsp;loudness,&nbsp;and&nbsp;analysis_url&nbsp;keys.</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dictionary&nbsp;containing&nbsp;mode,&nbsp;tempo,&nbsp;key,&nbsp;duration,&nbsp;time&nbsp;signature,&nbsp;loudness,&nbsp;danceability,&nbsp;energy&nbsp;and&nbsp;analysis_url&nbsp;keys.</tt></dd></dl>
 
 <dl><dt><a name="Song-get_song_hotttnesss"><strong>get_song_hotttnesss</strong></a>(self, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;our&nbsp;numerical&nbsp;description&nbsp;of&nbsp;how&nbsp;hottt&nbsp;a&nbsp;song&nbsp;currently&nbsp;is<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;cache:&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**cache**&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;float&nbsp;representing&nbsp;hotttnesss.</tt></dd></dl>
 
-<dl><dt><a name="Song-get_tracks"><strong>get_tracks</strong></a>(self, catalog, limit<font color="#909090">=False</font>, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;the&nbsp;tracks&nbsp;for&nbsp;a&nbsp;song&nbsp;given&nbsp;a&nbsp;catalog.<br>
+<dl><dt><a name="Song-get_tracks"><strong>get_tracks</strong></a>(self, catalog, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;the&nbsp;tracks&nbsp;for&nbsp;a&nbsp;song&nbsp;given&nbsp;a&nbsp;catalog.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;catalog:&nbsp;a&nbsp;string&nbsp;representing&nbsp;the&nbsp;catalog&nbsp;whose&nbsp;track&nbsp;you&nbsp;want&nbsp;to&nbsp;retrieve.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**catalog**&nbsp;(str):&nbsp;a&nbsp;string&nbsp;representing&nbsp;the&nbsp;catalog&nbsp;whose&nbsp;track&nbsp;you&nbsp;want&nbsp;to&nbsp;retrieve.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;Track&nbsp;dicts.</tt></dd></dl>
@@ -131,7 +141,7 @@ Data descriptors defined here:<br>
 <dd><tt>Get&nbsp;our&nbsp;numerical&nbsp;estimation&nbsp;of&nbsp;how&nbsp;familiar&nbsp;a&nbsp;song's&nbsp;artist&nbsp;currently&nbsp;is&nbsp;to&nbsp;the&nbsp;world<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;cache:&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**cache**&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;float&nbsp;representing&nbsp;familiarity.</tt></dd>
@@ -140,7 +150,7 @@ Returns:<br>
 <dd><tt>Get&nbsp;our&nbsp;numerical&nbsp;description&nbsp;of&nbsp;how&nbsp;hottt&nbsp;a&nbsp;song's&nbsp;artist&nbsp;currently&nbsp;is<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;cache:&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**cache**&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;float&nbsp;representing&nbsp;hotttnesss.</tt></dd>
@@ -149,25 +159,25 @@ Returns:<br>
 <dd><tt>Get&nbsp;the&nbsp;location&nbsp;of&nbsp;a&nbsp;song's&nbsp;artist.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;cache:&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**cache**&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;An&nbsp;artist&nbsp;location&nbsp;object.</tt></dd>
 </dl>
 <dl><dt><strong>audio_summary</strong></dt>
-<dd><tt>Get&nbsp;an&nbsp;audio&nbsp;summary&nbsp;of&nbsp;a&nbsp;song&nbsp;containing&nbsp;mode,&nbsp;tempo,&nbsp;key,&nbsp;duration,&nbsp;time&nbsp;signature,&nbsp;loudness,&nbsp;and&nbsp;analysis_url.<br>
+<dd><tt>Get&nbsp;an&nbsp;audio&nbsp;summary&nbsp;of&nbsp;a&nbsp;song&nbsp;containing&nbsp;mode,&nbsp;tempo,&nbsp;key,&nbsp;duration,&nbsp;time&nbsp;signature,&nbsp;loudness,&nbsp;danceability,&nbsp;energy,&nbsp;and&nbsp;analysis_url.<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;cache:&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**cache**&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
 &nbsp;<br>
 Returns:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dictionary&nbsp;containing&nbsp;mode,&nbsp;tempo,&nbsp;key,&nbsp;duration,&nbsp;time&nbsp;signature,&nbsp;loudness,&nbsp;and&nbsp;analysis_url&nbsp;keys.</tt></dd>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dictionary&nbsp;containing&nbsp;mode,&nbsp;tempo,&nbsp;key,&nbsp;duration,&nbsp;time&nbsp;signature,&nbsp;loudness,&nbsp;danceability,&nbsp;energy&nbsp;and&nbsp;analysis_url&nbsp;keys.</tt></dd>
 </dl>
 <dl><dt><strong>song_hotttnesss</strong></dt>
 <dd><tt>Get&nbsp;our&nbsp;numerical&nbsp;description&nbsp;of&nbsp;how&nbsp;hottt&nbsp;a&nbsp;song&nbsp;currently&nbsp;is<br>
 &nbsp;<br>
 Args:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;cache:&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;**cache**&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
 &nbsp;<br>
 Returns:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;float&nbsp;representing&nbsp;hotttnesss.</tt></dd>
@@ -197,6 +207,6 @@ Data descriptors inherited from <a href="pyechonest.proxies.html#GenericProxy">p
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl><dt><a name="-identify"><strong>identify</strong></a>(filename<font color="#909090">=None</font>, query_obj<font color="#909090">=None</font>, code<font color="#909090">=None</font>, artist<font color="#909090">=None</font>, title<font color="#909090">=None</font>, release<font color="#909090">=None</font>, duration<font color="#909090">=None</font>, genre<font color="#909090">=None</font>, buckets<font color="#909090">=None</font>, alt<font color="#909090">=None</font>, codegen_start<font color="#909090">=0</font>, codegen_duration<font color="#909090">=30</font>)</dt></dl>
  <dl><dt><a name="-profile"><strong>profile</strong></a>(ids, buckets<font color="#909090">=None</font>, limit<font color="#909090">=False</font>)</dt><dd><tt>get&nbsp;the&nbsp;profiles&nbsp;for&nbsp;multiple&nbsp;songs&nbsp;at&nbsp;once</tt></dd></dl>
- <dl><dt><a name="-search"><strong>search</strong></a>(title<font color="#909090">=None</font>, artist<font color="#909090">=None</font>, artist_id<font color="#909090">=None</font>, combined<font color="#909090">=None</font>, description<font color="#909090">=None</font>, results<font color="#909090">=None</font>, max_tempo<font color="#909090">=None</font>, min_tempo<font color="#909090">=None</font>, max_duration<font color="#909090">=None</font>, min_duration<font color="#909090">=None</font>, max_loudness<font color="#909090">=None</font>, min_loudness<font color="#909090">=None</font>, artist_max_familiarity<font color="#909090">=None</font>, artist_min_familiarity<font color="#909090">=None</font>, artist_max_hotttnesss<font color="#909090">=None</font>, artist_min_hotttnesss<font color="#909090">=None</font>, song_max_hotttnesss<font color="#909090">=None</font>, song_min_hotttnesss<font color="#909090">=None</font>, mode<font color="#909090">=None</font>, key<font color="#909090">=None</font>, max_latitude<font color="#909090">=None</font>, min_latitude<font color="#909090">=None</font>, max_longitude<font color="#909090">=None</font>, min_longitude<font color="#909090">=None</font>, sort<font color="#909090">=None</font>, buckets<font color="#909090">=None</font>, limit<font color="#909090">=False</font>)</dt><dd><tt>search&nbsp;for&nbsp;songs</tt></dd></dl>
+ <dl><dt><a name="-search"><strong>search</strong></a>(title<font color="#909090">=None</font>, artist<font color="#909090">=None</font>, artist_id<font color="#909090">=None</font>, combined<font color="#909090">=None</font>, description<font color="#909090">=None</font>, results<font color="#909090">=None</font>, max_tempo<font color="#909090">=None</font>, min_tempo<font color="#909090">=None</font>, max_duration<font color="#909090">=None</font>, min_duration<font color="#909090">=None</font>, max_loudness<font color="#909090">=None</font>, min_loudness<font color="#909090">=None</font>, artist_max_familiarity<font color="#909090">=None</font>, artist_min_familiarity<font color="#909090">=None</font>, artist_max_hotttnesss<font color="#909090">=None</font>, artist_min_hotttnesss<font color="#909090">=None</font>, song_max_hotttnesss<font color="#909090">=None</font>, song_min_hotttnesss<font color="#909090">=None</font>, mode<font color="#909090">=None</font>, min_energy<font color="#909090">=None</font>, max_energy<font color="#909090">=None</font>, min_danceability<font color="#909090">=None</font>, max_danceability<font color="#909090">=None</font>, key<font color="#909090">=None</font>, max_latitude<font color="#909090">=None</font>, min_latitude<font color="#909090">=None</font>, max_longitude<font color="#909090">=None</font>, min_longitude<font color="#909090">=None</font>, sort<font color="#909090">=None</font>, buckets<font color="#909090">=None</font>, limit<font color="#909090">=False</font>)</dt><dd><tt>search&nbsp;for&nbsp;songs</tt></dd></dl>
 </td></tr></table>
 </body></html>

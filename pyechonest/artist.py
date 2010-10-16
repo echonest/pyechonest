@@ -8,7 +8,6 @@ Created by Tyler Williams on 2010-04-25.
 The Artist module loosely covers http://developer.echonest.com/docs/v4/artist.html
 Refer to the official api documentation if you are unsure about something.
 """
-
 import util
 from proxies import ArtistProxy
 from results import Result
@@ -19,26 +18,12 @@ class Artist(ArtistProxy):
     """
     An Artist object
     
-    Create an artist object like so:
-        a = artist.Artist('ARH6W4X1187B99274F')
-        a = artist.Artist('the national')
-        a = artist.Artist('musicbrainz:artist:a74b1b7f-71a5-4011-9441-d0b5e4122711')
+    You create an artist object like this.
     
-    Attributes: (**attributes** are guaranteed to exist as soon as an artist object exists)
-        **id**: Echo Nest Artist ID
-        **name**: Artist Name
-        hotttnesss: A float representing an artist's hotttnesss
-        audio: A list of audio document Result objects
-        biographies: A list of biography document Result objects
-        blogs: A list of blog document Result objects
-        familiarity: A float representing an artist's familiarity 
-        images: A list of image document Result objects
-        news: A list of news document Result objects
-        reviews: A list of review document Result objects
-        similar: A list of similar Artist objects
-        terms: A list of terms document Result objects
-        urls: A urls result object
-        video: A list of video document Result objects
+    >>> a = artist.Artist('ARH6W4X1187B99274F')
+    >>> a = artist.Artist('the national')
+    >>> a = artist.Artist('musicbrainz:artist:a74b1b7f-71a5-4011-9441-d0b5e4122711')
+    
     """
     def __init__(self, id, **kwargs):
         super(Artist, self).__init__(id, **kwargs)
@@ -56,10 +41,16 @@ class Artist(ArtistProxy):
         """Get our numerical description of how hottt an artist currently is
         
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
         
         Returns:
-            A float representing hotttnesss.
+            float: the hotttnesss value
+        
+        Example:
+        
+        >>> a = artist.Artist('britney spears')
+        >>> a.get_hotttnessss()
+        >>> 0.760757716457235
         """
         if not (cache and ('hotttnesss' in self.cache)):
             response = self.get_attribute('hotttnesss')
@@ -72,9 +63,11 @@ class Artist(ArtistProxy):
         """Get a list of audio documents found on the web related to an artist
         
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
-            results: An integer number of results to return
-            start: An integer starting value for the result set
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            
+            **results** (int): An integer number of results to return
+            
+            **start** (int): An integer starting value for the result set
         
         Returns:
             A list of audio document Result objects
@@ -95,10 +88,13 @@ class Artist(ArtistProxy):
         """Get a list of artist biographies
         
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
-            results: An integer number of results to return
-            start: An integer starting value for the result set
-            license: A string specifying the desired license type
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            
+            **results** (int): An integer number of results to return
+            
+            **start** (int): An integer starting value for the result set
+            
+            **license** (str): A string specifying the desired license type
         
         Returns:
             A list of biography document Result objects
@@ -116,9 +112,11 @@ class Artist(ArtistProxy):
     def get_blogs(self, results=15, start=0, cache=True, high_relevance=False):
         """Get a list of blog articles related to an artist
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
-            results: An integer number of results to return
-            start: An ingteger starting value for the result set
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            
+            **results** (int): An integer number of results to return
+            
+            **start** (int): An ingteger starting value for the result set
         
         Returns:
             A list of blog document Result objects
@@ -138,7 +136,7 @@ class Artist(ArtistProxy):
         """Get our numerical estimation of how familiar an artist currently is to the world
         
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
         
         Returns:
             A float representing familiarity.
@@ -154,10 +152,13 @@ class Artist(ArtistProxy):
         """Get a list of artist images
         
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
-            results: An integer number of results to return
-            start: An integer starting value for the result set
-            license: A string specifying the desired license type
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            
+            **results** (int): An integer number of results to return
+            
+            **start** (int): An integer starting value for the result set
+            
+            **license** (str): A string specifying the desired license type
         
         Returns:
             A list of image document Result objects
@@ -176,9 +177,11 @@ class Artist(ArtistProxy):
         """Get a list of news articles found on the web related to an artist
         
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
-            results: An integer number of results to return
-            start: An integer starting value for the result set
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            
+            **results** (int): An integer number of results to return
+            
+            **start** (int): An integer starting value for the result set
         
         Returns:
             A list of news document Result objects
@@ -198,9 +201,11 @@ class Artist(ArtistProxy):
     def get_reviews(self, results=15, start=0, cache=True):
         """Get reviews related to an artist's work
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
-            results: An integer number of results to return
-            start: An integer starting value for the result set
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            
+            **results** (int): An integer number of results to return
+            
+            **start** (int): An integer starting value for the result set
         
         Returns:
             A list of review document Result objects
@@ -221,14 +226,22 @@ class Artist(ArtistProxy):
         """Return similar artists to this one
         
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
-            results: An integer number of results to return
-            start: An integer starting value for the result set
-            max_familiarity: A float specifying the max familiarity of artists to search for
-            min_familiarity: A float specifying the min familiarity of artists to search for
-            max_hotttnesss: A float specifying the max hotttnesss of artists to search for
-            min_hotttnesss: A float specifying the max hotttnesss of artists to search for
-            reverse: A boolean indicating whether or not to return dissimilar artists (wrecommender). Defaults to False.
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            
+            **results** (int): An integer number of results to return
+            
+            **start** (int): An integer starting value for the result set
+            
+            **max_familiarity** (float): A float specifying the max familiarity of artists to search for
+            
+            **min_familiarity** (float): A float specifying the min familiarity of artists to search for
+            
+            **max_hotttnesss** (float): A float specifying the max hotttnesss of artists to search for
+            
+            **min_hotttnesss** (float): A float specifying the max hotttnesss of artists to search for
+            
+            **reverse** (bool): A boolean indicating whether or not to return dissimilar artists (wrecommender). Defaults to False.
+        
         Returns:
             A list of similar Artist objects
         """
@@ -269,9 +282,11 @@ class Artist(ArtistProxy):
         """Get the songs associated with an artist
         
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
-            results: An integer number of results to return
-            start: An integer starting value for the result set
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            
+            **results** (int): An integer number of results to return
+            
+            **start** (int): An integer starting value for the result set
             
         Results:
             A list of Song objects
@@ -289,6 +304,7 @@ class Artist(ArtistProxy):
             if results==15 and start==0:
                 self.cache['songs'] = songs
             return songs
+
     
     songs = property(get_songs)
 
@@ -296,8 +312,9 @@ class Artist(ArtistProxy):
         """Get the terms associated with an artist
         
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
-            sort: A string specifying the desired sorting type (weight or frequency)
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            
+            **sort** (str): A string specifying the desired sorting type (weight or frequency)
             
         Results:
             A list of term document Result objects
@@ -316,7 +333,7 @@ class Artist(ArtistProxy):
         """Get the urls for an artist
         
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
             
         Results:
             A url document Result objects
@@ -332,9 +349,11 @@ class Artist(ArtistProxy):
         """Get a list of video documents found on the web related to an artist
         
         Args:
-            cache: A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
-            results: An integer number of results to return
-            start: An integer starting value for the result set
+            **cache** (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+            
+            **results** (int): An integer number of results to return
+            
+            **start** (int): An integer starting value for the result set
         
         Returns:
             A list of video document Result objects
@@ -353,7 +372,7 @@ class Artist(ArtistProxy):
         """Get the foreign id for this artist for a specific id space
         
         Args:
-            idspace: A string indicating the idspace to fetch a foreign id for.
+            **idspace** (str): A string indicating the idspace to fetch a foreign id for.
         
         Returns:
             A foreign ID string
@@ -372,16 +391,25 @@ def search(name=None, description=None, results=15, buckets=None, limit=False, \
     """Search for artists by name, description, or constraint.
     
     Args:
-        name: the name of an artist
-        description: A string describing the artist
-        results: An integer number of results to return
-        buckets: A list of strings specifying which buckets to retrieve
-        limit: A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
-        fuzzy_match: A boolean indicating whether or not to search for similar sounding matches (only works with name)
-        max_familiarity: A float specifying the max familiarity of artists to search for
-        min_familiarity: A float specifying the min familiarity of artists to search for
-        max_hotttnesss: A float specifying the max hotttnesss of artists to search for
-        min_hotttnesss: A float specifying the max hotttnesss of artists to search for
+        **name** (str): the name of an artist
+        
+        **description** (str): A string describing the artist
+        
+        **results** (int): An integer number of results to return
+        
+        **buckets** (list): A list of strings specifying which buckets to retrieve
+        
+        **limit** (bool): A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
+        
+        **fuzzy_match** (bool): A boolean indicating whether or not to search for similar sounding matches (only works with name)
+        
+        **max_familiarity** (float): A float specifying the max familiarity of artists to search for
+        
+        **min_familiarity** (float): A float specifying the min familiarity of artists to search for
+        
+        **max_hotttnesss** (float): A float specifying the max hotttnesss of artists to search for
+        
+        **min_hotttnesss** (float): A float specifying the max hotttnesss of artists to search for
     
     Returns:
         A list of Artist objects
@@ -421,10 +449,13 @@ def top_hottt(start=0, results=15, buckets = None, limit=False):
     """Get the top hotttest artists, according to The Echo Nest
     
     Args:
-        results: An integer number of results to return
-        start: An integer starting value for the result set
-        buckets: A list of strings specifying which buckets to retrieve
-        limit: A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
+        *results** (int): An integer number of results to return
+        
+        *start** (int): An integer starting value for the result set
+        
+        *buckets** (list): A list of strings specifying which buckets to retrieve
+        
+        *limit** (bool): A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
         
     Returns:
         A list of hottt Artist objects
@@ -451,7 +482,7 @@ def top_terms(results=15):
     """Get a list of the top overall terms
         
     Args:
-        results: An integer number of results to return
+        **results** (int): An integer number of results to return
         
     Returns:
         A list of term document Result objects
@@ -471,18 +502,26 @@ def similar(names=None, ids=None, start=0, results=15, buckets=None, limit=False
     """Return similar artists to this one
     
     Args:
-        id: An artist id or list of ids
-        name: An artist name or list of names
-        results: An integer number of results to return
-        buckets: A list of strings specifying which buckets to retrieve
-        limit: A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
-        start: An integer starting value for the result set
-        buckets: A list of strings specifying which buckets to retrieve
-        limit: A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
-        max_familiarity: A float specifying the max familiarity of artists to search for
-        min_familiarity: A float specifying the min familiarity of artists to search for
-        max_hotttnesss: A float specifying the max hotttnesss of artists to search for
-        min_hotttnesss: A float specifying the max hotttnesss of artists to search for
+        **ids** (str/list): An artist id or list of ids
+        
+        **names** (str/list): An artist name or list of names
+        
+        **results** (int): An integer number of results to return
+        
+        **buckets** (list): A list of strings specifying which buckets to retrieve
+        
+        **limit** (bool): A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
+        
+        **start** (int): An integer starting value for the result set
+        
+        **max_familiarity** (float): A float specifying the max familiarity of artists to search for
+        
+        **min_familiarity** (float): A float specifying the min familiarity of artists to search for
+        
+        **max_hotttnesss** (float): A float specifying the max hotttnesss of artists to search for
+        
+        **min_hotttnesss** (float): A float specifying the max hotttnesss of artists to search for
+    
     Returns:
         A list of similar Artist objects
     """

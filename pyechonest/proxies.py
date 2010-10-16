@@ -45,6 +45,55 @@ class ArtistProxy(GenericProxy):
         return super(ArtistProxy, self).get_attribute(*args, **kwargs)
     
 
+class CatalogProxy(GenericProxy):
+    def __init__(self, identifier, type, buckets = None, **kwargs):
+        super(CatalogProxy, self).__init__()
+        buckets = buckets or []
+        self.id = identifier
+        self._object_type = 'catalog'
+        kwargs = dict((str(k), v) for (k,v) in kwargs.iteritems())
+        # the following are integral to all catalog objects... the rest is up to you!
+        core_attrs = ['name']
+        if not all(ca in kwargs for ca in core_attrs):
+            if util.short_regex.match(self.id) or util.long_regex.match(self.id) or util.foreign_regex.match(self.id):
+                try:
+                    profile = self.get_attribute('profile')
+                    kwargs.update(profile['catalog'])
+                except util.EchoNestAPIError:
+                    raise Exception('Catalog %s does not exist' % (identifier))
+            else:
+                if not type:
+                    raise Exception('You must specify a "type"!')
+                try:
+                    profile = self.get_attribute('profile')
+                    existing_type = profile['catalog'].get('type', 'Unknown')
+                    if type != existing_type:
+                        raise Exception("Catalog type requested (%s) does not match existing catalog type (%s)" % (type, existing_type))
+                    
+                    kwargs.update(profile['catalog'])
+                except util.EchoNestAPIError:
+                    profile = self.post_attribute('create', type=type, **kwargs)
+                    kwargs.update(profile)
+        [self.__dict__.update({ca:kwargs.pop(ca)}) for ca in core_attrs+['id'] if ca in kwargs]
+        self.cache.update(kwargs)
+    
+    def get_attribute_simple(self, *args, **kwargs):
+        # omit name/id kwargs for this call
+        return super(CatalogProxy, self).get_attribute(*args, **kwargs)
+    
+    def get_attribute(self, *args, **kwargs):
+        if util.short_regex.match(self.id) or util.long_regex.match(self.id) or util.foreign_regex.match(self.id):
+            kwargs['id'] = self.id
+        else:
+            kwargs['name'] = self.id
+        return super(CatalogProxy, self).get_attribute(*args, **kwargs)
+    
+    def post_attribute(self, *args, **kwargs):
+        if util.short_regex.match(self.id) or util.long_regex.match(self.id) or util.foreign_regex.match(self.id):
+            kwargs['id'] = self.id
+        else:
+            kwargs['name'] = self.id
+        return super(CatalogProxy, self).post_attribute(*args, **kwargs)
     
 
 class PlaylistProxy(GenericProxy):

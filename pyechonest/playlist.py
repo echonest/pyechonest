@@ -28,7 +28,7 @@ class Playlist(PlaylistProxy):
     def __init__(self, session_id=None, type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist_id=None, artist=None, \
                         song_id=None, description=None, max_tempo=None, min_tempo=None, max_duration=None, \
                         min_duration=None, max_loudness=None, min_loudness=None, max_danceability=None, min_danceability=None, \
-                        max_complexity=None, min_complexity=None, artist_max_familiarity=None, artist_min_familiarity=None, \
+                        max_energy=None, min_energy=None, artist_max_familiarity=None, artist_min_familiarity=None, \
                         artist_max_hotttnesss=None, artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, \
                         min_longitude=None, max_longitude=None, min_latitude=None, max_latitude=None, \
                         mode=None, key=None, buckets=[], sort=None, limit=False, dmca=False, audio=False, chain_xspf=False):
@@ -59,6 +59,14 @@ class Playlist(PlaylistProxy):
             kwargs['max_loudness'] = max_loudness
         if min_loudness is not None:
             kwargs['min_loudness'] = min_loudness
+        if max_danceability is not None:
+            kwargs['max_danceability'] = max_danceability
+        if min_danceability is not None:
+            kwargs['min_danceability'] = min_danceability
+        if max_energy is not None:
+            kwargs['max_energy'] = max_energy
+        if min_energy is not None:
+            kwargs['min_energy'] = min_energy
         if artist_max_familiarity is not None:
             kwargs['artist_max_familiarity'] = artist_max_familiarity
         if artist_min_familiarity is not None:
@@ -128,7 +136,7 @@ class Playlist(PlaylistProxy):
 def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist_id=None, artist=None, \
                     song_id=None, description=None, results=15, max_tempo=None, min_tempo=None, max_duration=None, \
                     min_duration=None, max_loudness=None, min_loudness=None, max_danceability=None, min_danceability=None, \
-                    max_complexity=None, min_complexity=None, artist_max_familiarity=None, artist_min_familiarity=None, \
+                    max_energy=None, min_energy=None, artist_max_familiarity=None, artist_min_familiarity=None, \
                     artist_max_hotttnesss=None, artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, \
                     min_longitude=None, max_longitude=None, min_latitude=None, max_latitude=None, \
                     mode=None, key=None, buckets=[], sort=None, limit=False, audio=False):
@@ -162,6 +170,14 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
         kwargs['max_loudness'] = max_loudness
     if min_loudness is not None:
         kwargs['min_loudness'] = min_loudness
+    if max_danceability is not None:
+        kwargs['max_danceability'] = max_danceability
+    if min_danceability is not None:
+        kwargs['min_danceability'] = min_danceability
+    if max_energy is not None:
+        kwargs['max_energy'] = max_energy
+    if min_energy is not None:
+        kwargs['min_energy'] = min_energy
     if artist_max_familiarity is not None:
         kwargs['artist_max_familiarity'] = artist_max_familiarity
     if artist_min_familiarity is not None:

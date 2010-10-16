@@ -5,6 +5,7 @@ __version__ = "4.2"
 
 # $Source$
 from sys import version
+import os
 from setuptools import setup
 
 if version < '2.6':
@@ -15,9 +16,13 @@ else:
     #unknown version?
     requires=['urllib', 'urllib2']
 
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
 setup(name='pyechonest',
       version='4.2',
       description='Python interface to The Echo Nest APIs.',
+      long_description=read('README'),
       author='Tyler Williams',
       author_email='tyler@echonest.com',
       maintainer='Tyler Williams',

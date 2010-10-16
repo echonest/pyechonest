@@ -10,4 +10,9 @@ pydoc -w $MAIN
 for s in $submodules; do pydoc -w $MAIN.$s; done
 
 mv *.html doc/
-echo "all done!" 
+
+
+mkdir -p doc/build
+/usr/bin/env python setup.py build_sphinx
+
+echo "all done!"

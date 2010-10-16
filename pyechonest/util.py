@@ -22,7 +22,7 @@ from types import StringType, UnicodeType
 from hashlib import md5
 try:
     import cPickle as pickle
-except:
+except ImportError:
     import pickle
 
 try:
@@ -42,6 +42,7 @@ TYPENAMES = (
     ('LI', 'listener'),
     ('ED', 'editor'),
     ('TW', 'tweditor'),
+    ('CA', 'catalog'),
 )
 foreign_regex = re.compile(r'^.+?:(%s):([^^]+)\^?([0-9\.]+)?' % r'|'.join(n[1] for n in TYPENAMES))
 short_regex = re.compile(r'^((%s)[0-9A-Z]{16})\^?([0-9\.]+)?' % r'|'.join(n[0] for n in TYPENAMES))
@@ -113,27 +114,28 @@ def codegen(filename, start=0, duration=30):
     if not cmd:
         # Is this is posix platform, or is it windows?
         if hasattr(os, 'uname'):
-            if os.uname()[0] == "Darwin": # mac
+            if(os.uname()[0] == "Darwin"):
                 cmd = "codegen.Darwin"
-            else: # linux
-                cmd = 'codegen.' + os.uname()[0]+'-'+os.uname()[4]
+            else:
+                cmd = 'codegen.'+os.uname()[0]+'-'+os.uname()[4]
         else:
             cmd = "codegen.windows.exe"
-    
-    command = '%s "%s"' % (cmd, filename)
-    if 0 <= start:
-        command += ' ' + str(start)
-    if 0 <= duration:
-        command += ' ' + str(duration)
-    
+
+    command = cmd + " \"" + filename + "\" " 
+    if start >= 0:
+        command = command + str(start) + " "
+    if duration >= 0:
+        command = command + str(duration)
+        
     p = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     (json_block, errs) = p.communicate()
     json_block = reallyUTF8(json_block)
-    
+
     try:
         return json.loads(json_block)
     except ValueError:
-        raise ValueError("No JSON object came out of codegen: error was %s" % (errs))
+        logger.debug("No JSON object came out of codegen: error was %s" % (errs))
+        return None
 
 
 def callm(method, param_dict, POST=False, socket_timeout=None, data=None):
@@ -156,10 +158,12 @@ def callm(method, param_dict, POST=False, socket_timeout=None, data=None):
             if isinstance(val, unicode):
                 val = val.encode('utf-8')
             param_list.append( (key,val) )
+
     params = urllib.urlencode(param_list)
+        
     socket.setdefaulttimeout(socket_timeout)
 
-    if POST:
+    if(POST):
         if (not method == 'track/upload') or ((method == 'track/upload') and 'url' in param_dict):
             """
             this is a normal POST call
@@ -168,10 +172,11 @@ def callm(method, param_dict, POST=False, socket_timeout=None, data=None):
                                         config.API_VERSION, method)
             
             if data is None:
-                data = {}
-            data.update(param_dict)
-            data = urllib.urlencode(data)
+                data = ''
             
+            data = urllib.urlencode(data)
+            data = "&".join([data, params])
+
             f = opener.open(url, data=data)
         else:
             """

@@ -14,36 +14,65 @@ class Track(TrackProxy):
     All methods in this module return Track objects.
 
     The track object will have the following properties:
+    
 
-    analysis_channels       int: the number of audio channels used during analysis
-    analysis_sample_rate    float: the sample rate used during analysis
-    analyzer_version        str: ex. '3.01a'
-    artist                  str or None: artist name
-    bars                    list of dicts: timing of each measure
-    beats                   list of dicts: timing of each beat
-    bitrate                 int: the bitrate of the input mp3 (or other file)
-    duration                float: length of track in seconds
-    end_of_fade_in          float: time in seconds track where fade-in ends
-    id                      str: Echo Nest Track ID, ex. 'TRTOBXJ1296BCDA33B'
-    key                     int: between 0 (key of C) and 11 (key of B flat) inclusive
-    key_confidence          float: confidence that key detection was accurate
-    loudness                float: overall loudness in decibels (dB)
-    md5                     str: 32-character checksum of the input mp3
-    meta                    dict: other track metainfo
-    mode                    int: 0 (major) or 1 (minor)
-    mode_confidence         float: confidence that mode detection was accurate
-    num_samples             int: total samples in the decoded track
-    release                 str or None: the album name
-    sample_md5              str: 32-character checksum of the decoded audio file
-    samplerate              int: sample rate of input mp3
-    sections                list of dicts: larger sections of song (chorus, bridge, solo, etc.)
-    segments                list of dicts: timing, pitch, loudness and timbre for each segment
-    start_of_fade_out       float: time in seconds where fade out begins
-    status                  str: analysis status, ex. 'complete', 'pending', 'error'
-    tatums                  list of dicts: the smallest metrical unit (subdivision of a beat)
-    tempo                   float: overall BPM (beats per minute)
-    tempo_confidence        float: confidence that tempo detection was accurate
-    title                   str: or None: song title
+    **analysis_channels**       int: the number of audio channels used during analysis
+    
+    **analysis_sample_rate**    float: the sample rate used during analysis
+    
+    **analyzer_version**        str: ex. '3.01a'
+    
+    **artist**                  str or None: artist name
+    
+    **bars**                    list of dicts: timing of each measure
+    
+    **beats**                   list of dicts: timing of each beat
+    
+    **bitrate**                 int: the bitrate of the input mp3 (or other file)
+    
+    **duration**                float: length of track in seconds
+    
+    **end_of_fade_in**          float: time in seconds track where fade-in ends
+    
+    **id**                      str: Echo Nest Track ID, ex. 'TRTOBXJ1296BCDA33B'
+    
+    **key**                     int: between 0 (key of C) and 11 (key of B flat) inclusive
+    
+    **key_confidence**          float: confidence that key detection was accurate
+    
+    **loudness**                float: overall loudness in decibels (dB)
+    
+    **md5**                     str: 32-character checksum of the input mp3
+    
+    **meta**                    dict: other track metainfo
+    
+    **mode**                    int: 0 (major) or 1 (minor)
+    
+    **mode_confidence**         float: confidence that mode detection was accurate
+    
+    **num_samples**             int: total samples in the decoded track
+    
+    **release**                 str or None: the album name
+    
+    **sample_md5**              str: 32-character checksum of the decoded audio file
+    
+    **samplerate**              int: sample rate of input mp3
+    
+    **sections**                list of dicts: larger sections of song (chorus, bridge, solo, etc.)
+    
+    **segments**                list of dicts: timing, pitch, loudness and timbre for each segment
+    
+    **start_of_fade_out**       float: time in seconds where fade out begins
+    
+    **status**                  str: analysis status, ex. 'complete', 'pending', 'error'
+    
+    **tatums**                  list of dicts: the smallest metrical unit (subdivision of a beat)
+    
+    **tempo**                   float: overall BPM (beats per minute)
+    
+    **tempo_confidence**        float: confidence that tempo detection was accurate
+    
+    **title**                   str: or None: song title
 
     Each bar, beat, section, segment and tatum has a start time, a duration, and a confidence,
     in addition to whatever other data is given.    
