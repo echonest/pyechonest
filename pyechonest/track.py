@@ -169,7 +169,7 @@ def track_from_filename(filename, filetype = None):
         filetype: A string indicating the filetype; Defaults to None (type determined by file extension).
     """
     filetype = filetype or filename.split('.')[-1]
-    return track_from_file(open(filename), filetype)
+    return track_from_file(open(filename, 'rb'), filetype)
 
 def track_from_url(url):
     """
