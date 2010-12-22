@@ -18,7 +18,7 @@ else:
     ECHO_NEST_API_KEY = None
 
 
-API_HOST = 'developer.echonest.com'
+API_HOST = 'bleeding-edge.sandpit.us'
 
 API_SELECTOR = 'api'
 "Locations for the Analyze API calls."
@@ -44,14 +44,9 @@ You may change this to False to prevent local caching
 of API results.
 """
 
-TRACE_API_CALLS = False
+TRACE_API_CALLS = True
 """
 If true, API calls will be traced to the console
-"""
-
-ANALYSIS_VERSION = 3
-"""
-Analysis version
 """
 
 CALL_TIMEOUT = 10

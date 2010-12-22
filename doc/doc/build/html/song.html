@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Song – song methods &mdash; pyechonest v4 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyechonest v4 documentation" href="index.html" />
+    <link rel="next" title="Track – track methods" href="track.html" />
+    <link rel="prev" title="Artist – artist methods" href="artist.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="track.html" title="Track – track methods"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="artist.html" title="Artist – artist methods"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyechonest v4 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="song-song-methods">
+<h1>Song &#8211; song methods<a class="headerlink" href="#song-song-methods" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyechonest.song.Song">
+<em class="property">class </em><tt class="descclassname">pyechonest.song.</tt><tt class="descname">Song</tt><big>(</big><em>id</em>, <em>buckets=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyechonest.song.Song" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Song object</p>
+<dl class="docutils">
+<dt>Attributes: </dt>
+<dd><p class="first">id (str): Echo Nest Song ID</p>
+<p>title (str): Song Title</p>
+<p>artist_name (str): Artist Name</p>
+<p>artist_id (str): Artist ID</p>
+<p>audio_summary (dict): An Audio Summary dict</p>
+<p>song_hotttnesss (float): A float representing a song&#8217;s hotttnesss</p>
+<p>artist_hotttnesss (float): A float representing a song&#8217;s parent artist&#8217;s hotttnesss</p>
+<p>artist_familiarity (float): A float representing a song&#8217;s parent artist&#8217;s familiarity</p>
+<p>artist_location (str): A string specifying a song&#8217;s parent artist&#8217;s location</p>
+<p class="last">tracks (list): A list of track objects</p>
+</dd>
+</dl>
+<p>Create a song object like so:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">Song</span><span class="p">(</span><span class="s">&#39;SOPEXHZ12873FD2AC7&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="pyechonest.song.Song.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>id</em>, <em>buckets=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyechonest.song.Song.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Song class</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): a song ID</dd>
+<dt>Kwargs:</dt>
+<dd>buckets (list): A list of strings specifying which buckets to retrieve</dd>
+<dt>Returns:</dt>
+<dd>A Song object</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">Song</span><span class="p">(</span><span class="s">&#39;SOPEXHZ12873FD2AC7&#39;</span><span class="p">,</span> <span class="n">buckets</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;song_hotttnesss&#39;</span><span class="p">,</span> <span class="s">&#39;artist_hotttnesss&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">song_hotttnesss</span>
+<span class="go">0.58602500000000002</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">artist_hotttnesss</span>
+<span class="go">0.80329715999999995</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.song.Song.__repr__">
+<tt class="descname">__repr__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.song.Song.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.song.Song.__str__">
+<tt class="descname">__str__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.song.Song.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.song.Song.get_artist_familiarity">
+<tt class="descname">get_artist_familiarity</tt><big>(</big><em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.song.Song.get_artist_familiarity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get our numerical estimation of how familiar a song&#8217;s artist currently is to the world</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</dd>
+<dt>Returns:</dt>
+<dd>A float representing familiarity.</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">Song</span><span class="p">(</span><span class="s">&#39;SOQKVPH12A58A7AF4D&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">get_artist_familiarity</span><span class="p">()</span>
+<span class="go">0.639626025843539</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">artist_familiarity</span>
+<span class="go">0.639626025843539</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.song.Song.get_artist_hotttnesss">
+<tt class="descname">get_artist_hotttnesss</tt><big>(</big><em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.song.Song.get_artist_hotttnesss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get our numerical description of how hottt a song&#8217;s artist currently is</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</dd>
+<dt>Returns:</dt>
+<dd>A float representing hotttnesss.</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">Song</span><span class="p">(</span><span class="s">&#39;SOOLGAZ127F3E1B87C&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">artist_hotttnesss</span>
+<span class="go">0.45645633000000002</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">get_artist_hotttnesss</span><span class="p">()</span>
+<span class="go">0.45645633000000002</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.song.Song.get_artist_location">
+<tt class="descname">get_artist_location</tt><big>(</big><em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.song.Song.get_artist_location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the location of a song&#8217;s artist.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</dd>
+<dt>Returns:</dt>
+<dd>An artist location object.</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">Song</span><span class="p">(</span><span class="s">&#39;SOQKVPH12A58A7AF4D&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">artist_location</span>
+<span class="go">{u&#39;latitude&#39;: 34.053489999999996, u&#39;location&#39;: u&#39;Los Angeles, CA&#39;, u&#39;longitude&#39;: -118.24532000000001}</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.song.Song.get_audio_summary">
+<tt class="descname">get_audio_summary</tt><big>(</big><em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.song.Song.get_audio_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an audio summary of a song containing mode, tempo, key, duration, time signature, loudness, danceability, energy, and analysis_url.</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</dd>
+<dt>Returns:</dt>
+<dd>A dictionary containing mode, tempo, key, duration, time signature, loudness, danceability, energy and analysis_url keys.</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">Song</span><span class="p">(</span><span class="s">&#39;SOGNMKX12B0B806320&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">audio_summary</span>
+<span class="go">{u&#39;analysis_url&#39;: u&#39;https://echonest-analysis.s3.amazonaws.com:443/TR/TRCPUOG123E85891F2/3/full.json?Signature=wcML1ZKsl%2F2FU4k68euHJcF7Jbc%3D&amp;Expires=1287518562&amp;AWSAccessKeyId=AKIAIAFEHLM3KJ2XMHRA&#39;,</span>
+<span class="go"> u&#39;danceability&#39;: 0.20964757782725996,</span>
+<span class="go"> u&#39;duration&#39;: 472.63301999999999,</span>
+<span class="go"> u&#39;energy&#39;: 0.64265230549809549,</span>
+<span class="go"> u&#39;key&#39;: 0,</span>
+<span class="go"> u&#39;loudness&#39;: -9.6820000000000004,</span>
+<span class="go"> u&#39;mode&#39;: 1,</span>
+<span class="go"> u&#39;tempo&#39;: 126.99299999999999,</span>
+<span class="go"> u&#39;time_signature&#39;: 4}</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.song.Song.get_song_hotttnesss">
+<tt class="descname">get_song_hotttnesss</tt><big>(</big><em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.song.Song.get_song_hotttnesss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get our numerical description of how hottt a song currently is</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</dd>
+<dt>Returns:</dt>
+<dd>A float representing hotttnesss.</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">Song</span><span class="p">(</span><span class="s">&#39;SOLUHKP129F0698D49&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">get_song_hotttnesss</span><span class="p">()</span>
+<span class="go">0.57344379999999995</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">song_hotttnesss</span>
+<span class="go">0.57344379999999995</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.song.Song.get_tracks">
+<tt class="descname">get_tracks</tt><big>(</big><em>catalog</em>, <em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.song.Song.get_tracks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the tracks for a song given a catalog.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>catalog (str): a string representing the catalog whose track you want to retrieve.</dd>
+<dt>Returns:</dt>
+<dd>A list of Track dicts.</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">Song</span><span class="p">(</span><span class="s">&#39;SOWDASQ12A6310F24F&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">get_tracks</span><span class="p">(</span><span class="s">&#39;7digital&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">{u&#39;catalog&#39;: u&#39;7digital&#39;,</span>
+<span class="go"> u&#39;foreign_id&#39;: u&#39;7digital:track:8445818&#39;,</span>
+<span class="go"> u&#39;id&#39;: u&#39;TRJGNNY12903CC625C&#39;,</span>
+<span class="go"> u&#39;preview_url&#39;: u&#39;http://previews.7digital.com/clips/34/8445818.clip.mp3&#39;,</span>
+<span class="go"> u&#39;release_image&#39;: u&#39;http://cdn.7static.com/static/img/sleeveart/00/007/628/0000762838_200.jpg&#39;}</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pyechonest.song.identify">
+<em class="property">static </em><tt class="descclassname">song.</tt><tt class="descname">identify</tt><big>(</big><em>filename=None</em>, <em>query_obj=None</em>, <em>code=None</em>, <em>artist=None</em>, <em>title=None</em>, <em>release=None</em>, <em>duration=None</em>, <em>genre=None</em>, <em>buckets=None</em>, <em>codegen_start=0</em>, <em>codegen_duration=30</em><big>)</big><a class="headerlink" href="#pyechonest.song.identify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identify a song.</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">filename (str): The path of the file you want to analyze (requires codegen binary!)</p>
+<p>query_obj (dict or list): A dict or list of dicts containing a &#8216;code&#8217; element with an fp code</p>
+<p>code (str): A fingerprinter code</p>
+<p>artist (str): An artist name</p>
+<p>title (str): A song title</p>
+<p>release (str): A release name</p>
+<p>duration (int): A song duration</p>
+<p>genre (str): A string representing the genre</p>
+<p>buckets (list): A list of strings specifying which buckets to retrieve</p>
+<p>codegen_start (int): The point (in seconds) where the codegen should start</p>
+<p class="last">codegen_duration (int): The duration (in seconds) the codegen should analyze</p>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">qo</span>
+<span class="go">{&#39;code&#39;: &#39;eJxlldehHSEMRFsChAjlAIL-S_CZvfaXXxAglEaBTen300Qu__lAyoJYhVQdXTvXrmvXdTsKZOqoU1q63QNydBGfOd1cGX3scpb1jEiWRLaPcJureC6RVkXE69jL8pGHjpP48pLI1m7r9oiEyBXvoVv45Q-5IhylYLkIRxGO4rp18ZpEOmpFPopwfJjL0u3WceO3HB1DIvJRnkQeO1PCLIsIjBWEzYaShq4pV9Z0KzDiQ8SbSNuSyBZPOOxIJKR7dauEmXwotxDCqllEAVZlrX6F8Y-IJ0e169i_HQaqslaVtTq1W-1vKeupImzrxWWVI5cPlw-XDxckN-3kyeXDm3jKmqv6PtB1gfH1Eey5qu8qvAuMC4zLfPv1l3aqviylJhytFhF0mzqs6aYpYU04mlqgKWtNjppwNKWubR2FowlHUws0gWmPi668dSHq6rOuPuhqgRcVKKM8s-fZS937nBe23iz3Uctx9607z-kLph1i8YZ8f_TfzLXseBh7nXy9nn1YBAg4Nwjp4AzTL23M_U3Rh0-sdDFtyspNOb1bYeZZqz2Y6TaHmXeuNmfFdTueLuvdsbOU9luvtIkl4vI5F_92PVprM1-sdJ_o9_Guc0b_WimpD_Rt1DFg0sY3wyw08e6jlqhjH3o76naYvzWqhX9rOv15Y7Ww_MIF8dXzw30s_uHO5PPDfUonnzq_NJ8J93mngAkIz5jA29SqxGwwvxQsih-sozX0zVk__RFaf_qyG9hb8dktZZXd4a8-1ljB-c5bllXOe1HqHplzeiN4E7q9ZRdmJuI73gBEJ_HcAxUm74PAVDNL47D6OAfzTHI0mHpXAmY60QNmlqjDfIPzwUDYhVnoXqtvZGrBdMi3ClQUQ8D8rX_1JE_In94CBXER4lrrw0H867ei8x-OVz8c-Osh5plzTOySpKIROmFkbn5xVuK784vTyPpS3OlcSjHpL16saZnm4Bk66hte9sd80Dcj02f7xDVrExjk32cssKXjmflU_SxXmn4Y9Ttued10YM552h5Wtt_WeVR4U6LPWfbIdW31J4JOXnpn4qhH7yE_pdBH9E_sMwbNFr0z0IW5NA8aOZhLmOh3zSVNRZwxiZc5pb8fikGzIf-ampJnCSb3r-ZPfjPuvLm7CY_Vfa_k7SCzdwHNg5mICTSHDxyBWmaOSyLQpPmCSXyF-eL7MHo7zNd668JMb_N-AJJRuMwrX0jNx7a8-Rj5oN6nyWoL-jRv4pu7Ue821TzU3MhvpD9Fo-XI&#39;,</span>
+<span class="go"> &#39;code_count&#39;: 151,</span>
+<span class="go"> &#39;low_rank&#39;: 0,</span>
+<span class="go"> &#39;metadata&#39;: {&#39;artist&#39;: &#39;Harmonic 313&#39;,</span>
+<span class="go">              &#39;bitrate&#39;: 198,</span>
+<span class="go">              &#39;codegen_time&#39;: 0.57198400000000005,</span>
+<span class="go">              &#39;decode_time&#39;: 0.37954599999999999,</span>
+<span class="go">              &#39;duration&#39;: 226,</span>
+<span class="go">              &#39;filename&#39;: &#39;koln.mp3&#39;,</span>
+<span class="go">              &#39;genre&#39;: &#39;Electronic&#39;,</span>
+<span class="go">              &#39;given_duration&#39;: 30,</span>
+<span class="go">              &#39;release&#39;: &#39;When Machines Exceed Human Intelligence&#39;,</span>
+<span class="go">              &#39;sample_rate&#39;: 44100,</span>
+<span class="go">              &#39;samples_decoded&#39;: 661816,</span>
+<span class="go">              &#39;start_offset&#39;: 0,</span>
+<span class="go">              &#39;title&#39;: &#39;kln&#39;,</span>
+<span class="go">              &#39;version&#39;: 3.1499999999999999},</span>
+<span class="go"> &#39;tag&#39;: 0}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">song</span><span class="o">.</span><span class="n">identify</span><span class="p">(</span><span class="n">query_obj</span><span class="o">=</span><span class="n">qo</span><span class="p">)</span>
+<span class="go">[&lt;song - Köln&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pyechonest.song.search">
+<em class="property">static </em><tt class="descclassname">song.</tt><tt class="descname">search</tt><big>(</big><em>title=None</em>, <em>artist=None</em>, <em>artist_id=None</em>, <em>combined=None</em>, <em>description=None</em>, <em>results=None</em>, <em>start=None</em>, <em>max_tempo=None</em>, <em>min_tempo=None</em>, <em>max_duration=None</em>, <em>min_duration=None</em>, <em>max_loudness=None</em>, <em>min_loudness=None</em>, <em>artist_max_familiarity=None</em>, <em>artist_min_familiarity=None</em>, <em>artist_max_hotttnesss=None</em>, <em>artist_min_hotttnesss=None</em>, <em>song_max_hotttnesss=None</em>, <em>song_min_hotttnesss=None</em>, <em>mode=None</em>, <em>min_energy=None</em>, <em>max_energy=None</em>, <em>min_danceability=None</em>, <em>max_danceability=None</em>, <em>key=None</em>, <em>max_latitude=None</em>, <em>min_latitude=None</em>, <em>max_longitude=None</em>, <em>min_longitude=None</em>, <em>sort=None</em>, <em>buckets=None</em>, <em>limit=False</em><big>)</big><a class="headerlink" href="#pyechonest.song.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for songs by name, description, or constraint.</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">title (str): the name of a song</p>
+<p>artist (str): the name of an artist</p>
+<p>artist_id (str): the artist_id</p>
+<p>combined (str): the artist name and song title</p>
+<p>description (str): A string describing the artist and song</p>
+<p>results (int): An integer number of results to return</p>
+<p>max_tempo (float): The max tempo of song results</p>
+<p>min_tempo (float): The min tempo of song results</p>
+<p>max_duration (float): The max duration of song results</p>
+<p>min_duration (float): The min duration of song results</p>
+<p>max_loudness (float): The max loudness of song results</p>
+<p>min_loudness (float): The min loudness of song results</p>
+<p>artist_max_familiarity (float): A float specifying the max familiarity of artists to search for</p>
+<p>artist_min_familiarity (float): A float specifying the min familiarity of artists to search for</p>
+<p>artist_max_hotttnesss (float): A float specifying the max hotttnesss of artists to search for</p>
+<p>artist_min_hotttnesss (float): A float specifying the max hotttnesss of artists to search for</p>
+<p>song_max_hotttnesss (float): A float specifying the max hotttnesss of songs to search for</p>
+<p>song_min_hotttnesss (float): A float specifying the max hotttnesss of songs to search for</p>
+<p>max_energy (float): The max energy of song results</p>
+<p>min_energy (float): The min energy of song results</p>
+<p>max_dancibility (float): The max dancibility of song results</p>
+<p>min_dancibility (float): The min dancibility of song results</p>
+<p>mode (int): 0 or 1 (minor or major)</p>
+<p>key (int): 0-11 (c, c-sharp, d, e-flat, e, f, f-sharp, g, a-flat, a, b-flat, b)</p>
+<p>max_latitude (float): A float specifying the max latitude of artists to search for</p>
+<p>min_latitude (float): A float specifying the min latitude of artists to search for</p>
+<p>max_longitude (float): A float specifying the max longitude of artists to search for</p>
+<p>min_longitude (float): A float specifying the min longitude of artists to search for</p>
+<p>sort (str): A string indicating an attribute and order for sorting the results</p>
+<p>buckets (list): A list of strings specifying which buckets to retrieve</p>
+<p class="last">limit (bool): A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets</p>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of Song objects</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">artist</span><span class="o">=</span><span class="s">&#39;shakira&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&#39;she wolf&#39;</span><span class="p">,</span> <span class="n">buckets</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;id:7digital&#39;</span><span class="p">,</span> <span class="s">&#39;tracks&#39;</span><span class="p">],</span> <span class="n">limit</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">results</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span>
+<span class="go">[&lt;song - She Wolf&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_tracks</span><span class="p">(</span><span class="s">&#39;7digital&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">{u&#39;catalog&#39;: u&#39;7digital&#39;,</span>
+<span class="go"> u&#39;foreign_id&#39;: u&#39;7digital:track:7854109&#39;,</span>
+<span class="go"> u&#39;id&#39;: u&#39;TRTOBSE12903CACEC4&#39;,</span>
+<span class="go"> u&#39;preview_url&#39;: u&#39;http://previews.7digital.com/clips/34/7854109.clip.mp3&#39;,</span>
+<span class="go"> u&#39;release_image&#39;: u&#39;http://cdn.7static.com/static/img/sleeveart/00/007/081/0000708184_200.jpg&#39;}</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pyechonest.song.profile">
+<em class="property">static </em><tt class="descclassname">song.</tt><tt class="descname">profile</tt><big>(</big><em>ids</em>, <em>buckets=None</em>, <em>limit=False</em><big>)</big><a class="headerlink" href="#pyechonest.song.profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the profiles for multiple songs at once</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>ids (str or list): a song ID or list of song IDs</dd>
+<dt>Kwargs:</dt>
+<dd><p class="first">buckets (list): A list of strings specifying which buckets to retrieve</p>
+<p class="last">limit (bool): A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets</p>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of term document dicts</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">song_ids</span> <span class="o">=</span> <span class="p">[</span><span class="s">u&#39;SOGNMKX12B0B806320&#39;</span><span class="p">,</span> <span class="s">u&#39;SOLUHKP129F0698D49&#39;</span><span class="p">,</span> <span class="s">u&#39;SOOLGAZ127F3E1B87C&#39;</span><span class="p">,</span> <span class="s">u&#39;SOQKVPH12A58A7AF4D&#39;</span><span class="p">,</span> <span class="s">u&#39;SOHKEEM1288D3ED9F5&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">songs</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">profile</span><span class="p">(</span><span class="n">song_ids</span><span class="p">,</span> <span class="n">buckets</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;audio_summary&#39;</span><span class="p">])</span>
+<span class="go">[&lt;song - chickfactor&gt;,</span>
+<span class="go"> &lt;song - One Step Closer&gt;,</span>
+<span class="go"> &lt;song - And I Am Telling You I&#39;m Not Going (Glee Cast Version)&gt;,</span>
+<span class="go"> &lt;song - In This Temple As In The Hearts Of Man For Whom He Saved The Earth&gt;,</span>
+<span class="go"> &lt;song - Octet&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">songs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">audio_summary</span>
+<span class="go">{u&#39;analysis_url&#39;: u&#39;https://echonest-analysis.s3.amazonaws.com:443/TR/TRKHTDL123E858AC4B/3/full.json?Signature=sE6OwAzg6UvrtiX6nJJW1t7E6YI%3D&amp;Expires=1287585351&amp;AWSAccessKeyId=AKIAIAFEHLM3KJ2XMHRA&#39;,</span>
+<span class="go"> u&#39;danceability&#39;: None,</span>
+<span class="go"> u&#39;duration&#39;: 211.90485000000001,</span>
+<span class="go"> u&#39;energy&#39;: None,</span>
+<span class="go"> u&#39;key&#39;: 7,</span>
+<span class="go"> u&#39;loudness&#39;: -16.736999999999998,</span>
+<span class="go"> u&#39;mode&#39;: 1,</span>
+<span class="go"> u&#39;tempo&#39;: 94.957999999999998,</span>
+<span class="go"> u&#39;time_signature&#39;: 4}</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="artist.html"
+                        title="previous chapter">Artist &#8211; artist methods</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="track.html"
+                        title="next chapter">Track &#8211; track methods</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/song.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="track.html" title="Track – track methods"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="artist.html" title="Artist – artist methods"
+             >previous</a> |</li>
+        <li><a href="index.html">pyechonest v4 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, The Echo Nest.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
+    </div>
+  </body>
+</html>

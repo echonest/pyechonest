@@ -19,11 +19,6 @@ import os
 import subprocess
 import traceback
 from types import StringType, UnicodeType
-from hashlib import md5
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
 
 try:
     import json
@@ -121,6 +116,9 @@ def codegen(filename, start=0, duration=30):
         else:
             cmd = "codegen.windows.exe"
 
+    if not os.path.exists(cmd):
+        raise Exception("Codegen binary not found.")
+
     command = cmd + " \"" + filename + "\" " 
     if start >= 0:
         command = command + str(start) + " "
@@ -185,9 +183,16 @@ def callm(method, param_dict, POST=False, socket_timeout=None, data=None):
             """
             url = '/%s/%s/%s?%s' % (config.API_SELECTOR, config.API_VERSION, 
                                         method, params)
+
+            if ':' in config.API_HOST:
+                host, port = config.API_HOST.split(':')
+            else:
+                host = config.API_HOST
+                port = 80
+                
             if config.TRACE_API_CALLS:
-                logger.info("%s/%s" % (config.API_HOST, url,))
-            conn = httplib.HTTPConnection(config.API_HOST, port = 80)
+                logger.info("%s/%s" % (host+':'+str(port), url,))
+            conn = httplib.HTTPConnection(host, port = port)
             conn.request('POST', url, body = data, headers = dict([('Content-Type', 'application/octet-stream')]+headers))
             f = conn.getresponse()
 
@@ -215,7 +220,7 @@ def postChunked(host, selector, fields, files):
     Uses the urllib2_file.py originally from 
     http://fabien.seisen.org which was also drawn heavily from 
     http://code.activestate.com/recipes/146306/ .
-
+    
     This urllib2_file.py is more desirable because of the chunked 
     uploading from a file pointer (no need to read entire file into 
     memory) and the ability to work from behind a proxy (due to its 
@@ -228,47 +233,9 @@ def postChunked(host, selector, fields, files):
     [fp.close() for (key, fp) in files]
     return result
 
-class attrdict(dict):
-    def __init__(self, *args, **kwargs):
-        dict.__init__(self, *args, **kwargs)
-        self.__dict__ = self
 
-class memoize(object):
-    """
-        Caches the result of a class method inside the instance.
-        big ups to: http://eoyilmaz.blogspot.com/2009/09/python-function-decorators-caching.html
-    """
-    def __init__(self, method):        
-        if not isinstance( method, property ):
-            self._method = method
-            self._name = method.__name__
-            self._isProperty = False
-        else:
-            self._method = method.fget
-            self._name = method.fget.__name__
-            self._isProperty = True
-        self._obj = None
-
-    def __get__(self, inst, cls):
-        self._obj = inst
-        if self._isProperty:
-            return self.__call__()
-        else:
-            return self
-
-    def __call__(self, *args, **kwargs):
-        print 'args: %s, kwargs %s' % (args, kwargs)
-        key = self._name+md5(pickle.dumps(args, 2)).hexdigest()+md5(pickle.dumps(kwargs, 2)).hexdigest()
-        print 'key is: %s' % (key,)
-        # call the function and store the result as a cache
-        if not hasattr(self._obj, key) or getattr(self._obj, key ) == None:
-            data = self._method(self._obj, *args, **kwargs )
-            setattr( self._obj, key, data )
-
-        return getattr( self._obj, key )
-
-    def __repr__(self):
-        """Return the function's representation
-        """
-        return self._obj.__repr__()
+def fix(x):
+    # we need this to fix up all the dict keys to be strings, not unicode objects
+    assert(isinstance(x,dict))
+    return dict((str(k), v) for (k,v) in x.iteritems())
 

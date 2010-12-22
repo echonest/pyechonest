@@ -4,6 +4,7 @@ try:
 except ImportError:
     import simplejson as json
 
+import hashlib
 from proxies import TrackProxy
 import util
 
@@ -13,69 +14,82 @@ class Track(TrackProxy):
 
     All methods in this module return Track objects.
 
-    The track object will have the following properties:
-    
+    Attributes:
 
-    **analysis_channels**       int: the number of audio channels used during analysis
+        analysis_channels       int: the number of audio channels used during analysis
     
-    **analysis_sample_rate**    float: the sample rate used during analysis
+        analysis_sample_rate    float: the sample rate used during analysis
     
-    **analyzer_version**        str: ex. '3.01a'
+        analyzer_version        str: e.g. '3.01a'
     
-    **artist**                  str or None: artist name
+        artist                  str or None: artist name
     
-    **bars**                    list of dicts: timing of each measure
+        bars                    list of dicts: timing of each measure
     
-    **beats**                   list of dicts: timing of each beat
+        beats                   list of dicts: timing of each beat
     
-    **bitrate**                 int: the bitrate of the input mp3 (or other file)
+        bitrate                 int: the bitrate of the input mp3 (or other file)
+        
+        danceability            float: relative danceability (0 to 1)
     
-    **duration**                float: length of track in seconds
+        duration                float: length of track in seconds
+        
+        energy                  float: relative energy (0 to 1)
     
-    **end_of_fade_in**          float: time in seconds track where fade-in ends
+        end_of_fade_in          float: time in seconds track where fade-in ends
     
-    **id**                      str: Echo Nest Track ID, ex. 'TRTOBXJ1296BCDA33B'
+        id                      str: Echo Nest Track ID, e.g. 'TRTOBXJ1296BCDA33B'
     
-    **key**                     int: between 0 (key of C) and 11 (key of B flat) inclusive
+        key                     int: between 0 (key of C) and 11 (key of B flat) inclusive
     
-    **key_confidence**          float: confidence that key detection was accurate
+        key_confidence          float: confidence that key detection was accurate
     
-    **loudness**                float: overall loudness in decibels (dB)
+        loudness                float: overall loudness in decibels (dB)
     
-    **md5**                     str: 32-character checksum of the input mp3
+        md5                     str: 32-character checksum of the input mp3
     
-    **meta**                    dict: other track metainfo
+        meta                    dict: other track metainfo
     
-    **mode**                    int: 0 (major) or 1 (minor)
+        mode                    int: 0 (major) or 1 (minor)
     
-    **mode_confidence**         float: confidence that mode detection was accurate
+        mode_confidence         float: confidence that mode detection was accurate
     
-    **num_samples**             int: total samples in the decoded track
+        num_samples             int: total samples in the decoded track
     
-    **release**                 str or None: the album name
+        release                 str or None: the album name
     
-    **sample_md5**              str: 32-character checksum of the decoded audio file
+        sample_md5              str: 32-character checksum of the decoded audio file
     
-    **samplerate**              int: sample rate of input mp3
+        samplerate              int: sample rate of input mp3
     
-    **sections**                list of dicts: larger sections of song (chorus, bridge, solo, etc.)
+        sections                list of dicts: larger sections of song (chorus, bridge, solo, etc.)
     
-    **segments**                list of dicts: timing, pitch, loudness and timbre for each segment
+        segments                list of dicts: timing, pitch, loudness and timbre for each segment
     
-    **start_of_fade_out**       float: time in seconds where fade out begins
+        start_of_fade_out       float: time in seconds where fade out begins
     
-    **status**                  str: analysis status, ex. 'complete', 'pending', 'error'
+        status                  str: analysis status, e.g. 'complete', 'pending', 'error'
     
-    **tatums**                  list of dicts: the smallest metrical unit (subdivision of a beat)
+        tatums                  list of dicts: the smallest metrical unit (subdivision of a beat)
     
-    **tempo**                   float: overall BPM (beats per minute)
+        tempo                   float: overall BPM (beats per minute)
     
-    **tempo_confidence**        float: confidence that tempo detection was accurate
+        tempo_confidence        float: confidence that tempo detection was accurate
     
-    **title**                   str: or None: song title
+        title                   str or None: song title
 
     Each bar, beat, section, segment and tatum has a start time, a duration, and a confidence,
-    in addition to whatever other data is given.    
+    in addition to whatever other data is given.
+    
+    Examples:
+    
+    >>> t = track.track_from_id('TRXXHTJ1294CD8F3B3')
+    >>> t
+    <track - Neverwas Restored (from Neverwas Soundtrack)>
+    >>> t = track.track_from_md5('b8abf85746ab3416adabca63141d8c2d')
+    >>> t
+    <track - Neverwas Restored (from Neverwas Soundtrack)>
+    >>> 
     """
 
     def __repr__(self):
@@ -109,13 +123,15 @@ def _track_from_response(response):
         identifier      = track.pop('id') 
         md5             = track.pop('md5', None) # tracks from song api calls will not have an md5
         audio_summary   = track.pop('audio_summary')
+        energy          = audio_summary.get('energy', 0)
+        danceability    = audio_summary.get('danceability', 0)
         json_url        = audio_summary['analysis_url']
         json_string     = urllib2.urlopen(json_url).read()
         analysis        = json.loads(json_string)
         nested_track    = analysis.pop('track')
         track.update(analysis)
         track.update(nested_track)
-        track.update({'analysis_url': json_url})
+        track.update({'analysis_url': json_url, 'energy': energy, 'danceability': danceability})
         return Track(identifier, md5, track)
 
 def _upload(param_dict, data = None):
@@ -158,7 +174,12 @@ def track_from_file(file_object, filetype):
         file_object: a file-like Python object
         filetype: the file type (ex. mp3, ogg, wav)
     """
-    return _track_from_string(file_object.read(), filetype)
+    try:
+        hash = hashlib.md5(file_object.read()).hexdigest()
+        return track_from_md5(hash)
+    except util.EchoNestAPIError:
+        file_object.seek(0)
+        return _track_from_string(file_object.read(), filetype)
 
 def track_from_filename(filename, filetype = None):
     """
@@ -169,7 +190,11 @@ def track_from_filename(filename, filetype = None):
         filetype: A string indicating the filetype; Defaults to None (type determined by file extension).
     """
     filetype = filetype or filename.split('.')[-1]
-    return track_from_file(open(filename, 'rb'), filetype)
+    try:
+        hash = hashlib.md5(open(filename, 'rb').read()).hexdigest()
+        return track_from_md5(hash)
+    except util.EchoNestAPIError:
+        return track_from_file(open(filename, 'rb'), filetype)
 
 def track_from_url(url):
     """
