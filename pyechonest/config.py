@@ -18,7 +18,7 @@ else:
     ECHO_NEST_API_KEY = None
 
 
-API_HOST = 'bleeding-edge.sandpit.us'
+API_HOST = 'developer.echonest.com'
 
 API_SELECTOR = 'api'
 "Locations for the Analyze API calls."
