@@ -1,0 +1,471 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module pyechonest.playlist</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="pyechonest.html"><font color="#ffffff">pyechonest</font></a>.playlist</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="http://pyechonest.googlecode.com/svn/trunk/doc/playlist.py">http://pyechonest.googlecode.com/svn/trunk/doc/playlist.py</a></font></td></tr></table>
+    <p><tt>Copyright&nbsp;(c)&nbsp;2010&nbsp;The&nbsp;Echo&nbsp;Nest.&nbsp;All&nbsp;rights&nbsp;reserved.<br>
+Created&nbsp;by&nbsp;Tyler&nbsp;Williams&nbsp;on&nbsp;2010-04-25.<br>
+&nbsp;<br>
+The&nbsp;<a href="#Playlist">Playlist</a>&nbsp;module&nbsp;loosely&nbsp;covers&nbsp;<a href="http://developer.echonest.com/docs/v4/playlist.html">http://developer.echonest.com/docs/v4/playlist.html</a><br>
+Refer&nbsp;to&nbsp;the&nbsp;official&nbsp;api&nbsp;documentation&nbsp;if&nbsp;you&nbsp;are&nbsp;unsure&nbsp;about&nbsp;something.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="pyechonest.catalog.html">pyechonest.catalog</a><br>
+</td><td width="25%" valign=top><a href="pyechonest.util.html">pyechonest.util</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="pyechonest.proxies.html#PlaylistProxy">pyechonest.proxies.PlaylistProxy</a>(<a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="pyechonest.playlist.html#Playlist">Playlist</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Playlist">class <strong>Playlist</strong></a>(<a href="pyechonest.proxies.html#PlaylistProxy">pyechonest.proxies.PlaylistProxy</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;Dynamic&nbsp;<a href="#Playlist">Playlist</a>&nbsp;object<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;session_id:&nbsp;<a href="#Playlist">Playlist</a>&nbsp;Session&nbsp;ID<br>
+&nbsp;&nbsp;&nbsp;&nbsp;song:&nbsp;The&nbsp;current&nbsp;song<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;p&nbsp;=&nbsp;<a href="#Playlist">Playlist</a>(type='artist-radio',&nbsp;artist=['ida&nbsp;maria',&nbsp;'florence&nbsp;+&nbsp;the&nbsp;machine'])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;p<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;Dynamic&nbsp;<a href="#Playlist">Playlist</a>&nbsp;-&nbsp;9c210205d4784144b4fa90770fa55d0b&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;p.song<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;song&nbsp;-&nbsp;Later&nbsp;On&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;p.<a href="#Playlist-get_next_song">get_next_song</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;song&nbsp;-&nbsp;Overall&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="pyechonest.playlist.html#Playlist">Playlist</a></dd>
+<dd><a href="pyechonest.proxies.html#PlaylistProxy">pyechonest.proxies.PlaylistProxy</a></dd>
+<dd><a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Playlist-__init__"><strong>__init__</strong></a>(self, session_id<font color="#909090">=None</font>, type<font color="#909090">='artist'</font>, artist_pick<font color="#909090">='song_hotttnesss-desc'</font>, variety<font color="#909090">=0.5</font>, artist_id<font color="#909090">=None</font>, artist<font color="#909090">=None</font>, song_id<font color="#909090">=None</font>, description<font color="#909090">=None</font>, max_tempo<font color="#909090">=None</font>, min_tempo<font color="#909090">=None</font>, max_duration<font color="#909090">=None</font>, min_duration<font color="#909090">=None</font>, max_loudness<font color="#909090">=None</font>, min_loudness<font color="#909090">=None</font>, max_danceability<font color="#909090">=None</font>, min_danceability<font color="#909090">=None</font>, max_energy<font color="#909090">=None</font>, min_energy<font color="#909090">=None</font>, artist_max_familiarity<font color="#909090">=None</font>, artist_min_familiarity<font color="#909090">=None</font>, artist_max_hotttnesss<font color="#909090">=None</font>, artist_min_hotttnesss<font color="#909090">=None</font>, song_max_hotttnesss<font color="#909090">=None</font>, song_min_hotttnesss<font color="#909090">=None</font>, min_longitude<font color="#909090">=None</font>, max_longitude<font color="#909090">=None</font>, min_latitude<font color="#909090">=None</font>, max_latitude<font color="#909090">=None</font>, mode<font color="#909090">=None</font>, key<font color="#909090">=None</font>, buckets<font color="#909090">=[]</font>, sort<font color="#909090">=None</font>, limit<font color="#909090">=False</font>, dmca<font color="#909090">=False</font>, audio<font color="#909090">=False</font>, chain_xspf<font color="#909090">=False</font>, seed_catalog<font color="#909090">=None</font>, steer<font color="#909090">=None</font>, source_catalog<font color="#909090">=None</font>, steer_description<font color="#909090">=None</font>)</dt><dd><tt>Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;(str):&nbsp;a&nbsp;string&nbsp;representing&nbsp;the&nbsp;playlist&nbsp;type&nbsp;('artist',&nbsp;'artist-radio',&nbsp;...)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_pick&nbsp;(str):&nbsp;How&nbsp;songs&nbsp;should&nbsp;be&nbsp;chosen&nbsp;for&nbsp;each&nbsp;artist<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;variety&nbsp;(float):&nbsp;A&nbsp;number&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;specifying&nbsp;the&nbsp;variety&nbsp;of&nbsp;the&nbsp;playlist<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_id&nbsp;(str):&nbsp;the&nbsp;artist_id<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist&nbsp;(str):&nbsp;the&nbsp;name&nbsp;of&nbsp;an&nbsp;artist<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;song_id&nbsp;(str):&nbsp;the&nbsp;song_id<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;description&nbsp;(str):&nbsp;A&nbsp;string&nbsp;describing&nbsp;the&nbsp;artist&nbsp;and&nbsp;song<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_tempo&nbsp;(float):&nbsp;The&nbsp;max&nbsp;tempo&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_tempo&nbsp;(float):&nbsp;The&nbsp;min&nbsp;tempo&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_duration&nbsp;(float):&nbsp;The&nbsp;max&nbsp;duration&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_duration&nbsp;(float):&nbsp;The&nbsp;min&nbsp;duration&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_loudness&nbsp;(float):&nbsp;The&nbsp;max&nbsp;loudness&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_loudness&nbsp;(float):&nbsp;The&nbsp;min&nbsp;loudness&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_max_familiarity&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;familiarity&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_min_familiarity&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;min&nbsp;familiarity&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_max_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_min_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;song_max_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;songs&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;song_min_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;songs&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_energy&nbsp;(float):&nbsp;The&nbsp;max&nbsp;energy&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_energy&nbsp;(float):&nbsp;The&nbsp;min&nbsp;energy&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_dancibility&nbsp;(float):&nbsp;The&nbsp;max&nbsp;dancibility&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_dancibility&nbsp;(float):&nbsp;The&nbsp;min&nbsp;dancibility&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mode&nbsp;(int):&nbsp;0&nbsp;or&nbsp;1&nbsp;(minor&nbsp;or&nbsp;major)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;key&nbsp;(int):&nbsp;0-11&nbsp;(c,&nbsp;c-sharp,&nbsp;d,&nbsp;e-flat,&nbsp;e,&nbsp;f,&nbsp;f-sharp,&nbsp;g,&nbsp;a-flat,&nbsp;a,&nbsp;b-flat,&nbsp;b)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_latitude&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;latitude&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_latitude&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;min&nbsp;latitude&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_longitude&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;longitude&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_longitude&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;min&nbsp;longitude&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sort&nbsp;(str):&nbsp;A&nbsp;string&nbsp;indicating&nbsp;an&nbsp;attribute&nbsp;and&nbsp;order&nbsp;for&nbsp;sorting&nbsp;the&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;buckets&nbsp;(list):&nbsp;A&nbsp;list&nbsp;of&nbsp;strings&nbsp;specifying&nbsp;which&nbsp;buckets&nbsp;to&nbsp;retrieve<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;limit&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;to&nbsp;limit&nbsp;the&nbsp;results&nbsp;to&nbsp;one&nbsp;of&nbsp;the&nbsp;id&nbsp;spaces&nbsp;specified&nbsp;in&nbsp;buckets<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;seed_catalog&nbsp;(str&nbsp;or&nbsp;Catalog):&nbsp;A&nbsp;Catalog&nbsp;object&nbsp;or&nbsp;catalog&nbsp;id&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;seed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;source_catalog&nbsp;(str&nbsp;or&nbsp;Catalog):&nbsp;A&nbsp;Catalog&nbsp;object&nbsp;or&nbsp;catalog&nbsp;id<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;steer&nbsp;(str):&nbsp;A&nbsp;steering&nbsp;value&nbsp;to&nbsp;determine&nbsp;the&nbsp;target&nbsp;song&nbsp;attributes<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;steer_description&nbsp;(str):&nbsp;A&nbsp;steering&nbsp;value&nbsp;to&nbsp;determine&nbsp;the&nbsp;target&nbsp;song&nbsp;description&nbsp;term&nbsp;attributes<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dynamic&nbsp;playlist&nbsp;object</tt></dd></dl>
+
+<dl><dt><a name="Playlist-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Playlist-get_current_song"><strong>get_current_song</strong></a>(self)</dt><dd><tt>Get&nbsp;the&nbsp;current&nbsp;song&nbsp;in&nbsp;the&nbsp;playlist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;song&nbsp;object<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;p&nbsp;=&nbsp;playlist.<a href="#Playlist">Playlist</a>(type='artist-radio',&nbsp;artist=['ida&nbsp;maria',&nbsp;'florence&nbsp;+&nbsp;the&nbsp;machine'])<br>
+&gt;&gt;&gt;&nbsp;p.song<br>
+&lt;song&nbsp;-&nbsp;Later&nbsp;On&gt;<br>
+&gt;&gt;&gt;&nbsp;p.<a href="#Playlist-get_current_song">get_current_song</a>()<br>
+&lt;song&nbsp;-&nbsp;Later&nbsp;On&gt;<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Playlist-get_next_song"><strong>get_next_song</strong></a>(self, **kwargs)</dt><dd><tt>Get&nbsp;the&nbsp;next&nbsp;song&nbsp;in&nbsp;the&nbsp;playlist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;song&nbsp;object<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;p&nbsp;=&nbsp;playlist.<a href="#Playlist">Playlist</a>(type='artist-radio',&nbsp;artist=['ida&nbsp;maria',&nbsp;'florence&nbsp;+&nbsp;the&nbsp;machine'])<br>
+&gt;&gt;&gt;&nbsp;p.<a href="#Playlist-get_next_song">get_next_song</a>()<br>
+&lt;song&nbsp;-&nbsp;She&nbsp;Said&gt;<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Playlist-session_info"><strong>session_info</strong></a>(self)</dt><dd><tt>Get&nbsp;information&nbsp;about&nbsp;the&nbsp;playlist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dict&nbsp;with&nbsp;diagnostic&nbsp;information&nbsp;about&nbsp;the&nbsp;currently&nbsp;running&nbsp;playlist<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;p&nbsp;=&nbsp;playlist.<a href="#Playlist">Playlist</a>(type='artist-radio',&nbsp;artist=['ida&nbsp;maria',&nbsp;'florence&nbsp;+&nbsp;the&nbsp;machine'])<br>
+&gt;&gt;&gt;&nbsp;p.info<br>
+&nbsp;<br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'terms':&nbsp;[{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'frequency':&nbsp;1.0,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'name':&nbsp;u&nbsp;'rock'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'frequency':&nbsp;0.99646542152360207,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'name':&nbsp;u&nbsp;'pop'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'frequency':&nbsp;0.90801905502131963,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'name':&nbsp;u&nbsp;'indie'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'frequency':&nbsp;0.90586455490260576,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'name':&nbsp;u&nbsp;'indie&nbsp;rock'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'frequency':&nbsp;0.8968907243373172,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'name':&nbsp;u&nbsp;'alternative'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[...]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'frequency':&nbsp;0.052197425644931635,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'name':&nbsp;u&nbsp;'easy&nbsp;listening'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'description':&nbsp;[],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'seed_songs':&nbsp;[],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'banned_artists':&nbsp;[],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'rules':&nbsp;[{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'rule':&nbsp;u&nbsp;"Don't&nbsp;put&nbsp;two&nbsp;copies&nbsp;of&nbsp;the&nbsp;same&nbsp;song&nbsp;in&nbsp;a&nbsp;playlist."<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'rule':&nbsp;u&nbsp;'Give&nbsp;preference&nbsp;to&nbsp;artists&nbsp;that&nbsp;are&nbsp;not&nbsp;already&nbsp;in&nbsp;the&nbsp;playlist'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'session_id':&nbsp;u&nbsp;'9c1893e6ace04c8f9ce745f38b35ff95',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'seeds':&nbsp;[u&nbsp;'ARI4XHX1187B9A1216',&nbsp;u&nbsp;'ARNCHOP121318C56B8'],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'skipped_songs':&nbsp;[],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'banned_songs':&nbsp;[],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'playlist_type':&nbsp;u&nbsp;'artist-radio',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'seed_catalogs':&nbsp;[],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'rated_songs':&nbsp;[],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'history':&nbsp;[{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'artist_id':&nbsp;u&nbsp;'ARN6QMG1187FB56C8D',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'artist_name':&nbsp;u&nbsp;'Laura&nbsp;Marling',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'id':&nbsp;u&nbsp;'SOMSHNP12AB018513F',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'served_time':&nbsp;1291412277.204201,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'title':&nbsp;u&nbsp;'Hope&nbsp;In&nbsp;The&nbsp;Air'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}]<br>
+}<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;p.<a href="#Playlist-session_info">session_info</a>()<br>
+(same&nbsp;result&nbsp;as&nbsp;above)<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>info</strong></dt>
+<dd><tt>Get&nbsp;information&nbsp;about&nbsp;the&nbsp;playlist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dict&nbsp;with&nbsp;diagnostic&nbsp;information&nbsp;about&nbsp;the&nbsp;currently&nbsp;running&nbsp;playlist<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;p&nbsp;=&nbsp;playlist.Playlist(type='artist-radio',&nbsp;artist=['ida&nbsp;maria',&nbsp;'florence&nbsp;+&nbsp;the&nbsp;machine'])<br>
+&gt;&gt;&gt;&nbsp;p.info<br>
+&nbsp;<br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'terms':&nbsp;[{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'frequency':&nbsp;1.0,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'name':&nbsp;u&nbsp;'rock'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'frequency':&nbsp;0.99646542152360207,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'name':&nbsp;u&nbsp;'pop'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'frequency':&nbsp;0.90801905502131963,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'name':&nbsp;u&nbsp;'indie'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'frequency':&nbsp;0.90586455490260576,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'name':&nbsp;u&nbsp;'indie&nbsp;rock'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'frequency':&nbsp;0.8968907243373172,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'name':&nbsp;u&nbsp;'alternative'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[...]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'frequency':&nbsp;0.052197425644931635,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'name':&nbsp;u&nbsp;'easy&nbsp;listening'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'description':&nbsp;[],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'seed_songs':&nbsp;[],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'banned_artists':&nbsp;[],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'rules':&nbsp;[{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'rule':&nbsp;u&nbsp;"Don't&nbsp;put&nbsp;two&nbsp;copies&nbsp;of&nbsp;the&nbsp;same&nbsp;song&nbsp;in&nbsp;a&nbsp;playlist."<br>
+&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'rule':&nbsp;u&nbsp;'Give&nbsp;preference&nbsp;to&nbsp;artists&nbsp;that&nbsp;are&nbsp;not&nbsp;already&nbsp;in&nbsp;the&nbsp;playlist'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'session_id':&nbsp;u&nbsp;'9c1893e6ace04c8f9ce745f38b35ff95',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'seeds':&nbsp;[u&nbsp;'ARI4XHX1187B9A1216',&nbsp;u&nbsp;'ARNCHOP121318C56B8'],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'skipped_songs':&nbsp;[],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'banned_songs':&nbsp;[],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'playlist_type':&nbsp;u&nbsp;'artist-radio',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'seed_catalogs':&nbsp;[],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'rated_songs':&nbsp;[],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'history':&nbsp;[{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'artist_id':&nbsp;u&nbsp;'ARN6QMG1187FB56C8D',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'artist_name':&nbsp;u&nbsp;'Laura&nbsp;Marling',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'id':&nbsp;u&nbsp;'SOMSHNP12AB018513F',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'served_time':&nbsp;1291412277.204201,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u&nbsp;'title':&nbsp;u&nbsp;'Hope&nbsp;In&nbsp;The&nbsp;Air'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}]<br>
+}<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;p.session_info()<br>
+(same&nbsp;result&nbsp;as&nbsp;above)<br>
+&gt;&gt;&gt;</tt></dd>
+</dl>
+<dl><dt><strong>song</strong></dt>
+<dd><tt>Get&nbsp;the&nbsp;current&nbsp;song&nbsp;in&nbsp;the&nbsp;playlist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;song&nbsp;object<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;p&nbsp;=&nbsp;playlist.Playlist(type='artist-radio',&nbsp;artist=['ida&nbsp;maria',&nbsp;'florence&nbsp;+&nbsp;the&nbsp;machine'])<br>
+&gt;&gt;&gt;&nbsp;p.song<br>
+&lt;song&nbsp;-&nbsp;Later&nbsp;On&gt;<br>
+&gt;&gt;&gt;&nbsp;p.get_current_song()<br>
+&lt;song&nbsp;-&nbsp;Later&nbsp;On&gt;<br>
+&gt;&gt;&gt;</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="pyechonest.proxies.html#PlaylistProxy">pyechonest.proxies.PlaylistProxy</a>:<br>
+<dl><dt><a name="Playlist-get_attribute"><strong>get_attribute</strong></a>(self, *args, **kwargs)</dt></dl>
+
+<hr>
+Methods inherited from <a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a>:<br>
+<dl><dt><a name="Playlist-post_attribute"><strong>post_attribute</strong></a>(self, method_name, **kwargs)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-static"><strong>static</strong></a>(type<font color="#909090">='artist'</font>, artist_pick<font color="#909090">='song_hotttnesss-desc'</font>, variety<font color="#909090">=0.5</font>, artist_id<font color="#909090">=None</font>, artist<font color="#909090">=None</font>, song_id<font color="#909090">=None</font>, description<font color="#909090">=None</font>, results<font color="#909090">=15</font>, max_tempo<font color="#909090">=None</font>, min_tempo<font color="#909090">=None</font>, max_duration<font color="#909090">=None</font>, min_duration<font color="#909090">=None</font>, max_loudness<font color="#909090">=None</font>, min_loudness<font color="#909090">=None</font>, max_danceability<font color="#909090">=None</font>, min_danceability<font color="#909090">=None</font>, max_energy<font color="#909090">=None</font>, min_energy<font color="#909090">=None</font>, artist_max_familiarity<font color="#909090">=None</font>, artist_min_familiarity<font color="#909090">=None</font>, artist_max_hotttnesss<font color="#909090">=None</font>, artist_min_hotttnesss<font color="#909090">=None</font>, song_max_hotttnesss<font color="#909090">=None</font>, song_min_hotttnesss<font color="#909090">=None</font>, min_longitude<font color="#909090">=None</font>, max_longitude<font color="#909090">=None</font>, min_latitude<font color="#909090">=None</font>, max_latitude<font color="#909090">=None</font>, mode<font color="#909090">=None</font>, key<font color="#909090">=None</font>, buckets<font color="#909090">=[]</font>, sort<font color="#909090">=None</font>, limit<font color="#909090">=False</font>, seed_catalog<font color="#909090">=None</font>, source_catalog<font color="#909090">=None</font>)</dt><dd><tt>Get&nbsp;a&nbsp;static&nbsp;playlist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;(str):&nbsp;a&nbsp;string&nbsp;representing&nbsp;the&nbsp;playlist&nbsp;type&nbsp;('artist',&nbsp;'artist-radio',&nbsp;...)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_pick&nbsp;(str):&nbsp;How&nbsp;songs&nbsp;should&nbsp;be&nbsp;chosen&nbsp;for&nbsp;each&nbsp;artist<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;variety&nbsp;(float):&nbsp;A&nbsp;number&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;specifying&nbsp;the&nbsp;variety&nbsp;of&nbsp;the&nbsp;playlist<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_id&nbsp;(str):&nbsp;the&nbsp;artist_id<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist&nbsp;(str):&nbsp;the&nbsp;name&nbsp;of&nbsp;an&nbsp;artist<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;song_id&nbsp;(str):&nbsp;the&nbsp;song_id<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;description&nbsp;(str):&nbsp;A&nbsp;string&nbsp;describing&nbsp;the&nbsp;artist&nbsp;and&nbsp;song<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_tempo&nbsp;(float):&nbsp;The&nbsp;max&nbsp;tempo&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_tempo&nbsp;(float):&nbsp;The&nbsp;min&nbsp;tempo&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_duration&nbsp;(float):&nbsp;The&nbsp;max&nbsp;duration&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_duration&nbsp;(float):&nbsp;The&nbsp;min&nbsp;duration&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_loudness&nbsp;(float):&nbsp;The&nbsp;max&nbsp;loudness&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_loudness&nbsp;(float):&nbsp;The&nbsp;min&nbsp;loudness&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_max_familiarity&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;familiarity&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_min_familiarity&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;min&nbsp;familiarity&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_max_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_min_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;song_max_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;songs&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;song_min_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;songs&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_energy&nbsp;(float):&nbsp;The&nbsp;max&nbsp;energy&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_energy&nbsp;(float):&nbsp;The&nbsp;min&nbsp;energy&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_dancibility&nbsp;(float):&nbsp;The&nbsp;max&nbsp;dancibility&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_dancibility&nbsp;(float):&nbsp;The&nbsp;min&nbsp;dancibility&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mode&nbsp;(int):&nbsp;0&nbsp;or&nbsp;1&nbsp;(minor&nbsp;or&nbsp;major)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;key&nbsp;(int):&nbsp;0-11&nbsp;(c,&nbsp;c-sharp,&nbsp;d,&nbsp;e-flat,&nbsp;e,&nbsp;f,&nbsp;f-sharp,&nbsp;g,&nbsp;a-flat,&nbsp;a,&nbsp;b-flat,&nbsp;b)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_latitude&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;latitude&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_latitude&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;min&nbsp;latitude&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_longitude&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;longitude&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_longitude&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;min&nbsp;longitude&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sort&nbsp;(str):&nbsp;A&nbsp;string&nbsp;indicating&nbsp;an&nbsp;attribute&nbsp;and&nbsp;order&nbsp;for&nbsp;sorting&nbsp;the&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;buckets&nbsp;(list):&nbsp;A&nbsp;list&nbsp;of&nbsp;strings&nbsp;specifying&nbsp;which&nbsp;buckets&nbsp;to&nbsp;retrieve<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;limit&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;to&nbsp;limit&nbsp;the&nbsp;results&nbsp;to&nbsp;one&nbsp;of&nbsp;the&nbsp;id&nbsp;spaces&nbsp;specified&nbsp;in&nbsp;buckets<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;seed_catalog&nbsp;(str&nbsp;or&nbsp;Catalog):&nbsp;An&nbsp;Artist&nbsp;Catalog&nbsp;object&nbsp;or&nbsp;Artist&nbsp;Catalog&nbsp;id&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;seed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;source_catalog&nbsp;(str&nbsp;or&nbsp;Catalog):&nbsp;A&nbsp;Catalog&nbsp;object&nbsp;or&nbsp;catalog&nbsp;id<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;Song&nbsp;objects<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;p&nbsp;=&nbsp;playlist.<a href="#-static">static</a>(type='artist-radio',&nbsp;artist=['ida&nbsp;maria',&nbsp;'florence&nbsp;+&nbsp;the&nbsp;machine'])<br>
+&gt;&gt;&gt;&nbsp;p<br>
+[&lt;song&nbsp;-&nbsp;Pickpocket&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;Self-Taught&nbsp;Learner&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;Maps&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;Window&nbsp;Blues&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;That's&nbsp;Not&nbsp;My&nbsp;Name&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;My&nbsp;Lover&nbsp;Will&nbsp;Go&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;Home&nbsp;Sweet&nbsp;Home&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;Stella&nbsp;&amp;&nbsp;God&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;Don't&nbsp;You&nbsp;Want&nbsp;To&nbsp;Share&nbsp;The&nbsp;Guilt?&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;Forget&nbsp;About&nbsp;It&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;Dull&nbsp;Life&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;This&nbsp;Trumpet&nbsp;In&nbsp;My&nbsp;Head&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;Keep&nbsp;Your&nbsp;Head&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;One&nbsp;More&nbsp;Time&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;Knights&nbsp;in&nbsp;Mountain&nbsp;Fox&nbsp;Jackets&gt;]<br>
+&gt;&gt;&gt;</tt></dd></dl>
+</td></tr></table>
+</body></html>

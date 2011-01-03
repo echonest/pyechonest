@@ -1,0 +1,502 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module pyechonest.song</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="pyechonest.html"><font color="#ffffff">pyechonest</font></a>.song</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="http://pyechonest.googlecode.com/svn/trunk/doc/song.py">http://pyechonest.googlecode.com/svn/trunk/doc/song.py</a></font></td></tr></table>
+    <p><tt>Copyright&nbsp;(c)&nbsp;2010&nbsp;The&nbsp;Echo&nbsp;Nest.&nbsp;All&nbsp;rights&nbsp;reserved.<br>
+Created&nbsp;by&nbsp;Tyler&nbsp;Williams&nbsp;on&nbsp;2010-04-25.<br>
+&nbsp;<br>
+The&nbsp;<a href="#Song">Song</a>&nbsp;module&nbsp;loosely&nbsp;covers&nbsp;<a href="http://developer.echonest.com/docs/v4/song.html">http://developer.echonest.com/docs/v4/song.html</a><br>
+Refer&nbsp;to&nbsp;the&nbsp;official&nbsp;api&nbsp;documentation&nbsp;if&nbsp;you&nbsp;are&nbsp;unsure&nbsp;about&nbsp;something.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="json.html">json</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="pyechonest.util.html">pyechonest.util</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="pyechonest.proxies.html#SongProxy">pyechonest.proxies.SongProxy</a>(<a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="pyechonest.song.html#Song">Song</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Song">class <strong>Song</strong></a>(<a href="pyechonest.proxies.html#SongProxy">pyechonest.proxies.SongProxy</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>A&nbsp;<a href="#Song">Song</a>&nbsp;object<br>
+&nbsp;<br>
+Attributes:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;(str):&nbsp;Echo&nbsp;Nest&nbsp;<a href="#Song">Song</a>&nbsp;ID<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;title&nbsp;(str):&nbsp;<a href="#Song">Song</a>&nbsp;Title<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_name&nbsp;(str):&nbsp;Artist&nbsp;Name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_id&nbsp;(str):&nbsp;Artist&nbsp;ID<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;audio_summary&nbsp;(dict):&nbsp;An&nbsp;Audio&nbsp;Summary&nbsp;dict<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;song_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;representing&nbsp;a&nbsp;song's&nbsp;hotttnesss<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;representing&nbsp;a&nbsp;song's&nbsp;parent&nbsp;artist's&nbsp;hotttnesss<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_familiarity&nbsp;(float):&nbsp;A&nbsp;float&nbsp;representing&nbsp;a&nbsp;song's&nbsp;parent&nbsp;artist's&nbsp;familiarity<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_location&nbsp;(str):&nbsp;A&nbsp;string&nbsp;specifying&nbsp;a&nbsp;song's&nbsp;parent&nbsp;artist's&nbsp;location<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tracks&nbsp;(list):&nbsp;A&nbsp;list&nbsp;of&nbsp;track&nbsp;objects<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Create&nbsp;a&nbsp;song&nbsp;object&nbsp;like&nbsp;so:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;s&nbsp;=&nbsp;song.<a href="#Song">Song</a>('SOPEXHZ12873FD2AC7')<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="pyechonest.song.html#Song">Song</a></dd>
+<dd><a href="pyechonest.proxies.html#SongProxy">pyechonest.proxies.SongProxy</a></dd>
+<dd><a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Song-__init__"><strong>__init__</strong></a>(self, id, buckets<font color="#909090">=None</font>, **kwargs)</dt><dd><tt><a href="#Song">Song</a>&nbsp;class<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;(str):&nbsp;a&nbsp;song&nbsp;ID&nbsp;<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;buckets&nbsp;(list):&nbsp;A&nbsp;list&nbsp;of&nbsp;strings&nbsp;specifying&nbsp;which&nbsp;buckets&nbsp;to&nbsp;retrieve<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;<a href="#Song">Song</a>&nbsp;object<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;s&nbsp;=&nbsp;song.<a href="#Song">Song</a>('SOPEXHZ12873FD2AC7',&nbsp;buckets=['song_hotttnesss',&nbsp;'artist_hotttnesss'])<br>
+&gt;&gt;&gt;&nbsp;s.song_hotttnesss<br>
+0.58602500000000002<br>
+&gt;&gt;&gt;&nbsp;s.artist_hotttnesss<br>
+0.80329715999999995<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Song-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Song-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Song-get_artist_familiarity"><strong>get_artist_familiarity</strong></a>(self, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;our&nbsp;numerical&nbsp;estimation&nbsp;of&nbsp;how&nbsp;familiar&nbsp;a&nbsp;song's&nbsp;artist&nbsp;currently&nbsp;is&nbsp;to&nbsp;the&nbsp;world<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;float&nbsp;representing&nbsp;familiarity.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s&nbsp;=&nbsp;song.<a href="#Song">Song</a>('SOQKVPH12A58A7AF4D')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s.<a href="#Song-get_artist_familiarity">get_artist_familiarity</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0.639626025843539<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s.artist_familiarity<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0.639626025843539<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Song-get_artist_hotttnesss"><strong>get_artist_hotttnesss</strong></a>(self, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;our&nbsp;numerical&nbsp;description&nbsp;of&nbsp;how&nbsp;hottt&nbsp;a&nbsp;song's&nbsp;artist&nbsp;currently&nbsp;is<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;float&nbsp;representing&nbsp;hotttnesss.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s&nbsp;=&nbsp;song.<a href="#Song">Song</a>('SOOLGAZ127F3E1B87C')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s.artist_hotttnesss<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0.45645633000000002<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s.<a href="#Song-get_artist_hotttnesss">get_artist_hotttnesss</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0.45645633000000002<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Song-get_artist_location"><strong>get_artist_location</strong></a>(self, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;the&nbsp;location&nbsp;of&nbsp;a&nbsp;song's&nbsp;artist.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;An&nbsp;artist&nbsp;location&nbsp;object.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s&nbsp;=&nbsp;song.<a href="#Song">Song</a>('SOQKVPH12A58A7AF4D')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s.artist_location<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{u'latitude':&nbsp;34.053489999999996,&nbsp;u'location':&nbsp;u'Los&nbsp;Angeles,&nbsp;CA',&nbsp;u'longitude':&nbsp;-118.24532000000001}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Song-get_audio_summary"><strong>get_audio_summary</strong></a>(self, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;an&nbsp;audio&nbsp;summary&nbsp;of&nbsp;a&nbsp;song&nbsp;containing&nbsp;mode,&nbsp;tempo,&nbsp;key,&nbsp;duration,&nbsp;time&nbsp;signature,&nbsp;loudness,&nbsp;danceability,&nbsp;energy,&nbsp;and&nbsp;analysis_url.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dictionary&nbsp;containing&nbsp;mode,&nbsp;tempo,&nbsp;key,&nbsp;duration,&nbsp;time&nbsp;signature,&nbsp;loudness,&nbsp;danceability,&nbsp;energy&nbsp;and&nbsp;analysis_url&nbsp;keys.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s&nbsp;=&nbsp;song.<a href="#Song">Song</a>('SOGNMKX12B0B806320')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s.audio_summary<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{u'analysis_url':&nbsp;u'https://echonest-analysis.s3.amazonaws.com:443/TR/TRCPUOG123E85891F2/3/full.json?Signature=wcML1ZKsl%2F2FU4k68euHJcF7Jbc%3D&amp;Expires=1287518562&amp;AWSAccessKeyId=AKIAIAFEHLM3KJ2XMHRA',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'danceability':&nbsp;0.20964757782725996,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'duration':&nbsp;472.63301999999999,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'energy':&nbsp;0.64265230549809549,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'key':&nbsp;0,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'loudness':&nbsp;-9.6820000000000004,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'mode':&nbsp;1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'tempo':&nbsp;126.99299999999999,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'time_signature':&nbsp;4}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Song-get_song_hotttnesss"><strong>get_song_hotttnesss</strong></a>(self, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;our&nbsp;numerical&nbsp;description&nbsp;of&nbsp;how&nbsp;hottt&nbsp;a&nbsp;song&nbsp;currently&nbsp;is<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;float&nbsp;representing&nbsp;hotttnesss.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s&nbsp;=&nbsp;song.<a href="#Song">Song</a>('SOLUHKP129F0698D49')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s.<a href="#Song-get_song_hotttnesss">get_song_hotttnesss</a>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0.57344379999999995<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s.song_hotttnesss<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0.57344379999999995<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Song-get_tracks"><strong>get_tracks</strong></a>(self, catalog, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;the&nbsp;tracks&nbsp;for&nbsp;a&nbsp;song&nbsp;given&nbsp;a&nbsp;catalog.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;catalog&nbsp;(str):&nbsp;a&nbsp;string&nbsp;representing&nbsp;the&nbsp;catalog&nbsp;whose&nbsp;track&nbsp;you&nbsp;want&nbsp;to&nbsp;retrieve.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;Track&nbsp;dicts.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s&nbsp;=&nbsp;song.<a href="#Song">Song</a>('SOWDASQ12A6310F24F')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s.<a href="#Song-get_tracks">get_tracks</a>('7digital')[0]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{u'catalog':&nbsp;u'7digital',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'foreign_id':&nbsp;u'7digital:track:8445818',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'id':&nbsp;u'TRJGNNY12903CC625C',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'preview_url':&nbsp;u'<a href="http://previews.7digital.com/clips/34/8445818.clip.mp3">http://previews.7digital.com/clips/34/8445818.clip.mp3</a>',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'release_image':&nbsp;u'<a href="http://cdn.7static.com/static/img/sleeveart/00/007/628/0000762838_200.jpg">http://cdn.7static.com/static/img/sleeveart/00/007/628/0000762838_200.jpg</a>'}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>artist_familiarity</strong></dt>
+<dd><tt>Get&nbsp;our&nbsp;numerical&nbsp;estimation&nbsp;of&nbsp;how&nbsp;familiar&nbsp;a&nbsp;song's&nbsp;artist&nbsp;currently&nbsp;is&nbsp;to&nbsp;the&nbsp;world<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;float&nbsp;representing&nbsp;familiarity.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s&nbsp;=&nbsp;song.Song('SOQKVPH12A58A7AF4D')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s.get_artist_familiarity()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0.639626025843539<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s.artist_familiarity<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0.639626025843539<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd>
+</dl>
+<dl><dt><strong>artist_hotttnesss</strong></dt>
+<dd><tt>Get&nbsp;our&nbsp;numerical&nbsp;description&nbsp;of&nbsp;how&nbsp;hottt&nbsp;a&nbsp;song's&nbsp;artist&nbsp;currently&nbsp;is<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;float&nbsp;representing&nbsp;hotttnesss.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s&nbsp;=&nbsp;song.Song('SOOLGAZ127F3E1B87C')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s.artist_hotttnesss<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0.45645633000000002<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s.get_artist_hotttnesss()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0.45645633000000002<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd>
+</dl>
+<dl><dt><strong>artist_location</strong></dt>
+<dd><tt>Get&nbsp;the&nbsp;location&nbsp;of&nbsp;a&nbsp;song's&nbsp;artist.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;An&nbsp;artist&nbsp;location&nbsp;object.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s&nbsp;=&nbsp;song.Song('SOQKVPH12A58A7AF4D')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s.artist_location<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{u'latitude':&nbsp;34.053489999999996,&nbsp;u'location':&nbsp;u'Los&nbsp;Angeles,&nbsp;CA',&nbsp;u'longitude':&nbsp;-118.24532000000001}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd>
+</dl>
+<dl><dt><strong>audio_summary</strong></dt>
+<dd><tt>Get&nbsp;an&nbsp;audio&nbsp;summary&nbsp;of&nbsp;a&nbsp;song&nbsp;containing&nbsp;mode,&nbsp;tempo,&nbsp;key,&nbsp;duration,&nbsp;time&nbsp;signature,&nbsp;loudness,&nbsp;danceability,&nbsp;energy,&nbsp;and&nbsp;analysis_url.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;dictionary&nbsp;containing&nbsp;mode,&nbsp;tempo,&nbsp;key,&nbsp;duration,&nbsp;time&nbsp;signature,&nbsp;loudness,&nbsp;danceability,&nbsp;energy&nbsp;and&nbsp;analysis_url&nbsp;keys.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s&nbsp;=&nbsp;song.Song('SOGNMKX12B0B806320')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s.audio_summary<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{u'analysis_url':&nbsp;u'https://echonest-analysis.s3.amazonaws.com:443/TR/TRCPUOG123E85891F2/3/full.json?Signature=wcML1ZKsl%2F2FU4k68euHJcF7Jbc%3D&amp;Expires=1287518562&amp;AWSAccessKeyId=AKIAIAFEHLM3KJ2XMHRA',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'danceability':&nbsp;0.20964757782725996,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'duration':&nbsp;472.63301999999999,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'energy':&nbsp;0.64265230549809549,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'key':&nbsp;0,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'loudness':&nbsp;-9.6820000000000004,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'mode':&nbsp;1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'tempo':&nbsp;126.99299999999999,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;u'time_signature':&nbsp;4}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd>
+</dl>
+<dl><dt><strong>song_hotttnesss</strong></dt>
+<dd><tt>Get&nbsp;our&nbsp;numerical&nbsp;description&nbsp;of&nbsp;how&nbsp;hottt&nbsp;a&nbsp;song&nbsp;currently&nbsp;is<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;float&nbsp;representing&nbsp;hotttnesss.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s&nbsp;=&nbsp;song.Song('SOLUHKP129F0698D49')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s.get_song_hotttnesss()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0.57344379999999995<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;s.song_hotttnesss<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0.57344379999999995<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="pyechonest.proxies.html#SongProxy">pyechonest.proxies.SongProxy</a>:<br>
+<dl><dt><a name="Song-get_attribute"><strong>get_attribute</strong></a>(self, *args, **kwargs)</dt></dl>
+
+<hr>
+Methods inherited from <a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a>:<br>
+<dl><dt><a name="Song-post_attribute"><strong>post_attribute</strong></a>(self, method_name, **kwargs)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-identify"><strong>identify</strong></a>(filename<font color="#909090">=None</font>, query_obj<font color="#909090">=None</font>, code<font color="#909090">=None</font>, artist<font color="#909090">=None</font>, title<font color="#909090">=None</font>, release<font color="#909090">=None</font>, duration<font color="#909090">=None</font>, genre<font color="#909090">=None</font>, buckets<font color="#909090">=None</font>, codegen_start<font color="#909090">=0</font>, codegen_duration<font color="#909090">=30</font>)</dt><dd><tt>Identify&nbsp;a&nbsp;song.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;filename&nbsp;(str):&nbsp;The&nbsp;path&nbsp;of&nbsp;the&nbsp;file&nbsp;you&nbsp;want&nbsp;to&nbsp;analyze&nbsp;(requires&nbsp;codegen&nbsp;binary!)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;query_obj&nbsp;(dict&nbsp;or&nbsp;list):&nbsp;A&nbsp;dict&nbsp;or&nbsp;list&nbsp;of&nbsp;dicts&nbsp;containing&nbsp;a&nbsp;'code'&nbsp;element&nbsp;with&nbsp;an&nbsp;fp&nbsp;code<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;code&nbsp;(str):&nbsp;A&nbsp;fingerprinter&nbsp;code<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist&nbsp;(str):&nbsp;An&nbsp;artist&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;title&nbsp;(str):&nbsp;A&nbsp;song&nbsp;title<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;release&nbsp;(str):&nbsp;A&nbsp;release&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;duration&nbsp;(int):&nbsp;A&nbsp;song&nbsp;duration<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;genre&nbsp;(str):&nbsp;A&nbsp;string&nbsp;representing&nbsp;the&nbsp;genre<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;buckets&nbsp;(list):&nbsp;A&nbsp;list&nbsp;of&nbsp;strings&nbsp;specifying&nbsp;which&nbsp;buckets&nbsp;to&nbsp;retrieve<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;codegen_start&nbsp;(int):&nbsp;The&nbsp;point&nbsp;(in&nbsp;seconds)&nbsp;where&nbsp;the&nbsp;codegen&nbsp;should&nbsp;start<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;codegen_duration&nbsp;(int):&nbsp;The&nbsp;duration&nbsp;(in&nbsp;seconds)&nbsp;the&nbsp;codegen&nbsp;should&nbsp;analyze<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;qo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{'code':&nbsp;'eJxlldehHSEMRFsChAjlAIL-S_CZvfaXXxAglEaBTen300Qu__lAyoJYhVQdXTvXrmvXdTsKZOqoU1q63QNydBGfOd1cGX3scpb1jEiWRLaPcJureC6RVkXE69jL8pGHjpP48pLI1m7r9oiEyBXvoVv45Q-5IhylYLkIRxGO4rp18ZpEOmpFPopwfJjL0u3WceO3HB1DIvJRnkQeO1PCLIsIjBWEzYaShq4pV9Z0KzDiQ8SbSNuSyBZPOOxIJKR7dauEmXwotxDCqllEAVZlrX6F8Y-IJ0e169i_HQaqslaVtTq1W-1vKeupImzrxWWVI5cPlw-XDxckN-3kyeXDm3jKmqv6PtB1gfH1Eey5qu8qvAuMC4zLfPv1l3aqviylJhytFhF0mzqs6aYpYU04mlqgKWtNjppwNKWubR2FowlHUws0gWmPi668dSHq6rOuPuhqgRcVKKM8s-fZS937nBe23iz3Uctx9607z-kLph1i8YZ8f_TfzLXseBh7nXy9nn1YBAg4Nwjp4AzTL23M_U3Rh0-sdDFtyspNOb1bYeZZqz2Y6TaHmXeuNmfFdTueLuvdsbOU9luvtIkl4vI5F_92PVprM1-sdJ_o9_Guc0b_WimpD_Rt1DFg0sY3wyw08e6jlqhjH3o76naYvzWqhX9rOv15Y7Ww_MIF8dXzw30s_uHO5PPDfUonnzq_NJ8J93mngAkIz5jA29SqxGwwvxQsih-sozX0zVk__RFaf_qyG9hb8dktZZXd4a8-1ljB-c5bllXOe1HqHplzeiN4E7q9ZRdmJuI73gBEJ_HcAxUm74PAVDNL47D6OAfzTHI0mHpXAmY60QNmlqjDfIPzwUDYhVnoXqtvZGrBdMi3ClQUQ8D8rX_1JE_In94CBXER4lrrw0H867ei8x-OVz8c-Osh5plzTOySpKIROmFkbn5xVuK784vTyPpS3OlcSjHpL16saZnm4Bk66hte9sd80Dcj02f7xDVrExjk32cssKXjmflU_SxXmn4Y9Ttued10YM552h5Wtt_WeVR4U6LPWfbIdW31J4JOXnpn4qhH7yE_pdBH9E_sMwbNFr0z0IW5NA8aOZhLmOh3zSVNRZwxiZc5pb8fikGzIf-ampJnCSb3r-ZPfjPuvLm7CY_Vfa_k7SCzdwHNg5mICTSHDxyBWmaOSyLQpPmCSXyF-eL7MHo7zNd668JMb_N-AJJRuMwrX0jNx7a8-Rj5oN6nyWoL-jRv4pu7Ue821TzU3MhvpD9Fo-XI',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'code_count':&nbsp;151,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'low_rank':&nbsp;0,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'metadata':&nbsp;{'artist':&nbsp;'Harmonic&nbsp;313',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'bitrate':&nbsp;198,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'codegen_time':&nbsp;0.57198400000000005,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'decode_time':&nbsp;0.37954599999999999,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'duration':&nbsp;226,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'filename':&nbsp;'koln.mp3',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'genre':&nbsp;'Electronic',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'given_duration':&nbsp;30,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'release':&nbsp;'When&nbsp;Machines&nbsp;Exceed&nbsp;Human&nbsp;Intelligence',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'sample_rate':&nbsp;44100,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'samples_decoded':&nbsp;661816,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'start_offset':&nbsp;0,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'title':&nbsp;'kln',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'version':&nbsp;3.1499999999999999},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'tag':&nbsp;0}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;song.<a href="#-identify">identify</a>(query_obj=qo)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[&lt;song&nbsp;-&nbsp;Köln&gt;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;</tt></dd></dl>
+ <dl><dt><a name="-profile"><strong>profile</strong></a>(ids, buckets<font color="#909090">=None</font>, limit<font color="#909090">=False</font>)</dt><dd><tt>get&nbsp;the&nbsp;profiles&nbsp;for&nbsp;multiple&nbsp;songs&nbsp;at&nbsp;once<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ids&nbsp;(str&nbsp;or&nbsp;list):&nbsp;a&nbsp;song&nbsp;ID&nbsp;or&nbsp;list&nbsp;of&nbsp;song&nbsp;IDs<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;buckets&nbsp;(list):&nbsp;A&nbsp;list&nbsp;of&nbsp;strings&nbsp;specifying&nbsp;which&nbsp;buckets&nbsp;to&nbsp;retrieve<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;limit&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;to&nbsp;limit&nbsp;the&nbsp;results&nbsp;to&nbsp;one&nbsp;of&nbsp;the&nbsp;id&nbsp;spaces&nbsp;specified&nbsp;in&nbsp;buckets<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;term&nbsp;document&nbsp;dicts<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;song_ids&nbsp;=&nbsp;[u'SOGNMKX12B0B806320',&nbsp;u'SOLUHKP129F0698D49',&nbsp;u'SOOLGAZ127F3E1B87C',&nbsp;u'SOQKVPH12A58A7AF4D',&nbsp;u'SOHKEEM1288D3ED9F5']<br>
+&gt;&gt;&gt;&nbsp;songs&nbsp;=&nbsp;song.<a href="#-profile">profile</a>(song_ids,&nbsp;buckets=['audio_summary'])<br>
+[&lt;song&nbsp;-&nbsp;chickfactor&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;One&nbsp;Step&nbsp;Closer&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;And&nbsp;I&nbsp;Am&nbsp;Telling&nbsp;You&nbsp;I'm&nbsp;Not&nbsp;Going&nbsp;(Glee&nbsp;Cast&nbsp;Version)&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;In&nbsp;This&nbsp;Temple&nbsp;As&nbsp;In&nbsp;The&nbsp;Hearts&nbsp;Of&nbsp;Man&nbsp;For&nbsp;Whom&nbsp;He&nbsp;Saved&nbsp;The&nbsp;Earth&gt;,<br>
+&nbsp;&lt;song&nbsp;-&nbsp;Octet&gt;]<br>
+&gt;&gt;&gt;&nbsp;songs[0].audio_summary<br>
+{u'analysis_url':&nbsp;u'https://echonest-analysis.s3.amazonaws.com:443/TR/TRKHTDL123E858AC4B/3/full.json?Signature=sE6OwAzg6UvrtiX6nJJW1t7E6YI%3D&amp;Expires=1287585351&amp;AWSAccessKeyId=AKIAIAFEHLM3KJ2XMHRA',<br>
+&nbsp;u'danceability':&nbsp;None,<br>
+&nbsp;u'duration':&nbsp;211.90485000000001,<br>
+&nbsp;u'energy':&nbsp;None,<br>
+&nbsp;u'key':&nbsp;7,<br>
+&nbsp;u'loudness':&nbsp;-16.736999999999998,<br>
+&nbsp;u'mode':&nbsp;1,<br>
+&nbsp;u'tempo':&nbsp;94.957999999999998,<br>
+&nbsp;u'time_signature':&nbsp;4}<br>
+&gt;&gt;&gt;</tt></dd></dl>
+ <dl><dt><a name="-search"><strong>search</strong></a>(title<font color="#909090">=None</font>, artist<font color="#909090">=None</font>, artist_id<font color="#909090">=None</font>, combined<font color="#909090">=None</font>, description<font color="#909090">=None</font>, results<font color="#909090">=None</font>, start<font color="#909090">=None</font>, max_tempo<font color="#909090">=None</font>, min_tempo<font color="#909090">=None</font>, max_duration<font color="#909090">=None</font>, min_duration<font color="#909090">=None</font>, max_loudness<font color="#909090">=None</font>, min_loudness<font color="#909090">=None</font>, artist_max_familiarity<font color="#909090">=None</font>, artist_min_familiarity<font color="#909090">=None</font>, artist_max_hotttnesss<font color="#909090">=None</font>, artist_min_hotttnesss<font color="#909090">=None</font>, song_max_hotttnesss<font color="#909090">=None</font>, song_min_hotttnesss<font color="#909090">=None</font>, mode<font color="#909090">=None</font>, min_energy<font color="#909090">=None</font>, max_energy<font color="#909090">=None</font>, min_danceability<font color="#909090">=None</font>, max_danceability<font color="#909090">=None</font>, key<font color="#909090">=None</font>, max_latitude<font color="#909090">=None</font>, min_latitude<font color="#909090">=None</font>, max_longitude<font color="#909090">=None</font>, min_longitude<font color="#909090">=None</font>, sort<font color="#909090">=None</font>, buckets<font color="#909090">=None</font>, limit<font color="#909090">=False</font>)</dt><dd><tt>Search&nbsp;for&nbsp;songs&nbsp;by&nbsp;name,&nbsp;description,&nbsp;or&nbsp;constraint.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;title&nbsp;(str):&nbsp;the&nbsp;name&nbsp;of&nbsp;a&nbsp;song<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist&nbsp;(str):&nbsp;the&nbsp;name&nbsp;of&nbsp;an&nbsp;artist<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_id&nbsp;(str):&nbsp;the&nbsp;artist_id<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;combined&nbsp;(str):&nbsp;the&nbsp;artist&nbsp;name&nbsp;and&nbsp;song&nbsp;title<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;description&nbsp;(str):&nbsp;A&nbsp;string&nbsp;describing&nbsp;the&nbsp;artist&nbsp;and&nbsp;song<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_tempo&nbsp;(float):&nbsp;The&nbsp;max&nbsp;tempo&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_tempo&nbsp;(float):&nbsp;The&nbsp;min&nbsp;tempo&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_duration&nbsp;(float):&nbsp;The&nbsp;max&nbsp;duration&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_duration&nbsp;(float):&nbsp;The&nbsp;min&nbsp;duration&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_loudness&nbsp;(float):&nbsp;The&nbsp;max&nbsp;loudness&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_loudness&nbsp;(float):&nbsp;The&nbsp;min&nbsp;loudness&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_max_familiarity&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;familiarity&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_min_familiarity&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;min&nbsp;familiarity&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_max_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist_min_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;song_max_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;songs&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;song_min_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;songs&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_energy&nbsp;(float):&nbsp;The&nbsp;max&nbsp;energy&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_energy&nbsp;(float):&nbsp;The&nbsp;min&nbsp;energy&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_dancibility&nbsp;(float):&nbsp;The&nbsp;max&nbsp;dancibility&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_dancibility&nbsp;(float):&nbsp;The&nbsp;min&nbsp;dancibility&nbsp;of&nbsp;song&nbsp;results<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mode&nbsp;(int):&nbsp;0&nbsp;or&nbsp;1&nbsp;(minor&nbsp;or&nbsp;major)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;key&nbsp;(int):&nbsp;0-11&nbsp;(c,&nbsp;c-sharp,&nbsp;d,&nbsp;e-flat,&nbsp;e,&nbsp;f,&nbsp;f-sharp,&nbsp;g,&nbsp;a-flat,&nbsp;a,&nbsp;b-flat,&nbsp;b)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_latitude&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;latitude&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_latitude&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;min&nbsp;latitude&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_longitude&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;longitude&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_longitude&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;min&nbsp;longitude&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sort&nbsp;(str):&nbsp;A&nbsp;string&nbsp;indicating&nbsp;an&nbsp;attribute&nbsp;and&nbsp;order&nbsp;for&nbsp;sorting&nbsp;the&nbsp;results<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;buckets&nbsp;(list):&nbsp;A&nbsp;list&nbsp;of&nbsp;strings&nbsp;specifying&nbsp;which&nbsp;buckets&nbsp;to&nbsp;retrieve<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;limit&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;to&nbsp;limit&nbsp;the&nbsp;results&nbsp;to&nbsp;one&nbsp;of&nbsp;the&nbsp;id&nbsp;spaces&nbsp;specified&nbsp;in&nbsp;buckets<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#Song">Song</a>&nbsp;objects<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;results&nbsp;=&nbsp;song.<a href="#-search">search</a>(artist='shakira',&nbsp;title='she&nbsp;wolf',&nbsp;buckets=['id:7digital',&nbsp;'tracks'],&nbsp;limit=True,&nbsp;results=1)<br>
+&gt;&gt;&gt;&nbsp;results<br>
+[&lt;song&nbsp;-&nbsp;She&nbsp;Wolf&gt;]<br>
+&gt;&gt;&gt;&nbsp;results[0].get_tracks('7digital')[0]<br>
+{u'catalog':&nbsp;u'7digital',<br>
+&nbsp;u'foreign_id':&nbsp;u'7digital:track:7854109',<br>
+&nbsp;u'id':&nbsp;u'TRTOBSE12903CACEC4',<br>
+&nbsp;u'preview_url':&nbsp;u'<a href="http://previews.7digital.com/clips/34/7854109.clip.mp3">http://previews.7digital.com/clips/34/7854109.clip.mp3</a>',<br>
+&nbsp;u'release_image':&nbsp;u'<a href="http://cdn.7static.com/static/img/sleeveart/00/007/081/0000708184_200.jpg">http://cdn.7static.com/static/img/sleeveart/00/007/081/0000708184_200.jpg</a>'}<br>
+&gt;&gt;&gt;</tt></dd></dl>
+</td></tr></table>
+</body></html>

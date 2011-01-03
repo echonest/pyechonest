@@ -1,0 +1,197 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module pyechonest.track</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="pyechonest.html"><font color="#ffffff">pyechonest</font></a>.track</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="http://pyechonest.googlecode.com/svn/trunk/doc/track.py">http://pyechonest.googlecode.com/svn/trunk/doc/track.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="hashlib.html">hashlib</a><br>
+</td><td width="25%" valign=top><a href="json.html">json</a><br>
+</td><td width="25%" valign=top><a href="urllib2.html">urllib2</a><br>
+</td><td width="25%" valign=top><a href="pyechonest.util.html">pyechonest.util</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="pyechonest.proxies.html#TrackProxy">pyechonest.proxies.TrackProxy</a>(<a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="pyechonest.track.html#Track">Track</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Track">class <strong>Track</strong></a>(<a href="pyechonest.proxies.html#TrackProxy">pyechonest.proxies.TrackProxy</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Represents&nbsp;an&nbsp;audio&nbsp;analysis&nbsp;from&nbsp;The&nbsp;Echo&nbsp;Nest.<br>
+&nbsp;<br>
+All&nbsp;methods&nbsp;in&nbsp;this&nbsp;module&nbsp;return&nbsp;<a href="#Track">Track</a>&nbsp;objects.<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;analysis_channels&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int:&nbsp;the&nbsp;number&nbsp;of&nbsp;audio&nbsp;channels&nbsp;used&nbsp;during&nbsp;analysis<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;analysis_sample_rate&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;the&nbsp;sample&nbsp;rate&nbsp;used&nbsp;during&nbsp;analysis<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;analyzer_version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;e.g.&nbsp;'3.01a'<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;artist&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str&nbsp;or&nbsp;None:&nbsp;artist&nbsp;name<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bars&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list&nbsp;of&nbsp;dicts:&nbsp;timing&nbsp;of&nbsp;each&nbsp;measure<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;beats&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list&nbsp;of&nbsp;dicts:&nbsp;timing&nbsp;of&nbsp;each&nbsp;beat<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bitrate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int:&nbsp;the&nbsp;bitrate&nbsp;of&nbsp;the&nbsp;input&nbsp;mp3&nbsp;(or&nbsp;other&nbsp;file)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;danceability&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;relative&nbsp;danceability&nbsp;(0&nbsp;to&nbsp;1)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;duration&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;length&nbsp;of&nbsp;track&nbsp;in&nbsp;seconds<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;energy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;relative&nbsp;energy&nbsp;(0&nbsp;to&nbsp;1)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;end_of_fade_in&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;time&nbsp;in&nbsp;seconds&nbsp;track&nbsp;where&nbsp;fade-in&nbsp;ends<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;Echo&nbsp;Nest&nbsp;<a href="#Track">Track</a>&nbsp;ID,&nbsp;e.g.&nbsp;'TRTOBXJ1296BCDA33B'<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;key&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int:&nbsp;between&nbsp;0&nbsp;(key&nbsp;of&nbsp;C)&nbsp;and&nbsp;11&nbsp;(key&nbsp;of&nbsp;B&nbsp;flat)&nbsp;inclusive<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;key_confidence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;confidence&nbsp;that&nbsp;key&nbsp;detection&nbsp;was&nbsp;accurate<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;loudness&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;overall&nbsp;loudness&nbsp;in&nbsp;decibels&nbsp;(dB)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;md5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;32-character&nbsp;checksum&nbsp;of&nbsp;the&nbsp;input&nbsp;mp3<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;meta&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;other&nbsp;track&nbsp;metainfo<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int:&nbsp;0&nbsp;(major)&nbsp;or&nbsp;1&nbsp;(minor)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mode_confidence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;confidence&nbsp;that&nbsp;mode&nbsp;detection&nbsp;was&nbsp;accurate<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;num_samples&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int:&nbsp;total&nbsp;samples&nbsp;in&nbsp;the&nbsp;decoded&nbsp;track<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;release&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str&nbsp;or&nbsp;None:&nbsp;the&nbsp;album&nbsp;name<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sample_md5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;32-character&nbsp;checksum&nbsp;of&nbsp;the&nbsp;decoded&nbsp;audio&nbsp;file<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;samplerate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int:&nbsp;sample&nbsp;rate&nbsp;of&nbsp;input&nbsp;mp3<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sections&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list&nbsp;of&nbsp;dicts:&nbsp;larger&nbsp;sections&nbsp;of&nbsp;song&nbsp;(chorus,&nbsp;bridge,&nbsp;solo,&nbsp;etc.)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;segments&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list&nbsp;of&nbsp;dicts:&nbsp;timing,&nbsp;pitch,&nbsp;loudness&nbsp;and&nbsp;timbre&nbsp;for&nbsp;each&nbsp;segment<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start_of_fade_out&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;time&nbsp;in&nbsp;seconds&nbsp;where&nbsp;fade&nbsp;out&nbsp;begins<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;status&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;analysis&nbsp;status,&nbsp;e.g.&nbsp;'complete',&nbsp;'pending',&nbsp;'error'<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tatums&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list&nbsp;of&nbsp;dicts:&nbsp;the&nbsp;smallest&nbsp;metrical&nbsp;unit&nbsp;(subdivision&nbsp;of&nbsp;a&nbsp;beat)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tempo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;overall&nbsp;BPM&nbsp;(beats&nbsp;per&nbsp;minute)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tempo_confidence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;confidence&nbsp;that&nbsp;tempo&nbsp;detection&nbsp;was&nbsp;accurate<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;title&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str&nbsp;or&nbsp;None:&nbsp;song&nbsp;title<br>
+&nbsp;<br>
+Each&nbsp;bar,&nbsp;beat,&nbsp;section,&nbsp;segment&nbsp;and&nbsp;tatum&nbsp;has&nbsp;a&nbsp;start&nbsp;time,&nbsp;a&nbsp;duration,&nbsp;and&nbsp;a&nbsp;confidence,<br>
+in&nbsp;addition&nbsp;to&nbsp;whatever&nbsp;other&nbsp;data&nbsp;is&nbsp;given.<br>
+&nbsp;<br>
+Examples:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;track.<a href="#-track_from_id">track_from_id</a>('TRXXHTJ1294CD8F3B3')<br>
+&gt;&gt;&gt;&nbsp;t<br>
+&lt;track&nbsp;-&nbsp;Neverwas&nbsp;Restored&nbsp;(from&nbsp;Neverwas&nbsp;Soundtrack)&gt;<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;track.<a href="#-track_from_md5">track_from_md5</a>('b8abf85746ab3416adabca63141d8c2d')<br>
+&gt;&gt;&gt;&nbsp;t<br>
+&lt;track&nbsp;-&nbsp;Neverwas&nbsp;Restored&nbsp;(from&nbsp;Neverwas&nbsp;Soundtrack)&gt;<br>
+&gt;&gt;&gt;<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="pyechonest.track.html#Track">Track</a></dd>
+<dd><a href="pyechonest.proxies.html#TrackProxy">pyechonest.proxies.TrackProxy</a></dd>
+<dd><a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Track-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Track-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Methods inherited from <a href="pyechonest.proxies.html#TrackProxy">pyechonest.proxies.TrackProxy</a>:<br>
+<dl><dt><a name="Track-__init__"><strong>__init__</strong></a>(self, identifier, md5, properties)</dt><dd><tt>You&nbsp;should&nbsp;not&nbsp;call&nbsp;this&nbsp;constructor&nbsp;directly,&nbsp;rather&nbsp;use&nbsp;the&nbsp;convenience&nbsp;functions<br>
+that&nbsp;are&nbsp;in&nbsp;track.py.&nbsp;For&nbsp;example,&nbsp;call&nbsp;track.track_from_filename<br>
+Let's&nbsp;always&nbsp;get&nbsp;the&nbsp;bucket&nbsp;`audio_summary`</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a>:<br>
+<dl><dt><a name="Track-get_attribute"><strong>get_attribute</strong></a>(self, method_name, **kwargs)</dt></dl>
+
+<dl><dt><a name="Track-post_attribute"><strong>post_attribute</strong></a>(self, method_name, **kwargs)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-track_from_file"><strong>track_from_file</strong></a>(file_object, filetype)</dt><dd><tt>Create&nbsp;a&nbsp;track&nbsp;object&nbsp;from&nbsp;a&nbsp;file-like&nbsp;object.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;file_object:&nbsp;a&nbsp;file-like&nbsp;Python&nbsp;object<br>
+&nbsp;&nbsp;&nbsp;&nbsp;filetype:&nbsp;the&nbsp;file&nbsp;type&nbsp;(ex.&nbsp;mp3,&nbsp;ogg,&nbsp;wav)</tt></dd></dl>
+ <dl><dt><a name="-track_from_filename"><strong>track_from_filename</strong></a>(filename, filetype<font color="#909090">=None</font>)</dt><dd><tt>Create&nbsp;a&nbsp;track&nbsp;object&nbsp;from&nbsp;a&nbsp;filename.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;filename:&nbsp;A&nbsp;string&nbsp;containing&nbsp;the&nbsp;path&nbsp;to&nbsp;the&nbsp;input&nbsp;file.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;filetype:&nbsp;A&nbsp;string&nbsp;indicating&nbsp;the&nbsp;filetype;&nbsp;Defaults&nbsp;to&nbsp;None&nbsp;(type&nbsp;determined&nbsp;by&nbsp;file&nbsp;extension).</tt></dd></dl>
+ <dl><dt><a name="-track_from_id"><strong>track_from_id</strong></a>(identifier)</dt><dd><tt>Create&nbsp;a&nbsp;track&nbsp;object&nbsp;from&nbsp;an&nbsp;Echo&nbsp;Nest&nbsp;track&nbsp;ID.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;identifier:&nbsp;A&nbsp;string&nbsp;containing&nbsp;the&nbsp;ID&nbsp;of&nbsp;a&nbsp;track&nbsp;already&nbsp;analyzed&nbsp;(looks&nbsp;like&nbsp;"TRLMNOP12345678901").</tt></dd></dl>
+ <dl><dt><a name="-track_from_md5"><strong>track_from_md5</strong></a>(md5)</dt><dd><tt>Create&nbsp;a&nbsp;track&nbsp;object&nbsp;from&nbsp;an&nbsp;md5&nbsp;hash.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;md5:&nbsp;A&nbsp;string&nbsp;32&nbsp;characters&nbsp;long&nbsp;giving&nbsp;the&nbsp;md5&nbsp;checksum&nbsp;of&nbsp;a&nbsp;track&nbsp;already&nbsp;analyzed.</tt></dd></dl>
+ <dl><dt><a name="-track_from_reanalyzing_id"><strong>track_from_reanalyzing_id</strong></a>(identifier)</dt><dd><tt>Create&nbsp;a&nbsp;track&nbsp;object&nbsp;from&nbsp;an&nbsp;Echo&nbsp;Nest&nbsp;track&nbsp;ID,&nbsp;reanalyzing&nbsp;the&nbsp;track&nbsp;first.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;identifier:&nbsp;A&nbsp;string&nbsp;containing&nbsp;the&nbsp;ID&nbsp;of&nbsp;a&nbsp;track&nbsp;already&nbsp;analyzed&nbsp;(looks&nbsp;like&nbsp;"TRLMNOP12345678901").</tt></dd></dl>
+ <dl><dt><a name="-track_from_reanalyzing_md5"><strong>track_from_reanalyzing_md5</strong></a>(md5)</dt><dd><tt>Create&nbsp;a&nbsp;track&nbsp;object&nbsp;from&nbsp;an&nbsp;md5&nbsp;hash,&nbsp;reanalyzing&nbsp;the&nbsp;track&nbsp;first.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;md5:&nbsp;A&nbsp;string&nbsp;containing&nbsp;the&nbsp;md5&nbsp;of&nbsp;a&nbsp;track&nbsp;already&nbsp;analyzed&nbsp;(looks&nbsp;like&nbsp;"TRLMNOP12345678901").</tt></dd></dl>
+ <dl><dt><a name="-track_from_url"><strong>track_from_url</strong></a>(url)</dt><dd><tt>Create&nbsp;a&nbsp;track&nbsp;object&nbsp;from&nbsp;a&nbsp;public&nbsp;http&nbsp;URL.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;url:&nbsp;A&nbsp;string&nbsp;giving&nbsp;the&nbsp;URL&nbsp;to&nbsp;read&nbsp;from.&nbsp;This&nbsp;must&nbsp;be&nbsp;on&nbsp;a&nbsp;public&nbsp;machine&nbsp;accessible&nbsp;by&nbsp;HTTP.</tt></dd></dl>
+</td></tr></table>
+</body></html>

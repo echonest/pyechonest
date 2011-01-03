@@ -1,0 +1,218 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module pyechonest.util</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="pyechonest.html"><font color="#ffffff">pyechonest</font></a>.util</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="http://pyechonest.googlecode.com/svn/trunk/doc/util.py">http://pyechonest.googlecode.com/svn/trunk/doc/util.py</a></font></td></tr></table>
+    <p><tt>Copyright&nbsp;(c)&nbsp;2010&nbsp;The&nbsp;Echo&nbsp;Nest.&nbsp;All&nbsp;rights&nbsp;reserved.<br>
+Created&nbsp;by&nbsp;Tyler&nbsp;Williams&nbsp;on&nbsp;2010-04-25.<br>
+&nbsp;<br>
+Utility&nbsp;functions&nbsp;to&nbsp;support&nbsp;the&nbsp;Echo&nbsp;Nest&nbsp;web&nbsp;API&nbsp;interface.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="pyechonest.config.html">pyechonest.config</a><br>
+<a href="httplib.html">httplib</a><br>
+<a href="json.html">json</a><br>
+</td><td width="25%" valign=top><a href="logging.html">logging</a><br>
+<a href="os.html">os</a><br>
+<a href="re.html">re</a><br>
+</td><td width="25%" valign=top><a href="socket.html">socket</a><br>
+<a href="subprocess.html">subprocess</a><br>
+<a href="time.html">time</a><br>
+</td><td width="25%" valign=top><a href="traceback.html">traceback</a><br>
+<a href="urllib.html">urllib</a><br>
+<a href="urllib2.html">urllib2</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>(<a href="exceptions.html#BaseException">exceptions.BaseException</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="pyechonest.util.html#EchoNestAPIError">EchoNestAPIError</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="pyechonest.util.html#MyBaseHandler">MyBaseHandler</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="urllib2.html#HTTPErrorProcessor">urllib2.HTTPErrorProcessor</a>(<a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="pyechonest.util.html#MyErrorProcessor">MyErrorProcessor</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="EchoNestAPIError">class <strong>EchoNestAPIError</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Generic&nbsp;API&nbsp;errors.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="pyechonest.util.html#EchoNestAPIError">EchoNestAPIError</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="EchoNestAPIError-__init__"><strong>__init__</strong></a>(self, code, message)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object at 0x100119f80&gt;<dd><tt>T.<a href="#EchoNestAPIError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;object&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="EchoNestAPIError-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#EchoNestAPIError-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="EchoNestAPIError-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#EchoNestAPIError-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="EchoNestAPIError-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#EchoNestAPIError-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="EchoNestAPIError-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#EchoNestAPIError-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="EchoNestAPIError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="EchoNestAPIError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#EchoNestAPIError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="EchoNestAPIError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#EchoNestAPIError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="EchoNestAPIError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="EchoNestAPIError-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#EchoNestAPIError-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="EchoNestAPIError-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MyBaseHandler">class <strong>MyBaseHandler</strong></a>(<a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="MyBaseHandler-default_open"><strong>default_open</strong></a>(self, request)</dt></dl>
+
+<hr>
+Methods inherited from <a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>:<br>
+<dl><dt><a name="MyBaseHandler-__lt__"><strong>__lt__</strong></a>(self, other)</dt></dl>
+
+<dl><dt><a name="MyBaseHandler-add_parent"><strong>add_parent</strong></a>(self, parent)</dt></dl>
+
+<dl><dt><a name="MyBaseHandler-close"><strong>close</strong></a>(self)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>:<br>
+<dl><dt><strong>handler_order</strong> = 500</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MyErrorProcessor">class <strong>MyErrorProcessor</strong></a>(<a href="urllib2.html#HTTPErrorProcessor">urllib2.HTTPErrorProcessor</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="pyechonest.util.html#MyErrorProcessor">MyErrorProcessor</a></dd>
+<dd><a href="urllib2.html#HTTPErrorProcessor">urllib2.HTTPErrorProcessor</a></dd>
+<dd><a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="MyErrorProcessor-http_response"><strong>http_response</strong></a>(self, request, response)</dt></dl>
+
+<hr>
+Methods inherited from <a href="urllib2.html#HTTPErrorProcessor">urllib2.HTTPErrorProcessor</a>:<br>
+<dl><dt><a name="MyErrorProcessor-https_response"><strong>https_response</strong></a> = http_response(self, request, response)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="urllib2.html#HTTPErrorProcessor">urllib2.HTTPErrorProcessor</a>:<br>
+<dl><dt><strong>handler_order</strong> = 1000</dl>
+
+<hr>
+Methods inherited from <a href="urllib2.html#BaseHandler">urllib2.BaseHandler</a>:<br>
+<dl><dt><a name="MyErrorProcessor-__lt__"><strong>__lt__</strong></a>(self, other)</dt></dl>
+
+<dl><dt><a name="MyErrorProcessor-add_parent"><strong>add_parent</strong></a>(self, parent)</dt></dl>
+
+<dl><dt><a name="MyErrorProcessor-close"><strong>close</strong></a>(self)</dt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-callm"><strong>callm</strong></a>(method, param_dict, POST<font color="#909090">=False</font>, socket_timeout<font color="#909090">=None</font>, data<font color="#909090">=None</font>)</dt><dd><tt>Call&nbsp;the&nbsp;api!&nbsp;<br>
+Param_dict&nbsp;is&nbsp;a&nbsp;*regular*&nbsp;*python*&nbsp;*dictionary*&nbsp;so&nbsp;if&nbsp;you&nbsp;want&nbsp;to&nbsp;have&nbsp;multi-valued&nbsp;params<br>
+put&nbsp;them&nbsp;in&nbsp;a&nbsp;list.<br>
+&nbsp;<br>
+**&nbsp;note,&nbsp;if&nbsp;we&nbsp;require&nbsp;2.6,&nbsp;we&nbsp;can&nbsp;get&nbsp;rid&nbsp;of&nbsp;this&nbsp;timeout&nbsp;munging.</tt></dd></dl>
+ <dl><dt><a name="-codegen"><strong>codegen</strong></a>(filename, start<font color="#909090">=0</font>, duration<font color="#909090">=30</font>)</dt></dl>
+ <dl><dt><a name="-fix"><strong>fix</strong></a>(x)</dt></dl>
+ <dl><dt><a name="-get_successful_response"><strong>get_successful_response</strong></a>(raw_json)</dt></dl>
+ <dl><dt><a name="-postChunked"><strong>postChunked</strong></a>(host, selector, fields, files)</dt><dd><tt>Attempt&nbsp;to&nbsp;replace&nbsp;postMultipart()&nbsp;with&nbsp;nearly-identical&nbsp;interface.<br>
+(The&nbsp;files&nbsp;tuple&nbsp;no&nbsp;longer&nbsp;requires&nbsp;the&nbsp;filename,&nbsp;and&nbsp;we&nbsp;only&nbsp;return<br>
+the&nbsp;response&nbsp;body.)&nbsp;<br>
+Uses&nbsp;the&nbsp;urllib2_file.py&nbsp;originally&nbsp;from&nbsp;<br>
+<a href="http://fabien.seisen.org">http://fabien.seisen.org</a>&nbsp;which&nbsp;was&nbsp;also&nbsp;drawn&nbsp;heavily&nbsp;from&nbsp;<br>
+<a href="http://code.activestate.com/recipes/146306/">http://code.activestate.com/recipes/146306/</a>&nbsp;.<br>
+&nbsp;<br>
+This&nbsp;urllib2_file.py&nbsp;is&nbsp;more&nbsp;desirable&nbsp;because&nbsp;of&nbsp;the&nbsp;chunked&nbsp;<br>
+uploading&nbsp;from&nbsp;a&nbsp;file&nbsp;pointer&nbsp;(no&nbsp;need&nbsp;to&nbsp;read&nbsp;entire&nbsp;file&nbsp;into&nbsp;<br>
+memory)&nbsp;and&nbsp;the&nbsp;ability&nbsp;to&nbsp;work&nbsp;from&nbsp;behind&nbsp;a&nbsp;proxy&nbsp;(due&nbsp;to&nbsp;its&nbsp;<br>
+basis&nbsp;on&nbsp;urllib2).</tt></dd></dl>
+ <dl><dt><a name="-reallyUTF8"><strong>reallyUTF8</strong></a>(s)</dt></dl>
+ <dl><dt><a name="-reallyunicode"><strong>reallyunicode</strong></a>(s, encoding<font color="#909090">='utf-8'</font>)</dt><dd><tt>#&nbsp;These&nbsp;two&nbsp;functions&nbsp;are&nbsp;to&nbsp;deal&nbsp;with&nbsp;the&nbsp;unknown&nbsp;encoded&nbsp;output&nbsp;of&nbsp;codegen&nbsp;(varies&nbsp;by&nbsp;platform&nbsp;and&nbsp;ID3&nbsp;tag)</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>TYPENAMES</strong> = (('AR', 'artist'), ('SO', 'song'), ('RE', 'release'), ('TR', 'track'), ('PE', 'person'), ('DE', 'device'), ('LI', 'listener'), ('ED', 'editor'), ('TW', 'tweditor'), ('CA', 'catalog'))<br>
+<strong>foreign_regex</strong> = &lt;_sre.SRE_Pattern object at 0x101006350&gt;<br>
+<strong>headers</strong> = [('User-Agent', 'Pyechonest 4.2')]<br>
+<strong>logger</strong> = &lt;logging.Logger instance at 0x100782710&gt;<br>
+<strong>long_regex</strong> = &lt;_sre.SRE_Pattern object at 0x101007240&gt;<br>
+<strong>opener</strong> = &lt;urllib2.OpenerDirector instance at 0x100780200&gt;<br>
+<strong>short_regex</strong> = &lt;_sre.SRE_Pattern object at 0x1002f4d00&gt;</td></tr></table>
+</body></html>

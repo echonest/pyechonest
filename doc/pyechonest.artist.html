@@ -1,0 +1,944 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module pyechonest.artist</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="pyechonest.html"><font color="#ffffff">pyechonest</font></a>.artist</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="http://pyechonest.googlecode.com/svn/trunk/doc/artist.py">http://pyechonest.googlecode.com/svn/trunk/doc/artist.py</a></font></td></tr></table>
+    <p><tt>Copyright&nbsp;(c)&nbsp;2010&nbsp;The&nbsp;Echo&nbsp;Nest.&nbsp;All&nbsp;rights&nbsp;reserved.<br>
+Created&nbsp;by&nbsp;Tyler&nbsp;Williams&nbsp;on&nbsp;2010-04-25.<br>
+&nbsp;<br>
+The&nbsp;<a href="#Artist">Artist</a>&nbsp;module&nbsp;loosely&nbsp;covers&nbsp;<a href="http://developer.echonest.com/docs/v4/artist.html">http://developer.echonest.com/docs/v4/artist.html</a><br>
+Refer&nbsp;to&nbsp;the&nbsp;official&nbsp;api&nbsp;documentation&nbsp;if&nbsp;you&nbsp;are&nbsp;unsure&nbsp;about&nbsp;something.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="pyechonest.util.html">pyechonest.util</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="pyechonest.proxies.html#ArtistProxy">pyechonest.proxies.ArtistProxy</a>(<a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="pyechonest.artist.html#Artist">Artist</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Artist">class <strong>Artist</strong></a>(<a href="pyechonest.proxies.html#ArtistProxy">pyechonest.proxies.ArtistProxy</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>An&nbsp;<a href="#Artist">Artist</a>&nbsp;object<br>
+&nbsp;<br>
+Attributes:&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;(str):&nbsp;Echo&nbsp;Nest&nbsp;<a href="#Artist">Artist</a>&nbsp;ID<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;(str):&nbsp;<a href="#Artist">Artist</a>&nbsp;Name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;audio&nbsp;(list):&nbsp;<a href="#Artist">Artist</a>&nbsp;audio<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;biographies&nbsp;(list):&nbsp;<a href="#Artist">Artist</a>&nbsp;biographies<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;blogs&nbsp;(list):&nbsp;<a href="#Artist">Artist</a>&nbsp;blogs<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;familiarity&nbsp;(float):&nbsp;<a href="#Artist">Artist</a>&nbsp;familiarity<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;hotttnesss&nbsp;(float):&nbsp;<a href="#Artist">Artist</a>&nbsp;hotttnesss<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;images&nbsp;(list):&nbsp;<a href="#Artist">Artist</a>&nbsp;images<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;news&nbsp;(list):&nbsp;<a href="#Artist">Artist</a>&nbsp;news<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;reviews&nbsp;(list):&nbsp;<a href="#Artist">Artist</a>&nbsp;reviews<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;similar&nbsp;(list):&nbsp;Similar&nbsp;Artists<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;songs&nbsp;(list):&nbsp;A&nbsp;list&nbsp;of&nbsp;song&nbsp;objects<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;terms&nbsp;(list):&nbsp;Terms&nbsp;for&nbsp;an&nbsp;artist<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;urls&nbsp;(list):&nbsp;<a href="#Artist">Artist</a>&nbsp;urls<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;video&nbsp;(list):&nbsp;<a href="#Artist">Artist</a>&nbsp;video<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+You&nbsp;create&nbsp;an&nbsp;artist&nbsp;object&nbsp;like&nbsp;this:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('ARH6W4X1187B99274F')<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('the&nbsp;national')<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('musicbrainz:artist:a74b1b7f-71a5-4011-9441-d0b5e4122711')<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="pyechonest.artist.html#Artist">Artist</a></dd>
+<dd><a href="pyechonest.proxies.html#ArtistProxy">pyechonest.proxies.ArtistProxy</a></dd>
+<dd><a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Artist-__cmp__"><strong>__cmp__</strong></a>(self, other)</dt></dl>
+
+<dl><dt><a name="Artist-__init__"><strong>__init__</strong></a>(self, id, **kwargs)</dt><dd><tt><a href="#Artist">Artist</a>&nbsp;class<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;(str):&nbsp;an&nbsp;artistw&nbsp;ID&nbsp;<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;An&nbsp;artist&nbsp;object<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('ARH6W4X1187B99274F',&nbsp;buckets=['hotttnesss'])<br>
+&gt;&gt;&gt;&nbsp;a.hotttnesss<br>
+0.80098515900997658<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Artist-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Artist-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Artist-get_audio"><strong>get_audio</strong></a>(self, results<font color="#909090">=15</font>, start<font color="#909090">=0</font>, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;a&nbsp;list&nbsp;of&nbsp;audio&nbsp;documents&nbsp;found&nbsp;on&nbsp;the&nbsp;web&nbsp;related&nbsp;to&nbsp;an&nbsp;artist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;audio&nbsp;document&nbsp;dicts<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('alphabeat')<br>
+&gt;&gt;&gt;&nbsp;a.<a href="#Artist-get_audio">get_audio</a>()[0]<br>
+{u'artist':&nbsp;u'Alphabeat',<br>
+&nbsp;u'date':&nbsp;u'2010-04-28T01:40:45',<br>
+&nbsp;u'id':&nbsp;u'70be4373fa57ac2eee8c7f30b0580899',<br>
+&nbsp;u'length':&nbsp;210.0,<br>
+&nbsp;u'link':&nbsp;u'<a href="http://iamthecrime.com">http://iamthecrime.com</a>',<br>
+&nbsp;u'release':&nbsp;u'The&nbsp;Beat&nbsp;Is...',<br>
+&nbsp;u'title':&nbsp;u'DJ',<br>
+&nbsp;u'url':&nbsp;u'<a href="http://iamthecrime.com/wp-content/uploads/2010/04/03_DJ_iatc.mp3">http://iamthecrime.com/wp-content/uploads/2010/04/03_DJ_iatc.mp3</a>'}<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Artist-get_biographies"><strong>get_biographies</strong></a>(self, results<font color="#909090">=15</font>, start<font color="#909090">=0</font>, license<font color="#909090">='unknown'</font>, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;a&nbsp;list&nbsp;of&nbsp;artist&nbsp;biographies<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;license&nbsp;(str):&nbsp;A&nbsp;string&nbsp;specifying&nbsp;the&nbsp;desired&nbsp;license&nbsp;type<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;biography&nbsp;document&nbsp;dicts<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('britney&nbsp;spears')<br>
+&gt;&gt;&gt;&nbsp;bio&nbsp;=&nbsp;a.<a href="#Artist-get_biographies">get_biographies</a>(results=1)[0]<br>
+&gt;&gt;&gt;&nbsp;bio['url']<br>
+u'<a href="http://www.mtvmusic.com/spears_britney">http://www.mtvmusic.com/spears_britney</a>'<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Artist-get_blogs"><strong>get_blogs</strong></a>(self, results<font color="#909090">=15</font>, start<font color="#909090">=0</font>, cache<font color="#909090">=True</font>, high_relevance<font color="#909090">=False</font>)</dt><dd><tt>Get&nbsp;a&nbsp;list&nbsp;of&nbsp;blog&nbsp;articles&nbsp;related&nbsp;to&nbsp;an&nbsp;artist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;ingteger&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;blog&nbsp;document&nbsp;dicts<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('bob&nbsp;marley')<br>
+&gt;&gt;&gt;&nbsp;blog&nbsp;=&nbsp;a.<a href="#Artist-get_blogs">get_blogs</a>(results=1,start=4)[0]<br>
+&gt;&gt;&gt;&nbsp;blog['summary']<br>
+But&nbsp;the&nbsp;Kenyans&nbsp;I&nbsp;know&nbsp;relate&nbsp;to&nbsp;music&nbsp;about&nbsp;the&nbsp;same&nbsp;way&nbsp;Americans&nbsp;do.&nbsp;They&nbsp;like&nbsp;their&nbsp;Congolese&nbsp;afropop,&nbsp;<br>
+and&nbsp;I've&nbsp;known&nbsp;some&nbsp;to&nbsp;be&nbsp;big&nbsp;fans&nbsp;of&nbsp;international&nbsp;acts&nbsp;like&nbsp;&lt;span&gt;Bob&lt;/span&gt;&nbsp;&lt;span&gt;Marley&lt;/span&gt;&nbsp;and&nbsp;Dolly&nbsp;Parton.&nbsp;<br>
+They&nbsp;rarely&nbsp;talk&nbsp;about&nbsp;music&nbsp;that's&nbsp;indigenous&nbsp;in&nbsp;the&nbsp;way&nbsp;a&nbsp;South&nbsp;African&nbsp;or&nbsp;Malian&nbsp;or&nbsp;Zimbabwean&nbsp;would,&nbsp;and&nbsp;it's&nbsp;<br>
+even&nbsp;rarer&nbsp;to&nbsp;actually&nbsp;hear&nbsp;such&nbsp;indigenous&nbsp;music.&nbsp;I&nbsp;do&nbsp;sometimes&nbsp;hear&nbsp;ceremonial&nbsp;chanting&nbsp;from&nbsp;the&nbsp;Maasai,&nbsp;but&nbsp;only&nbsp;<br>
+when&nbsp;they're&nbsp;dancing&nbsp;for&nbsp;tourists.&nbsp;If&nbsp;East&nbsp;Africa&nbsp;isn't&nbsp;the&nbsp;most&nbsp;musical&nbsp;part&nbsp;...&nbsp;"<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Artist-get_familiarity"><strong>get_familiarity</strong></a>(self, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;our&nbsp;numerical&nbsp;estimation&nbsp;of&nbsp;how&nbsp;familiar&nbsp;an&nbsp;artist&nbsp;currently&nbsp;is&nbsp;to&nbsp;the&nbsp;world<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;float&nbsp;representing&nbsp;familiarity.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('frank&nbsp;sinatra')<br>
+&gt;&gt;&gt;&nbsp;a.<a href="#Artist-get_familiarity">get_familiarity</a>()<br>
+0.65142555825947457<br>
+&gt;&gt;&gt;&nbsp;a.familiarity<br>
+0.65142555825947457<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Artist-get_foreign_id"><strong>get_foreign_id</strong></a>(self, idspace<font color="#909090">='musicbrainz'</font>, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;the&nbsp;foreign&nbsp;id&nbsp;for&nbsp;this&nbsp;artist&nbsp;for&nbsp;a&nbsp;specific&nbsp;id&nbsp;space<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;idspace&nbsp;(str):&nbsp;A&nbsp;string&nbsp;indicating&nbsp;the&nbsp;idspace&nbsp;to&nbsp;fetch&nbsp;a&nbsp;foreign&nbsp;id&nbsp;for.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;foreign&nbsp;ID&nbsp;string<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('fabulous')<br>
+&gt;&gt;&gt;&nbsp;a.<a href="#Artist-get_foreign_id">get_foreign_id</a>('7digital')<br>
+u'7digital:artist:186042'<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Artist-get_hotttnesss"><strong>get_hotttnesss</strong></a>(self, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;our&nbsp;numerical&nbsp;description&nbsp;of&nbsp;how&nbsp;hottt&nbsp;an&nbsp;artist&nbsp;currently&nbsp;is<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;the&nbsp;hotttnesss&nbsp;value<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('hannah&nbsp;montana')<br>
+&gt;&gt;&gt;&nbsp;a.<a href="#Artist-get_hotttnesss">get_hotttnesss</a>()<br>
+0.59906022155998995<br>
+&gt;&gt;&gt;&nbsp;a.hotttnesss<br>
+0.59906022155998995<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Artist-get_images"><strong>get_images</strong></a>(self, results<font color="#909090">=15</font>, start<font color="#909090">=0</font>, license<font color="#909090">='unknown'</font>, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;a&nbsp;list&nbsp;of&nbsp;artist&nbsp;images<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;license&nbsp;(str):&nbsp;A&nbsp;string&nbsp;specifying&nbsp;the&nbsp;desired&nbsp;license&nbsp;type<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;image&nbsp;document&nbsp;dicts<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('imogen&nbsp;heap')<br>
+&gt;&gt;&gt;&nbsp;image&nbsp;=&nbsp;a.<a href="#Artist-get_images">get_images</a>(results=1)[0]<br>
+&gt;&gt;&gt;&nbsp;image['url']<br>
+u'<a href="http://c1.ac-images.myspacecdn.com/images01/21/l_7fbcefbdc5f7185fb397882cad9d53b8.jpg">http://c1.ac-images.myspacecdn.com/images01/21/l_7fbcefbdc5f7185fb397882cad9d53b8.jpg</a>'<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Artist-get_news"><strong>get_news</strong></a>(self, results<font color="#909090">=15</font>, start<font color="#909090">=0</font>, cache<font color="#909090">=True</font>, high_relevance<font color="#909090">=False</font>)</dt><dd><tt>Get&nbsp;a&nbsp;list&nbsp;of&nbsp;news&nbsp;articles&nbsp;found&nbsp;on&nbsp;the&nbsp;web&nbsp;related&nbsp;to&nbsp;an&nbsp;artist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;news&nbsp;document&nbsp;dicts<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('Nirvana')<br>
+&gt;&gt;&gt;&nbsp;news&nbsp;=&nbsp;a.news[0]<br>
+&gt;&gt;&gt;&nbsp;news['name']<br>
+u'Experience&nbsp;Music&nbsp;Project&nbsp;Attains&nbsp;Nirvana'<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Artist-get_reviews"><strong>get_reviews</strong></a>(self, results<font color="#909090">=15</font>, start<font color="#909090">=0</font>, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;reviews&nbsp;related&nbsp;to&nbsp;an&nbsp;artist's&nbsp;work<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;review&nbsp;document&nbsp;dicts<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('Rilo&nbsp;Kiley')<br>
+&gt;&gt;&gt;&nbsp;review&nbsp;=&nbsp;a.reviews[10]<br>
+&gt;&gt;&gt;&nbsp;review['release']<br>
+u'Under&nbsp;the&nbsp;Blacklight'<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Artist-get_similar"><strong>get_similar</strong></a>(self, results<font color="#909090">=15</font>, start<font color="#909090">=0</font>, buckets<font color="#909090">=None</font>, limit<font color="#909090">=False</font>, cache<font color="#909090">=True</font>, max_familiarity<font color="#909090">=None</font>, min_familiarity<font color="#909090">=None</font>, max_hotttnesss<font color="#909090">=None</font>, min_hotttnesss<font color="#909090">=None</font>, min_results<font color="#909090">=None</font>, reverse<font color="#909090">=False</font>)</dt><dd><tt>Return&nbsp;similar&nbsp;artists&nbsp;to&nbsp;this&nbsp;one<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_familiarity&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;familiarity&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_familiarity&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;min&nbsp;familiarity&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;reverse&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;to&nbsp;return&nbsp;dissimilar&nbsp;artists&nbsp;(wrecommender).&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;similar&nbsp;<a href="#Artist">Artist</a>&nbsp;objects<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('Sleater&nbsp;Kinney')<br>
+&gt;&gt;&gt;&nbsp;similars&nbsp;=&nbsp;a.similar[:5]<br>
+&gt;&gt;&gt;&nbsp;similars<br>
+[&lt;artist&nbsp;-&nbsp;Bikini&nbsp;Kill&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Pretty&nbsp;Girls&nbsp;Make&nbsp;Graves&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Huggy&nbsp;Bear&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Bratmobile&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Team&nbsp;Dresch&gt;]<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Artist-get_songs"><strong>get_songs</strong></a>(self, cache<font color="#909090">=True</font>, results<font color="#909090">=15</font>, start<font color="#909090">=0</font>)</dt><dd><tt>Get&nbsp;the&nbsp;songs&nbsp;associated&nbsp;with&nbsp;an&nbsp;artist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Results:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;Song&nbsp;objects<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('Strokes')<br>
+&gt;&gt;&gt;&nbsp;a.<a href="#Artist-get_songs">get_songs</a>(results=5)<br>
+[&lt;song&nbsp;-&nbsp;Fear&nbsp;Of&nbsp;Sleep&gt;,&nbsp;&lt;song&nbsp;-&nbsp;Red&nbsp;Light&gt;,&nbsp;&lt;song&nbsp;-&nbsp;Ize&nbsp;Of&nbsp;The&nbsp;World&gt;,&nbsp;&lt;song&nbsp;-&nbsp;Evening&nbsp;Sun&gt;,&nbsp;&lt;song&nbsp;-&nbsp;Juicebox&gt;]<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Artist-get_terms"><strong>get_terms</strong></a>(self, sort<font color="#909090">='weight'</font>, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;the&nbsp;terms&nbsp;associated&nbsp;with&nbsp;an&nbsp;artist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sort&nbsp;(str):&nbsp;A&nbsp;string&nbsp;specifying&nbsp;the&nbsp;desired&nbsp;sorting&nbsp;type&nbsp;(weight&nbsp;or&nbsp;frequency)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Results:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;term&nbsp;document&nbsp;dicts<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('tom&nbsp;petty')<br>
+&gt;&gt;&gt;&nbsp;a.terms<br>
+[{u'frequency':&nbsp;1.0,&nbsp;u'name':&nbsp;u'heartland&nbsp;rock',&nbsp;u'weight':&nbsp;1.0},<br>
+&nbsp;{u'frequency':&nbsp;0.88569401860168606,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'jam&nbsp;band',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.9116501862732439},<br>
+&nbsp;{u'frequency':&nbsp;0.9656145118557401,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'pop&nbsp;rock',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.89777934440040685},<br>
+&nbsp;{u'frequency':&nbsp;0.8414744288140491,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'southern&nbsp;rock',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.8698567153186606},<br>
+&nbsp;{u'frequency':&nbsp;0.9656145118557401,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'hard&nbsp;rock',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.85738022655218893},<br>
+&nbsp;{u'frequency':&nbsp;0.88569401860168606,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'singer-songwriter',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.77427243392312772},<br>
+&nbsp;{u'frequency':&nbsp;0.88569401860168606,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'rock',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.71158718989399083},<br>
+&nbsp;{u'frequency':&nbsp;0.60874110500110956,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'album&nbsp;rock',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.69758668733499629},<br>
+&nbsp;{u'frequency':&nbsp;0.74350792060935744,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'psychedelic',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.68457367494207944},<br>
+&nbsp;{u'frequency':&nbsp;0.77213698386292873,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'pop',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.65039556639337293},<br>
+&nbsp;{u'frequency':&nbsp;0.41747136183050298,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'bar&nbsp;band',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.54974975024767025}]<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Artist-get_urls"><strong>get_urls</strong></a>(self, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;the&nbsp;urls&nbsp;for&nbsp;an&nbsp;artist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Results:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;url&nbsp;document&nbsp;dict<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('the&nbsp;unicorns')<br>
+&gt;&gt;&gt;&nbsp;a.<a href="#Artist-get_urls">get_urls</a>()<br>
+{u'amazon_url':&nbsp;u'<a href="http://www.amazon.com/gp/search?ie=UTF8&amp;keywords=The">http://www.amazon.com/gp/search?ie=UTF8&amp;keywords=The</a>&nbsp;Unicorns&amp;tag=httpechonecom-20&amp;index=music',<br>
+&nbsp;u'aolmusic_url':&nbsp;u'<a href="http://music.aol.com/artist/the-unicorns">http://music.aol.com/artist/the-unicorns</a>',<br>
+&nbsp;u'itunes_url':&nbsp;u'<a href="http://itunes.com/TheUnicorns">http://itunes.com/TheUnicorns</a>',<br>
+&nbsp;u'lastfm_url':&nbsp;u'<a href="http://www.last.fm/music/The+Unicorns">http://www.last.fm/music/The+Unicorns</a>',<br>
+&nbsp;u'mb_url':&nbsp;u'<a href="http://musicbrainz.org/artist/603c5f9f-492a-4f21-9d6f-1642a5dbea2d.html">http://musicbrainz.org/artist/603c5f9f-492a-4f21-9d6f-1642a5dbea2d.html</a>',<br>
+&nbsp;u'myspace_url':&nbsp;u'<a href="http://www.myspace.com/iwasbornunicorn">http://www.myspace.com/iwasbornunicorn</a>'}<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<dl><dt><a name="Artist-get_video"><strong>get_video</strong></a>(self, results<font color="#909090">=15</font>, start<font color="#909090">=0</font>, cache<font color="#909090">=True</font>)</dt><dd><tt>Get&nbsp;a&nbsp;list&nbsp;of&nbsp;video&nbsp;documents&nbsp;found&nbsp;on&nbsp;the&nbsp;web&nbsp;related&nbsp;to&nbsp;an&nbsp;artist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;video&nbsp;document&nbsp;dicts<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.<a href="#Artist">Artist</a>('the&nbsp;vapors')<br>
+&gt;&gt;&gt;&nbsp;a.<a href="#Artist-get_video">get_video</a>(results=1,&nbsp;start=2)<br>
+[{u'date_found':&nbsp;u'2009-12-28T08:27:48',<br>
+&nbsp;&nbsp;u'id':&nbsp;u'd02f9e6dc7904f70402d4676516286b9',<br>
+&nbsp;&nbsp;u'image_url':&nbsp;u'<a href="http://i1.ytimg.com/vi/p6c0wOFL3Us/default.jpg">http://i1.ytimg.com/vi/p6c0wOFL3Us/default.jpg</a>',<br>
+&nbsp;&nbsp;u'site':&nbsp;u'youtube',<br>
+&nbsp;&nbsp;u'title':&nbsp;u'The&nbsp;Vapors-Turning&nbsp;Japanese&nbsp;(rectangular&nbsp;white&nbsp;vinyl&nbsp;promo)',<br>
+&nbsp;&nbsp;u'url':&nbsp;u'<a href="http://youtube.com/watch?v=p6c0wOFL3Us">http://youtube.com/watch?v=p6c0wOFL3Us</a>'}]<br>
+&gt;&gt;&gt;</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>audio</strong></dt>
+<dd><tt>Get&nbsp;a&nbsp;list&nbsp;of&nbsp;audio&nbsp;documents&nbsp;found&nbsp;on&nbsp;the&nbsp;web&nbsp;related&nbsp;to&nbsp;an&nbsp;artist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;audio&nbsp;document&nbsp;dicts<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.Artist('alphabeat')<br>
+&gt;&gt;&gt;&nbsp;a.get_audio()[0]<br>
+{u'artist':&nbsp;u'Alphabeat',<br>
+&nbsp;u'date':&nbsp;u'2010-04-28T01:40:45',<br>
+&nbsp;u'id':&nbsp;u'70be4373fa57ac2eee8c7f30b0580899',<br>
+&nbsp;u'length':&nbsp;210.0,<br>
+&nbsp;u'link':&nbsp;u'<a href="http://iamthecrime.com">http://iamthecrime.com</a>',<br>
+&nbsp;u'release':&nbsp;u'The&nbsp;Beat&nbsp;Is...',<br>
+&nbsp;u'title':&nbsp;u'DJ',<br>
+&nbsp;u'url':&nbsp;u'<a href="http://iamthecrime.com/wp-content/uploads/2010/04/03_DJ_iatc.mp3">http://iamthecrime.com/wp-content/uploads/2010/04/03_DJ_iatc.mp3</a>'}<br>
+&gt;&gt;&gt;</tt></dd>
+</dl>
+<dl><dt><strong>biographies</strong></dt>
+<dd><tt>Get&nbsp;a&nbsp;list&nbsp;of&nbsp;artist&nbsp;biographies<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;license&nbsp;(str):&nbsp;A&nbsp;string&nbsp;specifying&nbsp;the&nbsp;desired&nbsp;license&nbsp;type<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;biography&nbsp;document&nbsp;dicts<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.Artist('britney&nbsp;spears')<br>
+&gt;&gt;&gt;&nbsp;bio&nbsp;=&nbsp;a.get_biographies(results=1)[0]<br>
+&gt;&gt;&gt;&nbsp;bio['url']<br>
+u'<a href="http://www.mtvmusic.com/spears_britney">http://www.mtvmusic.com/spears_britney</a>'<br>
+&gt;&gt;&gt;</tt></dd>
+</dl>
+<dl><dt><strong>blogs</strong></dt>
+<dd><tt>Get&nbsp;a&nbsp;list&nbsp;of&nbsp;blog&nbsp;articles&nbsp;related&nbsp;to&nbsp;an&nbsp;artist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;ingteger&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;blog&nbsp;document&nbsp;dicts<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.Artist('bob&nbsp;marley')<br>
+&gt;&gt;&gt;&nbsp;blog&nbsp;=&nbsp;a.get_blogs(results=1,start=4)[0]<br>
+&gt;&gt;&gt;&nbsp;blog['summary']<br>
+But&nbsp;the&nbsp;Kenyans&nbsp;I&nbsp;know&nbsp;relate&nbsp;to&nbsp;music&nbsp;about&nbsp;the&nbsp;same&nbsp;way&nbsp;Americans&nbsp;do.&nbsp;They&nbsp;like&nbsp;their&nbsp;Congolese&nbsp;afropop,&nbsp;<br>
+and&nbsp;I've&nbsp;known&nbsp;some&nbsp;to&nbsp;be&nbsp;big&nbsp;fans&nbsp;of&nbsp;international&nbsp;acts&nbsp;like&nbsp;&lt;span&gt;Bob&lt;/span&gt;&nbsp;&lt;span&gt;Marley&lt;/span&gt;&nbsp;and&nbsp;Dolly&nbsp;Parton.&nbsp;<br>
+They&nbsp;rarely&nbsp;talk&nbsp;about&nbsp;music&nbsp;that's&nbsp;indigenous&nbsp;in&nbsp;the&nbsp;way&nbsp;a&nbsp;South&nbsp;African&nbsp;or&nbsp;Malian&nbsp;or&nbsp;Zimbabwean&nbsp;would,&nbsp;and&nbsp;it's&nbsp;<br>
+even&nbsp;rarer&nbsp;to&nbsp;actually&nbsp;hear&nbsp;such&nbsp;indigenous&nbsp;music.&nbsp;I&nbsp;do&nbsp;sometimes&nbsp;hear&nbsp;ceremonial&nbsp;chanting&nbsp;from&nbsp;the&nbsp;Maasai,&nbsp;but&nbsp;only&nbsp;<br>
+when&nbsp;they're&nbsp;dancing&nbsp;for&nbsp;tourists.&nbsp;If&nbsp;East&nbsp;Africa&nbsp;isn't&nbsp;the&nbsp;most&nbsp;musical&nbsp;part&nbsp;...&nbsp;"<br>
+&gt;&gt;&gt;</tt></dd>
+</dl>
+<dl><dt><strong>familiarity</strong></dt>
+<dd><tt>Get&nbsp;our&nbsp;numerical&nbsp;estimation&nbsp;of&nbsp;how&nbsp;familiar&nbsp;an&nbsp;artist&nbsp;currently&nbsp;is&nbsp;to&nbsp;the&nbsp;world<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;float&nbsp;representing&nbsp;familiarity.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.Artist('frank&nbsp;sinatra')<br>
+&gt;&gt;&gt;&nbsp;a.get_familiarity()<br>
+0.65142555825947457<br>
+&gt;&gt;&gt;&nbsp;a.familiarity<br>
+0.65142555825947457<br>
+&gt;&gt;&gt;</tt></dd>
+</dl>
+<dl><dt><strong>hotttnesss</strong></dt>
+<dd><tt>Get&nbsp;our&nbsp;numerical&nbsp;description&nbsp;of&nbsp;how&nbsp;hottt&nbsp;an&nbsp;artist&nbsp;currently&nbsp;is<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;the&nbsp;hotttnesss&nbsp;value<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.Artist('hannah&nbsp;montana')<br>
+&gt;&gt;&gt;&nbsp;a.get_hotttnesss()<br>
+0.59906022155998995<br>
+&gt;&gt;&gt;&nbsp;a.hotttnesss<br>
+0.59906022155998995<br>
+&gt;&gt;&gt;</tt></dd>
+</dl>
+<dl><dt><strong>images</strong></dt>
+<dd><tt>Get&nbsp;a&nbsp;list&nbsp;of&nbsp;artist&nbsp;images<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;license&nbsp;(str):&nbsp;A&nbsp;string&nbsp;specifying&nbsp;the&nbsp;desired&nbsp;license&nbsp;type<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;image&nbsp;document&nbsp;dicts<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.Artist('imogen&nbsp;heap')<br>
+&gt;&gt;&gt;&nbsp;image&nbsp;=&nbsp;a.get_images(results=1)[0]<br>
+&gt;&gt;&gt;&nbsp;image['url']<br>
+u'<a href="http://c1.ac-images.myspacecdn.com/images01/21/l_7fbcefbdc5f7185fb397882cad9d53b8.jpg">http://c1.ac-images.myspacecdn.com/images01/21/l_7fbcefbdc5f7185fb397882cad9d53b8.jpg</a>'<br>
+&gt;&gt;&gt;</tt></dd>
+</dl>
+<dl><dt><strong>news</strong></dt>
+<dd><tt>Get&nbsp;a&nbsp;list&nbsp;of&nbsp;news&nbsp;articles&nbsp;found&nbsp;on&nbsp;the&nbsp;web&nbsp;related&nbsp;to&nbsp;an&nbsp;artist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;news&nbsp;document&nbsp;dicts<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.Artist('Nirvana')<br>
+&gt;&gt;&gt;&nbsp;news&nbsp;=&nbsp;a.news[0]<br>
+&gt;&gt;&gt;&nbsp;news['name']<br>
+u'Experience&nbsp;Music&nbsp;Project&nbsp;Attains&nbsp;Nirvana'<br>
+&gt;&gt;&gt;</tt></dd>
+</dl>
+<dl><dt><strong>reviews</strong></dt>
+<dd><tt>Get&nbsp;reviews&nbsp;related&nbsp;to&nbsp;an&nbsp;artist's&nbsp;work<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;review&nbsp;document&nbsp;dicts<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.Artist('Rilo&nbsp;Kiley')<br>
+&gt;&gt;&gt;&nbsp;review&nbsp;=&nbsp;a.reviews[10]<br>
+&gt;&gt;&gt;&nbsp;review['release']<br>
+u'Under&nbsp;the&nbsp;Blacklight'<br>
+&gt;&gt;&gt;</tt></dd>
+</dl>
+<dl><dt><strong>similar</strong></dt>
+<dd><tt>Return&nbsp;similar&nbsp;artists&nbsp;to&nbsp;this&nbsp;one<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_familiarity&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;familiarity&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_familiarity&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;min&nbsp;familiarity&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;reverse&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;to&nbsp;return&nbsp;dissimilar&nbsp;artists&nbsp;(wrecommender).&nbsp;Defaults&nbsp;to&nbsp;False.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;similar&nbsp;Artist&nbsp;objects<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.Artist('Sleater&nbsp;Kinney')<br>
+&gt;&gt;&gt;&nbsp;similars&nbsp;=&nbsp;a.similar[:5]<br>
+&gt;&gt;&gt;&nbsp;similars<br>
+[&lt;artist&nbsp;-&nbsp;Bikini&nbsp;Kill&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Pretty&nbsp;Girls&nbsp;Make&nbsp;Graves&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Huggy&nbsp;Bear&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Bratmobile&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Team&nbsp;Dresch&gt;]<br>
+&gt;&gt;&gt;</tt></dd>
+</dl>
+<dl><dt><strong>songs</strong></dt>
+<dd><tt>Get&nbsp;the&nbsp;songs&nbsp;associated&nbsp;with&nbsp;an&nbsp;artist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Results:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;Song&nbsp;objects<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.Artist('Strokes')<br>
+&gt;&gt;&gt;&nbsp;a.get_songs(results=5)<br>
+[&lt;song&nbsp;-&nbsp;Fear&nbsp;Of&nbsp;Sleep&gt;,&nbsp;&lt;song&nbsp;-&nbsp;Red&nbsp;Light&gt;,&nbsp;&lt;song&nbsp;-&nbsp;Ize&nbsp;Of&nbsp;The&nbsp;World&gt;,&nbsp;&lt;song&nbsp;-&nbsp;Evening&nbsp;Sun&gt;,&nbsp;&lt;song&nbsp;-&nbsp;Juicebox&gt;]<br>
+&gt;&gt;&gt;</tt></dd>
+</dl>
+<dl><dt><strong>terms</strong></dt>
+<dd><tt>Get&nbsp;the&nbsp;terms&nbsp;associated&nbsp;with&nbsp;an&nbsp;artist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sort&nbsp;(str):&nbsp;A&nbsp;string&nbsp;specifying&nbsp;the&nbsp;desired&nbsp;sorting&nbsp;type&nbsp;(weight&nbsp;or&nbsp;frequency)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Results:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;term&nbsp;document&nbsp;dicts<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.Artist('tom&nbsp;petty')<br>
+&gt;&gt;&gt;&nbsp;a.terms<br>
+[{u'frequency':&nbsp;1.0,&nbsp;u'name':&nbsp;u'heartland&nbsp;rock',&nbsp;u'weight':&nbsp;1.0},<br>
+&nbsp;{u'frequency':&nbsp;0.88569401860168606,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'jam&nbsp;band',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.9116501862732439},<br>
+&nbsp;{u'frequency':&nbsp;0.9656145118557401,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'pop&nbsp;rock',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.89777934440040685},<br>
+&nbsp;{u'frequency':&nbsp;0.8414744288140491,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'southern&nbsp;rock',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.8698567153186606},<br>
+&nbsp;{u'frequency':&nbsp;0.9656145118557401,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'hard&nbsp;rock',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.85738022655218893},<br>
+&nbsp;{u'frequency':&nbsp;0.88569401860168606,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'singer-songwriter',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.77427243392312772},<br>
+&nbsp;{u'frequency':&nbsp;0.88569401860168606,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'rock',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.71158718989399083},<br>
+&nbsp;{u'frequency':&nbsp;0.60874110500110956,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'album&nbsp;rock',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.69758668733499629},<br>
+&nbsp;{u'frequency':&nbsp;0.74350792060935744,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'psychedelic',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.68457367494207944},<br>
+&nbsp;{u'frequency':&nbsp;0.77213698386292873,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'pop',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.65039556639337293},<br>
+&nbsp;{u'frequency':&nbsp;0.41747136183050298,<br>
+&nbsp;&nbsp;u'name':&nbsp;u'bar&nbsp;band',<br>
+&nbsp;&nbsp;u'weight':&nbsp;0.54974975024767025}]<br>
+&gt;&gt;&gt;</tt></dd>
+</dl>
+<dl><dt><strong>urls</strong></dt>
+<dd><tt>Get&nbsp;the&nbsp;urls&nbsp;for&nbsp;an&nbsp;artist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Results:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;url&nbsp;document&nbsp;dict<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.Artist('the&nbsp;unicorns')<br>
+&gt;&gt;&gt;&nbsp;a.get_urls()<br>
+{u'amazon_url':&nbsp;u'<a href="http://www.amazon.com/gp/search?ie=UTF8&amp;keywords=The">http://www.amazon.com/gp/search?ie=UTF8&amp;keywords=The</a>&nbsp;Unicorns&amp;tag=httpechonecom-20&amp;index=music',<br>
+&nbsp;u'aolmusic_url':&nbsp;u'<a href="http://music.aol.com/artist/the-unicorns">http://music.aol.com/artist/the-unicorns</a>',<br>
+&nbsp;u'itunes_url':&nbsp;u'<a href="http://itunes.com/TheUnicorns">http://itunes.com/TheUnicorns</a>',<br>
+&nbsp;u'lastfm_url':&nbsp;u'<a href="http://www.last.fm/music/The+Unicorns">http://www.last.fm/music/The+Unicorns</a>',<br>
+&nbsp;u'mb_url':&nbsp;u'<a href="http://musicbrainz.org/artist/603c5f9f-492a-4f21-9d6f-1642a5dbea2d.html">http://musicbrainz.org/artist/603c5f9f-492a-4f21-9d6f-1642a5dbea2d.html</a>',<br>
+&nbsp;u'myspace_url':&nbsp;u'<a href="http://www.myspace.com/iwasbornunicorn">http://www.myspace.com/iwasbornunicorn</a>'}<br>
+&gt;&gt;&gt;</tt></dd>
+</dl>
+<dl><dt><strong>video</strong></dt>
+<dd><tt>Get&nbsp;a&nbsp;list&nbsp;of&nbsp;video&nbsp;documents&nbsp;found&nbsp;on&nbsp;the&nbsp;web&nbsp;related&nbsp;to&nbsp;an&nbsp;artist<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cache&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;the&nbsp;cached&nbsp;value&nbsp;should&nbsp;be&nbsp;used&nbsp;(if&nbsp;available).&nbsp;Defaults&nbsp;to&nbsp;True.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;video&nbsp;document&nbsp;dicts<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;a&nbsp;=&nbsp;artist.Artist('the&nbsp;vapors')<br>
+&gt;&gt;&gt;&nbsp;a.get_video(results=1,&nbsp;start=2)<br>
+[{u'date_found':&nbsp;u'2009-12-28T08:27:48',<br>
+&nbsp;&nbsp;u'id':&nbsp;u'd02f9e6dc7904f70402d4676516286b9',<br>
+&nbsp;&nbsp;u'image_url':&nbsp;u'<a href="http://i1.ytimg.com/vi/p6c0wOFL3Us/default.jpg">http://i1.ytimg.com/vi/p6c0wOFL3Us/default.jpg</a>',<br>
+&nbsp;&nbsp;u'site':&nbsp;u'youtube',<br>
+&nbsp;&nbsp;u'title':&nbsp;u'The&nbsp;Vapors-Turning&nbsp;Japanese&nbsp;(rectangular&nbsp;white&nbsp;vinyl&nbsp;promo)',<br>
+&nbsp;&nbsp;u'url':&nbsp;u'<a href="http://youtube.com/watch?v=p6c0wOFL3Us">http://youtube.com/watch?v=p6c0wOFL3Us</a>'}]<br>
+&gt;&gt;&gt;</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="pyechonest.proxies.html#ArtistProxy">pyechonest.proxies.ArtistProxy</a>:<br>
+<dl><dt><a name="Artist-get_attribute"><strong>get_attribute</strong></a>(self, *args, **kwargs)</dt></dl>
+
+<hr>
+Methods inherited from <a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a>:<br>
+<dl><dt><a name="Artist-post_attribute"><strong>post_attribute</strong></a>(self, method_name, **kwargs)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="pyechonest.proxies.html#GenericProxy">pyechonest.proxies.GenericProxy</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-search"><strong>search</strong></a>(name<font color="#909090">=None</font>, description<font color="#909090">=None</font>, results<font color="#909090">=15</font>, buckets<font color="#909090">=None</font>, limit<font color="#909090">=False</font>, fuzzy_match<font color="#909090">=False</font>, sort<font color="#909090">=None</font>, max_familiarity<font color="#909090">=None</font>, min_familiarity<font color="#909090">=None</font>, max_hotttnesss<font color="#909090">=None</font>, min_hotttnesss<font color="#909090">=None</font>)</dt><dd><tt>Search&nbsp;for&nbsp;artists&nbsp;by&nbsp;name,&nbsp;description,&nbsp;or&nbsp;constraint.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;(str):&nbsp;the&nbsp;name&nbsp;of&nbsp;an&nbsp;artist<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;description&nbsp;(str):&nbsp;A&nbsp;string&nbsp;describing&nbsp;the&nbsp;artist<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;buckets&nbsp;(list):&nbsp;A&nbsp;list&nbsp;of&nbsp;strings&nbsp;specifying&nbsp;which&nbsp;buckets&nbsp;to&nbsp;retrieve<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;limit&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;to&nbsp;limit&nbsp;the&nbsp;results&nbsp;to&nbsp;one&nbsp;of&nbsp;the&nbsp;id&nbsp;spaces&nbsp;specified&nbsp;in&nbsp;buckets<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;fuzzy_match&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;to&nbsp;search&nbsp;for&nbsp;similar&nbsp;sounding&nbsp;matches&nbsp;(only&nbsp;works&nbsp;with&nbsp;name)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_familiarity&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;familiarity&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_familiarity&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;min&nbsp;familiarity&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;<a href="#Artist">Artist</a>&nbsp;objects<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;results&nbsp;=&nbsp;artist.<a href="#-search">search</a>(name='t-pain')<br>
+&gt;&gt;&gt;&nbsp;results<br>
+[&lt;artist&nbsp;-&nbsp;T-Pain&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;T-Pain&nbsp;&amp;&nbsp;Lil&nbsp;Wayne&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;T&nbsp;Pain&nbsp;&amp;&nbsp;2&nbsp;Pistols&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Roscoe&nbsp;Dash&nbsp;&amp;&nbsp;T-Pain&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Tony&nbsp;Moxberg&nbsp;&amp;&nbsp;T-Pain&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Flo-Rida&nbsp;(feat.&nbsp;T-Pain)&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Shortyo/Too&nbsp;Short/T-Pain&gt;]<br>
+&gt;&gt;&gt;</tt></dd></dl>
+ <dl><dt><a name="-similar"><strong>similar</strong></a>(names<font color="#909090">=None</font>, ids<font color="#909090">=None</font>, start<font color="#909090">=0</font>, results<font color="#909090">=15</font>, buckets<font color="#909090">=None</font>, limit<font color="#909090">=False</font>, max_familiarity<font color="#909090">=None</font>, min_familiarity<font color="#909090">=None</font>, max_hotttnesss<font color="#909090">=None</font>, min_hotttnesss<font color="#909090">=None</font>)</dt><dd><tt>Return&nbsp;similar&nbsp;artists&nbsp;to&nbsp;this&nbsp;one<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ids&nbsp;(str/list):&nbsp;An&nbsp;artist&nbsp;id&nbsp;or&nbsp;list&nbsp;of&nbsp;ids<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;names&nbsp;(str/list):&nbsp;An&nbsp;artist&nbsp;name&nbsp;or&nbsp;list&nbsp;of&nbsp;names<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;buckets&nbsp;(list):&nbsp;A&nbsp;list&nbsp;of&nbsp;strings&nbsp;specifying&nbsp;which&nbsp;buckets&nbsp;to&nbsp;retrieve<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;limit&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;to&nbsp;limit&nbsp;the&nbsp;results&nbsp;to&nbsp;one&nbsp;of&nbsp;the&nbsp;id&nbsp;spaces&nbsp;specified&nbsp;in&nbsp;buckets<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_familiarity&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;familiarity&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_familiarity&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;min&nbsp;familiarity&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;max_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_hotttnesss&nbsp;(float):&nbsp;A&nbsp;float&nbsp;specifying&nbsp;the&nbsp;max&nbsp;hotttnesss&nbsp;of&nbsp;artists&nbsp;to&nbsp;search&nbsp;for<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;similar&nbsp;<a href="#Artist">Artist</a>&nbsp;objects<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;some_dudes&nbsp;=&nbsp;[artist.<a href="#Artist">Artist</a>('weezer'),&nbsp;artist.<a href="#Artist">Artist</a>('radiohead')]<br>
+&gt;&gt;&gt;&nbsp;some_dudes<br>
+[&lt;artist&nbsp;-&nbsp;Weezer&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Radiohead&gt;]<br>
+&gt;&gt;&gt;&nbsp;sims&nbsp;=&nbsp;artist.<a href="#-similar">similar</a>(ids=[art.id&nbsp;for&nbsp;art&nbsp;in&nbsp;some_dudes],&nbsp;results=5)<br>
+&gt;&gt;&gt;&nbsp;sims<br>
+[&lt;artist&nbsp;-&nbsp;The&nbsp;Smashing&nbsp;Pumpkins&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Biffy&nbsp;Clyro&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Death&nbsp;Cab&nbsp;for&nbsp;Cutie&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Jimmy&nbsp;Eat&nbsp;World&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Nerf&nbsp;Herder&gt;]<br>
+&gt;&gt;&gt;</tt></dd></dl>
+ <dl><dt><a name="-top_hottt"><strong>top_hottt</strong></a>(start<font color="#909090">=0</font>, results<font color="#909090">=15</font>, buckets<font color="#909090">=None</font>, limit<font color="#909090">=False</font>)</dt><dd><tt>Get&nbsp;the&nbsp;top&nbsp;hotttest&nbsp;artists,&nbsp;according&nbsp;to&nbsp;The&nbsp;Echo&nbsp;Nest<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;starting&nbsp;value&nbsp;for&nbsp;the&nbsp;result&nbsp;set<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;buckets&nbsp;(list):&nbsp;A&nbsp;list&nbsp;of&nbsp;strings&nbsp;specifying&nbsp;which&nbsp;buckets&nbsp;to&nbsp;retrieve<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;limit&nbsp;(bool):&nbsp;A&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;or&nbsp;not&nbsp;to&nbsp;limit&nbsp;the&nbsp;results&nbsp;to&nbsp;one&nbsp;of&nbsp;the&nbsp;id&nbsp;spaces&nbsp;specified&nbsp;in&nbsp;buckets<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;hottt&nbsp;<a href="#Artist">Artist</a>&nbsp;objects<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;hot_stuff&nbsp;=&nbsp;artist.<a href="#-top_hottt">top_hottt</a>()<br>
+&gt;&gt;&gt;&nbsp;hot_stuff<br>
+[&lt;artist&nbsp;-&nbsp;Deerhunter&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Sufjan&nbsp;Stevens&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Belle&nbsp;and&nbsp;Sebastian&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Glee&nbsp;Cast&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Linkin&nbsp;Park&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Neil&nbsp;Young&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Jimmy&nbsp;Eat&nbsp;World&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Kanye&nbsp;West&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Katy&nbsp;Perry&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Bruno&nbsp;Mars&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Lady&nbsp;Gaga&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Rihanna&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Lil&nbsp;Wayne&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Jason&nbsp;Mraz&gt;,&nbsp;&lt;artist&nbsp;-&nbsp;Green&nbsp;Day&gt;]<br>
+&gt;&gt;&gt;</tt></dd></dl>
+ <dl><dt><a name="-top_terms"><strong>top_terms</strong></a>(results<font color="#909090">=15</font>)</dt><dd><tt>Get&nbsp;a&nbsp;list&nbsp;of&nbsp;the&nbsp;top&nbsp;overall&nbsp;terms<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Args:<br>
+&nbsp;<br>
+Kwargs:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;results&nbsp;(int):&nbsp;An&nbsp;integer&nbsp;number&nbsp;of&nbsp;results&nbsp;to&nbsp;return<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;list&nbsp;of&nbsp;term&nbsp;document&nbsp;dicts<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;terms&nbsp;=&nbsp;artist.<a href="#-top_terms">top_terms</a>(results=5)<br>
+&gt;&gt;&gt;&nbsp;terms<br>
+[{u'frequency':&nbsp;1.0,&nbsp;u'name':&nbsp;u'rock'},<br>
+&nbsp;{u'frequency':&nbsp;0.99054710039307992,&nbsp;u'name':&nbsp;u'electronic'},<br>
+&nbsp;{u'frequency':&nbsp;0.96131624654034398,&nbsp;u'name':&nbsp;u'hip&nbsp;hop'},<br>
+&nbsp;{u'frequency':&nbsp;0.94358477322411127,&nbsp;u'name':&nbsp;u'jazz'},<br>
+&nbsp;{u'frequency':&nbsp;0.94023302416455468,&nbsp;u'name':&nbsp;u'pop&nbsp;rock'}]<br>
+&gt;&gt;&gt;</tt></dd></dl>
+</td></tr></table>
+</body></html>
