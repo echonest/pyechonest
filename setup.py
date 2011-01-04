@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-__version__ = "4.2"
+__version__ = "4.2.6"
 
 # $Source$
 from sys import version
@@ -20,7 +20,7 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(name='pyechonest',
-      version='4.2',
+      version='4.2.6',
       description='Python interface to The Echo Nest APIs.',
       long_description=read('README'),
       author='Tyler Williams',
