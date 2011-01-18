@@ -9,7 +9,7 @@ The Artist module loosely covers http://developer.echonest.com/docs/v4/artist.ht
 Refer to the official api documentation if you are unsure about something.
 """
 import util
-from proxies import ArtistProxy
+from proxies import ArtistProxy, ResultList
 from song import Song
 
 
@@ -49,33 +49,32 @@ class Artist(ArtistProxy):
         video (list): Artist video
         
     You create an artist object like this:
-
+    
     >>> a = artist.Artist('ARH6W4X1187B99274F')
     >>> a = artist.Artist('the national')
     >>> a = artist.Artist('musicbrainz:artist:a74b1b7f-71a5-4011-9441-d0b5e4122711')
         
     """
+
     def __init__(self, id, **kwargs):
         """
         Artist class
         
         Args:
             id (str): an artistw ID 
-
+            
         Returns:
             An artist object
-
+            
         Example:
-
+        
         >>> a = artist.Artist('ARH6W4X1187B99274F', buckets=['hotttnesss'])
         >>> a.hotttnesss
         0.80098515900997658
-        >>> 
-
-
-        """
-        super(Artist, self).__init__(id, **kwargs)
+        >>>
         
+        """
+        super(Artist, self).__init__(id, **kwargs)    
     
     def __repr__(self):
         return "<%s - %s>" % (self._object_type.encode('utf-8'), self.name.encode('utf-8'))
@@ -85,7 +84,6 @@ class Artist(ArtistProxy):
     
     def __cmp__(self, other):
         return cmp(self.id, other.id)
-    
     
     def get_audio(self, results=15, start=0, cache=True):
         """Get a list of audio documents found on the web related to an artist
@@ -100,7 +98,7 @@ class Artist(ArtistProxy):
             start (int): An integer starting value for the result set
         
         Returns:
-            A list of audio document dicts
+            A list of audio document dicts; list contains additional attributes 'start' and 'total'
         
         Example:
 
@@ -122,9 +120,8 @@ class Artist(ArtistProxy):
         else:
             response = self.get_attribute('audio', results=results, start=start)
             if results==15 and start==0:
-                self.cache['audio'] = response['audio']
-            return response['audio']
-
+                self.cache['audio'] = ResultList(response['audio'], 0, response['total'])
+            return ResultList(response['audio'], start, response['total'])
     
     audio = property(get_audio)
     
@@ -143,7 +140,7 @@ class Artist(ArtistProxy):
             license (str): A string specifying the desired license type
         
         Returns:
-            A list of biography document dicts
+            A list of biography document dicts; list contains additional attributes 'start' and 'total'
             
         Example:
 
@@ -158,8 +155,8 @@ class Artist(ArtistProxy):
         else:
             response = self.get_attribute('biographies', results=results, start=start, license=license)
             if results==15 and start==0 and license=='unknown':
-                self.cache['biographies'] = response['biographies']
-            return response['biographies']
+                self.cache['biographies'] = ResultList(response['biographies'], 0, response['total'])
+            return ResultList(response['biographies'], start, response['total'])
     
     biographies = property(get_biographies)    
     
@@ -176,13 +173,15 @@ class Artist(ArtistProxy):
             start (int): An ingteger starting value for the result set
         
         Returns:
-            A list of blog document dicts
+            A list of blog document dicts; list contains additional attributes 'start' and 'total'
         
         Example:
-
+        
         >>> a = artist.Artist('bob marley')
-        >>> blog = a.get_blogs(results=1,start=4)[0]
-        >>> blog['summary']
+        >>> blogs = a.get_blogs(results=1,start=4)
+        >>> blogs.total
+        4068
+        >>> blogs[0]['summary']
         But the Kenyans I know relate to music about the same way Americans do. They like their Congolese afropop, 
         and I've known some to be big fans of international acts like <span>Bob</span> <span>Marley</span> and Dolly Parton. 
         They rarely talk about music that's indigenous in the way a South African or Malian or Zimbabwean would, and it's 
@@ -197,8 +196,8 @@ class Artist(ArtistProxy):
             high_relevance = 'true' if high_relevance else 'false'
             response = self.get_attribute('blogs', results=results, start=start, high_relevance=high_relevance)
             if results==15 and start==0:
-                self.cache['blogs'] = response['blogs']
-            return response['blogs']
+                self.cache['blogs'] = ResultList(response['blogs'], 0, response['total'])
+            return ResultList(response['blogs'], start, response['total'])
     
     blogs = property(get_blogs)
        
@@ -253,8 +252,7 @@ class Artist(ArtistProxy):
             self.cache['foreign_ids'] = self.cache.get('foreign_ids', []) + foreign_ids
         cval = filter(lambda d: d.get('catalog') == idspace, self.cache.get('foreign_ids'))
         return cval[0].get('foreign_id') if cval else None
-
-
+    
     def get_hotttnesss(self, cache=True):
         """Get our numerical description of how hottt an artist currently is
         
@@ -295,24 +293,26 @@ class Artist(ArtistProxy):
             license (str): A string specifying the desired license type
         
         Returns:
-            A list of image document dicts
+            A list of image document dicts; list contains additional attributes 'start' and 'total'
         
         Example:
-
-        >>> a = artist.Artist('imogen heap')
-        >>> image = a.get_images(results=1)[0]
-        >>> image['url']
-        u'http://c1.ac-images.myspacecdn.com/images01/21/l_7fbcefbdc5f7185fb397882cad9d53b8.jpg'
+        
+        >>> a = artist.Artist('Captain Beefheart')
+        >>> images = a.get_images(results=1)
+        >>> images.total
+        49
+        >>> images[0]['url']
+        u'http://c4.ac-images.myspacecdn.com/images01/5/l_e1a329cdfdb16a848288edc6d578730f.jpg'
         >>> 
         """
-
+        
         if cache and ('images' in self.cache) and results==15 and start==0 and license=='unknown':
             return self.cache['images']
         else:
             response = self.get_attribute('images', results=results, start=start, license=license)
             if results==15 and start==0 and license=='unknown':
-                self.cache['images'] = response['images']
-            return response['images']
+                self.cache['images'] = ResultList(response['images'], 0, response['total'])
+            return ResultList(response['images'], start, response['total'])
     
     images = property(get_images)    
     
@@ -327,14 +327,16 @@ class Artist(ArtistProxy):
             start (int): An integer starting value for the result set
         
         Returns:
-            A list of news document dicts
+            A list of news document dicts; list contains additional attributes 'start' and 'total'
         
         Example:
         
-        >>> a = artist.Artist('Nirvana')
-        >>> news = a.news[0]
-        >>> news['name']
-        u'Experience Music Project Attains Nirvana'
+        >>> a = artist.Artist('Henry Threadgill')
+        >>> news = a.news
+        >>> news.total
+        41
+        >>> news[0]['name']
+        u'Jazz Journalists Association Announces 2010 Jazz Award Winners'
         >>> 
         """
         if cache and ('news' in self.cache) and results==15 and start==0 and not high_relevance:
@@ -343,9 +345,8 @@ class Artist(ArtistProxy):
             high_relevance = 'true' if high_relevance else 'false'
             response = self.get_attribute('news', results=results, start=start, high_relevance=high_relevance)
             if results==15 and start==0:
-                self.cache['news'] = response['news']
-            return response['news']
-
+                self.cache['news'] = ResultList(response['news'], 0, response['total'])
+            return ResultList(response['news'], start, response['total'])
     
     news = property(get_news)
     
@@ -362,14 +363,16 @@ class Artist(ArtistProxy):
             start (int): An integer starting value for the result set
         
         Returns:
-            A list of review document dicts
+            A list of review document dicts; list contains additional attributes 'start' and 'total'
         
         Example:
         
-        >>> a = artist.Artist('Rilo Kiley')
-        >>> review = a.reviews[10]
-        >>> review['release']
-        u'Under the Blacklight'
+        >>> a = artist.Artist('Ennio Morricone')
+        >>> reviews = a.reviews
+        >>> reviews.total
+        17
+        >>> reviews[0]['release']
+        u'For A Few Dollars More'
         >>> 
         """
         if cache and ('reviews' in self.cache) and results==15 and start==0:
@@ -377,9 +380,8 @@ class Artist(ArtistProxy):
         else:
             response = self.get_attribute('reviews', results=results, start=start)
             if results==15 and start==0:
-                self.cache['reviews'] = response['reviews']
-            return response['reviews']
-
+                self.cache['reviews'] = ResultList(response['reviews'], 0, response['total'])
+            return ResultList(response['reviews'], start, response['total'])
     
     reviews = property(get_reviews)
     
@@ -408,9 +410,9 @@ class Artist(ArtistProxy):
         
         Returns:
             A list of similar Artist objects
-    
+        
         Example:
-    
+        
         >>> a = artist.Artist('Sleater Kinney')
         >>> similars = a.similar[:5]
         >>> similars
@@ -443,7 +445,6 @@ class Artist(ArtistProxy):
             if results==15 and start==0 and (not kwargs):
                 self.cache['similar'] = response['artists']
             return [Artist(**util.fix(a)) for a in response['artists']]
-        
     
     similar = property(get_similar)    
     
@@ -460,7 +461,7 @@ class Artist(ArtistProxy):
             start (int): An integer starting value for the result set
             
         Results:
-            A list of Song objects
+            A list of Song objects; list contains additional attributes 'start' and 'total'
         
         Example:
 
@@ -470,7 +471,6 @@ class Artist(ArtistProxy):
         >>> 
         """
 
-        
         if cache and ('songs' in self.cache) and results==15 and start==0:
             return self.cache['songs']
         else:
@@ -479,9 +479,8 @@ class Artist(ArtistProxy):
                 s.update({'artist_id':self.id, 'artist_name':self.name})
             songs = [Song(**util.fix(s)) for s in response['songs']]
             if results==15 and start==0:
-                self.cache['songs'] = songs
-            return songs
-
+                self.cache['songs'] = ResultList(songs, 0, response['total'])
+            return ResultList(songs, start, response['total'])
     
     songs = property(get_songs)
 
@@ -590,7 +589,7 @@ class Artist(ArtistProxy):
             start (int): An integer starting value for the result set
         
         Returns:
-            A list of video document dicts
+            A list of video document dicts; list contains additional attributes 'start' and 'total'
             
         Example:
 
@@ -610,12 +609,10 @@ class Artist(ArtistProxy):
         else:
             response = self.get_attribute('video', results=results, start=start)
             if results==15 and start==0:
-                self.cache['video'] = response['video']
-            return response['video']
+                self.cache['video'] = ResultList(response['video'], 0, response['total'])
+            return ResultList(response['video'], start, response['total'])
     
     video = property(get_video)
-
-
 
 def search(name=None, description=None, results=15, buckets=None, limit=False, \
             fuzzy_match=False, sort=None, max_familiarity=None, min_familiarity=None, \
@@ -649,7 +646,7 @@ def search(name=None, description=None, results=15, buckets=None, limit=False, \
         A list of Artist objects
     
     Example:
-
+    
     >>> results = artist.search(name='t-pain')
     >>> results
     [<artist - T-Pain>, <artist - T-Pain & Lil Wayne>, <artist - T Pain & 2 Pistols>, <artist - Roscoe Dash & T-Pain>, <artist - Tony Moxberg & T-Pain>, <artist - Flo-Rida (feat. T-Pain)>, <artist - Shortyo/Too Short/T-Pain>]
@@ -738,7 +735,7 @@ def top_terms(results=15):
         A list of term document dicts
     
     Example:
-
+    
     >>> terms = artist.top_terms(results=5)
     >>> terms
     [{u'frequency': 1.0, u'name': u'rock'},

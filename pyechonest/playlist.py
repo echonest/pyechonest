@@ -7,7 +7,6 @@ Created by Tyler Williams on 2010-04-25.
 
 The Playlist module loosely covers http://developer.echonest.com/docs/v4/playlist.html
 Refer to the official api documentation if you are unsure about something.
-
 """
 
 import util

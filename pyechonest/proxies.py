@@ -7,6 +7,14 @@ Created by Tyler Williams on 2010-04-25.
 """
 import util
 
+class ResultList(list):
+    def __init__(self, li, start=0, total=0):
+        self.extend(li)
+        self.start = start
+        if total == 0:
+            total = len(li)
+        self.total = total
+
 class GenericProxy(object):
     def __init__(self):
         self.cache = {}

@@ -15,7 +15,7 @@ except ImportError:
 import datetime
 
 import util
-from proxies import CatalogProxy
+from proxies import CatalogProxy, ResultList
 import artist, song
 
 # deal with datetime in json
@@ -175,7 +175,7 @@ class Catalog(CatalogProxy):
             start (int): An integer starting value for the result set
             
         Returns:
-            A list of objects in the catalog
+            A list of objects in the catalog; list contains additional attributes 'start' and 'total'
         
         Example:
 
@@ -188,8 +188,9 @@ class Catalog(CatalogProxy):
         kwargs = {}
         kwargs['bucket'] = buckets or []
         response = self.get_attribute("read", results=results, start=start, **kwargs)
-
-        rval = []
+        rval = ResultList([])
+        rval.start = response['catalog']['start']
+        rval.total = response['catalog']['total']
         for item in response['catalog']['items']:
             new_item = None
             # song item
@@ -259,6 +260,6 @@ def list(results=30, start=0):
 
     
     """
-    result = util.callm("%s/%s" % ('catalog', 'list'), {'results':results, 'start':start})
+    result = util.callm("%s/%s" % ('catalog', 'list'), {'results': results, 'start': start})
     return [Catalog(**util.fix(d)) for d in result['response']['catalogs']]
     

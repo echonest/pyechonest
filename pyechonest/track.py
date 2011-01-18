@@ -118,6 +118,8 @@ def _track_from_response(response):
             raise Exception('the track is still being analyzed')
         if status == 'forbidden':
             raise Exception('analysis of this track is forbidden')
+        if status == 'unavailable':
+            return track_from_reanalyzing_id(result['track']['id'])
     else:
         track = result['track']
         identifier      = track.pop('id') 
