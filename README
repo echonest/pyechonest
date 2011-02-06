@@ -24,9 +24,9 @@ Examples:
 		>>> print 'Blogs about weezer:', [blog.get('url') for blog in weezer_blogs]
 	
 	Get an artist by name:
-	    >>> from pyechonest import artist
-	    >>> a = artist.Artist('lady gaga')
-	    >>> print a.id
+	       	>>> from pyechonest import artist
+	       	>>> a = artist.Artist('lady gaga')
+	    	>>> print a.id
 	
 	Get an artist from their Musicbrainz ID:
 		>>> from pyechonest import artist
