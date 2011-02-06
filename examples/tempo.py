@@ -5,7 +5,7 @@ def get_tempo(artist, title):
     "gets the tempo for a song"
     results = song.search(artist=artist, title=title, results=1, buckets=['audio_summary'])
     if len(results) > 0:
-        return results[0].audio_summary.tempo
+        return results[0].audio_summary['tempo']
     else:
         return None
 

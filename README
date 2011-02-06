@@ -18,10 +18,10 @@ IMPORTANT: You must let pyechonest know about your API key before you use it. Th
 Examples:
 	Search for artist:
 		>>> from pyechonest import artist
-		>>> weezer_results = artist.search(query='weezer')
+		>>> weezer_results = artist.search(name='weezer')
 		>>> weezer = weezer_results[0]
 		>>> weezer_blogs = weezer.blogs
-		>>> print 'Blogs about weezer:', [blog.url for blog in weezer_blogs]
+		>>> print 'Blogs about weezer:', [blog.get('url') for blog in weezer_blogs]
 	
 	Get an artist by name:
 	    >>> from pyechonest import artist
@@ -43,14 +43,13 @@ Examples:
 		>>> rkp_results = song.search(artist='radiohead', title='karma police')
 		>>> karma_police = rkp_results[0]
 		>>> print karma_police.artist_location
-		>>> print karma_police.audio_summary.tempo, karma_police.audio_summary.duration
+		>>> print 'tempo:',karma_police.audio_summary['tempo'],'duration:',karma_police.audio_summary['duration']
 
 	Get a song's audio_url and analysis_url:
 		>>> from pyechonest import song
-		>>> wn_results = song.search(combined='the national - wasp nest')
+		>>> wn_results = song.search(combined='the national - wasp nest', buckets=['id:7digital'], limit=True)
 		>>> wasp_nest = wn_results[0]
-		>>> wn_tracks = wasp_nest.tracks
-		>>> print wn_tracks[0].audio_url
-		>>> print wn_tracks[0].analysis_url
+		>>> wn_tracks = wasp_nest.get_tracks('7digital')
+		>>> print wn_tracks[0].get('preview_url')
 	
 
