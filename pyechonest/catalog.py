@@ -214,6 +214,49 @@ class Catalog(CatalogProxy):
         return rval
     
     read = property(read_items)
+
+    def get_feed(self, buckets=None, since=None, results=15, start=0):
+        """
+        Returns feed (news, blogs, reviews, audio, video) for the catalog artists; response depends on requested buckets
+
+        Args:
+
+        Kwargs:
+            buckets (list): A list of strings specifying which feed items to retrieve
+
+            results (int): An integer number of results to return
+
+            start (int): An integer starting value for the result set
+
+        Returns:
+            A list of news, blogs, reviews, audio or video document dicts; 
+
+        Example:
+
+        >>> c
+        <catalog - my_artists>
+        >>> c.get_feed(results=15)
+	{u'date_found': u'2011-02-06T07:50:25',
+	 u'date_posted': u'2011-02-06T07:50:23',
+ 	 u'id': u'caec686c0dff361e4c53dceb58fb9d2f',
+ 	 u'name': u'Linkin Park \u2013 \u201cWaiting For The End\u201d + \u201cWhen They Come For Me\u201d 2/5 SNL',
+ 	 u'references': [{u'artist_id': u'ARQUMH41187B9AF699',
+        	          u'artist_name': u'Linkin Park'}],
+	 u'summary': u'<span>Linkin</span> <span>Park</span> performed "Waiting For The End" and "When They Come For Me" on Saturday Night Live. Watch the videos below and pick up their album A Thousand Suns on iTunes, Amazon MP3, CD    Social Bookmarking ... ',
+	 u'type': u'blogs',
+	 u'url': u'http://theaudioperv.com/2011/02/06/linkin-park-waiting-for-the-end-when-they-come-for-me-25-snl/'}
+        >>>
+        """
+        kwargs = {}
+        kwargs['bucket'] = buckets or []
+	if since:
+		kwargs['since']=since  
+        response = self.get_attribute("feed", results=results, start=start, **kwargs)
+        rval = ResultList(response['feed'])
+        return rval
+
+    feed = property(get_feed)
+
     
     def delete(self):
         """
