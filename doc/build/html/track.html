@@ -1,0 +1,178 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Track – track methods &mdash; pyechonest v4 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyechonest v4 documentation" href="index.html" />
+    <link rel="next" title="Playlist – playlist methods" href="playlist.html" />
+    <link rel="prev" title="Song – song methods" href="song.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="playlist.html" title="Playlist – playlist methods"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="song.html" title="Song – song methods"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyechonest v4 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="track-track-methods">
+<h1>Track &#8211; track methods<a class="headerlink" href="#track-track-methods" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyechonest.track.Track">
+<em class="property">class </em><tt class="descclassname">pyechonest.track.</tt><tt class="descname">Track</tt><big>(</big><em>identifier</em>, <em>md5</em>, <em>properties</em><big>)</big><a class="headerlink" href="#pyechonest.track.Track" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents an audio analysis from The Echo Nest.</p>
+<p>All methods in this module return Track objects.</p>
+<p>Attributes:</p>
+<blockquote>
+<p>analysis_channels       int: the number of audio channels used during analysis</p>
+<p>analysis_sample_rate    float: the sample rate used during analysis</p>
+<p>analyzer_version        str: e.g. &#8216;3.01a&#8217;</p>
+<p>artist                  str or None: artist name</p>
+<p>bars                    list of dicts: timing of each measure</p>
+<p>beats                   list of dicts: timing of each beat</p>
+<p>bitrate                 int: the bitrate of the input mp3 (or other file)</p>
+<p>danceability            float: relative danceability (0 to 1)</p>
+<p>duration                float: length of track in seconds</p>
+<p>energy                  float: relative energy (0 to 1)</p>
+<p>end_of_fade_in          float: time in seconds track where fade-in ends</p>
+<p>id                      str: Echo Nest Track ID, e.g. &#8216;TRTOBXJ1296BCDA33B&#8217;</p>
+<p>key                     int: between 0 (key of C) and 11 (key of B flat) inclusive</p>
+<p>key_confidence          float: confidence that key detection was accurate</p>
+<p>loudness                float: overall loudness in decibels (dB)</p>
+<p>md5                     str: 32-character checksum of the input mp3</p>
+<p>meta                    dict: other track metainfo</p>
+<p>mode                    int: 0 (major) or 1 (minor)</p>
+<p>mode_confidence         float: confidence that mode detection was accurate</p>
+<p>num_samples             int: total samples in the decoded track</p>
+<p>release                 str or None: the album name</p>
+<p>sample_md5              str: 32-character checksum of the decoded audio file</p>
+<p>samplerate              int: sample rate of input mp3</p>
+<p>sections                list of dicts: larger sections of song (chorus, bridge, solo, etc.)</p>
+<p>segments                list of dicts: timing, pitch, loudness and timbre for each segment</p>
+<p>start_of_fade_out       float: time in seconds where fade out begins</p>
+<p>status                  str: analysis status, e.g. &#8216;complete&#8217;, &#8216;pending&#8217;, &#8216;error&#8217;</p>
+<p>tatums                  list of dicts: the smallest metrical unit (subdivision of a beat)</p>
+<p>tempo                   float: overall BPM (beats per minute)</p>
+<p>tempo_confidence        float: confidence that tempo detection was accurate</p>
+<p>title                   str or None: song title</p>
+</blockquote>
+<p>Each bar, beat, section, segment and tatum has a start time, a duration, and a confidence,
+in addition to whatever other data is given.</p>
+<p>Examples:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">track_from_id</span><span class="p">(</span><span class="s">&#39;TRXXHTJ1294CD8F3B3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
+<span class="go">&lt;track - Neverwas Restored (from Neverwas Soundtrack)&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">track_from_md5</span><span class="p">(</span><span class="s">&#39;b8abf85746ab3416adabca63141d8c2d&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
+<span class="go">&lt;track - Neverwas Restored (from Neverwas Soundtrack)&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="pyechonest.track.Track.__repr__">
+<tt class="descname">__repr__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.track.Track.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.track.Track.__str__">
+<tt class="descname">__str__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.track.Track.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="song.html"
+                        title="previous chapter">Song &#8211; song methods</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="playlist.html"
+                        title="next chapter">Playlist &#8211; playlist methods</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/track.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="playlist.html" title="Playlist – playlist methods"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="song.html" title="Song – song methods"
+             >previous</a> |</li>
+        <li><a href="index.html">pyechonest v4 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, The Echo Nest.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.4.
+    </div>
+  </body>
+</html>

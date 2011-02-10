@@ -1,0 +1,674 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Artist – artist methods &mdash; pyechonest v4 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyechonest v4 documentation" href="index.html" />
+    <link rel="next" title="Song – song methods" href="song.html" />
+    <link rel="prev" title="Welcome to pyechonest’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="song.html" title="Song – song methods"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to pyechonest’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyechonest v4 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="artist-artist-methods">
+<h1>Artist &#8211; artist methods<a class="headerlink" href="#artist-artist-methods" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyechonest.artist.Artist">
+<em class="property">class </em><tt class="descclassname">pyechonest.artist.</tt><tt class="descname">Artist</tt><big>(</big><em>id</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist" title="Permalink to this definition">¶</a></dt>
+<dd><p>An Artist object</p>
+<dl class="docutils">
+<dt>Attributes: </dt>
+<dd><p class="first">id (str): Echo Nest Artist ID</p>
+<p>name (str): Artist Name</p>
+<p>audio (list): Artist audio</p>
+<p>biographies (list): Artist biographies</p>
+<p>blogs (list): Artist blogs</p>
+<p>familiarity (float): Artist familiarity</p>
+<p>hotttnesss (float): Artist hotttnesss</p>
+<p>images (list): Artist images</p>
+<p>news (list): Artist news</p>
+<p>reviews (list): Artist reviews</p>
+<p>similar (list): Similar Artists</p>
+<p>songs (list): A list of song objects</p>
+<p>terms (list): Terms for an artist</p>
+<p>urls (list): Artist urls</p>
+<p class="last">video (list): Artist video</p>
+</dd>
+</dl>
+<p>You create an artist object like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;ARH6W4X1187B99274F&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;the national&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;musicbrainz:artist:a74b1b7f-71a5-4011-9441-d0b5e4122711&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="pyechonest.artist.Artist.__cmp__">
+<tt class="descname">__cmp__</tt><big>(</big><em>other</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.__cmp__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.artist.Artist.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>id</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Artist class</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): an artistw ID</dd>
+<dt>Returns:</dt>
+<dd>An artist object</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;ARH6W4X1187B99274F&#39;</span><span class="p">,</span> <span class="n">buckets</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;hotttnesss&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">hotttnesss</span>
+<span class="go">0.80098515900997658</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.artist.Artist.__repr__">
+<tt class="descname">__repr__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.artist.Artist.__str__">
+<tt class="descname">__str__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.artist.Artist.get_audio">
+<tt class="descname">get_audio</tt><big>(</big><em>results=15</em>, <em>start=0</em>, <em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_audio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of audio documents found on the web related to an artist</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</p>
+<p>results (int): An integer number of results to return</p>
+<p class="last">start (int): An integer starting value for the result set</p>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of audio document dicts; list contains additional attributes &#8216;start&#8217; and &#8216;total&#8217;</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;alphabeat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">get_audio</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">{u&#39;artist&#39;: u&#39;Alphabeat&#39;,</span>
+<span class="go"> u&#39;date&#39;: u&#39;2010-04-28T01:40:45&#39;,</span>
+<span class="go"> u&#39;id&#39;: u&#39;70be4373fa57ac2eee8c7f30b0580899&#39;,</span>
+<span class="go"> u&#39;length&#39;: 210.0,</span>
+<span class="go"> u&#39;link&#39;: u&#39;http://iamthecrime.com&#39;,</span>
+<span class="go"> u&#39;release&#39;: u&#39;The Beat Is...&#39;,</span>
+<span class="go"> u&#39;title&#39;: u&#39;DJ&#39;,</span>
+<span class="go"> u&#39;url&#39;: u&#39;http://iamthecrime.com/wp-content/uploads/2010/04/03_DJ_iatc.mp3&#39;}</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.artist.Artist.get_biographies">
+<tt class="descname">get_biographies</tt><big>(</big><em>results=15</em>, <em>start=0</em>, <em>license='unknown'</em>, <em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_biographies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of artist biographies</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</p>
+<p>results (int): An integer number of results to return</p>
+<p>start (int): An integer starting value for the result set</p>
+<p class="last">license (str): A string specifying the desired license type</p>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of biography document dicts; list contains additional attributes &#8216;start&#8217; and &#8216;total&#8217;</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;britney spears&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bio</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">get_biographies</span><span class="p">(</span><span class="n">results</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bio</span><span class="p">[</span><span class="s">&#39;url&#39;</span><span class="p">]</span>
+<span class="go">u&#39;http://www.mtvmusic.com/spears_britney&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.artist.Artist.get_blogs">
+<tt class="descname">get_blogs</tt><big>(</big><em>results=15</em>, <em>start=0</em>, <em>cache=True</em>, <em>high_relevance=False</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_blogs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of blog articles related to an artist</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</p>
+<p>results (int): An integer number of results to return</p>
+<p class="last">start (int): An ingteger starting value for the result set</p>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of blog document dicts; list contains additional attributes &#8216;start&#8217; and &#8216;total&#8217;</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;bob marley&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blogs</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">get_blogs</span><span class="p">(</span><span class="n">results</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">start</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blogs</span><span class="o">.</span><span class="n">total</span>
+<span class="go">4068</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blogs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">&#39;summary&#39;</span><span class="p">]</span>
+<span class="go">But the Kenyans I know relate to music about the same way Americans do. They like their Congolese afropop, </span>
+<span class="go">and I&#39;ve known some to be big fans of international acts like &lt;span&gt;Bob&lt;/span&gt; &lt;span&gt;Marley&lt;/span&gt; and Dolly Parton. </span>
+<span class="go">They rarely talk about music that&#39;s indigenous in the way a South African or Malian or Zimbabwean would, and it&#39;s </span>
+<span class="go">even rarer to actually hear such indigenous music. I do sometimes hear ceremonial chanting from the Maasai, but only </span>
+<span class="go">when they&#39;re dancing for tourists. If East Africa isn&#39;t the most musical part ... &quot;</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.artist.Artist.get_familiarity">
+<tt class="descname">get_familiarity</tt><big>(</big><em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_familiarity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get our numerical estimation of how familiar an artist currently is to the world</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</dd>
+<dt>Returns:</dt>
+<dd>A float representing familiarity.</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;frank sinatra&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">get_familiarity</span><span class="p">()</span>
+<span class="go">0.65142555825947457</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">familiarity</span>
+<span class="go">0.65142555825947457</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.artist.Artist.get_foreign_id">
+<tt class="descname">get_foreign_id</tt><big>(</big><em>idspace='musicbrainz'</em>, <em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_foreign_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the foreign id for this artist for a specific id space</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>idspace (str): A string indicating the idspace to fetch a foreign id for.</dd>
+<dt>Returns:</dt>
+<dd>A foreign ID string</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;fabulous&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">get_foreign_id</span><span class="p">(</span><span class="s">&#39;7digital&#39;</span><span class="p">)</span>
+<span class="go">u&#39;7digital:artist:186042&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.artist.Artist.get_hotttnesss">
+<tt class="descname">get_hotttnesss</tt><big>(</big><em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_hotttnesss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get our numerical description of how hottt an artist currently is</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</dd>
+<dt>Returns:</dt>
+<dd>float: the hotttnesss value</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;hannah montana&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">get_hotttnesss</span><span class="p">()</span>
+<span class="go">0.59906022155998995</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">hotttnesss</span>
+<span class="go">0.59906022155998995</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.artist.Artist.get_images">
+<tt class="descname">get_images</tt><big>(</big><em>results=15</em>, <em>start=0</em>, <em>license='unknown'</em>, <em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of artist images</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</p>
+<p>results (int): An integer number of results to return</p>
+<p>start (int): An integer starting value for the result set</p>
+<p class="last">license (str): A string specifying the desired license type</p>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of image document dicts; list contains additional attributes &#8216;start&#8217; and &#8216;total&#8217;</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;Captain Beefheart&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">images</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">get_images</span><span class="p">(</span><span class="n">results</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">images</span><span class="o">.</span><span class="n">total</span>
+<span class="go">49</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">&#39;url&#39;</span><span class="p">]</span>
+<span class="go">u&#39;http://c4.ac-images.myspacecdn.com/images01/5/l_e1a329cdfdb16a848288edc6d578730f.jpg&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.artist.Artist.get_news">
+<tt class="descname">get_news</tt><big>(</big><em>results=15</em>, <em>start=0</em>, <em>cache=True</em>, <em>high_relevance=False</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_news" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of news articles found on the web related to an artist</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</p>
+<p>results (int): An integer number of results to return</p>
+<p class="last">start (int): An integer starting value for the result set</p>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of news document dicts; list contains additional attributes &#8216;start&#8217; and &#8216;total&#8217;</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;Henry Threadgill&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">news</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">news</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">news</span><span class="o">.</span><span class="n">total</span>
+<span class="go">41</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">news</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">&#39;name&#39;</span><span class="p">]</span>
+<span class="go">u&#39;Jazz Journalists Association Announces 2010 Jazz Award Winners&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.artist.Artist.get_reviews">
+<tt class="descname">get_reviews</tt><big>(</big><em>results=15</em>, <em>start=0</em>, <em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_reviews" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get reviews related to an artist&#8217;s work</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</p>
+<p>results (int): An integer number of results to return</p>
+<p class="last">start (int): An integer starting value for the result set</p>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of review document dicts; list contains additional attributes &#8216;start&#8217; and &#8216;total&#8217;</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;Ennio Morricone&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reviews</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">reviews</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reviews</span><span class="o">.</span><span class="n">total</span>
+<span class="go">17</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reviews</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">&#39;release&#39;</span><span class="p">]</span>
+<span class="go">u&#39;For A Few Dollars More&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.artist.Artist.get_similar">
+<tt class="descname">get_similar</tt><big>(</big><em>results=15</em>, <em>start=0</em>, <em>buckets=None</em>, <em>limit=False</em>, <em>cache=True</em>, <em>max_familiarity=None</em>, <em>min_familiarity=None</em>, <em>max_hotttnesss=None</em>, <em>min_hotttnesss=None</em>, <em>min_results=None</em>, <em>reverse=False</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_similar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return similar artists to this one</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</p>
+<p>results (int): An integer number of results to return</p>
+<p>start (int): An integer starting value for the result set</p>
+<p>max_familiarity (float): A float specifying the max familiarity of artists to search for</p>
+<p>min_familiarity (float): A float specifying the min familiarity of artists to search for</p>
+<p>max_hotttnesss (float): A float specifying the max hotttnesss of artists to search for</p>
+<p>min_hotttnesss (float): A float specifying the max hotttnesss of artists to search for</p>
+<p class="last">reverse (bool): A boolean indicating whether or not to return dissimilar artists (wrecommender). Defaults to False.</p>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of similar Artist objects</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;Sleater Kinney&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">similars</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">similar</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">similars</span>
+<span class="go">[&lt;artist - Bikini Kill&gt;, &lt;artist - Pretty Girls Make Graves&gt;, &lt;artist - Huggy Bear&gt;, &lt;artist - Bratmobile&gt;, &lt;artist - Team Dresch&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.artist.Artist.get_songs">
+<tt class="descname">get_songs</tt><big>(</big><em>cache=True</em>, <em>results=15</em>, <em>start=0</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_songs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the songs associated with an artist</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</p>
+<p>results (int): An integer number of results to return</p>
+<p class="last">start (int): An integer starting value for the result set</p>
+</dd>
+<dt>Results:</dt>
+<dd>A list of Song objects; list contains additional attributes &#8216;start&#8217; and &#8216;total&#8217;</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;Strokes&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">get_songs</span><span class="p">(</span><span class="n">results</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">[&lt;song - Fear Of Sleep&gt;, &lt;song - Red Light&gt;, &lt;song - Ize Of The World&gt;, &lt;song - Evening Sun&gt;, &lt;song - Juicebox&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.artist.Artist.get_terms">
+<tt class="descname">get_terms</tt><big>(</big><em>sort='weight'</em>, <em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_terms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the terms associated with an artist</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</p>
+<p class="last">sort (str): A string specifying the desired sorting type (weight or frequency)</p>
+</dd>
+<dt>Results:</dt>
+<dd>A list of term document dicts</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;tom petty&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">terms</span>
+<span class="go">[{u&#39;frequency&#39;: 1.0, u&#39;name&#39;: u&#39;heartland rock&#39;, u&#39;weight&#39;: 1.0},</span>
+<span class="go"> {u&#39;frequency&#39;: 0.88569401860168606,</span>
+<span class="go">  u&#39;name&#39;: u&#39;jam band&#39;,</span>
+<span class="go">  u&#39;weight&#39;: 0.9116501862732439},</span>
+<span class="go"> {u&#39;frequency&#39;: 0.9656145118557401,</span>
+<span class="go">  u&#39;name&#39;: u&#39;pop rock&#39;,</span>
+<span class="go">  u&#39;weight&#39;: 0.89777934440040685},</span>
+<span class="go"> {u&#39;frequency&#39;: 0.8414744288140491,</span>
+<span class="go">  u&#39;name&#39;: u&#39;southern rock&#39;,</span>
+<span class="go">  u&#39;weight&#39;: 0.8698567153186606},</span>
+<span class="go"> {u&#39;frequency&#39;: 0.9656145118557401,</span>
+<span class="go">  u&#39;name&#39;: u&#39;hard rock&#39;,</span>
+<span class="go">  u&#39;weight&#39;: 0.85738022655218893},</span>
+<span class="go"> {u&#39;frequency&#39;: 0.88569401860168606,</span>
+<span class="go">  u&#39;name&#39;: u&#39;singer-songwriter&#39;,</span>
+<span class="go">  u&#39;weight&#39;: 0.77427243392312772},</span>
+<span class="go"> {u&#39;frequency&#39;: 0.88569401860168606,</span>
+<span class="go">  u&#39;name&#39;: u&#39;rock&#39;,</span>
+<span class="go">  u&#39;weight&#39;: 0.71158718989399083},</span>
+<span class="go"> {u&#39;frequency&#39;: 0.60874110500110956,</span>
+<span class="go">  u&#39;name&#39;: u&#39;album rock&#39;,</span>
+<span class="go">  u&#39;weight&#39;: 0.69758668733499629},</span>
+<span class="go"> {u&#39;frequency&#39;: 0.74350792060935744,</span>
+<span class="go">  u&#39;name&#39;: u&#39;psychedelic&#39;,</span>
+<span class="go">  u&#39;weight&#39;: 0.68457367494207944},</span>
+<span class="go"> {u&#39;frequency&#39;: 0.77213698386292873,</span>
+<span class="go">  u&#39;name&#39;: u&#39;pop&#39;,</span>
+<span class="go">  u&#39;weight&#39;: 0.65039556639337293},</span>
+<span class="go"> {u&#39;frequency&#39;: 0.41747136183050298,</span>
+<span class="go">  u&#39;name&#39;: u&#39;bar band&#39;,</span>
+<span class="go">  u&#39;weight&#39;: 0.54974975024767025}]</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.artist.Artist.get_urls">
+<tt class="descname">get_urls</tt><big>(</big><em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_urls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the urls for an artist</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</dd>
+<dt>Results:</dt>
+<dd>A url document dict</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;the unicorns&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">get_urls</span><span class="p">()</span>
+<span class="go">{u&#39;amazon_url&#39;: u&#39;http://www.amazon.com/gp/search?ie=UTF8&amp;keywords=The Unicorns&amp;tag=httpechonecom-20&amp;index=music&#39;,</span>
+<span class="go"> u&#39;aolmusic_url&#39;: u&#39;http://music.aol.com/artist/the-unicorns&#39;,</span>
+<span class="go"> u&#39;itunes_url&#39;: u&#39;http://itunes.com/TheUnicorns&#39;,</span>
+<span class="go"> u&#39;lastfm_url&#39;: u&#39;http://www.last.fm/music/The+Unicorns&#39;,</span>
+<span class="go"> u&#39;mb_url&#39;: u&#39;http://musicbrainz.org/artist/603c5f9f-492a-4f21-9d6f-1642a5dbea2d.html&#39;,</span>
+<span class="go"> u&#39;myspace_url&#39;: u&#39;http://www.myspace.com/iwasbornunicorn&#39;}</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.artist.Artist.get_video">
+<tt class="descname">get_video</tt><big>(</big><em>results=15</em>, <em>start=0</em>, <em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_video" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of video documents found on the web related to an artist</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.</p>
+<p>results (int): An integer number of results to return</p>
+<p class="last">start (int): An integer starting value for the result set</p>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of video document dicts; list contains additional attributes &#8216;start&#8217; and &#8216;total&#8217;</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;the vapors&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">get_video</span><span class="p">(</span><span class="n">results</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">[{u&#39;date_found&#39;: u&#39;2009-12-28T08:27:48&#39;,</span>
+<span class="go">  u&#39;id&#39;: u&#39;d02f9e6dc7904f70402d4676516286b9&#39;,</span>
+<span class="go">  u&#39;image_url&#39;: u&#39;http://i1.ytimg.com/vi/p6c0wOFL3Us/default.jpg&#39;,</span>
+<span class="go">  u&#39;site&#39;: u&#39;youtube&#39;,</span>
+<span class="go">  u&#39;title&#39;: u&#39;The Vapors-Turning Japanese (rectangular white vinyl promo)&#39;,</span>
+<span class="go">  u&#39;url&#39;: u&#39;http://youtube.com/watch?v=p6c0wOFL3Us&#39;}]</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pyechonest.artist.search">
+<em class="property">static </em><tt class="descclassname">artist.</tt><tt class="descname">search</tt><big>(</big><em>name=None</em>, <em>description=None</em>, <em>results=15</em>, <em>buckets=None</em>, <em>limit=False</em>, <em>fuzzy_match=False</em>, <em>sort=None</em>, <em>max_familiarity=None</em>, <em>min_familiarity=None</em>, <em>max_hotttnesss=None</em>, <em>min_hotttnesss=None</em><big>)</big><a class="headerlink" href="#pyechonest.artist.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search for artists by name, description, or constraint.</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">name (str): the name of an artist</p>
+<p>description (str): A string describing the artist</p>
+<p>results (int): An integer number of results to return</p>
+<p>buckets (list): A list of strings specifying which buckets to retrieve</p>
+<p>limit (bool): A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets</p>
+<p>fuzzy_match (bool): A boolean indicating whether or not to search for similar sounding matches (only works with name)</p>
+<p>max_familiarity (float): A float specifying the max familiarity of artists to search for</p>
+<p>min_familiarity (float): A float specifying the min familiarity of artists to search for</p>
+<p>max_hotttnesss (float): A float specifying the max hotttnesss of artists to search for</p>
+<p class="last">min_hotttnesss (float): A float specifying the max hotttnesss of artists to search for</p>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of Artist objects</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;t-pain&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span>
+<span class="go">[&lt;artist - T-Pain&gt;, &lt;artist - T-Pain &amp; Lil Wayne&gt;, &lt;artist - T Pain &amp; 2 Pistols&gt;, &lt;artist - Roscoe Dash &amp; T-Pain&gt;, &lt;artist - Tony Moxberg &amp; T-Pain&gt;, &lt;artist - Flo-Rida (feat. T-Pain)&gt;, &lt;artist - Shortyo/Too Short/T-Pain&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pyechonest.artist.top_hottt">
+<em class="property">static </em><tt class="descclassname">artist.</tt><tt class="descname">top_hottt</tt><big>(</big><em>start=0</em>, <em>results=15</em>, <em>buckets=None</em>, <em>limit=False</em><big>)</big><a class="headerlink" href="#pyechonest.artist.top_hottt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the top hotttest artists, according to The Echo Nest</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">results (int): An integer number of results to return</p>
+<p>start (int): An integer starting value for the result set</p>
+<p>buckets (list): A list of strings specifying which buckets to retrieve</p>
+<p class="last">limit (bool): A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets</p>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of hottt Artist objects</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">hot_stuff</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">top_hottt</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hot_stuff</span>
+<span class="go">[&lt;artist - Deerhunter&gt;, &lt;artist - Sufjan Stevens&gt;, &lt;artist - Belle and Sebastian&gt;, &lt;artist - Glee Cast&gt;, &lt;artist - Linkin Park&gt;, &lt;artist - Neil Young&gt;, &lt;artist - Jimmy Eat World&gt;, &lt;artist - Kanye West&gt;, &lt;artist - Katy Perry&gt;, &lt;artist - Bruno Mars&gt;, &lt;artist - Lady Gaga&gt;, &lt;artist - Rihanna&gt;, &lt;artist - Lil Wayne&gt;, &lt;artist - Jason Mraz&gt;, &lt;artist - Green Day&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pyechonest.artist.top_terms">
+<em class="property">static </em><tt class="descclassname">artist.</tt><tt class="descname">top_terms</tt><big>(</big><em>results=15</em><big>)</big><a class="headerlink" href="#pyechonest.artist.top_terms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of the top overall terms</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>results (int): An integer number of results to return</dd>
+<dt>Returns:</dt>
+<dd>A list of term document dicts</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">terms</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">top_terms</span><span class="p">(</span><span class="n">results</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">terms</span>
+<span class="go">[{u&#39;frequency&#39;: 1.0, u&#39;name&#39;: u&#39;rock&#39;},</span>
+<span class="go"> {u&#39;frequency&#39;: 0.99054710039307992, u&#39;name&#39;: u&#39;electronic&#39;},</span>
+<span class="go"> {u&#39;frequency&#39;: 0.96131624654034398, u&#39;name&#39;: u&#39;hip hop&#39;},</span>
+<span class="go"> {u&#39;frequency&#39;: 0.94358477322411127, u&#39;name&#39;: u&#39;jazz&#39;},</span>
+<span class="go"> {u&#39;frequency&#39;: 0.94023302416455468, u&#39;name&#39;: u&#39;pop rock&#39;}]</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pyechonest.artist.similar">
+<em class="property">static </em><tt class="descclassname">artist.</tt><tt class="descname">similar</tt><big>(</big><em>names=None</em>, <em>ids=None</em>, <em>start=0</em>, <em>results=15</em>, <em>buckets=None</em>, <em>limit=False</em>, <em>max_familiarity=None</em>, <em>min_familiarity=None</em>, <em>max_hotttnesss=None</em>, <em>min_hotttnesss=None</em><big>)</big><a class="headerlink" href="#pyechonest.artist.similar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return similar artists to this one</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">ids (str/list): An artist id or list of ids</p>
+<p>names (str/list): An artist name or list of names</p>
+<p>results (int): An integer number of results to return</p>
+<p>buckets (list): A list of strings specifying which buckets to retrieve</p>
+<p>limit (bool): A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets</p>
+<p>start (int): An integer starting value for the result set</p>
+<p>max_familiarity (float): A float specifying the max familiarity of artists to search for</p>
+<p>min_familiarity (float): A float specifying the min familiarity of artists to search for</p>
+<p>max_hotttnesss (float): A float specifying the max hotttnesss of artists to search for</p>
+<p class="last">min_hotttnesss (float): A float specifying the max hotttnesss of artists to search for</p>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of similar Artist objects</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">some_dudes</span> <span class="o">=</span> <span class="p">[</span><span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;weezer&#39;</span><span class="p">),</span> <span class="n">artist</span><span class="o">.</span><span class="n">Artist</span><span class="p">(</span><span class="s">&#39;radiohead&#39;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">some_dudes</span>
+<span class="go">[&lt;artist - Weezer&gt;, &lt;artist - Radiohead&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sims</span> <span class="o">=</span> <span class="n">artist</span><span class="o">.</span><span class="n">similar</span><span class="p">(</span><span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="n">art</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">art</span> <span class="ow">in</span> <span class="n">some_dudes</span><span class="p">],</span> <span class="n">results</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sims</span>
+<span class="go">[&lt;artist - The Smashing Pumpkins&gt;, &lt;artist - Biffy Clyro&gt;, &lt;artist - Death Cab for Cutie&gt;, &lt;artist - Jimmy Eat World&gt;, &lt;artist - Nerf Herder&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to pyechonest&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="song.html"
+                        title="next chapter">Song &#8211; song methods</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/artist.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="song.html" title="Song – song methods"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to pyechonest’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">pyechonest v4 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, The Echo Nest.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.4.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,325 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Catalog – catalog methods &mdash; pyechonest v4 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyechonest v4 documentation" href="index.html" />
+    <link rel="next" title="Util – utility functions" href="util.html" />
+    <link rel="prev" title="Playlist – playlist methods" href="playlist.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="util.html" title="Util – utility functions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="playlist.html" title="Playlist – playlist methods"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyechonest v4 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="catalog-catalog-methods">
+<h1>Catalog &#8211; catalog methods<a class="headerlink" href="#catalog-catalog-methods" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyechonest.catalog.Catalog">
+<em class="property">class </em><tt class="descclassname">pyechonest.catalog.</tt><tt class="descname">Catalog</tt><big>(</big><em>id</em>, <em>type=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Catalog object</p>
+<dl class="docutils">
+<dt>Attributes:</dt>
+<dd><p class="first">id (str): Catalog ID</p>
+<p class="last">name (str): Catalog Name</p>
+</dd>
+</dl>
+<p>Create an catalog object like so:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="n">Catalog</span><span class="p">(</span><span class="s">&#39;CAGPXKK12BB06F9DE9&#39;</span><span class="p">)</span> <span class="c"># get existing catalog</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="n">Catalog</span><span class="p">(</span><span class="s">&#39;test_song_catalog&#39;</span><span class="p">,</span> <span class="s">&#39;song&#39;</span><span class="p">)</span> <span class="c"># get existing or create new catalog</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>id</em>, <em>type=None</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a catalog object (get a catalog by ID or get or create one given by name and type)</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>id (str): A catalog id or name</dd>
+<dt>Kwargs:</dt>
+<dd>type (str): &#8216;song&#8217; or &#8216;artist&#8217;, specifying the catalog type</dd>
+<dt>Returns:</dt>
+<dd>A catalog object</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="n">Catalog</span><span class="p">(</span><span class="s">&#39;my_songs&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;song&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">id</span>
+<span class="go">u&#39;CAVKUPC12BCA792120&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">name</span>
+<span class="go">u&#39;my_songs&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.__repr__">
+<tt class="descname">__repr__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.__str__">
+<tt class="descname">__str__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.delete">
+<tt class="descname">delete</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes the entire catalog</p>
+<p>Args:</p>
+<p>Kwargs:</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>The deleted catalog&#8217;s id.</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">&lt;catalog - test_song_catalog&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+<span class="go">{u&#39;id&#39;: u&#39;CAXGUPY12BB087A21D&#39;}</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.get_feed">
+<tt class="descname">get_feed</tt><big>(</big><em>buckets=None</em>, <em>since=None</em>, <em>results=15</em>, <em>start=0</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.get_feed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns feed (news, blogs, reviews, audio, video) for the catalog artists; response depends on requested buckets</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">buckets (list): A list of strings specifying which feed items to retrieve</p>
+<p>results (int): An integer number of results to return</p>
+<p class="last">start (int): An integer starting value for the result set</p>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of news, blogs, reviews, audio or video document dicts;</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">&lt;catalog - my_artists&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">get_feed</span><span class="p">(</span><span class="n">results</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="go">{u&#39;date_found&#39;: u&#39;2011-02-06T07:50:25&#39;,</span>
+<span class="go"> u&#39;date_posted&#39;: u&#39;2011-02-06T07:50:23&#39;,</span>
+<span class="go"> u&#39;id&#39;: u&#39;caec686c0dff361e4c53dceb58fb9d2f&#39;,</span>
+<span class="go"> u&#39;name&#39;: u&#39;Linkin Park \u2013 \u201cWaiting For The End\u201d + \u201cWhen They Come For Me\u201d 2/5 SNL&#39;,</span>
+<span class="go"> u&#39;references&#39;: [{u&#39;artist_id&#39;: u&#39;ARQUMH41187B9AF699&#39;,</span>
+<span class="go">                  u&#39;artist_name&#39;: u&#39;Linkin Park&#39;}],</span>
+<span class="go"> u&#39;summary&#39;: u&#39;&lt;span&gt;Linkin&lt;/span&gt; &lt;span&gt;Park&lt;/span&gt; performed &quot;Waiting For The End&quot; and &quot;When They Come For Me&quot; on Saturday Night Live. Watch the videos below and pick up their album A Thousand Suns on iTunes, Amazon MP3, CD    Social Bookmarking ... &#39;,</span>
+<span class="go"> u&#39;type&#39;: u&#39;blogs&#39;,</span>
+<span class="go"> u&#39;url&#39;: u&#39;http://theaudioperv.com/2011/02/06/linkin-park-waiting-for-the-end-when-they-come-for-me-25-snl/&#39;}</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.get_profile">
+<tt class="descname">get_profile</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.get_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the status of a catalog update</p>
+<p>Args:</p>
+<p>Kwargs:</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>A dictionary representing ticket status</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">&lt;catalog - test_song_catalog&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">profile</span><span class="p">()</span>
+<span class="go">{u&#39;id&#39;: u&#39;CAGPXKK12BB06F9DE9&#39;,</span>
+<span class="go"> u&#39;name&#39;: u&#39;test_song_catalog&#39;,</span>
+<span class="go"> u&#39;pending_tickets&#39;: [],</span>
+<span class="go"> u&#39;resolved&#39;: 2,</span>
+<span class="go"> u&#39;total&#39;: 4,</span>
+<span class="go"> u&#39;type&#39;: u&#39;song&#39;}</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.read_items">
+<tt class="descname">read_items</tt><big>(</big><em>buckets=None</em>, <em>results=15</em>, <em>start=0</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.read_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns data from the catalog; also expanded for the requested buckets</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">buckets (list): A list of strings specifying which buckets to retrieve</p>
+<p>results (int): An integer number of results to return</p>
+<p class="last">start (int): An integer starting value for the result set</p>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of objects in the catalog; list contains additional attributes &#8216;start&#8217; and &#8216;total&#8217;</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">&lt;catalog - my_songs&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">read_items</span><span class="p">(</span><span class="n">results</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">[&lt;song - Harmonice Mundi II&gt;]</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.status">
+<tt class="descname">status</tt><big>(</big><em>ticket</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the status of a catalog update</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>ticket (str): A string representing a ticket ID</dd>
+</dl>
+<p>Kwargs:</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>A dictionary representing ticket status</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ticket</span>
+<span class="go">u&#39;7dcad583f2a38e6689d48a792b2e4c96&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">status</span><span class="p">(</span><span class="n">ticket</span><span class="p">)</span>
+<span class="go">{u&#39;ticket_status&#39;: u&#39;complete&#39;, u&#39;update_info&#39;: []}</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.update">
+<tt class="descname">update</tt><big>(</big><em>items</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a catalog object</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>items (list): A list of dicts describing update data and action codes (see api docs)</dd>
+</dl>
+<p>Kwargs:</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>A ticket id</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="n">Catalog</span><span class="p">(</span><span class="s">&#39;my_songs&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;song&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">items</span> 
+<span class="go">[{&#39;action&#39;: &#39;update&#39;,</span>
+<span class="go">  &#39;item&#39;: {&#39;artist_name&#39;: &#39;dAn ThE aUtOmAtOr&#39;,</span>
+<span class="go">           &#39;disc_number&#39;: 1,</span>
+<span class="go">           &#39;genre&#39;: &#39;Instrumental&#39;,</span>
+<span class="go">           &#39;item_id&#39;: &#39;38937DDF04BC7FC4&#39;,</span>
+<span class="go">           &#39;play_count&#39;: 5,</span>
+<span class="go">           &#39;release&#39;: &#39;Bombay the Hard Way: Guns, Cars &amp; Sitars&#39;,</span>
+<span class="go">           &#39;song_name&#39;: &#39;Inspector Jay From Dehli&#39;,</span>
+<span class="go">           &#39;track_number&#39;: 9,</span>
+<span class="go">           &#39;url&#39;: &#39;file://localhost/Users/tylerw/Music/iTunes/iTunes%20Media/Music/Dan%20the%20Automator/Bombay%20the%20Hard%20Way_%20Guns,%20Cars%20&amp;%20Sitars/09%20Inspector%20Jay%20From%20Dehli.m4a&#39;}}]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ticket</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ticket</span>
+<span class="go">u&#39;7dcad583f2a38e6689d48a792b2e4c96&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">status</span><span class="p">(</span><span class="n">ticket</span><span class="p">)</span>
+<span class="go">{u&#39;ticket_status&#39;: u&#39;complete&#39;, u&#39;update_info&#39;: []}</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="playlist.html"
+                        title="previous chapter">Playlist &#8211; playlist methods</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="util.html"
+                        title="next chapter">Util &#8211; utility functions</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/catalog.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="util.html" title="Util – utility functions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="playlist.html" title="Playlist – playlist methods"
+             >previous</a> |</li>
+        <li><a href="index.html">pyechonest v4 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, The Echo Nest.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.4.
+    </div>
+  </body>
+</html>
