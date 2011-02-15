@@ -125,7 +125,7 @@ class Artist(ArtistProxy):
     
     audio = property(get_audio)
     
-    def get_biographies(self, results=15, start=0, license='unknown', cache=True):
+    def get_biographies(self, results=15, start=0, license='', cache=True):
         """Get a list of artist biographies
         
         Args:
@@ -150,11 +150,11 @@ class Artist(ArtistProxy):
         u'http://www.mtvmusic.com/spears_britney'
         >>> 
         """
-        if cache and ('biographies' in self.cache) and results==15 and start==0 and license=='unknown':
+        if cache and ('biographies' in self.cache) and results==15 and start==0 and license=='':
             return self.cache['biographies']
         else:
             response = self.get_attribute('biographies', results=results, start=start, license=license)
-            if results==15 and start==0 and license=='unknown':
+            if results==15 and start==0 and license=='':
                 self.cache['biographies'] = ResultList(response['biographies'], 0, response['total'])
             return ResultList(response['biographies'], start, response['total'])
     
@@ -280,7 +280,7 @@ class Artist(ArtistProxy):
     
     hotttnesss = property(get_hotttnesss)
     
-    def get_images(self, results=15, start=0, license='unknown', cache=True):
+    def get_images(self, results=15, start=0, license='', cache=True):
         """Get a list of artist images
         
         Args:
@@ -306,11 +306,11 @@ class Artist(ArtistProxy):
         >>> 
         """
         
-        if cache and ('images' in self.cache) and results==15 and start==0 and license=='unknown':
+        if cache and ('images' in self.cache) and results==15 and start==0 and license=='':
             return self.cache['images']
         else:
             response = self.get_attribute('images', results=results, start=start, license=license)
-            if results==15 and start==0 and license=='unknown':
+            if results==15 and start==0 and license=='':
                 self.cache['images'] = ResultList(response['images'], 0, response['total'])
             return ResultList(response['images'], start, response['total'])
     
