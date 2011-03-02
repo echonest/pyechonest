@@ -291,61 +291,124 @@ class Playlist(PlaylistProxy):
         Example:
         
         >>> p = playlist.Playlist(type='artist-radio', artist=['ida maria', 'florence + the machine'])
-        >>> p.info
-        
-        {
-            u 'terms': [{
-                u 'frequency': 1.0,
-                u 'name': u 'rock'
-            },
-            {
-                u 'frequency': 0.99646542152360207,
-                u 'name': u 'pop'
-            },
-            {
-                u 'frequency': 0.90801905502131963,
-                u 'name': u 'indie'
-            },
-            {
-                u 'frequency': 0.90586455490260576,
-                u 'name': u 'indie rock'
-            },
-            {
-                u 'frequency': 0.8968907243373172,
-                u 'name': u 'alternative'
-            },
-            [...]
-            {
-                u 'frequency': 0.052197425644931635,
-                u 'name': u 'easy listening'
-            }],
-            u 'description': [],
-            u 'seed_songs': [],
-            u 'banned_artists': [],
-            u 'rules': [{
-                u 'rule': u "Don't put two copies of the same song in a playlist."
-            },
-            {
-                u 'rule': u 'Give preference to artists that are not already in the playlist'
-            }],
-            u 'session_id': u '9c1893e6ace04c8f9ce745f38b35ff95',
-            u 'seeds': [u 'ARI4XHX1187B9A1216', u 'ARNCHOP121318C56B8'],
-            u 'skipped_songs': [],
-            u 'banned_songs': [],
-            u 'playlist_type': u 'artist-radio',
-            u 'seed_catalogs': [],
-            u 'rated_songs': [],
-            u 'history': [{
-                u 'artist_id': u 'ARN6QMG1187FB56C8D',
-                u 'artist_name': u 'Laura Marling',
-                u 'id': u 'SOMSHNP12AB018513F',
-                u 'served_time': 1291412277.204201,
-                u 'title': u 'Hope In The Air'
-            }]
-        }
-        
         >>> p.session_info()
-        (same result as above)
+        {'banned_artists': [],
+        'banned_songs': [],
+        'description': [],
+        'history': [{'artist_id': 'ARLBTH21187FB53191',
+              'artist_name': 'The Ting Tings',
+              'id': 'SOWCBXM12B0B80B9AA',
+              'served_time': 1299092027.609634,
+              'title': 'Impacilla Carpisung'}],
+        'playlist_type': 'artist-radio',
+        'rated_songs': [],
+        'rules': [{'rule': "Don't put two copies of the same song in a playlist."},
+           {'rule': 'Give preference to artists that are not already in the playlist'}],
+        'seed_catalogs': [],
+        'seed_songs': [],
+        'seeds': ['ARI4XHX1187B9A1216', 'ARNCHOP121318C56B8'],
+        'session_id': 'c71d718b2e854ec58ab76a72ec738fac',
+        'skipped_songs': [],
+        'terms': [{'frequency': 1.0, 'name': 'rock'},
+           {'frequency': 0.9710461446720426, 'name': 'pop'},
+           {'frequency': 0.8939321026174193, 'name': 'indie'},
+           {'frequency': 0.8932392554185119, 'name': 'indie rock'},
+           {'frequency': 0.7833920377163979, 'name': 'alternative'},
+           {'frequency': 0.6503219368346062, 'name': 'alternative rock'},
+           {'frequency': 0.6299762436483861, 'name': 'electronic'},
+           {'frequency': 0.6111026978281094, 'name': 'indie pop'},
+           {'frequency': 0.4174929087066686, 'name': 'acoustic'},
+           {'frequency': 0.3804589191503101, 'name': 'electro'},
+           {'frequency': 0.3528832098937301, 'name': 'punk'},
+           {'frequency': 0.3477176570127335, 'name': 'folk'},
+           {'frequency': 0.34438857004724255, 'name': 'pop rock'},
+           {'frequency': 0.3201350993772201, 'name': 'female vocalist'},
+           {'frequency': 0.2930136812912544, 'name': 'singer-songwriter'},
+           {'frequency': 0.27855773620918817, 'name': 'guitar'},
+           {'frequency': 0.2608897298026231, 'name': 'female'},
+           {'frequency': 0.2257987517979643, 'name': 'jazz'},
+           {'frequency': 0.22076257097805616, 'name': 'new wave'},
+           {'frequency': 0.22067158583565338, 'name': 'experimental'},
+           {'frequency': 0.22046269833131954, 'name': 'folk rock'},
+           {'frequency': 0.2174644407782195, 'name': 'hip hop'},
+           {'frequency': 0.20640617807458408, 'name': 'electronica'},
+           {'frequency': 0.18755554090621548, 'name': 'vocal'},
+           {'frequency': 0.18591926305314618, 'name': 'synthpop'},
+           {'frequency': 0.18517407203199862, 'name': 'beautiful'},
+           {'frequency': 0.18402101677161792, 'name': 'soft rock'},
+           {'frequency': 0.16483655023966767, 'name': 'soundtrack'},
+           {'frequency': 0.1620391620224837, 'name': '00s'},
+           {'frequency': 0.1605208952456391, 'name': 'blues'},
+           {'frequency': 0.15112621997644843, 'name': 'norwegian'},
+           {'frequency': 0.15008765013390823, 'name': 'downtempo'},
+           {'frequency': 0.1459932432706328, 'name': 'garage rock'},
+           {'frequency': 0.14070914626164588, 'name': 'norway'},
+           {'frequency': 0.1347077821207766, 'name': 'scandinavia'},
+           {'frequency': 0.1335692053607083, 'name': 'mellow'},
+           {'frequency': 0.12979468413175474, 'name': 'soul'},
+           {'frequency': 0.12813192946395321, 'name': 'hard rock'},
+           {'frequency': 0.12641809523587832, 'name': 'classic rock'},
+           {'frequency': 0.12296650798160765, 'name': 'country rock'},
+           {'frequency': 0.1213771466612416, 'name': 'piano'},
+           {'frequency': 0.12076595580361003, 'name': 'post rock'},
+           {'frequency': 0.11915721061731957, 'name': '80s'},
+           {'frequency': 0.1110037740585051, 'name': 'ska'},
+           {'frequency': 0.10883656693952001, 'name': 'house'},
+           {'frequency': 0.1059204996140825, 'name': 'disco'},
+           {'frequency': 0.10277729388723868, 'name': 'chill-out'},
+           {'frequency': 0.09734141430337241, 'name': 'sweden'},
+           {'frequency': 0.0952557930918705, 'name': 'pop rap'},
+           {'frequency': 0.09445325509706426, 'name': 'emo'},
+           {'frequency': 0.09376612792746737, 'name': 'europop'},
+           {'frequency': 0.09218150809866822, 'name': 'female vocals'},
+           {'frequency': 0.09198221711464794, 'name': 'ballad'},
+           {'frequency': 0.09065007085811173, 'name': 'dream pop'},
+           {'frequency': 0.09049064169015415, 'name': 'future jazz'},
+           {'frequency': 0.08682614323719472, 'name': 'twee pop'},
+           {'frequency': 0.08659366733188904, 'name': 'power pop'},
+           {'frequency': 0.08585522015994426, 'name': 'swedish'},
+           {'frequency': 0.08250832612424043, 'name': 'reggae'},
+           {'frequency': 0.07974370431126251, 'name': 'dance pop'},
+           {'frequency': 0.07946569653610241, 'name': 'country'},
+           {'frequency': 0.07930367586262467, 'name': 'synth'},
+           {'frequency': 0.07871897935547836, 'name': 'indietronica'},
+           {'frequency': 0.07855152775656872, 'name': 'ambient'},
+           {'frequency': 0.07610981138554565, 'name': 'heavy metal'},
+           {'frequency': 0.07330890539699389, 'name': 'metal'},
+           {'frequency': 0.07193010126455535, 'name': 'hardcore'},
+           {'frequency': 0.06972580993314947, 'name': 'blues-rock'},
+           {'frequency': 0.0696586262870633, 'name': 'psychedelic rock'},
+           {'frequency': 0.06926151300222266, 'name': 'acid jazz'},
+           {'frequency': 0.06807873571076452, 'name': 'progressive rock'},
+           {'frequency': 0.06511658482129272, 'name': 'british'},
+           {'frequency': 0.06468627727708089, 'name': 'melodic'},
+           {'frequency': 0.06438061465050399, 'name': 'techno'},
+           {'frequency': 0.0639721791940246, 'name': 'american'},
+           {'frequency': 0.06313664884845813, 'name': 'england'},
+           {'frequency': 0.06223616131680611, 'name': 'sexy'},
+           {'frequency': 0.06199094786837033, 'name': 'soft'},
+           {'frequency': 0.06196367416672277, 'name': 'alternative dance'},
+           {'frequency': 0.060299115882783645, 'name': 'dark'},
+           {'frequency': 0.060142917341880785, 'name': 'london'},
+           {'frequency': 0.05862581739985387, 'name': 'song writer'},
+           {'frequency': 0.058307539362263655, 'name': 'psychedelic'},
+           {'frequency': 0.058297478633972666, 'name': 'shoegaze'},
+           {'frequency': 0.056650664064182565, 'name': 'male vocalist'},
+           {'frequency': 0.05563227271149839, 'name': 'funny'},
+           {'frequency': 0.055121468530633794, 'name': 'melancholia'},
+           {'frequency': 0.05483433641209914, 'name': 'british pop'},
+           {'frequency': 0.05374448195920263, 'name': 'garage'},
+           {'frequency': 0.05314211784143759, 'name': 'stoner rock'},
+           {'frequency': 0.052948125820119575, 'name': 'dance'},
+           {'frequency': 0.051924607548012584, 'name': 'tech house'},
+           {'frequency': 0.05126270846286737, 'name': 'germany'},
+           {'frequency': 0.05119529485602058, 'name': 'classical'},
+           {'frequency': 0.05091457971841325, 'name': 'art rock'},
+           {'frequency': 0.05003865991176611, 'name': 'european'},
+           {'frequency': 0.04944584014487098, 'name': 'chanson'},
+           {'frequency': 0.04844414853332869, 'name': 'dub'},
+           {'frequency': 0.047419886407436905, 'name': 'black metal'},
+           {'frequency': 0.04717140720623312, 'name': 'grunge'}]}
         >>> 
 
         """

@@ -180,74 +180,124 @@ song: The current song</dd>
 </dl>
 <p>Example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">playlist</span><span class="o">.</span><span class="n">Playlist</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s">&#39;artist-radio&#39;</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;ida maria&#39;</span><span class="p">,</span> <span class="s">&#39;florence + the machine&#39;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">info</span>
-</pre></div>
-</div>
-<dl class="docutils">
-<dt>{</dt>
-<dd><dl class="first docutils">
-<dt>u &#8216;terms&#8217;: [{</dt>
-<dd>u &#8216;frequency&#8217;: 1.0,
-u &#8216;name&#8217;: u &#8216;rock&#8217;</dd>
-</dl>
-<p>},
-{</p>
-<blockquote>
-u &#8216;frequency&#8217;: 0.99646542152360207,
-u &#8216;name&#8217;: u &#8216;pop&#8217;</blockquote>
-<p>},
-{</p>
-<blockquote>
-u &#8216;frequency&#8217;: 0.90801905502131963,
-u &#8216;name&#8217;: u &#8216;indie&#8217;</blockquote>
-<p>},
-{</p>
-<blockquote>
-u &#8216;frequency&#8217;: 0.90586455490260576,
-u &#8216;name&#8217;: u &#8216;indie rock&#8217;</blockquote>
-<p>},
-{</p>
-<blockquote>
-u &#8216;frequency&#8217;: 0.8968907243373172,
-u &#8216;name&#8217;: u &#8216;alternative&#8217;</blockquote>
-<p>},
-[...]
-{</p>
-<blockquote>
-u &#8216;frequency&#8217;: 0.052197425644931635,
-u &#8216;name&#8217;: u &#8216;easy listening&#8217;</blockquote>
-<p>}],
-u &#8216;description&#8217;: [],
-u &#8216;seed_songs&#8217;: [],
-u &#8216;banned_artists&#8217;: [],
-u &#8216;rules&#8217;: [{</p>
-<blockquote>
-u &#8216;rule&#8217;: u &#8220;Don&#8217;t put two copies of the same song in a playlist.&#8221;</blockquote>
-<p>},
-{</p>
-<blockquote>
-u &#8216;rule&#8217;: u &#8216;Give preference to artists that are not already in the playlist&#8217;</blockquote>
-<p>}],
-u &#8216;session_id&#8217;: u &#8216;9c1893e6ace04c8f9ce745f38b35ff95&#8217;,
-u &#8216;seeds&#8217;: [u &#8216;ARI4XHX1187B9A1216&#8217;, u &#8216;ARNCHOP121318C56B8&#8217;],
-u &#8216;skipped_songs&#8217;: [],
-u &#8216;banned_songs&#8217;: [],
-u &#8216;playlist_type&#8217;: u &#8216;artist-radio&#8217;,
-u &#8216;seed_catalogs&#8217;: [],
-u &#8216;rated_songs&#8217;: [],
-u &#8216;history&#8217;: [{</p>
-<blockquote>
-u &#8216;artist_id&#8217;: u &#8216;ARN6QMG1187FB56C8D&#8217;,
-u &#8216;artist_name&#8217;: u &#8216;Laura Marling&#8217;,
-u &#8216;id&#8217;: u &#8216;SOMSHNP12AB018513F&#8217;,
-u &#8216;served_time&#8217;: 1291412277.204201,
-u &#8216;title&#8217;: u &#8216;Hope In The Air&#8217;</blockquote>
-<p class="last">}]</p>
-</dd>
-</dl>
-<p>}</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">session_info</span><span class="p">()</span>
-<span class="go">(same result as above)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">session_info</span><span class="p">()</span>
+<span class="go">{&#39;banned_artists&#39;: [],</span>
+<span class="go">&#39;banned_songs&#39;: [],</span>
+<span class="go">&#39;description&#39;: [],</span>
+<span class="go">&#39;history&#39;: [{&#39;artist_id&#39;: &#39;ARLBTH21187FB53191&#39;,</span>
+<span class="go">      &#39;artist_name&#39;: &#39;The Ting Tings&#39;,</span>
+<span class="go">      &#39;id&#39;: &#39;SOWCBXM12B0B80B9AA&#39;,</span>
+<span class="go">      &#39;served_time&#39;: 1299092027.609634,</span>
+<span class="go">      &#39;title&#39;: &#39;Impacilla Carpisung&#39;}],</span>
+<span class="go">&#39;playlist_type&#39;: &#39;artist-radio&#39;,</span>
+<span class="go">&#39;rated_songs&#39;: [],</span>
+<span class="go">&#39;rules&#39;: [{&#39;rule&#39;: &quot;Don&#39;t put two copies of the same song in a playlist.&quot;},</span>
+<span class="go">   {&#39;rule&#39;: &#39;Give preference to artists that are not already in the playlist&#39;}],</span>
+<span class="go">&#39;seed_catalogs&#39;: [],</span>
+<span class="go">&#39;seed_songs&#39;: [],</span>
+<span class="go">&#39;seeds&#39;: [&#39;ARI4XHX1187B9A1216&#39;, &#39;ARNCHOP121318C56B8&#39;],</span>
+<span class="go">&#39;session_id&#39;: &#39;c71d718b2e854ec58ab76a72ec738fac&#39;,</span>
+<span class="go">&#39;skipped_songs&#39;: [],</span>
+<span class="go">&#39;terms&#39;: [{&#39;frequency&#39;: 1.0, &#39;name&#39;: &#39;rock&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.9710461446720426, &#39;name&#39;: &#39;pop&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.8939321026174193, &#39;name&#39;: &#39;indie&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.8932392554185119, &#39;name&#39;: &#39;indie rock&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.7833920377163979, &#39;name&#39;: &#39;alternative&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.6503219368346062, &#39;name&#39;: &#39;alternative rock&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.6299762436483861, &#39;name&#39;: &#39;electronic&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.6111026978281094, &#39;name&#39;: &#39;indie pop&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.4174929087066686, &#39;name&#39;: &#39;acoustic&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.3804589191503101, &#39;name&#39;: &#39;electro&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.3528832098937301, &#39;name&#39;: &#39;punk&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.3477176570127335, &#39;name&#39;: &#39;folk&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.34438857004724255, &#39;name&#39;: &#39;pop rock&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.3201350993772201, &#39;name&#39;: &#39;female vocalist&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.2930136812912544, &#39;name&#39;: &#39;singer-songwriter&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.27855773620918817, &#39;name&#39;: &#39;guitar&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.2608897298026231, &#39;name&#39;: &#39;female&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.2257987517979643, &#39;name&#39;: &#39;jazz&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.22076257097805616, &#39;name&#39;: &#39;new wave&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.22067158583565338, &#39;name&#39;: &#39;experimental&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.22046269833131954, &#39;name&#39;: &#39;folk rock&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.2174644407782195, &#39;name&#39;: &#39;hip hop&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.20640617807458408, &#39;name&#39;: &#39;electronica&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.18755554090621548, &#39;name&#39;: &#39;vocal&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.18591926305314618, &#39;name&#39;: &#39;synthpop&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.18517407203199862, &#39;name&#39;: &#39;beautiful&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.18402101677161792, &#39;name&#39;: &#39;soft rock&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.16483655023966767, &#39;name&#39;: &#39;soundtrack&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.1620391620224837, &#39;name&#39;: &#39;00s&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.1605208952456391, &#39;name&#39;: &#39;blues&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.15112621997644843, &#39;name&#39;: &#39;norwegian&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.15008765013390823, &#39;name&#39;: &#39;downtempo&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.1459932432706328, &#39;name&#39;: &#39;garage rock&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.14070914626164588, &#39;name&#39;: &#39;norway&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.1347077821207766, &#39;name&#39;: &#39;scandinavia&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.1335692053607083, &#39;name&#39;: &#39;mellow&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.12979468413175474, &#39;name&#39;: &#39;soul&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.12813192946395321, &#39;name&#39;: &#39;hard rock&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.12641809523587832, &#39;name&#39;: &#39;classic rock&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.12296650798160765, &#39;name&#39;: &#39;country rock&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.1213771466612416, &#39;name&#39;: &#39;piano&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.12076595580361003, &#39;name&#39;: &#39;post rock&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.11915721061731957, &#39;name&#39;: &#39;80s&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.1110037740585051, &#39;name&#39;: &#39;ska&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.10883656693952001, &#39;name&#39;: &#39;house&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.1059204996140825, &#39;name&#39;: &#39;disco&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.10277729388723868, &#39;name&#39;: &#39;chill-out&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.09734141430337241, &#39;name&#39;: &#39;sweden&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.0952557930918705, &#39;name&#39;: &#39;pop rap&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.09445325509706426, &#39;name&#39;: &#39;emo&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.09376612792746737, &#39;name&#39;: &#39;europop&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.09218150809866822, &#39;name&#39;: &#39;female vocals&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.09198221711464794, &#39;name&#39;: &#39;ballad&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.09065007085811173, &#39;name&#39;: &#39;dream pop&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.09049064169015415, &#39;name&#39;: &#39;future jazz&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.08682614323719472, &#39;name&#39;: &#39;twee pop&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.08659366733188904, &#39;name&#39;: &#39;power pop&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.08585522015994426, &#39;name&#39;: &#39;swedish&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.08250832612424043, &#39;name&#39;: &#39;reggae&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.07974370431126251, &#39;name&#39;: &#39;dance pop&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.07946569653610241, &#39;name&#39;: &#39;country&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.07930367586262467, &#39;name&#39;: &#39;synth&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.07871897935547836, &#39;name&#39;: &#39;indietronica&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.07855152775656872, &#39;name&#39;: &#39;ambient&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.07610981138554565, &#39;name&#39;: &#39;heavy metal&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.07330890539699389, &#39;name&#39;: &#39;metal&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.07193010126455535, &#39;name&#39;: &#39;hardcore&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.06972580993314947, &#39;name&#39;: &#39;blues-rock&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.0696586262870633, &#39;name&#39;: &#39;psychedelic rock&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.06926151300222266, &#39;name&#39;: &#39;acid jazz&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.06807873571076452, &#39;name&#39;: &#39;progressive rock&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.06511658482129272, &#39;name&#39;: &#39;british&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.06468627727708089, &#39;name&#39;: &#39;melodic&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.06438061465050399, &#39;name&#39;: &#39;techno&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.0639721791940246, &#39;name&#39;: &#39;american&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.06313664884845813, &#39;name&#39;: &#39;england&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.06223616131680611, &#39;name&#39;: &#39;sexy&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.06199094786837033, &#39;name&#39;: &#39;soft&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.06196367416672277, &#39;name&#39;: &#39;alternative dance&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.060299115882783645, &#39;name&#39;: &#39;dark&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.060142917341880785, &#39;name&#39;: &#39;london&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.05862581739985387, &#39;name&#39;: &#39;song writer&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.058307539362263655, &#39;name&#39;: &#39;psychedelic&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.058297478633972666, &#39;name&#39;: &#39;shoegaze&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.056650664064182565, &#39;name&#39;: &#39;male vocalist&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.05563227271149839, &#39;name&#39;: &#39;funny&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.055121468530633794, &#39;name&#39;: &#39;melancholia&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.05483433641209914, &#39;name&#39;: &#39;british pop&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.05374448195920263, &#39;name&#39;: &#39;garage&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.05314211784143759, &#39;name&#39;: &#39;stoner rock&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.052948125820119575, &#39;name&#39;: &#39;dance&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.051924607548012584, &#39;name&#39;: &#39;tech house&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.05126270846286737, &#39;name&#39;: &#39;germany&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.05119529485602058, &#39;name&#39;: &#39;classical&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.05091457971841325, &#39;name&#39;: &#39;art rock&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.05003865991176611, &#39;name&#39;: &#39;european&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.04944584014487098, &#39;name&#39;: &#39;chanson&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.04844414853332869, &#39;name&#39;: &#39;dub&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.047419886407436905, &#39;name&#39;: &#39;black metal&#39;},</span>
+<span class="go">   {&#39;frequency&#39;: 0.04717140720623312, &#39;name&#39;: &#39;grunge&#39;}]}</span>
 <span class="gp">&gt;&gt;&gt; </span>
 </pre></div>
 </div>
@@ -380,7 +430,7 @@ u &#8216;title&#8217;: u &#8216;Hope In The Air&#8217;</blockquote>
     </div>
     <div class="footer">
         &copy; Copyright 2010, The Echo Nest.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.4.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
     </div>
   </body>
 </html>
