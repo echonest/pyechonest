@@ -158,7 +158,8 @@ def callm(method, param_dict, POST=False, socket_timeout=None, data=None):
             param_list.append( (key,val) )
 
     params = urllib.urlencode(param_list)
-        
+    
+    orig_timeout = socket.getdefaulttimeout()
     socket.setdefaulttimeout(socket_timeout)
 
     if(POST):
@@ -171,7 +172,6 @@ def callm(method, param_dict, POST=False, socket_timeout=None, data=None):
             
             if data is None:
                 data = ''
-            
             data = urllib.urlencode(data)
             data = "&".join([data, params])
 
@@ -205,7 +205,7 @@ def callm(method, param_dict, POST=False, socket_timeout=None, data=None):
 
         f = opener.open(url)
             
-    socket.setdefaulttimeout(None)
+    socket.setdefaulttimeout(orig_timeout)
     
     # try/except
     response_dict = get_successful_response(f.read())
