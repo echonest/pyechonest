@@ -116,6 +116,117 @@ in addition to whatever other data is given.</p>
 
 </dd></dl>
 
+<dl class="staticmethod">
+<dt id="pyechonest.track.track_from_file">
+<em class="property">static </em><tt class="descclassname">track.</tt><tt class="descname">track_from_file</tt><big>(</big><em>file_object</em>, <em>filetype</em><big>)</big><a class="headerlink" href="#pyechonest.track.track_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a track object from a file-like object.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>file_object: a file-like Python object
+filetype: the file type (ex. mp3, ogg, wav)</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;Miaow-01-Tempered-song.mp3&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">track_from_file</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s">&#39;mp3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
+<span class="go">&lt; Track &gt;</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pyechonest.track.track_from_filename">
+<em class="property">static </em><tt class="descclassname">track.</tt><tt class="descname">track_from_filename</tt><big>(</big><em>filename</em>, <em>filetype=None</em><big>)</big><a class="headerlink" href="#pyechonest.track.track_from_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a track object from a filename.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>filename: A string containing the path to the input file.
+filetype: A string indicating the filetype; Defaults to None (type determined by file extension).</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">track_from_filename</span><span class="p">(</span><span class="s">&quot;Miaow-01-Tempered-song.mp3&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
+<span class="go">&lt; Track &gt;</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pyechonest.track.track_from_url">
+<em class="property">static </em><tt class="descclassname">track.</tt><tt class="descname">track_from_url</tt><big>(</big><em>url</em><big>)</big><a class="headerlink" href="#pyechonest.track.track_from_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a track object from a public http URL.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>url: A string giving the URL to read from. This must be on a public machine accessible by HTTP.</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">track_from_url</span><span class="p">(</span><span class="s">&quot;http://www.miaowmusic.com/mp3/Miaow-01-Tempered-song.mp3&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
+<span class="go">&lt; Track &gt;</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pyechonest.track.track_from_id">
+<em class="property">static </em><tt class="descclassname">track.</tt><tt class="descname">track_from_id</tt><big>(</big><em>identifier</em><big>)</big><a class="headerlink" href="#pyechonest.track.track_from_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a track object from an Echo Nest track ID.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>identifier: A string containing the ID of a previously analyzed track.</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">track_from_id</span><span class="p">(</span><span class="s">&quot;TRWFIDS128F92CC4CA&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
+<span class="go">&lt;track - Let The Spirit&gt;</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pyechonest.track.track_from_md5">
+<em class="property">static </em><tt class="descclassname">track.</tt><tt class="descname">track_from_md5</tt><big>(</big><em>md5</em><big>)</big><a class="headerlink" href="#pyechonest.track.track_from_md5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a track object from an md5 hash.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>md5: A string 32 characters long giving the md5 checksum of a track already analyzed.</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">track_from_md5</span><span class="p">(</span><span class="s">&#39;b8abf85746ab3416adabca63141d8c2d&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
+<span class="go">&lt;track - Neverwas Restored (from Neverwas Soundtrack)&gt;</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pyechonest.track.track_from_reanalyzing_md5">
+<em class="property">static </em><tt class="descclassname">track.</tt><tt class="descname">track_from_reanalyzing_md5</tt><big>(</big><em>md5</em><big>)</big><a class="headerlink" href="#pyechonest.track.track_from_reanalyzing_md5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a track object from an md5 hash, reanalyzing the track first.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>md5 (str): A string containing the md5 of a previously analyzed track</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">track_from_reanalyzing_md5</span><span class="p">(</span><span class="s">&#39;b8abf85746ab3416adabca63141d8c2d&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
+<span class="go">&lt;track - Neverwas Restored&gt;</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 

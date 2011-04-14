@@ -67,8 +67,7 @@
 <p>song_hotttnesss (float): A float representing a song&#8217;s hotttnesss</p>
 <p>artist_hotttnesss (float): A float representing a song&#8217;s parent artist&#8217;s hotttnesss</p>
 <p>artist_familiarity (float): A float representing a song&#8217;s parent artist&#8217;s familiarity</p>
-<p>artist_location (str): A string specifying a song&#8217;s parent artist&#8217;s location</p>
-<p class="last">tracks (list): A list of track objects</p>
+<p class="last">artist_location (dict): A dictionary of strings specifying a song&#8217;s parent artist&#8217;s location, lattitude and longitude</p>
 </dd>
 </dl>
 <p>Create a song object like so:</p>
@@ -203,6 +202,27 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="pyechonest.song.Song.get_foreign_id">
+<tt class="descname">get_foreign_id</tt><big>(</big><em>idspace=''</em>, <em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.song.Song.get_foreign_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the foreign id for this song for a specific id space</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd>idspace (str): A string indicating the idspace to fetch a foreign id for.</dd>
+<dt>Returns:</dt>
+<dd>A foreign ID string</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">Song</span><span class="p">(</span><span class="s">&#39;SOYRVMR12AF729F8DC&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">get_foreign_id</span><span class="p">(</span><span class="s">&#39;CAGPXKK12BB06F9DE9&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="pyechonest.song.Song.get_song_hotttnesss">
 <tt class="descname">get_song_hotttnesss</tt><big>(</big><em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.song.Song.get_song_hotttnesss" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get our numerical description of how hottt a song currently is</p>
@@ -301,7 +321,7 @@
 
 <dl class="staticmethod">
 <dt id="pyechonest.song.search">
-<em class="property">static </em><tt class="descclassname">song.</tt><tt class="descname">search</tt><big>(</big><em>title=None</em>, <em>artist=None</em>, <em>artist_id=None</em>, <em>combined=None</em>, <em>description=None</em>, <em>results=None</em>, <em>start=None</em>, <em>max_tempo=None</em>, <em>min_tempo=None</em>, <em>max_duration=None</em>, <em>min_duration=None</em>, <em>max_loudness=None</em>, <em>min_loudness=None</em>, <em>artist_max_familiarity=None</em>, <em>artist_min_familiarity=None</em>, <em>artist_max_hotttnesss=None</em>, <em>artist_min_hotttnesss=None</em>, <em>song_max_hotttnesss=None</em>, <em>song_min_hotttnesss=None</em>, <em>mode=None</em>, <em>min_energy=None</em>, <em>max_energy=None</em>, <em>min_danceability=None</em>, <em>max_danceability=None</em>, <em>key=None</em>, <em>max_latitude=None</em>, <em>min_latitude=None</em>, <em>max_longitude=None</em>, <em>min_longitude=None</em>, <em>sort=None</em>, <em>buckets=None</em>, <em>limit=False</em>, <em>test_new_things=None</em><big>)</big><a class="headerlink" href="#pyechonest.song.search" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descclassname">song.</tt><tt class="descname">search</tt><big>(</big><em>title=None</em>, <em>artist=None</em>, <em>artist_id=None</em>, <em>combined=None</em>, <em>description=None</em>, <em>style=None</em>, <em>mood=None</em>, <em>results=None</em>, <em>start=None</em>, <em>max_tempo=None</em>, <em>min_tempo=None</em>, <em>max_duration=None</em>, <em>min_duration=None</em>, <em>max_loudness=None</em>, <em>min_loudness=None</em>, <em>artist_max_familiarity=None</em>, <em>artist_min_familiarity=None</em>, <em>artist_max_hotttnesss=None</em>, <em>artist_min_hotttnesss=None</em>, <em>song_max_hotttnesss=None</em>, <em>song_min_hotttnesss=None</em>, <em>mode=None</em>, <em>min_energy=None</em>, <em>max_energy=None</em>, <em>min_danceability=None</em>, <em>max_danceability=None</em>, <em>key=None</em>, <em>max_latitude=None</em>, <em>min_latitude=None</em>, <em>max_longitude=None</em>, <em>min_longitude=None</em>, <em>sort=None</em>, <em>buckets=None</em>, <em>limit=False</em>, <em>test_new_things=None</em>, <em>rank_type=None</em><big>)</big><a class="headerlink" href="#pyechonest.song.search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search for songs by name, description, or constraint.</p>
 <p>Args:</p>
 <dl class="docutils">
@@ -311,6 +331,8 @@
 <p>artist_id (str): the artist_id</p>
 <p>combined (str): the artist name and song title</p>
 <p>description (str): A string describing the artist and song</p>
+<p>style (str): A string describing the style/genre of the artist and song</p>
+<p>mood (str): A string describing the mood of the artist and song</p>
 <p>results (int): An integer number of results to return</p>
 <p>max_tempo (float): The max tempo of song results</p>
 <p>min_tempo (float): The min tempo of song results</p>

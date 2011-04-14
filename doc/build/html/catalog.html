@@ -60,7 +60,9 @@
 <dl class="docutils">
 <dt>Attributes:</dt>
 <dd><p class="first">id (str): Catalog ID</p>
-<p class="last">name (str): Catalog Name</p>
+<p>name (str): Catalog Name</p>
+<p>read (list): A list of catalog items (objects if they are resolved, else dictionaries)</p>
+<p class="last">feed (list): A list of dictionaries for news, blogs, reviews, audio, video for a catalog&#8217;s artists</p>
 </dd>
 </dl>
 <p>Create an catalog object like so:</p>
@@ -261,6 +263,27 @@
 </div>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pyechonest.catalog.list">
+<em class="property">static </em><tt class="descclassname">catalog.</tt><tt class="descname">list</tt><big>(</big><em>results=30</em>, <em>start=0</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns list of all catalogs created on this API key</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">results (int): An integer number of results to return</p>
+<p class="last">start (int): An integer starting value for the result set</p>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of catalog objects</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">catalog</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
+<span class="go">[&lt;catalog - test_artist_catalog&gt;, &lt;catalog - test_song_catalog&gt;, &lt;catalog - my_songs&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>

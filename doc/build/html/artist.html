@@ -148,7 +148,7 @@
 
 <dl class="method">
 <dt id="pyechonest.artist.Artist.get_biographies">
-<tt class="descname">get_biographies</tt><big>(</big><em>results=15</em>, <em>start=0</em>, <em>license=''</em>, <em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_biographies" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_biographies</tt><big>(</big><em>results=15</em>, <em>start=0</em>, <em>license=None</em>, <em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_biographies" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a list of artist biographies</p>
 <p>Args:</p>
 <dl class="docutils">
@@ -267,7 +267,7 @@
 
 <dl class="method">
 <dt id="pyechonest.artist.Artist.get_images">
-<tt class="descname">get_images</tt><big>(</big><em>results=15</em>, <em>start=0</em>, <em>license=''</em>, <em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_images" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_images</tt><big>(</big><em>results=15</em>, <em>start=0</em>, <em>license=None</em>, <em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.artist.Artist.get_images" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get a list of artist images</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -503,13 +503,15 @@
 
 <dl class="staticmethod">
 <dt id="pyechonest.artist.search">
-<em class="property">static </em><tt class="descclassname">artist.</tt><tt class="descname">search</tt><big>(</big><em>name=None</em>, <em>description=None</em>, <em>results=15</em>, <em>buckets=None</em>, <em>limit=False</em>, <em>fuzzy_match=False</em>, <em>sort=None</em>, <em>max_familiarity=None</em>, <em>min_familiarity=None</em>, <em>max_hotttnesss=None</em>, <em>min_hotttnesss=None</em>, <em>test_new_things=None</em>, <em>rank_type=None</em><big>)</big><a class="headerlink" href="#pyechonest.artist.search" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descclassname">artist.</tt><tt class="descname">search</tt><big>(</big><em>name=None</em>, <em>description=None</em>, <em>style=None</em>, <em>mood=None</em>, <em>results=15</em>, <em>buckets=None</em>, <em>limit=False</em>, <em>fuzzy_match=False</em>, <em>sort=None</em>, <em>max_familiarity=None</em>, <em>min_familiarity=None</em>, <em>max_hotttnesss=None</em>, <em>min_hotttnesss=None</em>, <em>test_new_things=None</em>, <em>rank_type=None</em><big>)</big><a class="headerlink" href="#pyechonest.artist.search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search for artists by name, description, or constraint.</p>
 <p>Args:</p>
 <dl class="docutils">
 <dt>Kwargs:</dt>
 <dd><p class="first">name (str): the name of an artist</p>
 <p>description (str): A string describing the artist</p>
+<p>style (str): A string describing the style/genre of the artist</p>
+<p>mood (str): A string describing the mood of the artist</p>
 <p>results (int): An integer number of results to return</p>
 <p>buckets (list): A list of strings specifying which buckets to retrieve</p>
 <p>limit (bool): A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets</p>
@@ -582,7 +584,7 @@
 
 <dl class="staticmethod">
 <dt id="pyechonest.artist.similar">
-<em class="property">static </em><tt class="descclassname">artist.</tt><tt class="descname">similar</tt><big>(</big><em>names=None</em>, <em>ids=None</em>, <em>start=0</em>, <em>results=15</em>, <em>buckets=None</em>, <em>limit=False</em>, <em>max_familiarity=None</em>, <em>min_familiarity=None</em>, <em>max_hotttnesss=None</em>, <em>min_hotttnesss=None</em><big>)</big><a class="headerlink" href="#pyechonest.artist.similar" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descclassname">artist.</tt><tt class="descname">similar</tt><big>(</big><em>names=None</em>, <em>ids=None</em>, <em>start=0</em>, <em>results=15</em>, <em>buckets=None</em>, <em>limit=False</em>, <em>max_familiarity=None</em>, <em>min_familiarity=None</em>, <em>max_hotttnesss=None</em>, <em>min_hotttnesss=None</em>, <em>seed_catalog=None</em><big>)</big><a class="headerlink" href="#pyechonest.artist.similar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return similar artists to this one</p>
 <p>Args:</p>
 <dl class="docutils">
@@ -596,7 +598,8 @@
 <p>max_familiarity (float): A float specifying the max familiarity of artists to search for</p>
 <p>min_familiarity (float): A float specifying the min familiarity of artists to search for</p>
 <p>max_hotttnesss (float): A float specifying the max hotttnesss of artists to search for</p>
-<p class="last">min_hotttnesss (float): A float specifying the max hotttnesss of artists to search for</p>
+<p>min_hotttnesss (float): A float specifying the max hotttnesss of artists to search for</p>
+<p class="last">seed_catalog (str): A string specifying the catalog similar artists are restricted to</p>
 </dd>
 <dt>Returns:</dt>
 <dd>A list of similar Artist objects</dd>

@@ -56,6 +56,86 @@
 <p>Copyright (c) 2010 The Echo Nest. All rights reserved.
 Created by Tyler Williams on 2010-04-25.</p>
 <p>Utility functions to support the Echo Nest web API interface.</p>
+<dl class="exception">
+<dt id="pyechonest.util.EchoNestAPIError">
+<em class="property">exception </em><tt class="descclassname">pyechonest.util.</tt><tt class="descname">EchoNestAPIError</tt><big>(</big><em>code</em>, <em>message</em><big>)</big><a class="headerlink" href="#pyechonest.util.EchoNestAPIError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic API errors.</p>
+<dl class="method">
+<dt id="pyechonest.util.EchoNestAPIError.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>code</em>, <em>message</em><big>)</big><a class="headerlink" href="#pyechonest.util.EchoNestAPIError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyechonest.util.MyBaseHandler">
+<em class="property">class </em><tt class="descclassname">pyechonest.util.</tt><tt class="descname">MyBaseHandler</tt><a class="headerlink" href="#pyechonest.util.MyBaseHandler" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="pyechonest.util.MyBaseHandler.default_open">
+<tt class="descname">default_open</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#pyechonest.util.MyBaseHandler.default_open" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyechonest.util.MyErrorProcessor">
+<em class="property">class </em><tt class="descclassname">pyechonest.util.</tt><tt class="descname">MyErrorProcessor</tt><a class="headerlink" href="#pyechonest.util.MyErrorProcessor" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="pyechonest.util.MyErrorProcessor.http_response">
+<tt class="descname">http_response</tt><big>(</big><em>request</em>, <em>response</em><big>)</big><a class="headerlink" href="#pyechonest.util.MyErrorProcessor.http_response" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pyechonest.util.callm">
+<tt class="descclassname">pyechonest.util.</tt><tt class="descname">callm</tt><big>(</big><em>method</em>, <em>param_dict</em>, <em>POST=False</em>, <em>socket_timeout=None</em>, <em>data=None</em><big>)</big><a class="headerlink" href="#pyechonest.util.callm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call the api! 
+Param_dict is a <em>regular</em> <em>python</em> <em>dictionary</em> so if you want to have multi-valued params
+put them in a list.</p>
+<p>** note, if we require 2.6, we can get rid of this timeout munging.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyechonest.util.codegen">
+<tt class="descclassname">pyechonest.util.</tt><tt class="descname">codegen</tt><big>(</big><em>filename</em>, <em>start=0</em>, <em>duration=30</em><big>)</big><a class="headerlink" href="#pyechonest.util.codegen" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="pyechonest.util.fix">
+<tt class="descclassname">pyechonest.util.</tt><tt class="descname">fix</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#pyechonest.util.fix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="pyechonest.util.get_successful_response">
+<tt class="descclassname">pyechonest.util.</tt><tt class="descname">get_successful_response</tt><big>(</big><em>raw_json</em><big>)</big><a class="headerlink" href="#pyechonest.util.get_successful_response" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="pyechonest.util.postChunked">
+<tt class="descclassname">pyechonest.util.</tt><tt class="descname">postChunked</tt><big>(</big><em>host</em>, <em>selector</em>, <em>fields</em>, <em>files</em><big>)</big><a class="headerlink" href="#pyechonest.util.postChunked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempt to replace postMultipart() with nearly-identical interface.
+(The files tuple no longer requires the filename, and we only return
+the response body.) 
+Uses the urllib2_file.py originally from 
+<a class="reference external" href="http://fabien.seisen.org">http://fabien.seisen.org</a> which was also drawn heavily from 
+<a class="reference external" href="http://code.activestate.com/recipes/146306/">http://code.activestate.com/recipes/146306/</a> .</p>
+<p>This urllib2_file.py is more desirable because of the chunked 
+uploading from a file pointer (no need to read entire file into 
+memory) and the ability to work from behind a proxy (due to its 
+basis on urllib2).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyechonest.util.reallyUTF8">
+<tt class="descclassname">pyechonest.util.</tt><tt class="descname">reallyUTF8</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#pyechonest.util.reallyUTF8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="pyechonest.util.reallyunicode">
+<tt class="descclassname">pyechonest.util.</tt><tt class="descname">reallyunicode</tt><big>(</big><em>s</em>, <em>encoding='utf-8'</em><big>)</big><a class="headerlink" href="#pyechonest.util.reallyunicode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 
 
