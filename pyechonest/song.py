@@ -38,9 +38,7 @@ class Song(SongProxy):
         
         artist_familiarity (float): A float representing a song's parent artist's familiarity
         
-        artist_location (str): A string specifying a song's parent artist's location
-        
-        tracks (list): A list of track objects
+        artist_location (dict): A dictionary of strings specifying a song's parent artist's location, lattitude and longitude
         
     Create a song object like so:
 
@@ -214,6 +212,34 @@ class Song(SongProxy):
     
     artist_location = property(get_artist_location)
     
+    def get_foreign_id(self, idspace='', cache=True):
+        """Get the foreign id for this song for a specific id space
+        
+        Args:
+        
+        Kwargs:
+            idspace (str): A string indicating the idspace to fetch a foreign id for.
+        
+        Returns:
+            A foreign ID string
+        
+        Example:
+        
+        >>> s = song.Song('SOYRVMR12AF729F8DC')
+        >>> s.get_foreign_id('CAGPXKK12BB06F9DE9')
+        
+        >>> 
+        """
+        if not (cache and ('foreign_ids' in self.cache) and filter(lambda d: d.get('catalog') == idspace, self.cache['foreign_ids'])):
+            response = self.get_attribute('profile', bucket=['id:'+idspace])
+            rsongs = response['songs']
+            if len(rsongs) == 0:
+                return None
+            foreign_ids = rsongs[0].get("foreign_ids", [])
+            self.cache['foreign_ids'] = self.cache.get('foreign_ids', []) + foreign_ids
+        cval = filter(lambda d: d.get('catalog') == idspace, self.cache.get('foreign_ids'))
+        return cval[0].get('foreign_id') if cval else None
+    
     def get_tracks(self, catalog, cache=True):
         """Get the tracks for a song given a catalog.
         
@@ -349,13 +375,14 @@ def identify(filename=None, query_obj=None, code=None, artist=None, title=None, 
         return [Song(**util.fix(s_dict)) for s_dict in result['response'].get('songs',[])]
 
 
-def search(title=None, artist=None, artist_id=None, combined=None, description=None, results=None, start=None, max_tempo=None, \
-                min_tempo=None, max_duration=None, min_duration=None, max_loudness=None, min_loudness=None, \
+def search(title=None, artist=None, artist_id=None, combined=None, description=None, style=None, mood=None, \
+                results=None, start=None, max_tempo=None, min_tempo=None, \
+                max_duration=None, min_duration=None, max_loudness=None, min_loudness=None, \
                 artist_max_familiarity=None, artist_min_familiarity=None, artist_max_hotttnesss=None, \
                 artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, mode=None, \
                 min_energy=None, max_energy=None, min_danceability=None, max_danceability=None, \
                 key=None, max_latitude=None, min_latitude=None, max_longitude=None, min_longitude=None, \
-                sort=None, buckets = None, limit=False):
+                sort=None, buckets = None, limit=False, test_new_things=None, rank_type=None):
     """Search for songs by name, description, or constraint.
 
     Args:
@@ -370,7 +397,11 @@ def search(title=None, artist=None, artist_id=None, combined=None, description=N
         combined (str): the artist name and song title
         
         description (str): A string describing the artist and song
+        
+        style (str): A string describing the style/genre of the artist and song
 
+        mood (str): A string describing the mood of the artist and song
+        
         results (int): An integer number of results to return
         
         max_tempo (float): The max tempo of song results
@@ -423,6 +454,8 @@ def search(title=None, artist=None, artist_id=None, combined=None, description=N
 
         limit (bool): A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
 
+        rank_type (str): A string denoting the desired ranking for description searches, either 'relevance' or 'familiarity'
+
     Returns:
         A list of Song objects
 
@@ -451,6 +484,10 @@ def search(title=None, artist=None, artist_id=None, combined=None, description=N
         kwargs['combined'] = combined
     if description:
         kwargs['description'] = description
+    if style:
+        kwargs['style'] = style
+    if mood:
+        kwargs['mood'] = mood
     if results is not None:
         kwargs['results'] = results
     if start is not None:
@@ -489,6 +526,8 @@ def search(title=None, artist=None, artist_id=None, combined=None, description=N
         kwargs['max_energy'] = max_energy
     if mode is not None:
         kwargs['mode'] = mode
+    if test_new_things is not None:
+        kwargs['test_new_things'] = test_new_things
     if key is not None:
         kwargs['key'] = key
     if max_latitude is not None:
@@ -505,6 +544,11 @@ def search(title=None, artist=None, artist_id=None, combined=None, description=N
         kwargs['bucket'] = buckets
     if limit:
         kwargs['limit'] = 'true'
+    if rank_type:
+        kwargs['rank_type'] = rank_type
+
+    if test_new_things is not None:
+        kwargs['test_new_things'] = test_new_things
     
     result = util.callm("%s/%s" % ('song', 'search'), kwargs)
     return [Song(**util.fix(s_dict)) for s_dict in result['response']['songs']]

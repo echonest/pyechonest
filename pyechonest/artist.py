@@ -125,7 +125,7 @@ class Artist(ArtistProxy):
     
     audio = property(get_audio)
     
-    def get_biographies(self, results=15, start=0, license='', cache=True):
+    def get_biographies(self, results=15, start=0, license=None, cache=True):
         """Get a list of artist biographies
         
         Args:
@@ -150,11 +150,11 @@ class Artist(ArtistProxy):
         u'http://www.mtvmusic.com/spears_britney'
         >>> 
         """
-        if cache and ('biographies' in self.cache) and results==15 and start==0 and license=='':
+        if cache and ('biographies' in self.cache) and results==15 and start==0 and license==None:
             return self.cache['biographies']
         else:
             response = self.get_attribute('biographies', results=results, start=start, license=license)
-            if results==15 and start==0 and license=='':
+            if results==15 and start==0 and license==None:
                 self.cache['biographies'] = ResultList(response['biographies'], 0, response['total'])
             return ResultList(response['biographies'], start, response['total'])
     
@@ -280,7 +280,7 @@ class Artist(ArtistProxy):
     
     hotttnesss = property(get_hotttnesss)
     
-    def get_images(self, results=15, start=0, license='', cache=True):
+    def get_images(self, results=15, start=0, license=None, cache=True):
         """Get a list of artist images
         
         Args:
@@ -306,11 +306,11 @@ class Artist(ArtistProxy):
         >>> 
         """
         
-        if cache and ('images' in self.cache) and results==15 and start==0 and license=='':
+        if cache and ('images' in self.cache) and results==15 and start==0 and license==None:
             return self.cache['images']
         else:
             response = self.get_attribute('images', results=results, start=start, license=license)
-            if results==15 and start==0 and license=='':
+            if results==15 and start==0 and license==None:
                 self.cache['images'] = ResultList(response['images'], 0, response['total'])
             return ResultList(response['images'], start, response['total'])
     
@@ -614,9 +614,9 @@ class Artist(ArtistProxy):
     
     video = property(get_video)
 
-def search(name=None, description=None, results=15, buckets=None, limit=False, \
+def search(name=None, description=None, style=None, mood=None, results=15, buckets=None, limit=False, \
             fuzzy_match=False, sort=None, max_familiarity=None, min_familiarity=None, \
-            max_hotttnesss=None, min_hotttnesss=None):
+            max_hotttnesss=None, min_hotttnesss=None, test_new_things=None, rank_type=None):
     """Search for artists by name, description, or constraint.
     
     Args:
@@ -625,6 +625,10 @@ def search(name=None, description=None, results=15, buckets=None, limit=False, \
         name (str): the name of an artist
         
         description (str): A string describing the artist
+        
+        style (str): A string describing the style/genre of the artist
+        
+        mood (str): A string describing the mood of the artist
         
         results (int): An integer number of results to return
         
@@ -641,7 +645,9 @@ def search(name=None, description=None, results=15, buckets=None, limit=False, \
         max_hotttnesss (float): A float specifying the max hotttnesss of artists to search for
         
         min_hotttnesss (float): A float specifying the max hotttnesss of artists to search for
-    
+        
+        rank_type (str): A string denoting the desired ranking for description searches, either 'relevance' or 'familiarity'
+
     Returns:
         A list of Artist objects
     
@@ -659,6 +665,10 @@ def search(name=None, description=None, results=15, buckets=None, limit=False, \
         kwargs['name'] = name
     if description:
         kwargs['description'] = description
+    if style:
+        kwargs['style'] = style
+    if mood:
+        kwargs['mood'] = mood
     if results:
         kwargs['results'] = results
     if buckets:
@@ -677,6 +687,11 @@ def search(name=None, description=None, results=15, buckets=None, limit=False, \
         kwargs['min_hotttnesss'] = min_hotttnesss
     if sort:
         kwargs['sort'] = sort
+    if rank_type:
+        kwargs['rank_type'] = rank_type
+
+    if test_new_things is not None:
+        kwargs['test_new_things'] = test_new_things
     
     """Search for artists"""
     result = util.callm("%s/%s" % ('artist', 'search'), kwargs)
@@ -756,7 +771,7 @@ def top_terms(results=15):
 
 
 def similar(names=None, ids=None, start=0, results=15, buckets=None, limit=False, max_familiarity=None, min_familiarity=None,
-            max_hotttnesss=None, min_hotttnesss=None):
+            max_hotttnesss=None, min_hotttnesss=None, seed_catalog=None):
     """Return similar artists to this one
     
     Args:
@@ -781,6 +796,8 @@ def similar(names=None, ids=None, start=0, results=15, buckets=None, limit=False
         max_hotttnesss (float): A float specifying the max hotttnesss of artists to search for
         
         min_hotttnesss (float): A float specifying the max hotttnesss of artists to search for
+        
+        seed_catalog (str): A string specifying the catalog similar artists are restricted to
     
     Returns:
         A list of similar Artist objects
@@ -816,6 +833,8 @@ def similar(names=None, ids=None, start=0, results=15, buckets=None, limit=False
         kwargs['max_hotttnesss'] = max_hotttnesss
     if min_hotttnesss is not None:
         kwargs['min_hotttnesss'] = min_hotttnesss
+    if seed_catalog is not None:
+        kwargs['seed_catalog'] = seed_catalog
     if start:
         kwargs['start'] = start
     if results:

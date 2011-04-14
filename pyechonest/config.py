@@ -8,7 +8,7 @@ Created by Tyler Williams on 2010-04-25.
 Global configuration variables for accessing the Echo Nest web API.
 """
 
-__version__ = "4.2.10"
+__version__ = "4.2.11"
 
 import os
 
@@ -19,9 +19,10 @@ else:
 
 
 API_HOST = 'developer.echonest.com'
+"The API endpoint you're talking to"
 
 API_SELECTOR = 'api'
-"Locations for the Analyze API calls."
+"API selector... just 'api' for now"
 
 API_VERSION = 'v4'
 "Version of api to use... only 4 for now"
@@ -29,29 +30,17 @@ API_VERSION = 'v4'
 HTTP_USER_AGENT = 'PyEchonest'
 """
 You may change this to be a user agent string of your
-own choosing.
+own choosing
 """
 
-MP3_BITRATE = 128
-"""
-Default bitrate for MP3 output. Conventionally an
-integer divisible by 32kbits/sec.
-"""
-
-CACHE = True
-"""
-You may change this to False to prevent local caching
-of API results.
-"""
-
-TRACE_API_CALLS = True
+TRACE_API_CALLS = False
 """
 If true, API calls will be traced to the console
 """
 
 CALL_TIMEOUT = 10
 """
-The API call timeout in seconds. 
+The API call timeout (seconds)
 """
 
 CODEGEN_BINARY_OVERRIDE = None

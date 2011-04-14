@@ -29,6 +29,10 @@ class Catalog(CatalogProxy):
         id (str): Catalog ID
 
         name (str): Catalog Name
+        
+        read (list): A list of catalog items (objects if they are resolved, else dictionaries)
+        
+        feed (list): A list of dictionaries for news, blogs, reviews, audio, video for a catalog's artists
 
     Create an catalog object like so:
     

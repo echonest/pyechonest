@@ -152,7 +152,7 @@ def callm(method, param_dict, POST=False, socket_timeout=None, data=None):
     for key,val in param_dict.iteritems():
         if isinstance(val, list):
             param_list.extend( [(key,subval) for subval in val] )
-        elif val:
+        elif val is not None:
             if isinstance(val, unicode):
                 val = val.encode('utf-8')
             param_list.append( (key,val) )

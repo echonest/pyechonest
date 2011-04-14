@@ -17,6 +17,7 @@ import sys, os, inspect
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0,os.path.abspath("../../pyechonest"))
 
 # -- General configuration -----------------------------------------------------
 
@@ -261,10 +262,10 @@ intersphinx_mapping = {'http://docs.python.org/': None}
 
 # don't document the properties!
 def maybe_skip_member(app, what, name, obj, skip, options):
-    # print 'app:',app,'what:',what,'name:',name,'obj:',obj,'skip:',skip,'options:',options
-    return not inspect.ismethod(obj)
-    
-    #return True
+    if what == 'module':
+        return False
+    else:
+        return not inspect.ismethod(obj)
 
 def setup(app):
     app.connect('autodoc-skip-member', maybe_skip_member)

@@ -175,6 +175,13 @@ def track_from_file(file_object, filetype):
     Args:
         file_object: a file-like Python object
         filetype: the file type (ex. mp3, ogg, wav)
+    
+    Example:
+        >>> f = open("Miaow-01-Tempered-song.mp3")
+        >>> t = track.track_from_file(f, 'mp3')
+        >>> t
+        < Track >
+        >>>
     """
     try:
         hash = hashlib.md5(file_object.read()).hexdigest()
@@ -190,6 +197,12 @@ def track_from_filename(filename, filetype = None):
     Args:
         filename: A string containing the path to the input file.
         filetype: A string indicating the filetype; Defaults to None (type determined by file extension).
+    
+    Example:
+        >>> t = track.track_from_filename("Miaow-01-Tempered-song.mp3")
+        >>> t
+        < Track >
+        >>>
     """
     filetype = filetype or filename.split('.')[-1]
     try:
@@ -204,6 +217,13 @@ def track_from_url(url):
 
     Args:
         url: A string giving the URL to read from. This must be on a public machine accessible by HTTP.
+    
+    Example:
+        >>> t = track.track_from_url("http://www.miaowmusic.com/mp3/Miaow-01-Tempered-song.mp3")
+        >>> t
+        < Track >
+        >>>
+        
     """
     param_dict = dict(url = url)
     return _upload(param_dict) 
@@ -213,7 +233,13 @@ def track_from_id(identifier):
     Create a track object from an Echo Nest track ID.
 
     Args:
-        identifier: A string containing the ID of a track already analyzed (looks like "TRLMNOP12345678901").
+        identifier: A string containing the ID of a previously analyzed track.
+    
+    Example:
+        >>> t = track.track_from_id("TRWFIDS128F92CC4CA")
+        >>> t
+        <track - Let The Spirit>
+        >>>
     """
     param_dict = dict(id = identifier)
     return _profile(param_dict)
@@ -224,6 +250,12 @@ def track_from_md5(md5):
 
     Args:
         md5: A string 32 characters long giving the md5 checksum of a track already analyzed.
+    
+    Example:
+        >>> t = track.track_from_md5('b8abf85746ab3416adabca63141d8c2d')
+        >>> t
+        <track - Neverwas Restored (from Neverwas Soundtrack)>
+        >>>
     """
     param_dict = dict(md5 = md5)
     return _profile(param_dict)
@@ -233,7 +265,13 @@ def track_from_reanalyzing_id(identifier):
     Create a track object from an Echo Nest track ID, reanalyzing the track first.
 
     Args:
-        identifier: A string containing the ID of a track already analyzed (looks like "TRLMNOP12345678901").
+        identifier (str): A string containing the ID of a previously analyzed track
+    
+    Example:
+        >>> t = track.track_from_reanalyzing_id('TRXXHTJ1294CD8F3B3')
+        >>> t
+        <track - Neverwas Restored>
+        >>>
     """
     param_dict = dict(id = identifier)
     return _analyze(param_dict)
@@ -243,7 +281,13 @@ def track_from_reanalyzing_md5(md5):
     Create a track object from an md5 hash, reanalyzing the track first.
 
     Args:
-        md5: A string containing the md5 of a track already analyzed (looks like "TRLMNOP12345678901").
+        md5 (str): A string containing the md5 of a previously analyzed track
+
+    Example:
+        >>> t = track.track_from_reanalyzing_md5('b8abf85746ab3416adabca63141d8c2d')
+        >>> t
+        <track - Neverwas Restored>
+        >>>
     """
     param_dict = dict(md5 = md5)
     return _analyze(param_dict)
