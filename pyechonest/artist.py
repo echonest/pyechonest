@@ -614,7 +614,8 @@ class Artist(ArtistProxy):
     
     video = property(get_video)
 
-def search(name=None, description=None, style=None, mood=None, results=15, buckets=None, limit=False, \
+def search(name=None, description=None, style=None, mood=None, start=0, \
+            results=15, buckets=None, limit=False, \
             fuzzy_match=False, sort=None, max_familiarity=None, min_familiarity=None, \
             max_hotttnesss=None, min_hotttnesss=None, test_new_things=None, rank_type=None):
     """Search for artists by name, description, or constraint.
@@ -630,6 +631,8 @@ def search(name=None, description=None, style=None, mood=None, results=15, bucke
         
         mood (str): A string describing the mood of the artist
         
+        start (int): An integer starting value for the result set
+
         results (int): An integer number of results to return
         
         buckets (list): A list of strings specifying which buckets to retrieve
@@ -671,6 +674,8 @@ def search(name=None, description=None, style=None, mood=None, results=15, bucke
         kwargs['mood'] = mood
     if results:
         kwargs['results'] = results
+    if start:
+        kwargs['start'] = start
     if buckets:
         kwargs['bucket'] = buckets
     if limit:
@@ -769,6 +774,30 @@ def top_terms(results=15):
     result = util.callm("%s/%s" % ('artist', 'top_terms'), kwargs)
     return result['response']['terms']
 
+def list_terms(type):
+    """Get a list of best terms to use with search
+    
+    Args:
+    
+    Kwargs:
+        type (str): the type of term to return, either 'mood' or 'style'
+    
+    Example:
+    
+    >>> best_terms = artist.list_terms('mood')
+    >>> best_terms
+    [{u'name': u'aggressive'},
+     {u'name': u'ambient'},
+     {u'name': u'angry'},
+     {u'name': u'angst-ridden'},
+     {u'name': u'bouncy'},
+     {u'name': u'calming'},
+     {u'name': u'carefree'}, etc.]
+    """
+    
+    kwargs = {'type': type}
+    result = util.callm("%s/%s" % ('artist', 'list_terms'), kwargs)
+    return result['response']['terms']
 
 def similar(names=None, ids=None, start=0, results=15, buckets=None, limit=False, max_familiarity=None, min_familiarity=None,
             max_hotttnesss=None, min_hotttnesss=None, seed_catalog=None):
@@ -845,5 +874,5 @@ def similar(names=None, ids=None, start=0, results=15, buckets=None, limit=False
         kwargs['limit'] = 'true'
 
     result = util.callm("%s/%s" % ('artist', 'similar'), kwargs)
-    return [Artist(**util.fix(a_dict)) for a_dict in result['response']['artists']]    
+    return [Artist(**util.fix(a_dict)) for a_dict in result['response']['artists']]
 
