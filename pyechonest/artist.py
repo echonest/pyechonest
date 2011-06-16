@@ -48,6 +48,8 @@ class Artist(ArtistProxy):
         
         video (list): Artist video
         
+        years_active (list): A list of dictionaries containing start and stop years
+        
     You create an artist object like this:
     
     >>> a = artist.Artist('ARH6W4X1187B99274F')
@@ -386,7 +388,8 @@ class Artist(ArtistProxy):
     reviews = property(get_reviews)
     
     def get_similar(self, results=15, start=0, buckets=None, limit=False, cache=True, max_familiarity=None, min_familiarity=None, \
-                    max_hotttnesss=None, min_hotttnesss=None, min_results=None, reverse=False):
+                    max_hotttnesss=None, min_hotttnesss=None, min_results=None, reverse=False, artist_start_year_before=None, \
+                    artist_start_year_after=None,artist_end_year_before=None,artist_end_year_after=None):
         """Return similar artists to this one
         
         Args:
@@ -437,6 +440,15 @@ class Artist(ArtistProxy):
             kwargs['limit'] = 'true'
         if reverse:
             kwargs['reverse'] = 'true'
+        if artist_start_year_before:
+            kwargs['artist_start_year_before'] = artist_start_year_before
+        if artist_start_year_after:
+            kwargs['artist_start_year_after'] = artist_start_year_after
+        if artist_end_year_before:
+            kwargs['artist_end_year_before'] = artist_end_year_before
+        if artist_end_year_after:
+            kwargs['artist_end_year_after'] = artist_end_year_after
+        
         
         if cache and ('similar' in self.cache) and results==15 and start==0 and (not kwargs):
             return [Artist(**util.fix(a)) for a in self.cache['similar']]
@@ -470,8 +482,16 @@ class Artist(ArtistProxy):
         [<song - Fear Of Sleep>, <song - Red Light>, <song - Ize Of The World>, <song - Evening Sun>, <song - Juicebox>]
         >>> 
         """
-
+        
         if cache and ('songs' in self.cache) and results==15 and start==0:
+            if not isinstance(self.cache['songs'][0], Song):
+                song_objects = []
+                for s in self.cache["songs"]:
+                    song_objects.append(Song(id=s['id'], 
+                                             title=s['title'],
+                                             artist_name=self.name,
+                                             artist_id=self.id))
+                self.cache['songs'] = song_objects
             return self.cache['songs']
         else:
             response = self.get_attribute('songs', results=results, start=start)
@@ -614,10 +634,78 @@ class Artist(ArtistProxy):
     
     video = property(get_video)
 
+    def get_years_active(self, cache=True):
+        """Get a list of years active dictionaries for an artist
+        
+        Args:
+        
+        Kwargs:
+            cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+        
+        Returns:
+            A list of years active dictionaries; list contains additional attributes 'start' and 'total'
+            
+        Example:
+
+        >>> a = artist.Artist('yelle')
+        >>> a.get_years_active()
+        [{ start: 2005 }]
+        >>> 
+
+        """
+        if cache and ('years_active' in self.cache):
+            return self.cache['years_active']
+        else:
+            response = self.get_attribute('profile', bucket=['years_active'])
+            self.cache['years_active'] = response['artist']['years_active']
+            return response['artist']['years_active']
+    
+    years_active = property(get_years_active)
+    
+    def get_doc_counts(self, cache=True):
+        """
+        Get the number of related documents of various types for the artist.
+        The types include audio, biographies, blogs, images, news, reviews, songs, videos.
+        
+        Note that these documents can be retrieved by calling artist.<document type>, for example,
+        artist.biographies.
+        
+        Args:
+        
+        Kwargs:
+            cache (bool): A boolean indicating whether or not the cached value should be used (if available).
+            Defaults to True.
+        
+        Returns:
+            A dictionary with one key for each document type, mapped to an integer count of documents.
+        
+        Example:
+        
+        >>> a = artist.Artist("The Kinks")
+
+        >>> a.get_doc_counts()
+        {u'audio': 194,
+         u'biographies': 9,
+         u'blogs': 379,
+         u'images': 177,
+         u'news': 84,
+         u'reviews': 110,
+         u'songs': 499,
+         u'videos': 340}
+         >>>
+        """
+        if not cache or not ('doc_counts' in self.cache):
+            response = self.get_attribute("profile", bucket='doc_counts')
+            self.cache['doc_counts'] = response['artist']['doc_counts']
+        return self.cache['doc_counts']
+    
+    doc_counts = property(get_doc_counts)
+
 def search(name=None, description=None, style=None, mood=None, start=0, \
             results=15, buckets=None, limit=False, \
             fuzzy_match=False, sort=None, max_familiarity=None, min_familiarity=None, \
-            max_hotttnesss=None, min_hotttnesss=None, test_new_things=None, rank_type=None):
+            max_hotttnesss=None, min_hotttnesss=None, test_new_things=None, rank_type=None, \
+            artist_start_year_after=None, artist_start_year_before=None,artist_end_year_after=None,artist_end_year_before=None):
     """Search for artists by name, description, or constraint.
     
     Args:
@@ -649,6 +737,14 @@ def search(name=None, description=None, style=None, mood=None, start=0, \
         
         min_hotttnesss (float): A float specifying the max hotttnesss of artists to search for
         
+        artist_start_year_before (int): Returned artists will have started recording music before this year.
+        
+        artist_start_year_after (int): Returned artists will have started recording music after this year.
+        
+        artist_end_year_before (int): Returned artists will have stopped recording music before this year.
+        
+        artist_end_year_after (int): Returned artists will have stopped recording music after this year.
+        
         rank_type (str): A string denoting the desired ranking for description searches, either 'relevance' or 'familiarity'
 
     Returns:
@@ -662,42 +758,11 @@ def search(name=None, description=None, style=None, mood=None, start=0, \
     >>> 
 
     """
-    buckets = buckets or []
-    kwargs = {}
-    if name:
-        kwargs['name'] = name
-    if description:
-        kwargs['description'] = description
-    if style:
-        kwargs['style'] = style
-    if mood:
-        kwargs['mood'] = mood
-    if results:
-        kwargs['results'] = results
-    if start:
-        kwargs['start'] = start
-    if buckets:
-        kwargs['bucket'] = buckets
-    if limit:
-        kwargs['limit'] = 'true'
-    if fuzzy_match:
-        kwargs['fuzzy_match'] = 'true'
-    if max_familiarity is not None:
-        kwargs['max_familiarity'] = max_familiarity
-    if min_familiarity is not None:
-        kwargs['min_familiarity'] = min_familiarity
-    if max_hotttnesss is not None:
-        kwargs['max_hotttnesss'] = max_hotttnesss
-    if min_hotttnesss is not None:
-        kwargs['min_hotttnesss'] = min_hotttnesss
-    if sort:
-        kwargs['sort'] = sort
-    if rank_type:
-        kwargs['rank_type'] = rank_type
-
-    if test_new_things is not None:
-        kwargs['test_new_things'] = test_new_things
-    
+    limit = str(limit).lower()
+    fuzzy_match = str(fuzzy_match).lower()
+    kwargs = locals()
+    kwargs['bucket'] = buckets or []
+    del kwargs['buckets']
     """Search for artists"""
     result = util.callm("%s/%s" % ('artist', 'search'), kwargs)
     return [Artist(**util.fix(a_dict)) for a_dict in result['response']['artists']]
@@ -800,7 +865,8 @@ def list_terms(type):
     return result['response']['terms']
 
 def similar(names=None, ids=None, start=0, results=15, buckets=None, limit=False, max_familiarity=None, min_familiarity=None,
-            max_hotttnesss=None, min_hotttnesss=None, seed_catalog=None):
+            max_hotttnesss=None, min_hotttnesss=None, seed_catalog=None,artist_start_year_before=None, \
+            artist_start_year_after=None,artist_end_year_before=None,artist_end_year_after=None):
     """Return similar artists to this one
     
     Args:
@@ -872,7 +938,78 @@ def similar(names=None, ids=None, start=0, results=15, buckets=None, limit=False
         kwargs['bucket'] = buckets
     if limit:
         kwargs['limit'] = 'true'
+    if artist_start_year_before:
+        kwargs['artist_start_year_before'] = artist_start_year_before
+    if artist_start_year_after:
+        kwargs['artist_start_year_after'] = artist_start_year_after
+    if artist_end_year_before:
+        kwargs['artist_end_year_before'] = artist_end_year_before
+    if artist_end_year_after:
+        kwargs['artist_end_year_after'] = artist_end_year_after
+
 
     result = util.callm("%s/%s" % ('artist', 'similar'), kwargs)
     return [Artist(**util.fix(a_dict)) for a_dict in result['response']['artists']]
 
+def extract(text='', start=0, results=15, buckets=None, limit=False, max_familiarity=None, min_familiarity=None,
+                max_hotttnesss=None, min_hotttnesss=None):
+    """Extract artist names from a block of text.
+    
+    Args:
+    
+    Kwargs:
+        text (str): The text to extract artists from
+    
+        start (int): An integer starting value for the result set
+    
+        results (int): An integer number of results to return
+    
+        buckets (list): A list of strings specifying which buckets to retrieve
+    
+        limit (bool): A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
+    
+        max_familiarity (float): A float specifying the max familiarity of artists to search for
+    
+        min_familiarity (float): A float specifying the min familiarity of artists to search for
+    
+        max_hotttnesss (float): A float specifying the max hotttnesss of artists to search for
+    
+        min_hotttnesss (float): A float specifying the max hotttnesss of artists to search for
+    
+    Returns:
+        A list of Artist objects
+    
+    Example:
+    
+    >>> results = artist.extract(text='i saw beyonce at burger king, she was eatin, she was eatin')
+    >>> results
+
+    >>> 
+    
+    """
+
+    buckets = buckets or []
+    kwargs = {}
+    
+    kwargs['text'] = text
+    
+    if max_familiarity is not None:
+        kwargs['max_familiarity'] = max_familiarity
+    if min_familiarity is not None:
+        kwargs['min_familiarity'] = min_familiarity
+    if max_hotttnesss is not None:
+        kwargs['max_hotttnesss'] = max_hotttnesss
+    if min_hotttnesss is not None:
+        kwargs['min_hotttnesss'] = min_hotttnesss
+    if start:
+        kwargs['start'] = start
+    if results:
+        kwargs['results'] = results
+    if buckets:
+        kwargs['bucket'] = buckets
+    if limit:
+        kwargs['limit'] = 'true'
+    
+    result = util.callm("%s/%s" % ('artist', 'extract'), kwargs)
+    
+    return [Artist(**util.fix(a_dict)) for a_dict in result['response']['artists']]

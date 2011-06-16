@@ -8,7 +8,7 @@ Created by Tyler Williams on 2010-04-25.
 Global configuration variables for accessing the Echo Nest web API.
 """
 
-__version__ = "4.2.12"
+__version__ = "4.2.13"
 
 import os
 
@@ -31,12 +31,6 @@ HTTP_USER_AGENT = 'PyEchonest'
 """
 You may change this to be a user agent string of your
 own choosing
-"""
-
-MP3_BITRATE = 128
-"""		
-Default bitrate for MP3 output. Conventionally an		
-integer divisible by 32kbits/sec.		
 """
 
 TRACE_API_CALLS = False

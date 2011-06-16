@@ -45,7 +45,8 @@ class Playlist(PlaylistProxy):
                         artist_max_hotttnesss=None, artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, \
                         min_longitude=None, max_longitude=None, min_latitude=None, max_latitude=None, \
                         mode=None, key=None, buckets=[], sort=None, limit=False, dmca=False, chain_xspf=False, \
-                        seed_catalog=None, steer=None, source_catalog=None, steer_description=None, test_new_things=None, rank_type=None):
+                        seed_catalog=None, steer=None, source_catalog=None, steer_description=None, test_new_things=None, rank_type=None,
+                        artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None):
         """
         Args:
 
@@ -129,104 +130,33 @@ class Playlist(PlaylistProxy):
             steer_description (str): A steering value to determine the target song description term attributes
             
             rank_type (str): A string denoting the desired ranking for description searches, either 'relevance' or 'familiarity'
-
+            
+            artist_start_year_before (int): Returned songs's artists will have started recording music before this year.
+            
+            artist_start_year_after (int): Returned songs's artists will have started recording music after this year.
+            
+            artist_end_year_before (int): Returned songs's artists will have stopped recording music before this year.
+            
+            artist_end_year_after (int): Returned songs's artists will have stopped recording music after this year.
+            
         Returns:
             A dynamic playlist object
         
             
         """
-        kwargs = {}
-        if type:
-            kwargs['type'] = type
-        if artist_pick:
-            kwargs['artist_pick'] = artist_pick
-        if variety is not None:
-            kwargs['variety'] = variety
-        if artist:
-            kwargs['artist'] = artist
-        if artist_id:
-            kwargs['artist_id'] = artist_id
-        if song_id:
-            kwargs['song_id'] = song_id
-        if description:
-            kwargs['description'] = description
-        if style:
-            kwargs['style'] = style
-        if mood:
-            kwargs['mood'] = mood
-        if max_tempo is not None:
-            kwargs['max_tempo'] = max_tempo
-        if min_tempo is not None:
-            kwargs['min_tempo'] = min_tempo
-        if max_duration is not None:
-            kwargs['max_duration'] = max_duration
-        if min_duration is not None:
-            kwargs['min_duration'] = min_duration
-        if max_loudness is not None:
-            kwargs['max_loudness'] = max_loudness
-        if min_loudness is not None:
-            kwargs['min_loudness'] = min_loudness
-        if max_danceability is not None:
-            kwargs['max_danceability'] = max_danceability
-        if min_danceability is not None:
-            kwargs['min_danceability'] = min_danceability
-        if max_energy is not None:
-            kwargs['max_energy'] = max_energy
-        if min_energy is not None:
-            kwargs['min_energy'] = min_energy
-        if artist_max_familiarity is not None:
-            kwargs['artist_max_familiarity'] = artist_max_familiarity
-        if artist_min_familiarity is not None:
-            kwargs['artist_min_familiarity'] = artist_min_familiarity
-        if artist_max_hotttnesss is not None:
-            kwargs['artist_max_hotttnesss'] = artist_max_hotttnesss
-        if artist_min_hotttnesss is not None:
-            kwargs['artist_min_hotttnesss'] = artist_min_hotttnesss
-        if song_max_hotttnesss is not None:
-            kwargs['song_max_hotttnesss'] = song_max_hotttnesss
-        if song_min_hotttnesss is not None:
-            kwargs['song_min_hotttnesss'] = song_min_hotttnesss
-        if mode is not None:
-            kwargs['mode'] = mode
-        if key is not None:
-            kwargs['key'] = key
-        if max_latitude is not None:
-            kwargs['max_latitude'] = max_latitude
-        if min_latitude is not None:
-            kwargs['min_latitude'] = min_latitude
-        if max_longitude is not None:
-            kwargs['max_longitude'] = max_longitude
-        if min_longitude is not None:
-            kwargs['min_longitude'] = min_longitude
-        if sort:
-            kwargs['sort'] = sort
-        if buckets:
-            kwargs['bucket'] = buckets
-        if limit:
-            kwargs['limit'] = 'true'
-        if dmca:
-            kwargs['dmca'] = 'true'
-        if chain_xspf:
-            kwargs['chain_xspf'] = 'true'
-        if steer:
-            kwargs['steer'] = steer
-        if steer_description:
-            kwargs['steer_description'] = steer_description
-        if seed_catalog:
-            if isinstance(seed_catalog, catalog.Catalog):
-                kwargs['seed_catalog'] = seed_catalog.id
-            else:
-                kwargs['seed_catalog'] = seed_catalog
-        if source_catalog:
-            if isinstance(source_catalog, catalog.Catalog):
-                kwargs['source_catalog'] = source_catalog.id
-            else:
-                kwargs['source_catalog'] = source_catalog
-        if rank_type is not None:
-            kwargs['rank_type'] = rank_type
-         
-        if test_new_things is not None:
-            kwargs['test_new_things'] = test_new_things
+        limit = str(limit).lower()
+        dmca = str(dmca).lower()
+        chain_xspf = str(chain_xspf).lower()
+        
+        if isinstance(seed_catalog, catalog.Catalog):
+            seed_catalog = seed_catalog.id
+
+        if isinstance(source_catalog, catalog.Catalog):
+            source_catalog = source_catalog.id
+
+        kwargs = locals()
+        del kwargs['self']
+        del kwargs['session_id']
         
         super(Playlist, self).__init__(session_id, **kwargs)
     
@@ -375,7 +305,8 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
                     max_energy=None, min_energy=None, artist_max_familiarity=None, artist_min_familiarity=None, \
                     artist_max_hotttnesss=None, artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, \
                     min_longitude=None, max_longitude=None, min_latitude=None, max_latitude=None, \
-                    mode=None, key=None, buckets=[], sort=None, limit=False, seed_catalog=None, source_catalog=None, rank_type=None, test_new_things=None):
+                    mode=None, key=None, buckets=[], sort=None, limit=False, seed_catalog=None, source_catalog=None, rank_type=None, test_new_things=None,
+                    artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None):
     """Get a static playlist
     
     Args:
@@ -456,6 +387,14 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
         source_catalog (str or Catalog): A Catalog object or catalog id
 
         rank_type (str): A string denoting the desired ranking for description searches, either 'relevance' or 'familiarity'    
+        
+        artist_start_year_before (int): Returned songs's artists will have started recording music before this year.
+        
+        artist_start_year_after (int): Returned songs's artists will have started recording music after this year.
+        
+        artist_end_year_before (int): Returned songs's artists will have stopped recording music before this year.
+        
+        artist_end_year_after (int): Returned songs's artists will have stopped recording music after this year.
 
     Returns:
         A list of Song objects
@@ -482,104 +421,17 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
     >>> 
 
     """
-    kwargs = {}
-    if type:
-        kwargs['type'] = type
-    if artist_pick:
-        kwargs['artist_pick'] = artist_pick
-    if variety is not None:
-        kwargs['variety'] = variety
-    if artist:
-        kwargs['artist'] = artist
-    if artist_id:
-        kwargs['artist_id'] = artist_id
-    if song_id:
-        kwargs['song_id'] = song_id
-    if description:
-        kwargs['description'] = description
-    if style:
-        kwargs['style'] = style
-    if mood:
-        kwargs['mood'] = mood
-    if results is not None:
-        kwargs['results'] = results
-    if max_tempo is not None:
-        kwargs['max_tempo'] = max_tempo
-    if min_tempo is not None:
-        kwargs['min_tempo'] = min_tempo
-    if max_duration is not None:
-        kwargs['max_duration'] = max_duration
-    if min_duration is not None:
-        kwargs['min_duration'] = min_duration
-    if max_loudness is not None:
-        kwargs['max_loudness'] = max_loudness
-    if min_loudness is not None:
-        kwargs['min_loudness'] = min_loudness
-    if max_danceability is not None:
-        kwargs['max_danceability'] = max_danceability
-    if min_danceability is not None:
-        kwargs['min_danceability'] = min_danceability
-    if max_energy is not None:
-        kwargs['max_energy'] = max_energy
-    if min_energy is not None:
-        kwargs['min_energy'] = min_energy
-    if artist_max_familiarity is not None:
-        kwargs['artist_max_familiarity'] = artist_max_familiarity
-    if artist_min_familiarity is not None:
-        kwargs['artist_min_familiarity'] = artist_min_familiarity
-    if artist_max_hotttnesss is not None:
-        kwargs['artist_max_hotttnesss'] = artist_max_hotttnesss
-    if artist_min_hotttnesss is not None:
-        kwargs['artist_min_hotttnesss'] = artist_min_hotttnesss
-    if song_max_hotttnesss is not None:
-        kwargs['song_max_hotttnesss'] = song_max_hotttnesss
-    if song_min_hotttnesss is not None:
-        kwargs['song_min_hotttnesss'] = song_min_hotttnesss
-    if mode is not None:
-        kwargs['mode'] = mode
-    if key is not None:
-        kwargs['key'] = key
-    if max_latitude is not None:
-        kwargs['max_latitude'] = max_latitude
-    if min_latitude is not None:
-        kwargs['min_latitude'] = min_latitude
-    if max_longitude is not None:
-        kwargs['max_longitude'] = max_longitude
-    if min_longitude is not None:
-        kwargs['min_longitude'] = min_longitude
-    if sort:
-        kwargs['sort'] = sort
-    if buckets:
-        kwargs['bucket'] = buckets
-    if limit:
-        kwargs['limit'] = 'true'
-    if seed_catalog:
-        if isinstance(seed_catalog, catalog.Catalog):
-            kwargs['seed_catalog'] = seed_catalog.id
-        else:
-            kwargs['seed_catalog'] = seed_catalog
-    if source_catalog:
-        if isinstance(source_catalog, catalog.Catalog):
-            kwargs['source_catalog'] = source_catalog.id
-        else:
-            kwargs['source_catalog'] = source_catalog
-    if rank_type is not None:
-        kwargs['rank_type'] = rank_type
-        
-    if test_new_things is not None:
-        kwargs['test_new_things'] = test_new_things
-    
-    ## ERROR-CHECKING: based on projects/developer/dec/branches/__/interface/playlist error-checking
-    if description and not type in ['artist-description', 'artist-radio', 'song-radio']:
-        raise Exception('Invalid parameter: the "description" parameter must be used in conjunction with a "type" parameter specifying an artist-description playlist or artist-radio playlist')
-    elif style and not type in ['artist-description', 'artist-radio', 'song-radio']:
-        raise Exception('Invalid parameter: the "style" parameter must be used in conjunction with a "type" parameter specifying an artist-description playlist or artist-radio playlist')
-    elif mood and not type in ['artist-description', 'artist-radio', 'song-radio']:
-        raise Exception('Invalid parameter: the "mood" parameter must be used in conjunction with a "type" parameter specifying an artist-description playlist or artist-radio playlist')
-    elif (type=='artist-description') and not (description or style or mood):
-        raise Exception('Invalid parameter: the "style" or the "mood" or the "description" parameters must be used in conjunction with a "type" parameter specifying an artist-description playlist')
-    elif (description or style or mood) and (artist or artist_id or song_id) and type != 'artist-radio':
-        raise Exception('Invalid parameter: the "description" or the "mood" or the "description" parameters may not used in conjunction with an "artist", "artist_id" or "song_id" parameter')
+    limit = str(limit).lower()
+
+    if seed_catalog and isinstance(seed_catalog, catalog.Catalog):
+        seed_catalog = seed_catalog.id
+
+    if source_catalog and isinstance(source_catalog, catalog.Catalog):
+        source_catalog = source_catalog.id
+
+    kwargs = locals()
+    kwargs['bucket'] = kwargs['buckets']
+    del kwargs['buckets']
     
     result = util.callm("%s/%s" % ('playlist', 'static'), kwargs)
     return [Song(**util.fix(s_dict)) for s_dict in result['response']['songs']]

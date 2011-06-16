@@ -382,7 +382,8 @@ def search(title=None, artist=None, artist_id=None, combined=None, description=N
                 artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, mode=None, \
                 min_energy=None, max_energy=None, min_danceability=None, max_danceability=None, \
                 key=None, max_latitude=None, min_latitude=None, max_longitude=None, min_longitude=None, \
-                sort=None, buckets = None, limit=False, test_new_things=None, rank_type=None):
+                sort=None, buckets = None, limit=False, test_new_things=None, rank_type=None,
+                artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None):
     """Search for songs by name, description, or constraint.
 
     Args:
@@ -454,7 +455,15 @@ def search(title=None, artist=None, artist_id=None, combined=None, description=N
 
         limit (bool): A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
 
-        rank_type (str): A string denoting the desired ranking for description searches, either 'relevance' or 'familiarity'
+        rank_type (str): A string denoting the desired ranking for description searches, either 'relevance' or 'familiarity
+        
+        artist_start_year_before (int): Returned songs's artists will have started recording music before this year.
+        
+        artist_start_year_after (int): Returned songs's artists will have started recording music after this year.
+        
+        artist_end_year_before (int): Returned songs's artists will have stopped recording music before this year.
+        
+        artist_end_year_after (int): Returned songs's artists will have stopped recording music after this year.
 
     Returns:
         A list of Song objects
@@ -473,82 +482,10 @@ def search(title=None, artist=None, artist_id=None, combined=None, description=N
     >>> 
     """
     
-    kwargs = {}
-    if title:
-        kwargs['title'] = title
-    if artist:
-        kwargs['artist'] = artist
-    if artist_id:
-        kwargs['artist_id'] = artist_id
-    if combined:
-        kwargs['combined'] = combined
-    if description:
-        kwargs['description'] = description
-    if style:
-        kwargs['style'] = style
-    if mood:
-        kwargs['mood'] = mood
-    if results is not None:
-        kwargs['results'] = results
-    if start is not None:
-        kwargs['start'] = start
-    if max_tempo is not None:
-        kwargs['max_tempo'] = max_tempo
-    if min_tempo is not None:
-        kwargs['min_tempo'] = min_tempo
-    if max_duration is not None:
-        kwargs['max_duration'] = max_duration
-    if min_duration is not None:
-        kwargs['min_duration'] = min_duration
-    if max_loudness is not None:
-        kwargs['max_loudness'] = max_loudness
-    if min_loudness is not None:
-        kwargs['min_loudness'] = min_loudness
-    if artist_max_familiarity is not None:
-        kwargs['artist_max_familiarity'] = artist_max_familiarity
-    if artist_min_familiarity is not None:
-        kwargs['artist_min_familiarity'] = artist_min_familiarity
-    if artist_max_hotttnesss is not None:
-        kwargs['artist_max_hotttnesss'] = artist_max_hotttnesss
-    if artist_min_hotttnesss is not None:
-        kwargs['artist_min_hotttnesss'] = artist_min_hotttnesss
-    if song_max_hotttnesss is not None:
-        kwargs['song_max_hotttnesss'] = song_max_hotttnesss
-    if song_min_hotttnesss is not None:
-        kwargs['song_min_hotttnesss'] = song_min_hotttnesss
-    if min_danceability is not None:
-        kwargs['min_danceability'] = min_danceability
-    if max_danceability is not None:
-        kwargs['max_danceability'] = max_danceability
-    if max_energy is not None:
-        kwargs['max_energy'] = max_energy
-    if max_energy is not None:
-        kwargs['max_energy'] = max_energy
-    if mode is not None:
-        kwargs['mode'] = mode
-    if test_new_things is not None:
-        kwargs['test_new_things'] = test_new_things
-    if key is not None:
-        kwargs['key'] = key
-    if max_latitude is not None:
-        kwargs['max_latitude'] = max_latitude
-    if min_latitude is not None:
-        kwargs['min_latitude'] = min_latitude
-    if max_longitude is not None:
-        kwargs['max_longitude'] = max_longitude
-    if min_longitude is not None:
-        kwargs['min_longitude'] = min_longitude
-    if sort:
-        kwargs['sort'] = sort
-    if buckets:
-        kwargs['bucket'] = buckets
-    if limit:
-        kwargs['limit'] = 'true'
-    if rank_type:
-        kwargs['rank_type'] = rank_type
-
-    if test_new_things is not None:
-        kwargs['test_new_things'] = test_new_things
+    limit = str(limit).lower()
+    kwargs = locals()
+    kwargs['bucket'] = buckets
+    del kwargs['buckets']
     
     result = util.callm("%s/%s" % ('song', 'search'), kwargs)
     return [Song(**util.fix(s_dict)) for s_dict in result['response']['songs']]
