@@ -155,6 +155,8 @@ class Playlist(PlaylistProxy):
             source_catalog = source_catalog.id
 
         kwargs = locals()
+        kwargs['bucket'] = kwargs['buckets']
+        del kwargs['buckets']
         del kwargs['self']
         del kwargs['session_id']
         
