@@ -275,7 +275,7 @@ class Song(SongProxy):
             self.cache['tracks'].extend(new_tds)
         return filter(lambda tr: tr['catalog']==catalog, self.cache['tracks'])
 
-def identify(filename=None, query_obj=None, code=None, artist=None, title=None, release=None, duration=None, genre=None, buckets=None, codegen_start=0, codegen_duration=30):
+def identify(filename=None, query_obj=None, code=None, artist=None, title=None, release=None, duration=None, genre=None, buckets=None, version=None, codegen_start=0, codegen_duration=30):
     """Identify a song.
     
     Args:
@@ -298,6 +298,8 @@ def identify(filename=None, query_obj=None, code=None, artist=None, title=None, 
         genre (str): A string representing the genre
         
         buckets (list): A list of strings specifying which buckets to retrieve
+        
+        version (str): The version of the code generator used to generate the code
         
         codegen_start (int): The point (in seconds) where the codegen should start
         
@@ -364,6 +366,8 @@ def identify(filename=None, query_obj=None, code=None, artist=None, title=None, 
         kwargs['genre'] = genre
     if buckets:
         kwargs['bucket'] = buckets
+    if version:
+        kwargs['version'] = version
     
     if query_obj and any(query_obj):
         has_data = True
