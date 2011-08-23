@@ -1,0 +1,3 @@
+[submodule "doc/build/html"]
+	path = doc/build/html
+	url = git@github.com:echonest/pyechonest.git
