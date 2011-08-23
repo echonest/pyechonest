@@ -73,9 +73,9 @@ Search for songs:
 Get a song's audio_url and analysis_url:
 
     from pyechonest import song
-    wn_results = song.search(combined='the national - wasp nest', buckets=['id:7digital'], limit=True)
-    wasp_nest = wn_results[0]
-    wn_tracks = wasp_nest.get_tracks('7digital')
-    print wn_tracks[0].get('preview_url')
+    ss_results = song.search(artist='the national', title='slow show', buckets=['id:7digital', 'tracks'], limit=True)
+    slow_show = ss_results[0]
+    ss_tracks = slow_show.get_tracks('7digital')
+    print ss_tracks[0].get('preview_url')
 
 
