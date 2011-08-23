@@ -40,7 +40,8 @@ fi
 # check that sphinx is installed, we need it to make the docs!
 type -P sphinx-build &>/dev/null || { echo "Please install sphinx (easy_install -U sphinx)" >&2; exit 1; }
 # export a clean copy to export location
-svn export . "$TEMP_LOCATION"
+git archive master --format tar --prefix pyechonest/ --output /$TEMP_LOCATION/pyechonest.tar.gz
+tar -xvzf /$TEMP_LOCATION/pyechonest.tar.gz -C /$TEMP_LOCATION/
 
 # remove this script, as well as our test files or .pyc files
 rm -rf "$TEMP_LOCATION"/mkrelease.sh
