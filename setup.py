@@ -28,8 +28,8 @@ setup(
     author_email='tyler@echonest.com',
     maintainer='Tyler Williams',
     maintainer_email='tyler@echonest.com',
-    url='http://code.google.com/p/pyechonest/',
-    download_url='http://code.google.com/p/pyechonest/',
+    url='https://github.com/echonest/pyechonest',
+    download_url='https://github.com/echonest/pyechonest',
     package_dir={'pyechonest':'pyechonest'},
     packages=['pyechonest'],
     requires=requires
