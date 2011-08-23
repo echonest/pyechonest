@@ -16,7 +16,7 @@ if [ $? != 0 ]; then
 fi
 
 EXPORT_LOCATION=""
-TEMP_LOCATION="/tmp/pyechonest"
+TEMP_LOCATION="/tmp"
 set -- $args
 for i
 do
@@ -40,8 +40,8 @@ fi
 # check that sphinx is installed, we need it to make the docs!
 type -P sphinx-build &>/dev/null || { echo "Please install sphinx (easy_install -U sphinx)" >&2; exit 1; }
 # export a clean copy to export location
-git archive master --format tar --prefix pyechonest/ --output /$TEMP_LOCATION/pyechonest.tar.gz
-tar -xvzf /$TEMP_LOCATION/pyechonest.tar.gz -C /$TEMP_LOCATION/
+git archive master --format tar --prefix pyechonest/ --output $TEMP_LOCATION/pyechonest.tar.gz
+tar -xvzf $TEMP_LOCATION/pyechonest.tar.gz -C $TEMP_LOCATION/
 
 # remove this script, as well as our test files or .pyc files
 rm -rf "$TEMP_LOCATION"/mkrelease.sh
@@ -50,20 +50,21 @@ rm -rf "$TEMP_LOCATION"/test
 rm -rf "$TEMP_LOCATION"/tmp
 
 # remake the docs
-cd "$TEMP_LOCATION" && \
-    python "$TEMP_LOCATION"/setup.py build_sphinx
+cd "$TEMP_LOCATION"/pyechonest && \
+    python setup.py build_sphinx
 
 # remove pyc files
-find "$TEMP_LOCATION" -name "*.pyc" | xargs rm -rf
+find "$TEMP_LOCATION"/pyechonest -name "*.pyc" | xargs rm -rf
 
 # make zip and copy
 cd "$TEMP_LOCATION" && \
-    zip -r "$EXPORT_LOCATION"/pyechonest.zip .
+    zip -r "$EXPORT_LOCATION"/pyechonest.zip pyechonest
 
 # make egg and copy
-cd "$TEMP_LOCATION" && \
-    python "$TEMP_LOCATION"/setup.py bdist_egg && \
+cd "$TEMP_LOCATION"/pyechonest && \
+    python setup.py bdist_egg && \
     cp dist/*.egg "$EXPORT_LOCATION"
 
 # remove temp dir
-rm -rf "$TEMP_LOCATION"
+rm -rf "$TEMP_LOCATION"/pyechonest
+rm -rf "$TEMP_LOCATION"/pyechonest.tar.gz
