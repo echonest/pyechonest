@@ -1,54 +1,154 @@
 {% extends "layout.html" %}
 {% set title = 'Overview' %}
 {% block body %}
-  <h1>Welcome</h1>
+<style type="text/css">
+@font-face {
+  font-family: Collegiate;
+  src: url("Collegiate.ttf");
+}
 
-  <div class="quotebar">
-    <p><em>What users say:</em></p>
-    <p>&ldquo;Cheers for a great tool that actually makes programmers <b>want</b>
-      to write documentation!&rdquo;</p>
-  </div>
+.ribbon-holder {
+  position: absolute;
+  top: 10px;
+/*  overflow: hidden;*/
+  height: 10em;
+}
 
+.right.ribbon-holder {
+  right: 0;
+}
+
+.left.ribbon-holder {
+  left: 0;
+}
+
+.ribbon,
+.ribbon:hover {
+  text-decoration: none;
+}
+
+.ribbon {
+  font-family: Collegiate, sans-serif;
+  letter-spacing: -.1px;
+  opacity: 0.95;
+
+  padding: 0.25em 0;
+  position: relative;
+  top: 2.5em;
+  /* Defaults friendly for white pages. */
+  -moz-box-shadow: 0 0 13px #888;
+  -webkit-box-shadow: 0 0 13px #888;
+  color: #FFF;
+  display: block;
+  line-height: 1.35em;
+}
+
+.ribbon .text {
+  padding: 0.1em 3em;
+}
+
+.right .ribbon {
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  right: -3.2em;
+  bottom: -2.6em;
+}
+
+.left .ribbon {
+  -moz-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  left: -2.6em;
+}
+
+.white.ribbon {
+  color: #111;
+  background-color: #F5F5F5;
+  background: -webkit-gradient(linear, left bottom, left top, from(#f3f3f3), to(#fff));
+  -moz-box-shadow: 0 0 13px #999;
+  -webkit-box-shadow: 0 0 13px #999;
+  text-shadow: 0 0 .05em;
+}
+
+.white.ribbon .text {
+  border: 1px solid #cecece;
+}
+
+.red.ribbon {
+  background-color: #9a0000;
+  background: -webkit-gradient(linear, left bottom, left top, from(#9a0000), to(#a90000));
+}
+
+.red.ribbon .text {
+  border: 1px solid #bf6060;
+}
+
+.green.ribbon {
+  background-color: #26AAE1;
+  background: -webkit-gradient(linear, left bottom, left top, from(#26AAE1), to(#26AAE1));
+}
+
+.green.ribbon .text {
+  border: 1px solid #FFFFFF;
+  color: white;
+  display: block;
+  line-height: 1.35em;
+}
+
+.darkblue.ribbon {
+  background-color: #121621;
+  color: #ecedee;
+}
+
+.darkblue.ribbon .text {
+  border: 1px solid #53565e;
+}
+
+.orange.ribbon {
+  background-color: #E57504;
+  background: -webkit-gradient(linear, right bottom, right top, from(#dc7202), to(#ee7906));
+}
+
+.orange.ribbon .text {
+  border: 1px solid #ebaa65;
+}
+
+.gray.ribbon {
+  background-color: #6d6d6d;
+  background: -webkit-gradient(linear, left bottom, left top, from(#6a6a6a) to(#6d6d6d));
+}
+
+.gray.ribbon .text {
+  border: 1px solid #a4a4a4;
+}
+
+</style>
+
+<div class="right ribbon-holder">
+    <a href="https://github.com/echonest/pyechonest" class="green ribbon">
+      <span class="text">Fork me on GitHub</span>
+    </a>
+</div>
+<!-- <a href="http://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/30f550e0d38ceb6ef5b81500c64d970b7fb0f028/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub"></a> -->
+
+  <h1>Welcome to Pyechonest!</h1>
+  
   <p>
-    Sphinx is a tool that makes it easy to create intelligent and beautiful
-    documentation, written by Georg Brandl and licensed under the BSD license.</p>
-  <p>It was originally created for <a href="http://docs.python.org/">the
-    new Python documentation</a>, and it has excellent facilities for the
-    documentation of Python projects, but C/C++ is already supported as well,
-    and it is planned to add special support for other languages as well.  Of
-    course, this site is also created from reStructuredText sources using
-    Sphinx!
+  Tap into The Echo Nest's Musical Brain for the best music search, information, recommendations and remix tools on the web.
   </p>
   <p>
-    Sphinx is under constant development.  The following features are present,
-    work fine and can be seen &#8220;in action&#8221; in the Python docs:
+  Pyechonest is an open source Python library for the Echo Nest API. With Pyechonest you have Python access to the entire set of API methods including:
   </p>
   <ul>
-    <li><b>Output formats:</b> HTML (including Windows HTML Help), LaTeX (for
-      printable PDF versions), manual pages, plain text</li>
-    <li><b>Extensive cross-references:</b> semantic markup and automatic links
-      for functions, classes, citations, glossary terms and similar pieces of
-      information</li>
-    <li><b>Hierarchical structure:</b> easy definition of a document tree, with
-      automatic links to siblings, parents and children</li>
-    <li><b>Automatic indices:</b> general index as well as a module index</li>
-    <li><b>Code handling:</b> automatic highlighting using the <a
-      href="http://pygments.org">Pygments</a> highlighter</li>
-    <li><b>Extensions:</b> automatic testing of code snippets, inclusion of
-      docstrings from Python modules (API docs), and more</li>
+  <li><b>artist</b> - search for artists by name, description, or attribute, and get back detailed information about any artist including audio, similar artists, blogs, familiarity, hotttnesss, news, reviews, urls and video.</li>
+  <li><b>song</b> - search songs by artist, title, description, or attribute (tempo, duration, etc) and get detailed information back about each song, such as hotttnesss, audio_summary, or tracks.</li>
+  <li><b>track</b> - upload a track to the Echo Nest and receive summary information about the track including key, duration, mode, tempo, time signature along with detailed track info including timbre, pitch, rhythm and loudness information.</li>
   </ul>
-  <p>
-    Sphinx uses <a href="http://docutils.sf.net/rst.html">reStructuredText</a>
-    as its markup language, and many of its strengths come from the power and
-    straightforwardness of reStructuredText and its parsing and translating
-    suite, the <a href="http://docutils.sf.net/">Docutils</a>.
-  </p>
 
   <h2>Documentation</h2>
 
   <table class="contentstable" align="center" style="margin-left: 30px"><tr>
     <td width="50%">
-      <p class="biglink"><a class="biglink" href="{{ pathto("tutorial") }}">First steps with Sphinx</a><br/>
+      <p class="biglink"><a class="biglink" href="http://developer.echonest.com/tutorial-overview.html">Getting Started</a><br/>
          <span class="linkdescr">overview of basic tasks</span></p>
       <p class="biglink"><a class="biglink" href="{{ pathto("contents") }}">Contents</a><br/>
          <span class="linkdescr">for a complete overview</span></p>
@@ -60,40 +160,26 @@
     </td></tr>
   </table>
 
-  <p>
-    You can also download PDF versions of the Sphinx documentation:
-    a <a href="http://sphinx.pocoo.org/sphinx.pdf">version</a> generated from
-    the LaTeX Sphinx produces, and
-    a <a href="http://sphinx.pocoo.org/sphinx-rst2pdf.pdf">version</a> generated
-    by rst2pdf.
-  </p>
-
   <h2>Examples</h2>
-  <p>Links to documentation generated with Sphinx can be found on the
-    <a href="{{ pathto("examples") }}">Projects using Sphinx</a> page.
+  <p>Some simple examples can be found in the
+    <a href="https://github.com/echonest/pyechonest/blob/master/README.md">README</a>.
   </p>
   <p>
-    For examples of how Sphinx source files look, use the &#8220;Show
-    source&#8221; links on all pages of the documentation apart from this
-    welcome page.
+    For more complex examples of what you can make with pyechonest, check out the bundled <a href="https://github.com/echonest/pyechonest/tree/master/examples">examples</a>.
   </p>
 
-  <p>You may also be interested in the very nice
-    <a href="http://matplotlib.sourceforge.net/sampledoc/">tutorial</a> on how to
-    create a customized documentation using Sphinx written by the matplotlib
-    developers.</p>
-
-  <p>There is a <a href="http://sphinx-users.jp/doc10/">Japanese translation</a>
-    of this documentation, thanks to Yoshiki Shibukawa.</p>
-
-  <h2>Get Sphinx</h2>
+  <h2>Get Pyechonest</h2>
   <p>
-    Sphinx is available as an <a
-    href="http://peak.telecommunity.com/DevCenter/EasyInstall">easy-install</a>able
-    package on the <a href="http://pypi.python.org/pypi/Sphinx">Python Package
-    Index</a>.
+    Pyechonest is available as an <a
+    href="http://peak.telecommunity.com/DevCenter/EasyInstall">easy-installable</a>
+    package on the <a href="http://pypi.python.org/pypi/pyechonest">Python Package
+    Index</a>. You can install it by running:
+    </p>
+    </p>
+        <tt>    "easy_install pyechonest" </tt>
+
   </p>
-  <p>The code can be found in a Mercurial repository, at
-    <tt>http://bitbucket.org/birkenfeld/sphinx/</tt>.</p>
+  <p>The code can be found in a git repository, at
+    <tt>https://github.com/echonest/pyechonest</tt>.</p>
 
 {% endblock %}

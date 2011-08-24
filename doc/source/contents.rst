@@ -1,10 +1,8 @@
-Welcome to pyechonest's documentation!
-======================================
-
-Contents:
+Contents
+========
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 4
    
    artist
    
@@ -26,5 +24,4 @@ Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
