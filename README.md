@@ -78,4 +78,4 @@ Get a song's audio_url and analysis_url:
     ss_tracks = slow_show.get_tracks('7digital')
     print ss_tracks[0].get('preview_url')
 
-
+![alt text](http://i.imgur.com/WWLYo.gif)
