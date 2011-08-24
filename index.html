@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -7,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to pyechonest’s documentation! &mdash; pyechonest v4 documentation</title>
+    <title>Overview &mdash; pyechonest v4 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -23,13 +22,40 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="pyechonest v4 documentation" href="#" />
-    <link rel="next" title="Artist – artist methods" href="artist.html" />
  
 <style type="text/css">
   table.right { float: right; margin-left: 20px; }
   table.right td { border: 1px solid #ccc; }
 </style>
 
+  </head>
+  <body>
+<!-- <div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px"> -->
+<!-- </div> -->
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+
+      
+        <li><a href="#">Pyechonest home</a>&nbsp;|&nbsp;</li>
+        <li><a href="contents.html">Documentation</a>
+          &raquo;</li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
 <style type="text/css">
 @font-face {
   font-family: Collegiate;
@@ -38,7 +64,7 @@
 
 .ribbon-holder {
   position: absolute;
-  bottom: -30px;
+  top: 10px;
 /*  overflow: hidden;*/
   height: 10em;
 }
@@ -64,7 +90,6 @@
   padding: 0.25em 0;
   position: relative;
   top: 2.5em;
-
   /* Defaults friendly for white pages. */
   -moz-box-shadow: 0 0 13px #888;
   -webkit-box-shadow: 0 0 13px #888;
@@ -78,9 +103,10 @@
 }
 
 .right .ribbon {
-  -moz-transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  right: -2.6em;
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  right: -3.2em;
+  bottom: -2.6em;
 }
 
 .left .ribbon {
@@ -112,12 +138,15 @@
 }
 
 .green.ribbon {
-  background-color: #006e00;
-  background: -webkit-gradient(linear, left bottom, left top, from(#006e00), to(#007200));
+  background-color: #26AAE1;
+  background: -webkit-gradient(linear, left bottom, left top, from(#26AAE1), to(#26AAE1));
 }
 
 .green.ribbon .text {
-  border: 1px solid #6bac6b;
+  border: 1px solid #FFFFFF;
+  color: white;
+  display: block;
+  line-height: 1.35em;
 }
 
 .darkblue.ribbon {
@@ -149,66 +178,64 @@
 
 </style>
 
-  </head>
-  <body>
-<!-- <div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px"> -->
-<!-- </div> -->
-
-    <div class="related">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="artist.html" title="Artist – artist methods"
-             accesskey="N">next</a> |</li>
-
 <div class="right ribbon-holder">
-        <a href="https://github.com/echonest/pyechonest" class="orange ribbon">
-          <span class="text">Fork me on GitHub</span>
-        </a>
-      </div>
-      
-        <li><a href="#">Sphinx home</a>&nbsp;|&nbsp;</li>
-        <li><a href="contents.html">Documentation</a>
-          &raquo;</li>
- 
-      </ul>
-    </div>  
+    <a href="https://github.com/echonest/pyechonest" class="green ribbon">
+      <span class="text">Fork me on GitHub</span>
+    </a>
+</div>
+<!-- <a href="http://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/30f550e0d38ceb6ef5b81500c64d970b7fb0f028/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub"></a> -->
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
-            
-  <div class="section" id="welcome-to-pyechonest-s-documentation">
-<h1>Welcome to pyechonest&#8217;s documentation!<a class="headerlink" href="#welcome-to-pyechonest-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Contents:</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="artist.html">Artist &#8211; artist methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="song.html">Song &#8211; song methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="track.html">Track &#8211; track methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="playlist.html">Playlist &#8211; playlist methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="catalog.html">Catalog &#8211; catalog methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="util.html">Util &#8211; utility functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="config.html">Config &#8211; configuration file</a></li>
-<li class="toctree-l1"><a class="reference internal" href="proxies.html">Proxies &#8211; object proxies</a></li>
-</ul>
-</div>
-</div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
-<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
-<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
-</ul>
-</div>
+  <h1>Welcome to Pyechonest!</h1>
+  
+  <p>
+  Tap into The Echo Nest's Musical Brain for the best music search, information, recommendations and remix tools on the web.
+  </p>
+  <p>
+  Pyechonest is an open source Python library for the Echo Nest API. With Pyechonest you have Python access to the entire set of API methods including:
+  </p>
+  <ul>
+  <li><b>artist</b> - search for artists by name, description, or attribute, and get back detailed information about any artist including audio, similar artists, blogs, familiarity, hotttnesss, news, reviews, urls and video.</li>
+  <li><b>song</b> - search songs by artist, title, description, or attribute (tempo, duration, etc) and get detailed information back about each song, such as hotttnesss, audio_summary, or tracks.</li>
+  <li><b>track</b> - upload a track to the Echo Nest and receive summary information about the track including key, duration, mode, tempo, time signature along with detailed track info including timbre, pitch, rhythm and loudness information.</li>
+  </ul>
+
+  <h2>Documentation</h2>
+
+  <table class="contentstable" align="center" style="margin-left: 30px"><tr>
+    <td width="50%">
+      <p class="biglink"><a class="biglink" href="http://developer.echonest.com/tutorial-overview.html">Getting Started</a><br/>
+         <span class="linkdescr">overview of basic tasks</span></p>
+      <p class="biglink"><a class="biglink" href="contents.html">Contents</a><br/>
+         <span class="linkdescr">for a complete overview</span></p>
+    </td><td width="50%">
+      <p class="biglink"><a class="biglink" href="search.html">Search page</a><br/>
+         <span class="linkdescr">search the documentation</span></p>
+      <p class="biglink"><a class="biglink" href="genindex.html">General Index</a><br/>
+         <span class="linkdescr">all functions, classes, terms</span></p>
+    </td></tr>
+  </table>
+
+  <h2>Examples</h2>
+  <p>Some simple examples can be found in the
+    <a href="https://github.com/echonest/pyechonest/blob/master/README.md">README</a>.
+  </p>
+  <p>
+    For more complex examples of what you can make with pyechonest, check out the bundled <a href="https://github.com/echonest/pyechonest/tree/master/examples">examples</a>.
+  </p>
+
+  <h2>Get Pyechonest</h2>
+  <p>
+    Pyechonest is available as an <a
+    href="http://peak.telecommunity.com/DevCenter/EasyInstall">easy-installable</a>
+    package on the <a href="http://pypi.python.org/pypi/pyechonest">Python Package
+    Index</a>. You can install it by running:
+    </p>
+    </p>
+        <tt>    "easy_install pyechonest" </tt>
+
+  </p>
+  <p>The code can be found in a git repository, at
+    <tt>https://github.com/echonest/pyechonest</tt>.</p>
 
 
           </div>
@@ -216,25 +243,9 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-            <p class="logo"><a href="#">
+            <p class="logo"><a href="contents.html">
               <img class="logo" src="_static/200x160_lt.png" alt="Logo"/>
             </a></p>
-  <h3><a href="#">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Welcome to pyechonest&#8217;s documentation!</a><ul>
-</ul>
-</li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
-</ul>
-
-  <h4>Next topic</h4>
-  <p class="topless"><a href="artist.html"
-                        title="next chapter">Artist &#8211; artist methods</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
@@ -261,17 +272,9 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="artist.html" title="Artist – artist methods"
-             >next</a> |</li>
 
-<div class="right ribbon-holder">
-        <a href="https://github.com/echonest/pyechonest" class="orange ribbon">
-          <span class="text">Fork me on GitHub</span>
-        </a>
-      </div>
       
-        <li><a href="#">Sphinx home</a>&nbsp;|&nbsp;</li>
+        <li><a href="#">Pyechonest home</a>&nbsp;|&nbsp;</li>
         <li><a href="contents.html">Documentation</a>
           &raquo;</li>
  
