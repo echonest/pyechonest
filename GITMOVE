@@ -12,6 +12,10 @@ How to do a release:
 $ cd doc
 $ make html
 $ cd build/html
+
+# if you haven't already, you need to make sure the submodule is on the
+# gh-pages branch
+$ git checkout --track -b gh-pages origin/gh-pages
 $ git commit -a -m 'made some changes, yo'
 $ git push
 
