@@ -23,7 +23,7 @@ setup(
     name='pyechonest',
     version=__version__,
     description='Python interface to The Echo Nest APIs.',
-    long_description=read('README'),
+    long_description=read('README.md'),
     author='Tyler Williams',
     author_email='tyler@echonest.com',
     maintainer='Tyler Williams',
