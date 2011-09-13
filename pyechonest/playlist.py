@@ -44,7 +44,8 @@ class Playlist(PlaylistProxy):
                         max_energy=None, min_energy=None, artist_max_familiarity=None, artist_min_familiarity=None, \
                         artist_max_hotttnesss=None, artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, \
                         min_longitude=None, max_longitude=None, min_latitude=None, max_latitude=None, \
-                        mode=None, key=None, buckets=[], sort=None, limit=False, dmca=False, chain_xspf=False, \
+                        mode=None, key=None, buckets=[], sort=None, limit=False, 
+                        dmca=False, chain_xspf=False, \
                         seed_catalog=None, steer=None, source_catalog=None, steer_description=None, test_new_things=None, rank_type=None,
                         artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None):
         """
@@ -308,7 +309,7 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
                     artist_max_hotttnesss=None, artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, \
                     min_longitude=None, max_longitude=None, min_latitude=None, max_latitude=None, \
                     mode=None, key=None, buckets=[], sort=None, limit=False, seed_catalog=None, source_catalog=None, rank_type=None, test_new_things=None,
-                    artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None):
+                    artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None,dmca=False):
     """Get a static playlist
     
     Args:
@@ -430,7 +431,7 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
 
     if source_catalog and isinstance(source_catalog, catalog.Catalog):
         source_catalog = source_catalog.id
-
+    dmca = str(dmca).lower()
     kwargs = locals()
     kwargs['bucket'] = kwargs['buckets']
     del kwargs['buckets']
