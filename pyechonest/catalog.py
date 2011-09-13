@@ -165,7 +165,7 @@ class Catalog(CatalogProxy):
     
     profile = property(get_profile)
     
-    def read_items(self, buckets=None, results=15, start=0):
+    def read_items(self, buckets=None, results=15, start=0,item_id=None):
         """
         Returns data from the catalog; also expanded for the requested buckets
         
@@ -191,13 +191,18 @@ class Catalog(CatalogProxy):
         """
         kwargs = {}
         kwargs['bucket'] = buckets or []
+        kwargs['item_id']=item_id or []
         response = self.get_attribute("read", results=results, start=start, **kwargs)
         rval = ResultList([])
-        rval.start = response['catalog']['start']
-        rval.total = response['catalog']['total']
+        if not item_id:
+            rval.start = response['catalog']['start']
+            rval.total = response['catalog']['total']
+        else:
+            rval.start=0;
+            rval.total=len(response['catalog']['items'])
         for item in response['catalog']['items']:
             new_item = None
-            # song item
+            # song items
             if 'song_id' in item:
                 item['id'] = item.pop('song_id')
                 item['title'] = item.pop('song_name')
