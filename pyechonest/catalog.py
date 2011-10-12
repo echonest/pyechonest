@@ -165,7 +165,7 @@ class Catalog(CatalogProxy):
     
     profile = property(get_profile)
     
-    def read_items(self, buckets=None, results=15, start=0,item_id=None):
+    def read_items(self, buckets=None, results=15, start=0,item_ids=None):
         """
         Returns data from the catalog; also expanded for the requested buckets
         
@@ -191,7 +191,7 @@ class Catalog(CatalogProxy):
         """
         kwargs = {}
         kwargs['bucket'] = buckets or []
-        kwargs['item_id']=item_id or []
+        kwargs['item_id'] = item_ids or []
         response = self.get_attribute("read", results=results, start=start, **kwargs)
         rval = ResultList([])
         if not item_id:

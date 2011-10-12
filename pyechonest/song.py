@@ -494,7 +494,7 @@ def search(title=None, artist=None, artist_id=None, combined=None, description=N
     result = util.callm("%s/%s" % ('song', 'search'), kwargs)
     return [Song(**util.fix(s_dict)) for s_dict in result['response']['songs']]
 
-def profile(ids, buckets=None, limit=False):
+def profile(ids=None, track_ids=None, buckets=None, limit=False):
     """get the profiles for multiple songs at once
         
     Args:
@@ -530,13 +530,22 @@ def profile(ids, buckets=None, limit=False):
     >>> 
     
     """
-    buckets = buckets or []
+    kwargs = {}
+
     if not isinstance(ids, list):
         ids = [ids]
-    kwargs = {}
-    kwargs['id'] = ids
+    if ids:
+        kwargs['id'] = ids
+
+    if not isinstance(track_ids, list):
+        track_ids = [track_ids]
+    if track_ids:
+        kwargs['track_id'] = track_ids
+
+    buckets = buckets or []
     if buckets:
         kwargs['bucket'] = buckets
+
     if limit:
         kwargs['limit'] = 'true'
     

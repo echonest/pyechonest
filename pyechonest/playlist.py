@@ -38,12 +38,12 @@ class Playlist(PlaylistProxy):
     """
     
     def __init__(self, session_id=None, type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist_id=None, artist=None, \
-                        song_id=None, description=None, style=None, mood=None, \
+                        song_id=None, track_id=None, description=None, style=None, mood=None, \
                         max_tempo=None, min_tempo=None, max_duration=None, \
                         min_duration=None, max_loudness=None, min_loudness=None, max_danceability=None, min_danceability=None, \
                         max_energy=None, min_energy=None, artist_max_familiarity=None, artist_min_familiarity=None, \
                         artist_max_hotttnesss=None, artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, \
-                        min_longitude=None, max_longitude=None, min_latitude=None, max_latitude=None, \
+                        min_longitude=None, max_longitude=None, min_latitude=None, max_latitude=None, adventurousness=0.2, \
                         mode=None, key=None, buckets=[], sort=None, limit=False, 
                         dmca=False, chain_xspf=False, \
                         seed_catalog=None, steer=None, source_catalog=None, steer_description=None, test_new_things=None, rank_type=None,
@@ -63,6 +63,8 @@ class Playlist(PlaylistProxy):
             artist (str): the name of an artist
 
             song_id (str): the song_id
+
+            track_id (str): the track_id
 
             description (str): A string describing the artist and song
             
@@ -115,6 +117,8 @@ class Playlist(PlaylistProxy):
             max_longitude (float): A float specifying the max longitude of artists to search for
 
             min_longitude (float): A float specifying the min longitude of artists to search for                        
+
+            adventurousness (float): A float ranging from 0 for old favorites to 1.0 for unheard music according to a seed_catalog
 
             sort (str): A string indicating an attribute and order for sorting the results
 
@@ -301,13 +305,52 @@ class Playlist(PlaylistProxy):
     info = property(session_info)
 
 
+def basic(type='artist-radio', artist_id=None, artist=None, song_id=None, song=None, track_id=None,
+          dmca=False, results=15, buckets=None, limit=False):
+    """Get a basic playlist
+    
+    Args:
+    
+    Kwargs:
+        type (str): a string representing the playlist type ('artist-radio' or 'song-radio')
+        
+        artist_id (str): the artist_id to seed the playlist
+        
+        artist (str): the name of an artist to seed the playlist
+        
+        song_id (str): a song_id to seed the playlist
+        
+        song (str): the name of a song to seed the playlist
+        
+        track_id (str): the name of a track to seed the playlist
+        
+        dmca (bool): make the playlist dmca-compliant
+        
+        results (int): desired length of the playlist
+        
+        buckets (list): A list of strings specifying which buckets to retrieve
+        
+        limit (bool): Whether results should be restricted to any idspaces given in the buckets parameter
+    """
+    
+    limit = str(limit).lower()
+    dmca = str(dmca).lower()
+    
+    kwargs = locals()
+    kwargs['bucket'] = kwargs['buckets']
+    del kwargs['buckets']
+    
+    result = util.callm("%s/%s" % ('playlist', 'basic'), kwargs)
+    return [Song(**util.fix(s_dict)) for s_dict in result['response']['songs']]    
+
+
 def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist_id=None, artist=None, \
-                    song_id=None, description=None, style=None, mood=None, \
+                    song_id=None, track_id=None, description=None, style=None, mood=None, \
                     results=15, max_tempo=None, min_tempo=None, max_duration=None, \
                     min_duration=None, max_loudness=None, min_loudness=None, max_danceability=None, min_danceability=None, \
                     max_energy=None, min_energy=None, artist_max_familiarity=None, artist_min_familiarity=None, \
                     artist_max_hotttnesss=None, artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, \
-                    min_longitude=None, max_longitude=None, min_latitude=None, max_latitude=None, \
+                    min_longitude=None, max_longitude=None, min_latitude=None, max_latitude=None, adventurousness=0.2, \
                     mode=None, key=None, buckets=[], sort=None, limit=False, seed_catalog=None, source_catalog=None, rank_type=None, test_new_things=None,
                     artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None,dmca=False):
     """Get a static playlist
@@ -326,7 +369,9 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
         artist (str): the name of an artist
         
         song_id (str): the song_id
-    
+        
+        track_id (str): the track id
+        
         description (str): A string describing the artist and song
         
         style (str): A string describing the style/genre of the artist and song
@@ -378,6 +423,8 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
         max_longitude (float): A float specifying the max longitude of artists to search for
     
         min_longitude (float): A float specifying the min longitude of artists to search for                        
+        
+        adventurousness (float): A float ranging from 0 for old favorites to 1.0 for unheard music according to a seed_catalog
     
         sort (str): A string indicating an attribute and order for sorting the results
     
