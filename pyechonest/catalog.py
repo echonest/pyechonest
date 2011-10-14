@@ -194,12 +194,12 @@ class Catalog(CatalogProxy):
         kwargs['item_id'] = item_ids or []
         response = self.get_attribute("read", results=results, start=start, **kwargs)
         rval = ResultList([])
-        if not item_id:
-            rval.start = response['catalog']['start']
-            rval.total = response['catalog']['total']
-        else:
+        if item_ids:
             rval.start=0;
             rval.total=len(response['catalog']['items'])
+        else:
+            rval.start = response['catalog']['start']
+            rval.total = response['catalog']['total']
         for item in response['catalog']['items']:
             new_item = None
             # song items
