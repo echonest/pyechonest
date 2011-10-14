@@ -532,14 +532,14 @@ def profile(ids=None, track_ids=None, buckets=None, limit=False):
     """
     kwargs = {}
 
-    if not isinstance(ids, list):
-        ids = [ids]
     if ids:
+        if not isinstance(ids, list):
+            ids = [ids]
         kwargs['id'] = ids
 
-    if not isinstance(track_ids, list):
-        track_ids = [track_ids]
     if track_ids:
+        if not isinstance(track_ids, list):
+            track_ids = [track_ids]
         kwargs['track_id'] = track_ids
 
     buckets = buckets or []
