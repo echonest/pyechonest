@@ -66,6 +66,8 @@ class Track(TrackProxy):
     
         segments                list of dicts: timing, pitch, loudness and timbre for each segment
     
+        speechiness             float: relative speechiness (0 to 1)
+    
         start_of_fade_out       float: time in seconds where fade out begins
     
         status                  str: analysis status, e.g. 'complete', 'pending', 'error'
@@ -127,13 +129,16 @@ def _track_from_response(response):
         audio_summary   = track.pop('audio_summary')
         energy          = audio_summary.get('energy', 0)
         danceability    = audio_summary.get('danceability', 0)
+        speechiness     = audio_summary.get('speechiness', 0)
         json_url        = audio_summary['analysis_url']
         json_string     = urllib2.urlopen(json_url).read()
         analysis        = json.loads(json_string)
         nested_track    = analysis.pop('track')
         track.update(analysis)
         track.update(nested_track)
-        track.update({'analysis_url': json_url, 'energy': energy, 'danceability': danceability})
+        track.update({'analysis_url': json_url, 'energy': energy,
+                    'danceability': danceability,
+                    'speechiness': speechiness})
         return Track(identifier, md5, track)
 
 def _upload(param_dict, data = None):
