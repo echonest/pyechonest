@@ -484,8 +484,6 @@ class Artist(ArtistProxy):
         """
         
         if cache and ('songs' in self.cache) and results==15 and start==0:
-            if len(self.cache['songs']) == 0:
-                return []
             if not isinstance(self.cache['songs'][0], Song):
                 song_objects = []
                 for s in self.cache["songs"]:

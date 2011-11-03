@@ -56,7 +56,7 @@ class MyErrorProcessor(urllib2.HTTPErrorProcessor):
         code = response.code
         if config.TRACE_API_CALLS:
             logger.info("took %2.2fs: (%i)" % (time.time()-request.start_time,code))
-        if code in [200, 400, 403, 500]:
+        if code in [200, 400, 401, 403, 500]:
             return response
         else:
             urllib2.HTTPErrorProcessor.http_response(self, request, response)
@@ -204,6 +204,64 @@ def callm(method, param_dict, POST=False, socket_timeout=None, data=None):
                                         method, params)
 
         f = opener.open(url)
+            
+    socket.setdefaulttimeout(orig_timeout)
+    
+    # try/except
+    response_dict = get_successful_response(f.read())
+    return response_dict
+
+def oauthgetm(method, param_dict, socket_timeout=None):
+    try:
+        import oauth2 # lazy import this so oauth2 is not a hard dep
+    except ImportError:
+        raise Exception("You must install the python-oauth2 library to use this method.")
+
+    """
+    Call the api! With Oauth! 
+    Param_dict is a *regular* *python* *dictionary* so if you want to have multi-valued params
+    put them in a list.
+    
+    ** note, if we require 2.6, we can get rid of this timeout munging.
+    """
+    def build_request(url):
+        params = {
+            'oauth_version': "1.0",
+            'oauth_nonce': oauth2.generate_nonce(),
+            'oauth_timestamp': int(time.time())
+            }
+        consumer = oauth2.Consumer(key=config.ECHO_NEST_CONSUMER_KEY, secret=config.ECHO_NEST_SHARED_SECRET)
+        params['oauth_consumer_key'] = config.ECHO_NEST_CONSUMER_KEY
+        
+        req = oauth2.Request(method='GET', url=url, parameters=params)
+        signature_method = oauth2.SignatureMethod_HMAC_SHA1()
+        req.sign_request(signature_method, consumer, None)
+        return req
+    
+    param_dict['api_key'] = config.ECHO_NEST_API_KEY
+    param_list = []
+    if not socket_timeout:
+        socket_timeout = config.CALL_TIMEOUT
+    
+    for key,val in param_dict.iteritems():
+        if isinstance(val, list):
+            param_list.extend( [(key,subval) for subval in val] )
+        elif val is not None:
+            if isinstance(val, unicode):
+                val = val.encode('utf-8')
+            param_list.append( (key,val) )
+
+    params = urllib.urlencode(param_list)
+    
+    orig_timeout = socket.getdefaulttimeout()
+    socket.setdefaulttimeout(socket_timeout)
+    """
+    just a normal GET call
+    """
+    url = 'http://%s/%s/%s/%s?%s' % (config.API_HOST, config.API_SELECTOR, config.API_VERSION, 
+                                     method, params)
+    req = build_request(url)
+    f = opener.open(req.to_url())
             
     socket.setdefaulttimeout(orig_timeout)
     

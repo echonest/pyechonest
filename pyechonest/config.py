@@ -10,13 +10,12 @@ Global configuration variables for accessing the Echo Nest web API.
 
 __version__ = "4.2.16"
 
-import os
+import sys, os
 
-if('ECHO_NEST_API_KEY' in os.environ):
-    ECHO_NEST_API_KEY = os.environ['ECHO_NEST_API_KEY']
-else:
-    ECHO_NEST_API_KEY = None
-
+envkeys = ["ECHO_NEST_API_KEY", "ECHO_NEST_CONSUMER_KEY", "ECHO_NEST_SHARED_SECRET"]
+this_module = sys.modules[__name__]
+for key in envkeys:
+    setattr(this_module, key, os.environ.get(key, None))
 
 API_HOST = 'developer.echonest.com'
 "The API endpoint you're talking to"
