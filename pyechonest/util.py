@@ -68,10 +68,16 @@ class EchoNestAPIError(Exception):
     """
     Generic API errors. 
     """
-    def __init__(self, code, message):
+    def __init__(self, code, message,headers):
         self.args = ('Echo Nest API Error %d: %s' % (code, message),)
+        self.headers = headers 
 
 def get_successful_response(raw_json):
+    if hasattr(raw_json,'headers'):
+        headers = raw_json.headers
+    else:
+        headers = {'Headers':'No Headers'}
+    raw_json = raw_json.read()
     try:
         response_dict = json.loads(raw_json)
         status_dict = response_dict['response']['status']
@@ -79,12 +85,12 @@ def get_successful_response(raw_json):
         message = status_dict['message']
         if (code != 0):
             # do some cute exception handling
-            raise EchoNestAPIError(code, message)
+            raise EchoNestAPIError(code, message,headers)
         del response_dict['response']['status']
         return response_dict
     except ValueError:
         logger.debug(traceback.format_exc())
-        raise EchoNestAPIError(-1, "Unknown error.")
+        raise EchoNestAPIError(-1, "Unknown error.",headers)
 
 
 # These two functions are to deal with the unknown encoded output of codegen (varies by platform and ID3 tag)
@@ -208,7 +214,7 @@ def callm(method, param_dict, POST=False, socket_timeout=None, data=None):
     socket.setdefaulttimeout(orig_timeout)
     
     # try/except
-    response_dict = get_successful_response(f.read())
+    response_dict = get_successful_response(f)
     return response_dict
 
 def oauthgetm(method, param_dict, socket_timeout=None):
@@ -266,7 +272,7 @@ def oauthgetm(method, param_dict, socket_timeout=None):
     socket.setdefaulttimeout(orig_timeout)
     
     # try/except
-    response_dict = get_successful_response(f.read())
+    response_dict = get_successful_response(f)
     return response_dict
 
 

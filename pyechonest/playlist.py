@@ -352,7 +352,7 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
                     artist_max_hotttnesss=None, artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, \
                     min_longitude=None, max_longitude=None, min_latitude=None, max_latitude=None, adventurousness=0.2, \
                     mode=None, key=None, buckets=[], sort=None, limit=False, seed_catalog=None, source_catalog=None, rank_type=None, test_new_things=None,
-                    artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None,dmca=False):
+                    artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None,dmca=False, distribution=None):
     """Get a static playlist
     
     Args:
@@ -445,6 +445,8 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
         artist_end_year_before (int): Returned songs's artists will have stopped recording music before this year.
         
         artist_end_year_after (int): Returned songs's artists will have stopped recording music after this year.
+
+        distribution (str): Affects the range of artists returned and how many songs each artsits will have in the playlist realative to how similar they are to the seed. (wandering, focused)
 
     Returns:
         A list of Song objects
