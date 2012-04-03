@@ -8,7 +8,12 @@ Created by Tyler Williams on 2010-04-25.
 Global configuration variables for accessing the Echo Nest web API.
 """
 
-__version__ = "4.2.16"
+import pkg_resources
+
+try:
+    __version__ = pkg_resources.require("pyechonest")[0].version
+except pkg_resources.DistributionNotFound:
+    __version__ = "0.0.0"
 
 import sys, os
 

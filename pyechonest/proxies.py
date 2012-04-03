@@ -123,6 +123,28 @@ class PlaylistProxy(GenericProxy):
     def get_attribute(self, *args, **kwargs):
         return super(PlaylistProxy, self).get_attribute(*args, **kwargs)
     
+class BetaPlaylistProxy(GenericProxy):
+    def __init__(self,session_id = None, buckets = None, **kwargs):
+        super(BetaPlaylistProxy, self).__init__()
+        core_attrs = ['session_id']
+        self._object_type = 'playlist'
+        if session_id:
+            response = self.get_attribute('info', session_id=session_id)
+            self.session_id=session_id
+        else:
+            buckets = buckets or []
+            kwargs['bucket'] = buckets
+            kwargs = dict((str(k), v) for (k,v) in kwargs.iteritems())
+            
+            if not all(ca in kwargs for ca in core_attrs):
+                kwargs = dict((str(k), v) for (k,v) in kwargs.iteritems())
+                profile = self.get_attribute('create', **kwargs)
+                kwargs.update(profile)
+            [self.__dict__.update({ca:kwargs.pop(ca)}) for ca in core_attrs if ca in kwargs]        
+            self.cache.update(kwargs)
+        
+    def get_attribute(self, method, **kwargs):
+        return super(BetaPlaylistProxy, self).get_attribute('dynamic/' + method, **kwargs)
 
 class SongProxy(GenericProxy):
     def __init__(self, identifier, buckets = None, **kwargs):
