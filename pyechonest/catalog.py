@@ -14,6 +14,7 @@ except ImportError:
     import simplejson as json
 import datetime
 
+import warnings
 import util
 from proxies import CatalogProxy, ResultList
 import artist, song
@@ -110,6 +111,7 @@ class Catalog(CatalogProxy):
         post_data['data'] = items_json
         
         response = self.post_attribute("update", data=post_data)
+
         return response['ticket']
     
     def status(self, ticket):
@@ -164,10 +166,10 @@ class Catalog(CatalogProxy):
         return result['catalog']
     
     profile = property(get_profile)
-    
     def read_items(self, buckets=None, results=15, start=0,item_ids=None):
         """
-        Returns data from the catalog; also expanded for the requested buckets
+        Returns data from the catalog; also expanded for the requested buckets.
+        This method is provided for backwards-compatibility 
         
         Args:
             
@@ -189,6 +191,7 @@ class Catalog(CatalogProxy):
         [<song - Harmonice Mundi II>]
         >>>
         """
+        warnings.warn("catalog.read_items() is depreciated. Please use catalog.get_item_dicts() instead.")
         kwargs = {}
         kwargs['bucket'] = buckets or []
         kwargs['item_id'] = item_ids or []
@@ -223,6 +226,58 @@ class Catalog(CatalogProxy):
         return rval
     
     read = property(read_items)
+    
+    def get_item_dicts(self, buckets=None, results=15, start=0,item_ids=None):
+        """
+        Returns data from the catalog; also expanded for the requested buckets
+        
+        Args:
+            
+        Kwargs:
+            buckets (list): A list of strings specifying which buckets to retrieve
+            
+            results (int): An integer number of results to return
+            
+            start (int): An integer starting value for the result set
+            
+        Returns:
+            A list of dicts representing objects in the catalog; list has additional attributes 'start' and 'total'
+        
+        Example:
+
+        >>> c
+        <catalog - my_songs>
+        >>> c.read_items(results=1)
+        [
+                {
+                    "artist_id": "AR78KRI1187B98E6F2", 
+                    "artist_name": "Art of Noise", 
+                    "date_added": "2012-04-02T16:50:02", 
+                    "foreign_id": "CAHLYLR13674D1CF83:song:1000", 
+                    "request": {
+                        "artist_name": "The Art Of Noise", 
+                        "item_id": "1000", 
+                        "song_name": "Love"
+                    }, 
+                    "song_id": "SOSBCTO1311AFE7AE0", 
+                    "song_name": "Love"
+                }
+        ]
+        """
+        kwargs = {}
+        kwargs['bucket'] = buckets or []
+        kwargs['item_id'] = item_ids or []
+        response = self.get_attribute("read", results=results, start=start, **kwargs)
+        rval = ResultList(response['catalog']['items'])
+        if item_ids:
+            rval.start=0;
+            rval.total=len(response['catalog']['items'])
+        else:
+            rval.start = response['catalog']['start']
+            rval.total = response['catalog']['total']
+        return rval
+    
+    item_dicts = property(get_item_dicts)
 
     def get_feed(self, buckets=None, since=None, results=15, start=0):
         """
@@ -288,7 +343,25 @@ class Catalog(CatalogProxy):
         
         """
         return self.post_attribute("delete")
-    
+
+    def play(self, items, plays=None):
+        return self.get_attribute("play", item=items, plays=plays)
+
+    def skip(self, items, skips=None):
+        return self.get_attribute("skip", item=items, skips=skips)
+
+    def favorite(self, items, favorite=None):
+        if favorite != None:
+            favorite = str(favorite).lower()
+        return self.get_attribute("favorite", item=items, favorite=favorite)
+
+    def ban(self, items, ban=None):
+        if ban != None:
+            ban = str(ban).lower()
+        return self.get_attribute("ban", item=items, ban=ban)
+
+    def rate(self, items, rating=None):
+        return self.get_attribute("rate", item=items, rating=rating)
 
 def list(results=30, start=0):
     """
