@@ -255,6 +255,28 @@ class Artist(ArtistProxy):
         cval = filter(lambda d: d.get('catalog') == idspace, self.cache.get('foreign_ids'))
         return cval[0].get('foreign_id') if cval else None
     
+    def get_twitter_id(self, cache=True):
+        """Get the twitter id for this artist if it exists
+
+        Args:
+
+        Kwargs:
+
+        Returns:
+            A twitter ID string
+
+        Example:
+
+        >>> a = artist.Artist('big boi')
+        >>> a.get_twitter_id()
+        u'BigBoi'
+        >>>
+        """
+        if not (cache and ('twitter' in self.cache)):
+            response = self.get_attribute('twitter')
+            self.cache['twitter'] = response['artist'].get('twitter')
+        return self.cache['twitter']
+            
     def get_hotttnesss(self, cache=True):
         """Get our numerical description of how hottt an artist currently is
         
@@ -317,7 +339,7 @@ class Artist(ArtistProxy):
             return ResultList(response['images'], start, response['total'])
     
     images = property(get_images)    
-    
+
     def get_news(self, results=15, start=0, cache=True, high_relevance=False):
         """Get a list of news articles found on the web related to an artist
         
@@ -327,7 +349,7 @@ class Artist(ArtistProxy):
             results (int): An integer number of results to return
             
             start (int): An integer starting value for the result set
-        
+
         Returns:
             A list of news document dicts; list contains additional attributes 'start' and 'total'
         
@@ -377,6 +399,9 @@ class Artist(ArtistProxy):
         u'For A Few Dollars More'
         >>> 
         """
+
+
+
         if cache and ('reviews' in self.cache) and results==15 and start==0:
             return self.cache['reviews']
         else:
@@ -1012,4 +1037,64 @@ def extract(text='', start=0, results=15, buckets=None, limit=False, max_familia
     
     result = util.callm("%s/%s" % ('artist', 'extract'), kwargs)
     
+    return [Artist(**util.fix(a_dict)) for a_dict in result['response']['artists']]
+
+
+def suggest(q='', results=15, buckets=None, limit=False, max_familiarity=None, min_familiarity=None,
+                max_hotttnesss=None, min_hotttnesss=None):
+    """Suggest artists based upon partial names.
+
+    Args:
+
+    Kwargs:
+        q (str): The text to suggest artists from
+
+        results (int): An integer number of results to return
+
+        buckets (list): A list of strings specifying which buckets to retrieve
+
+        limit (bool): A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
+
+        max_familiarity (float): A float specifying the max familiarity of artists to search for
+
+        min_familiarity (float): A float specifying the min familiarity of artists to search for
+
+        max_hotttnesss (float): A float specifying the max hotttnesss of artists to search for
+
+        min_hotttnesss (float): A float specifying the max hotttnesss of artists to search for
+
+    Returns:
+        A list of Artist objects
+
+    Example:
+
+    >>> results = artist.suggest(text='rad')
+    >>> results
+
+    >>> 
+
+    """
+
+    buckets = buckets or []
+    kwargs = {}
+
+    kwargs['q'] = q
+
+    if max_familiarity is not None:
+        kwargs['max_familiarity'] = max_familiarity
+    if min_familiarity is not None:
+        kwargs['min_familiarity'] = min_familiarity
+    if max_hotttnesss is not None:
+        kwargs['max_hotttnesss'] = max_hotttnesss
+    if min_hotttnesss is not None:
+        kwargs['min_hotttnesss'] = min_hotttnesss
+    if results:
+        kwargs['results'] = results
+    if buckets:
+        kwargs['bucket'] = buckets
+    if limit:
+        kwargs['limit'] = 'true'
+
+    result = util.callm("%s/%s" % ('artist', 'suggest'), kwargs)
+
     return [Artist(**util.fix(a_dict)) for a_dict in result['response']['artists']]
