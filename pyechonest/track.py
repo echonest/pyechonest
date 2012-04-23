@@ -130,13 +130,15 @@ def _track_from_response(response):
         energy          = audio_summary.get('energy', 0)
         danceability    = audio_summary.get('danceability', 0)
         speechiness     = audio_summary.get('speechiness', 0)
-        json_url        = audio_summary['analysis_url']
-        json_string     = urllib2.urlopen(json_url).read()
-        analysis        = json.loads(json_string)
-        nested_track    = analysis.pop('track')
-        track.update(analysis)
-        track.update(nested_track)
-        track.update({'analysis_url': json_url, 'energy': energy,
+        json_url        = audio_summary.get('analysis_url')
+        if json_url:
+            json_string     = urllib2.urlopen(json_url).read()
+            analysis        = json.loads(json_string)
+            nested_track    = analysis.pop('track')
+            track.update(analysis)
+            track.update(nested_track)
+            track.update({'analysis_url': json_url})
+        track.update({ 'energy': energy,
                     'danceability': danceability,
                     'speechiness': speechiness})
         return Track(identifier, md5, track)
