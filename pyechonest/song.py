@@ -106,7 +106,10 @@ class Song(SongProxy):
         """
         if not (cache and ('audio_summary' in self.cache)):
             response = self.get_attribute('profile', bucket='audio_summary')
-            self.cache['audio_summary'] = response['songs'][0]['audio_summary']
+            if response['songs'] and 'audio_summary' in response['songs'][0]:
+                self.cache['audio_summary'] = response['songs'][0]['audio_summary']
+            else:
+                self.cache['audio_summary'] = {}
         return self.cache['audio_summary']
     
     audio_summary = property(get_audio_summary)
