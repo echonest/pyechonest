@@ -7,6 +7,11 @@ except ImportError:
 import hashlib
 from proxies import TrackProxy
 import util
+import time
+
+# Seconds to wait for asynchronous track/upload or track/analyze jobs to complete.
+# Previously the socket timeouts on the synchronous calls were 300 secs.
+DEFAULT_ASYNC_TIMEOUT = 300
 
 class Track(TrackProxy):
     """
@@ -104,26 +109,44 @@ class Track(TrackProxy):
     def __str__(self):
         return self.title.encode('utf-8')
 
-def _track_from_response(response):
+def _wait_for_pending_track(trid, timeout):
+    # timeout is ignored for now
+    status = 'pending'
+    while status == 'pending':
+        time.sleep(1)
+        param_dict = {'id': trid} # dict(id = identifier)
+        param_dict['format'] = 'json'
+        param_dict['bucket'] = 'audio_summary'
+        result = util.callm('track/profile', param_dict)
+        status = result['response']['track']['status'].lower()
+        # TODO: timeout if necessary
+    return result
+
+def _track_from_response(result, timeout=DEFAULT_ASYNC_TIMEOUT):
     """
     This is the function that actually creates the track object
     """
-    result = response['response']
-    status = result['track']['status'].lower()
+    response = result['response']
+    status = response['track']['status'].lower()
+
+    if status == 'pending':
+        # Need to wait for async upload or analyze call to finish.
+        result = _wait_for_pending_track(response['track']['id'], timeout)
+        response = result['response']
+        status = response['track']['status'].lower()
+            
     if not status == 'complete':
-        """
-        pyechonest only supports wait = true for now, so this should not be pending
-        """
-        if status == 'error':
-            raise Exception('there was an error analyzing the track')
         if status == 'pending':
-            raise Exception('the track is still being analyzed')
-        if status == 'forbidden':
+            # Operation didn't complete by timeout above.
+            raise Exception('the operation didn\'t complete before the timeout (%d secs)' % timeout)
+        elif status == 'error':
+            raise Exception('there was an error analyzing the track')
+        elif status == 'forbidden':
             raise Exception('analysis of this track is forbidden')
         if status == 'unavailable':
             return track_from_reanalyzing_id(result['track']['id'])
     else:
-        track = result['track']
+        track = response['track']
         identifier      = track.pop('id') 
         md5             = track.pop('md5', None) # tracks from song api calls will not have an md5
         audio_summary   = track.pop('audio_summary')
@@ -132,18 +155,22 @@ def _track_from_response(response):
         speechiness     = audio_summary.get('speechiness', 0)
         json_url        = audio_summary.get('analysis_url')
         if json_url:
-            json_string     = urllib2.urlopen(json_url).read()
-            analysis        = json.loads(json_string)
-            nested_track    = analysis.pop('track')
-            track.update(analysis)
-            track.update(nested_track)
-            track.update({'analysis_url': json_url})
-        track.update({ 'energy': energy,
-                    'danceability': danceability,
-                    'speechiness': speechiness})
-        return Track(identifier, md5, track)
+            try:
+                json_string = urllib2.urlopen(json_url).read()
+                analysis = json.loads(json_string)
+            except: #pylint: disable=W0702
+                analysis = {}
+        else:
+            analysis = {}
+        nested_track    = analysis.pop('track', {})
+        track.update(analysis)
+        track.update(nested_track)
+    track.update({'analysis_url': json_url, 'energy': energy,
+                  'danceability': danceability,
+                  'speechiness': speechiness})
+    return Track(identifier, md5, track)
 
-def _upload(param_dict, data = None):
+def _upload(param_dict, timeout, data = None):
     """
     Calls upload either with a local audio file,
     or a url. Returns a track object.
@@ -152,7 +179,7 @@ def _upload(param_dict, data = None):
     param_dict['wait'] = 'true'
     param_dict['bucket'] = 'audio_summary'
     result = util.callm('track/upload', param_dict, POST = True, socket_timeout = 300,  data = data) 
-    return _track_from_response(result)
+    return _track_from_response(result, timeout)
 
 def _profile(param_dict):
     param_dict['format'] = 'json'
@@ -160,22 +187,22 @@ def _profile(param_dict):
     result = util.callm('track/profile', param_dict)
     return _track_from_response(result)
 
-def _analyze(param_dict):
+def _analyze(param_dict, timeout):
     param_dict['format'] = 'json'
     param_dict['bucket'] = 'audio_summary'
     param_dict['wait'] = 'true'
     result = util.callm('track/analyze', param_dict, POST = True, socket_timeout = 300)
-    return _track_from_response(result)
+    return _track_from_response(result, timeout)
     
 
 """ Below are convenience functions for creating Track objects, you should use them """
 
-def _track_from_string(audio_data, filetype):
+def _track_from_data(audio_data, filetype, timeout):
     param_dict = {}
     param_dict['filetype'] = filetype 
-    return _upload(param_dict, data = audio_data)
+    return _upload(param_dict, timeout, data = audio_data)
 
-def track_from_file(file_object, filetype):
+def track_from_file(file_object, filetype, timeout=DEFAULT_ASYNC_TIMEOUT):
     """
     Create a track object from a file-like object.
 
@@ -195,9 +222,9 @@ def track_from_file(file_object, filetype):
         return track_from_md5(hash)
     except util.EchoNestAPIError:
         file_object.seek(0)
-        return _track_from_string(file_object.read(), filetype)
+        return _track_from_string(file_object.read(), filetype, timeout)
 
-def track_from_filename(filename, filetype = None):
+def track_from_filename(filename, filetype = None, timeout=DEFAULT_ASYNC_TIMEOUT):
     """
     Create a track object from a filename.
 
@@ -213,12 +240,12 @@ def track_from_filename(filename, filetype = None):
     """
     filetype = filetype or filename.split('.')[-1]
     try:
-        hash = hashlib.md5(open(filename, 'rb').read()).hexdigest()
-        return track_from_md5(hash)
+        md5 = hashlib.md5(open(filename, 'rb').read()).hexdigest()
+        return track_from_md5(md5)
     except util.EchoNestAPIError:
-        return track_from_file(open(filename, 'rb'), filetype)
+        return _track_from_data(open(filename, 'rb').read(), filetype, timeout)
 
-def track_from_url(url):
+def track_from_url(url, timeout=DEFAULT_ASYNC_TIMEOUT):
     """
     Create a track object from a public http URL.
 
@@ -233,7 +260,7 @@ def track_from_url(url):
         
     """
     param_dict = dict(url = url)
-    return _upload(param_dict) 
+    return _upload(param_dict, timeout) 
      
 def track_from_id(identifier):
     """
@@ -267,7 +294,7 @@ def track_from_md5(md5):
     param_dict = dict(md5 = md5)
     return _profile(param_dict)
 
-def track_from_reanalyzing_id(identifier):
+def track_from_reanalyzing_id(identifier, timeout=DEFAULT_ASYNC_TIMEOUT):
     """
     Create a track object from an Echo Nest track ID, reanalyzing the track first.
 
@@ -281,9 +308,9 @@ def track_from_reanalyzing_id(identifier):
         >>>
     """
     param_dict = dict(id = identifier)
-    return _analyze(param_dict)
+    return _analyze(param_dict, timeout)
 
-def track_from_reanalyzing_md5(md5):
+def track_from_reanalyzing_md5(md5, timeout=DEFAULT_ASYNC_TIMEOUT):
     """
     Create a track object from an md5 hash, reanalyzing the track first.
 
@@ -297,4 +324,4 @@ def track_from_reanalyzing_md5(md5):
         >>>
     """
     param_dict = dict(md5 = md5)
-    return _analyze(param_dict)
+    return _analyze(param_dict, timeout)
