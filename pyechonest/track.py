@@ -222,7 +222,7 @@ def track_from_file(file_object, filetype, timeout=DEFAULT_ASYNC_TIMEOUT):
         return track_from_md5(hash)
     except util.EchoNestAPIError:
         file_object.seek(0)
-        return _track_from_string(file_object.read(), filetype, timeout)
+        return _track_from_data(file_object.read(), filetype, timeout)
 
 def track_from_filename(filename, filetype = None, timeout=DEFAULT_ASYNC_TIMEOUT):
     """
