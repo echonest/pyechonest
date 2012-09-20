@@ -118,7 +118,8 @@ class PlaylistProxy(GenericProxy):
             profile = self.get_attribute('dynamic', **kwargs)
             kwargs.update(profile)
         [self.__dict__.update({ca:kwargs.pop(ca)}) for ca in core_attrs if ca in kwargs]        
-        self.cache.update(kwargs)
+        if not session_id:
+            self.cache.update(kwargs)
     
     def get_attribute(self, *args, **kwargs):
         return super(PlaylistProxy, self).get_attribute(*args, **kwargs)
@@ -129,7 +130,8 @@ class BetaPlaylistProxy(GenericProxy):
         core_attrs = ['session_id']
         self._object_type = 'playlist'
         if session_id:
-            response = self.get_attribute('info', session_id=session_id)
+            if config.TRACE_API_CALLS:
+                response = self.get_attribute('info', session_id=session_id)
             self.session_id=session_id
         else:
             buckets = buckets or []
