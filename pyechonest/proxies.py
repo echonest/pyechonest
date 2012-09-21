@@ -125,13 +125,11 @@ class PlaylistProxy(GenericProxy):
         return super(PlaylistProxy, self).get_attribute(*args, **kwargs)
     
 class BetaPlaylistProxy(GenericProxy):
-    def __init__(self,session_id = None, buckets = None, **kwargs):
+    def __init__(self, session_id = None, buckets = None, **kwargs):
         super(BetaPlaylistProxy, self).__init__()
         core_attrs = ['session_id']
         self._object_type = 'playlist'
         if session_id:
-            if config.TRACE_API_CALLS:
-                response = self.get_attribute('info', session_id=session_id)
             self.session_id=session_id
         else:
             buckets = buckets or []

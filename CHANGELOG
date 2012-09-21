@@ -1,0 +1,39 @@
+debugging:  The 'info' playlist call is unnecessary unless a user wants debug information
+
+exception-handling:  Encapsulate URL/HTTP errors in a new general class
+Added EchoNestException and EchoNestIOError so that a user can use a single point for exception handling.
+Note, I maintained the self.code, which was truncated before.
+
+Merge pull request #7 from psobot/patch-1
+
+Renamed call to non-existent function (_track_from_string) in exception handler.
+Fixed bad function name (_track_from_string)
+Make all track/analyze calls async.
+
+Guard against empty song results when getting an audio summary.
+
+Bump version to 4.2.21
+
+Support tracks that do not have audio analysis.
+
+Adding twitter functionality.
+
+Adding qupdate functionality and get_item_dicts().
+
+add manifest, bump release
+
+beta playlist support for new dynamic playlist api, move version parameter to a single place
+
+Added distribution parameter to static playlists, some extra info when errors are thrown, and basic playlist docs.
+
+Add speechiness
+
+Add sandbox methods.
+
+don't choke if an artist does not have songs.
+Don't send None to server
+
+Fix item_id bug.
+
+Add track_id parameters to playlist and song profile calls, add adventurousness, and catalog/read item ids.
+

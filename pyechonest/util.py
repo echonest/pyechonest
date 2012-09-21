@@ -109,12 +109,12 @@ def get_successful_response(raw_json):
         message = status_dict['message']
         if (code != 0):
             # do some cute exception handling
-            raise EchoNestAPIError(code, message,headers)
+            raise EchoNestAPIError(code, message, headers)
         del response_dict['response']['status']
         return response_dict
     except ValueError:
         logger.debug(traceback.format_exc())
-        raise EchoNestAPIError(-1, "Unknown error.",headers)
+        raise EchoNestAPIError(-1, "Unknown error.", headers)
 
 
 # These two functions are to deal with the unknown encoded output of codegen (varies by platform and ID3 tag)
