@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-__version__ = "4.2.22"
+__version__ = "4.3.0"
 
 # $Source$
 from sys import version

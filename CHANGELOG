@@ -1,3 +1,9 @@
+Support for song_type in song and playlist;  bump version, update changelog
+
+bump version
+
+add a changelog, fix some spacing
+
 debugging:  The 'info' playlist call is unnecessary unless a user wants debug information
 
 exception-handling:  Encapsulate URL/HTTP errors in a new general class
