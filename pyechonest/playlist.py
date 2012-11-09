@@ -352,7 +352,7 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
                     artist_max_hotttnesss=None, artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, \
                     min_longitude=None, max_longitude=None, min_latitude=None, max_latitude=None, adventurousness=0.2, \
                     mode=None, key=None, buckets=[], sort=None, limit=False, seed_catalog=None, source_catalog=None, rank_type=None, test_new_things=None,
-                    artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None,dmca=False, distribution=None):
+                    artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None,dmca=False, distribution=None, song_type=None):
     """Get a static playlist
     
     Args:
@@ -447,6 +447,9 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
         artist_end_year_after (int): Returned songs's artists will have stopped recording music after this year.
 
         distribution (str): Affects the range of artists returned and how many songs each artsits will have in the playlist realative to how similar they are to the seed. (wandering, focused)
+
+        song_type (str):  A string or list of strings of the type of songs allowed.  The only valid song type at the moment is 'christmas'.
+                          Valid formats are 'song_type', 'song_type:true', 'song_type:false', or 'song_type:any'.
 
     Returns:
         A list of Song objects
@@ -546,6 +549,7 @@ class BetaPlaylist(BetaPlaylistProxy):
         artist_end_year_before=None,
         dmca=False,
         distribution=None,
+        song_type=None,
         ):
 
         limit = str(limit).lower()
@@ -602,6 +606,7 @@ class BetaPlaylist(BetaPlaylistProxy):
             artist_end_year_before=artist_end_year_before,
             dmca=dmca,
             distribution=distribution,
+            song_type=song_type,
             )
 
     def __repr__(self):
@@ -702,6 +707,7 @@ class BetaPlaylist(BetaPlaylistProxy):
         artist_end_year_before=None,
         dmca=False,
         distribution=None,
+        song_type=None,
         ):
         limit = str(limit).lower()
         dmca = str(dmca).lower()
@@ -759,6 +765,7 @@ class BetaPlaylist(BetaPlaylistProxy):
             artist_end_year_before=artist_end_year_before,
             dmca=dmca,
             distribution=distribution,
+            song_type=song_type,
             )
 
     def steer(
@@ -793,7 +800,8 @@ class BetaPlaylist(BetaPlaylistProxy):
         variety=None,
         description=None,
         style=None,
-        mood=None
+        mood=None,
+        song_type=None,
         ):
 
         response = self.get_attribute(
@@ -830,6 +838,7 @@ class BetaPlaylist(BetaPlaylistProxy):
             description=description,
             style=style,
             mood=mood,
+            song_type=song_type
             )
 
         self.cache['lookahead'] = []

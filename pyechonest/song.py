@@ -278,6 +278,30 @@ class Song(SongProxy):
             self.cache['tracks'].extend(new_tds)
         return filter(lambda tr: tr['catalog']==catalog, self.cache['tracks'])
 
+
+    def get_song_type(self, cache=True):
+        """Get the types of a song.
+
+        Args:
+            cache (boolean): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+
+        Returns:
+            A list of strings, each representing a song type:  'christmas', for example.
+
+        Example:
+            >>> s = song.Song('SOQKVPH12A58A7AF4D')
+            >>> s.song_type
+            [u'christmas']
+            >>>
+
+        """
+        if not (cache and ('song_type' in self.cache)):
+            response = self.get_attribute('profile', bucket='song_type')
+            self.cache['song_type'] = response['songs'][0]['song_type']
+        return self.cache['song_type']
+
+    song_type = property(get_song_type)
+
 def identify(filename=None, query_obj=None, code=None, artist=None, title=None, release=None, duration=None, genre=None, buckets=None, version=None, codegen_start=0, codegen_duration=30):
     """Identify a song.
     
@@ -390,7 +414,7 @@ def search(title=None, artist=None, artist_id=None, combined=None, description=N
                 min_energy=None, max_energy=None, min_danceability=None, max_danceability=None, \
                 key=None, max_latitude=None, min_latitude=None, max_longitude=None, min_longitude=None, \
                 sort=None, buckets = None, limit=False, test_new_things=None, rank_type=None,
-                artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None):
+                artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None,song_type=None):
     """Search for songs by name, description, or constraint.
 
     Args:
@@ -471,6 +495,8 @@ def search(title=None, artist=None, artist_id=None, combined=None, description=N
         artist_end_year_before (int): Returned songs's artists will have stopped recording music before this year.
         
         artist_end_year_after (int): Returned songs's artists will have stopped recording music after this year.
+
+        song_type (string): A string or list of strings specifiying the type of song to search for.
 
     Returns:
         A list of Song objects
