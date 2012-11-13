@@ -1,3 +1,9 @@
+bump version
+
+don't override builtin list, return ResultList for catalog list call
+
+Update changelog, bump version to 4.3
+
 Support for song_type in song and playlist;  bump version, update changelog
 
 bump version
