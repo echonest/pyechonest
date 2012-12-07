@@ -379,7 +379,7 @@ def list_catalogs(results=30, start=0):
 
     Example:
 
-    >>> catalog.list()
+    >>> catalog.list_catalogs()
     [<catalog - test_artist_catalog>, <catalog - test_song_catalog>, <catalog - my_songs>]
     >>>
 
