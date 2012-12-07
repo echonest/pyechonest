@@ -110,16 +110,15 @@ class Track(TrackProxy):
         return self.title.encode('utf-8')
 
 def _wait_for_pending_track(trid, timeout):
-    # timeout is ignored for now
     status = 'pending'
-    while status == 'pending':
+    start_time = time.time()
+    while status == 'pending' and time.time() - start_time < timeout:
         time.sleep(1)
         param_dict = {'id': trid} # dict(id = identifier)
         param_dict['format'] = 'json'
         param_dict['bucket'] = 'audio_summary'
         result = util.callm('track/profile', param_dict)
         status = result['response']['track']['status'].lower()
-        # TODO: timeout if necessary
     return result
 
 def _track_from_response(result, timeout=DEFAULT_ASYNC_TIMEOUT):
@@ -136,13 +135,14 @@ def _track_from_response(result, timeout=DEFAULT_ASYNC_TIMEOUT):
         status = response['track']['status'].lower()
             
     if not status == 'complete':
+        track_id = response['track']['id']
         if status == 'pending':
-            # Operation didn't complete by timeout above.
-            raise Exception('the operation didn\'t complete before the timeout (%d secs)' % timeout)
+            raise Exception('%s: the operation didn\'t complete before the timeout (%d secs)' %
+                            (track_id, timeout))
         elif status == 'error':
-            raise Exception('there was an error analyzing the track')
+            raise Exception('%s: there was an error analyzing the track' % track_id)
         elif status == 'forbidden':
-            raise Exception('analysis of this track is forbidden')
+            raise Exception('%s: analysis of this track is forbidden' % track_id)
         if status == 'unavailable':
             return track_from_reanalyzing_id(result['track']['id'])
     else:
@@ -181,11 +181,11 @@ def _upload(param_dict, timeout, data = None):
     result = util.callm('track/upload', param_dict, POST = True, socket_timeout = 300,  data = data) 
     return _track_from_response(result, timeout)
 
-def _profile(param_dict):
+def _profile(param_dict, timeout):
     param_dict['format'] = 'json'
     param_dict['bucket'] = 'audio_summary'
     result = util.callm('track/profile', param_dict)
-    return _track_from_response(result)
+    return _track_from_response(result, timeout)
 
 def _analyze(param_dict, timeout):
     param_dict['format'] = 'json'
@@ -262,7 +262,7 @@ def track_from_url(url, timeout=DEFAULT_ASYNC_TIMEOUT):
     param_dict = dict(url = url)
     return _upload(param_dict, timeout) 
      
-def track_from_id(identifier):
+def track_from_id(identifier, timeout=DEFAULT_ASYNC_TIMEOUT):
     """
     Create a track object from an Echo Nest track ID.
 
@@ -276,9 +276,9 @@ def track_from_id(identifier):
         >>>
     """
     param_dict = dict(id = identifier)
-    return _profile(param_dict)
+    return _profile(param_dict, timeout)
 
-def track_from_md5(md5):
+def track_from_md5(md5, timeout=DEFAULT_ASYNC_TIMEOUT):
     """
     Create a track object from an md5 hash.
 
@@ -292,7 +292,7 @@ def track_from_md5(md5):
         >>>
     """
     param_dict = dict(md5 = md5)
-    return _profile(param_dict)
+    return _profile(param_dict, timeout)
 
 def track_from_reanalyzing_id(identifier, timeout=DEFAULT_ASYNC_TIMEOUT):
     """
