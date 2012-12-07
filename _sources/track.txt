@@ -13,6 +13,3 @@ Track -- track methods
 .. automethod:: pyechonest.track.track_from_id
 
 .. automethod:: pyechonest.track.track_from_md5
-
-.. automethod:: pyechonest.track.track_from_reanalyzing_md5
-

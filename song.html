@@ -3,13 +3,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Song – song methods &mdash; pyechonest v4 documentation</title>
+    <title>Song – song methods &mdash; pyechonest 4 documentation</title>
+    
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
@@ -22,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="pyechonest v4 documentation" href="index.html" />
+    <link rel="top" title="pyechonest 4 documentation" href="index.html" />
     <link rel="next" title="Track – track methods" href="track.html" />
     <link rel="prev" title="Artist – artist methods" href="artist.html" />
  
@@ -199,15 +202,18 @@
 <dt>Example:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">Song</span><span class="p">(</span><span class="s">&#39;SOGNMKX12B0B806320&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">audio_summary</span>
-<span class="go">{u&#39;analysis_url&#39;: u&#39;https://echonest-analysis.s3.amazonaws.com:443/TR/TRCPUOG123E85891F2/3/full.json?Signature=wcML1ZKsl%2F2FU4k68euHJcF7Jbc%3D&amp;Expires=1287518562&amp;AWSAccessKeyId=AKIAIAFEHLM3KJ2XMHRA&#39;,</span>
-<span class="go"> u&#39;danceability&#39;: 0.20964757782725996,</span>
-<span class="go"> u&#39;duration&#39;: 472.63301999999999,</span>
-<span class="go"> u&#39;energy&#39;: 0.64265230549809549,</span>
-<span class="go"> u&#39;key&#39;: 0,</span>
-<span class="go"> u&#39;loudness&#39;: -9.6820000000000004,</span>
-<span class="go"> u&#39;mode&#39;: 1,</span>
-<span class="go"> u&#39;tempo&#39;: 126.99299999999999,</span>
-<span class="go"> u&#39;time_signature&#39;: 4}</span>
+<span class="go"> {u&#39;analysis_url&#39;: u&#39;https://echonest-analysis.s3.amazonaws.com/TR/RnMKCg47J5LgQZr0SISyoPuRxKVQx3Z_YSuhVa/3/full.json?Signature=KBUbewLiP3sZ2X6rRZzXhrgh8fw%3D&amp;Expires=1349809604&amp;AWSAccessKeyId=AKIAJRDFEY23UEVW42BQ&#39;,</span>
+<span class="go">  u&#39;audio_md5&#39;: u&#39;ca3fdfa72eed23d5ad89872c38cecc0e&#39;,</span>
+<span class="go">  u&#39;danceability&#39;: 0.33712086491871546,</span>
+<span class="go">  u&#39;duration&#39;: 470.70666999999997,</span>
+<span class="go">  u&#39;energy&#39;: 0.58186979146361684,</span>
+<span class="go">  u&#39;key&#39;: 0,</span>
+<span class="go">  u&#39;liveness&#39;: 0.08676759933615498,</span>
+<span class="go">  u&#39;loudness&#39;: -9.5960000000000001,</span>
+<span class="go">  u&#39;mode&#39;: 1,</span>
+<span class="go">  u&#39;speechiness&#39;: 0.036938896635994867,</span>
+<span class="go">  u&#39;tempo&#39;: 126.949,</span>
+<span class="go">  u&#39;time_signature&#39;: 4}</span>
 <span class="gp">&gt;&gt;&gt; </span>
 </pre></div>
 </div>
@@ -252,6 +258,27 @@
 <span class="go">0.57344379999999995</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">song_hotttnesss</span>
 <span class="go">0.57344379999999995</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.song.Song.get_song_type">
+<tt class="descname">get_song_type</tt><big>(</big><em>cache=True</em><big>)</big><a class="headerlink" href="#pyechonest.song.Song.get_song_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the types of a song.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>cache (boolean): A boolean indicating whether or not the cached value should be used
+(if available). Defaults to True.</dd>
+<dt>Returns:</dt>
+<dd>A list of strings, each representing a song type:  &#8216;christmas&#8217;, for example.</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">Song</span><span class="p">(</span><span class="s">&#39;SOQKVPH12A58A7AF4D&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span><span class="o">.</span><span class="n">song_type</span>
+<span class="go">[u&#39;christmas&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span>
 </pre></div>
 </div>
@@ -336,7 +363,7 @@
 
 <dl class="staticmethod">
 <dt id="pyechonest.song.search">
-<em class="property">static </em><tt class="descclassname">song.</tt><tt class="descname">search</tt><big>(</big><em>title=None</em>, <em>artist=None</em>, <em>artist_id=None</em>, <em>combined=None</em>, <em>description=None</em>, <em>style=None</em>, <em>mood=None</em>, <em>results=None</em>, <em>start=None</em>, <em>max_tempo=None</em>, <em>min_tempo=None</em>, <em>max_duration=None</em>, <em>min_duration=None</em>, <em>max_loudness=None</em>, <em>min_loudness=None</em>, <em>artist_max_familiarity=None</em>, <em>artist_min_familiarity=None</em>, <em>artist_max_hotttnesss=None</em>, <em>artist_min_hotttnesss=None</em>, <em>song_max_hotttnesss=None</em>, <em>song_min_hotttnesss=None</em>, <em>mode=None</em>, <em>min_energy=None</em>, <em>max_energy=None</em>, <em>min_danceability=None</em>, <em>max_danceability=None</em>, <em>key=None</em>, <em>max_latitude=None</em>, <em>min_latitude=None</em>, <em>max_longitude=None</em>, <em>min_longitude=None</em>, <em>sort=None</em>, <em>buckets=None</em>, <em>limit=False</em>, <em>test_new_things=None</em>, <em>rank_type=None</em>, <em>artist_start_year_after=None</em>, <em>artist_start_year_before=None</em>, <em>artist_end_year_after=None</em>, <em>artist_end_year_before=None</em><big>)</big><a class="headerlink" href="#pyechonest.song.search" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descclassname">song.</tt><tt class="descname">search</tt><big>(</big><em>title=None</em>, <em>artist=None</em>, <em>artist_id=None</em>, <em>combined=None</em>, <em>description=None</em>, <em>style=None</em>, <em>mood=None</em>, <em>results=None</em>, <em>start=None</em>, <em>max_tempo=None</em>, <em>min_tempo=None</em>, <em>max_duration=None</em>, <em>min_duration=None</em>, <em>max_loudness=None</em>, <em>min_loudness=None</em>, <em>artist_max_familiarity=None</em>, <em>artist_min_familiarity=None</em>, <em>artist_max_hotttnesss=None</em>, <em>artist_min_hotttnesss=None</em>, <em>song_max_hotttnesss=None</em>, <em>song_min_hotttnesss=None</em>, <em>mode=None</em>, <em>min_energy=None</em>, <em>max_energy=None</em>, <em>min_danceability=None</em>, <em>max_danceability=None</em>, <em>key=None</em>, <em>max_latitude=None</em>, <em>min_latitude=None</em>, <em>max_longitude=None</em>, <em>min_longitude=None</em>, <em>sort=None</em>, <em>buckets=None</em>, <em>limit=False</em>, <em>test_new_things=None</em>, <em>rank_type=None</em>, <em>artist_start_year_after=None</em>, <em>artist_start_year_before=None</em>, <em>artist_end_year_after=None</em>, <em>artist_end_year_before=None</em>, <em>song_type=None</em><big>)</big><a class="headerlink" href="#pyechonest.song.search" title="Permalink to this definition">¶</a></dt>
 <dd><p>Search for songs by name, description, or constraint.</p>
 <p>Args:</p>
 <dl class="docutils">
@@ -378,7 +405,8 @@
 <p>artist_start_year_before (int): Returned songs&#8217;s artists will have started recording music before this year.</p>
 <p>artist_start_year_after (int): Returned songs&#8217;s artists will have started recording music after this year.</p>
 <p>artist_end_year_before (int): Returned songs&#8217;s artists will have stopped recording music before this year.</p>
-<p class="last">artist_end_year_after (int): Returned songs&#8217;s artists will have stopped recording music after this year.</p>
+<p>artist_end_year_after (int): Returned songs&#8217;s artists will have stopped recording music after this year.</p>
+<p class="last">song_type (string): A string or list of strings specifiying the type of song to search for.</p>
 </dd>
 <dt>Returns:</dt>
 <dd>A list of Song objects</dd>
@@ -400,7 +428,7 @@
 
 <dl class="staticmethod">
 <dt id="pyechonest.song.profile">
-<em class="property">static </em><tt class="descclassname">song.</tt><tt class="descname">profile</tt><big>(</big><em>ids</em>, <em>buckets=None</em>, <em>limit=False</em><big>)</big><a class="headerlink" href="#pyechonest.song.profile" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descclassname">song.</tt><tt class="descname">profile</tt><big>(</big><em>ids=None</em>, <em>track_ids=None</em>, <em>buckets=None</em>, <em>limit=False</em><big>)</big><a class="headerlink" href="#pyechonest.song.profile" title="Permalink to this definition">¶</a></dt>
 <dd><p>get the profiles for multiple songs at once</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -413,22 +441,24 @@
 <dd>A list of term document dicts</dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">song_ids</span> <span class="o">=</span> <span class="p">[</span><span class="s">u&#39;SOGNMKX12B0B806320&#39;</span><span class="p">,</span> <span class="s">u&#39;SOLUHKP129F0698D49&#39;</span><span class="p">,</span> <span class="s">u&#39;SOOLGAZ127F3E1B87C&#39;</span><span class="p">,</span> <span class="s">u&#39;SOQKVPH12A58A7AF4D&#39;</span><span class="p">,</span> <span class="s">u&#39;SOHKEEM1288D3ED9F5&#39;</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">song_ids</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;SOBSLVH12A8C131F38&#39;</span><span class="p">,</span> <span class="s">&#39;SOXMSGY1338A5D5873&#39;</span><span class="p">,</span> <span class="s">&#39;SOJPHZO1376210AFE5&#39;</span><span class="p">,</span> <span class="s">&#39;SOBHNKR12AB0186218&#39;</span><span class="p">,</span> <span class="s">&#39;SOSJAHD13770F4D40C&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">songs</span> <span class="o">=</span> <span class="n">song</span><span class="o">.</span><span class="n">profile</span><span class="p">(</span><span class="n">song_ids</span><span class="p">,</span> <span class="n">buckets</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;audio_summary&#39;</span><span class="p">])</span>
-<span class="go">[&lt;song - chickfactor&gt;,</span>
-<span class="go"> &lt;song - One Step Closer&gt;,</span>
-<span class="go"> &lt;song - And I Am Telling You I&#39;m Not Going (Glee Cast Version)&gt;,</span>
-<span class="go"> &lt;song - In This Temple As In The Hearts Of Man For Whom He Saved The Earth&gt;,</span>
-<span class="go"> &lt;song - Octet&gt;]</span>
+<span class="go">[&lt;song - Say It Ain&#39;t So&gt;,</span>
+<span class="go"> &lt;song - Island In The Sun&gt;,</span>
+<span class="go"> &lt;song - My Name Is Jonas&gt;,</span>
+<span class="go"> &lt;song - Buddy Holly&gt;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">songs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">audio_summary</span>
-<span class="go">{u&#39;analysis_url&#39;: u&#39;https://echonest-analysis.s3.amazonaws.com:443/TR/TRKHTDL123E858AC4B/3/full.json?Signature=sE6OwAzg6UvrtiX6nJJW1t7E6YI%3D&amp;Expires=1287585351&amp;AWSAccessKeyId=AKIAIAFEHLM3KJ2XMHRA&#39;,</span>
-<span class="go"> u&#39;danceability&#39;: None,</span>
-<span class="go"> u&#39;duration&#39;: 211.90485000000001,</span>
-<span class="go"> u&#39;energy&#39;: None,</span>
-<span class="go"> u&#39;key&#39;: 7,</span>
-<span class="go"> u&#39;loudness&#39;: -16.736999999999998,</span>
+<span class="go">{u&#39;analysis_url&#39;: u&#39;https://echonest-analysis.s3.amazonaws.com/TR/7VRBNguufpHAQQ4ZjJ0eWsIQWl2S2_lrK-7Bp2azHOvPN4VFV-YnU7uO0dXgYtOKT-MTEa/3/full.json?Signature=hmNghHwfEsA4JKWFXnRi7mVP6T8%3D&amp;Expires=1349809918&amp;AWSAccessKeyId=AKIAJRDFEY23UEVW42BQ&#39;,</span>
+<span class="go"> u&#39;audio_md5&#39;: u&#39;b6079b2b88f8265be8bdd5fe9702e05c&#39;,</span>
+<span class="go"> u&#39;danceability&#39;: 0.64540643050283253,</span>
+<span class="go"> u&#39;duration&#39;: 255.92117999999999,</span>
+<span class="go"> u&#39;energy&#39;: 0.30711665772260549,</span>
+<span class="go"> u&#39;key&#39;: 8,</span>
+<span class="go"> u&#39;liveness&#39;: 0.088994423525370583,</span>
+<span class="go"> u&#39;loudness&#39;: -9.7799999999999994,</span>
 <span class="go"> u&#39;mode&#39;: 1,</span>
-<span class="go"> u&#39;tempo&#39;: 94.957999999999998,</span>
+<span class="go"> u&#39;speechiness&#39;: 0.031970700260699259,</span>
+<span class="go"> u&#39;tempo&#39;: 76.049999999999997,</span>
 <span class="go"> u&#39;time_signature&#39;: 4}</span>
 <span class="gp">&gt;&gt;&gt; </span>
 </pre></div>
@@ -460,7 +490,7 @@
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -499,7 +529,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2010, The Echo Nest.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>

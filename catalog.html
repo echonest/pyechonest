@@ -3,13 +3,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Catalog – catalog methods &mdash; pyechonest v4 documentation</title>
+    <title>Catalog – catalog methods &mdash; pyechonest 4 documentation</title>
+    
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
@@ -22,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="pyechonest v4 documentation" href="index.html" />
+    <link rel="top" title="pyechonest 4 documentation" href="index.html" />
     <link rel="next" title="Util – utility functions" href="util.html" />
     <link rel="prev" title="Playlist – playlist methods" href="playlist.html" />
  
@@ -102,7 +105,7 @@
 <span class="go">u&#39;CAVKUPC12BCA792120&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">name</span>
 <span class="go">u&#39;my_songs&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span>
+<span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -115,6 +118,11 @@
 <dl class="method">
 <dt id="pyechonest.catalog.Catalog.__str__">
 <tt class="descname">__str__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.__str__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.ban">
+<tt class="descname">ban</tt><big>(</big><em>items</em>, <em>ban=None</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.ban" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -136,6 +144,11 @@
 </pre></div>
 </div>
 </dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.favorite">
+<tt class="descname">favorite</tt><big>(</big><em>items</em>, <em>favorite=None</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.favorite" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="pyechonest.catalog.Catalog.get_feed">
@@ -170,6 +183,43 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="pyechonest.catalog.Catalog.get_item_dicts">
+<tt class="descname">get_item_dicts</tt><big>(</big><em>buckets=None</em>, <em>results=15</em>, <em>start=0</em>, <em>item_ids=None</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.get_item_dicts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns data from the catalog; also expanded for the requested buckets</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">buckets (list): A list of strings specifying which buckets to retrieve</p>
+<p>results (int): An integer number of results to return</p>
+<p class="last">start (int): An integer starting value for the result set</p>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of dicts representing objects in the catalog; list has additional attributes &#8216;start&#8217; and &#8216;total&#8217;</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span>
+<span class="go">&lt;catalog - my_songs&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">read_items</span><span class="p">(</span><span class="n">results</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">[</span>
+<span class="go">        {</span>
+<span class="go">            &quot;artist_id&quot;: &quot;AR78KRI1187B98E6F2&quot;,</span>
+<span class="go">            &quot;artist_name&quot;: &quot;Art of Noise&quot;,</span>
+<span class="go">            &quot;date_added&quot;: &quot;2012-04-02T16:50:02&quot;,</span>
+<span class="go">            &quot;foreign_id&quot;: &quot;CAHLYLR13674D1CF83:song:1000&quot;,</span>
+<span class="go">            &quot;request&quot;: {</span>
+<span class="go">                &quot;artist_name&quot;: &quot;The Art Of Noise&quot;,</span>
+<span class="go">                &quot;item_id&quot;: &quot;1000&quot;,</span>
+<span class="go">                &quot;song_name&quot;: &quot;Love&quot;</span>
+<span class="go">            },</span>
+<span class="go">            &quot;song_id&quot;: &quot;SOSBCTO1311AFE7AE0&quot;,</span>
+<span class="go">            &quot;song_name&quot;: &quot;Love&quot;</span>
+<span class="go">        }</span>
+<span class="go">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
 <dt id="pyechonest.catalog.Catalog.get_profile">
 <tt class="descname">get_profile</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.get_profile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check the status of a catalog update</p>
@@ -189,15 +239,26 @@
 <span class="go"> u&#39;resolved&#39;: 2,</span>
 <span class="go"> u&#39;total&#39;: 4,</span>
 <span class="go"> u&#39;type&#39;: u&#39;song&#39;}</span>
-<span class="gp">&gt;&gt;&gt; </span>
+<span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="method">
+<dt id="pyechonest.catalog.Catalog.play">
+<tt class="descname">play</tt><big>(</big><em>items</em>, <em>plays=None</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.play" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.rate">
+<tt class="descname">rate</tt><big>(</big><em>items</em>, <em>rating=None</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.rate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="pyechonest.catalog.Catalog.read_items">
-<tt class="descname">read_items</tt><big>(</big><em>buckets=None</em>, <em>results=15</em>, <em>start=0</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.read_items" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns data from the catalog; also expanded for the requested buckets</p>
+<tt class="descname">read_items</tt><big>(</big><em>buckets=None</em>, <em>results=15</em>, <em>start=0</em>, <em>item_ids=None</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.read_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns data from the catalog; also expanded for the requested buckets.
+This method is provided for backwards-compatibility</p>
 <p>Args:</p>
 <dl class="docutils">
 <dt>Kwargs:</dt>
@@ -217,6 +278,11 @@
 </pre></div>
 </div>
 </dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.catalog.Catalog.skip">
+<tt class="descname">skip</tt><big>(</big><em>items</em>, <em>skips=None</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.Catalog.skip" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="pyechonest.catalog.Catalog.status">
@@ -256,7 +322,7 @@
 </dl>
 <p>Example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="n">Catalog</span><span class="p">(</span><span class="s">&#39;my_songs&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s">&#39;song&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">items</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">items</span>
 <span class="go">[{&#39;action&#39;: &#39;update&#39;,</span>
 <span class="go">  &#39;item&#39;: {&#39;artist_name&#39;: &#39;dAn ThE aUtOmAtOr&#39;,</span>
 <span class="go">           &#39;disc_number&#39;: 1,</span>
@@ -272,7 +338,7 @@
 <span class="go">u&#39;7dcad583f2a38e6689d48a792b2e4c96&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">status</span><span class="p">(</span><span class="n">ticket</span><span class="p">)</span>
 <span class="go">{u&#39;ticket_status&#39;: u&#39;complete&#39;, u&#39;update_info&#39;: []}</span>
-<span class="gp">&gt;&gt;&gt; </span>
+<span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -280,8 +346,8 @@
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="pyechonest.catalog.list">
-<em class="property">static </em><tt class="descclassname">catalog.</tt><tt class="descname">list</tt><big>(</big><em>results=30</em>, <em>start=0</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.list" title="Permalink to this definition">¶</a></dt>
+<dt id="pyechonest.catalog.list_catalogs">
+<em class="property">static </em><tt class="descclassname">catalog.</tt><tt class="descname">list_catalogs</tt><big>(</big><em>results=30</em>, <em>start=0</em><big>)</big><a class="headerlink" href="#pyechonest.catalog.list_catalogs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns list of all catalogs created on this API key</p>
 <p>Args:</p>
 <dl class="docutils">
@@ -295,7 +361,7 @@
 <p>Example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">catalog</span><span class="o">.</span><span class="n">list</span><span class="p">()</span>
 <span class="go">[&lt;catalog - test_artist_catalog&gt;, &lt;catalog - test_song_catalog&gt;, &lt;catalog - my_songs&gt;]</span>
-<span class="gp">&gt;&gt;&gt; </span>
+<span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -325,7 +391,7 @@
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -364,7 +430,7 @@
     </div>
     <div class="footer">
         &copy; Copyright 2010, The Echo Nest.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>

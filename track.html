@@ -3,13 +3,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Track – track methods &mdash; pyechonest v4 documentation</title>
+    <title>Track – track methods &mdash; pyechonest 4 documentation</title>
+    
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
@@ -22,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="pyechonest v4 documentation" href="index.html" />
+    <link rel="top" title="pyechonest 4 documentation" href="index.html" />
     <link rel="next" title="Playlist – playlist methods" href="playlist.html" />
     <link rel="prev" title="Song – song methods" href="song.html" />
  
@@ -70,51 +73,67 @@
 <dl class="class">
 <dt id="pyechonest.track.Track">
 <em class="property">class </em><tt class="descclassname">pyechonest.track.</tt><tt class="descname">Track</tt><big>(</big><em>identifier</em>, <em>md5</em>, <em>properties</em><big>)</big><a class="headerlink" href="#pyechonest.track.Track" title="Permalink to this definition">¶</a></dt>
-<dd><p>Represents an audio analysis from The Echo Nest.</p>
-<p>All methods in this module return Track objects.</p>
-<p>Attributes:</p>
+<dd><p>Represents an audio file and its analysis from The Echo Nest.
+All methods in this module return Track objects.</p>
+<p>Depending on the information available, tracks may have some or all of the
+following attributes:</p>
 <blockquote>
-<div><p>analysis_channels       int: the number of audio channels used during analysis</p>
-<p>analysis_sample_rate    float: the sample rate used during analysis</p>
-<p>analyzer_version        str: e.g. &#8216;3.01a&#8217;</p>
-<p>artist                  str or None: artist name</p>
+<div><p>analysis_channels -     int: the number of audio channels used during analysis</p>
+<p>analysis_sample_rate -  int: the sample rate used during analysis</p>
+<p>analysis_url -          URL to retrieve the complete audio analysis (time expiring)</p>
+<p>analyzer_version -      str: e.g. &#8216;3.01a&#8217;</p>
+<p>artist -                str or None: artist name</p>
+<p>artist_id               Echo Nest ID of artist, if known</p>
 <p>bars                    list of dicts: timing of each measure</p>
 <p>beats                   list of dicts: timing of each beat</p>
-<p>bitrate                 int: the bitrate of the input mp3 (or other file)</p>
-<p>danceability            float: relative danceability (0 to 1)</p>
+<p>codestring              ENMFP code string</p>
+<p>code_version            version of ENMFP code generator</p>
+<p>danceability            float: relative danceability (0.0 to 1.0)</p>
+<p>decoder                 audio decoder used by the analysis (e.g. ffmpeg)</p>
 <p>duration                float: length of track in seconds</p>
-<p>energy                  float: relative energy (0 to 1)</p>
+<p>echoprintstring         fingerprint string using Echoprint (<a class="reference external" href="http://echoprint.me">http://echoprint.me</a>)</p>
+<p>echoprint_version       version of Echoprint code generator</p>
+<p>energy                  float: relative energy (0.0 to 1.0)</p>
 <p>end_of_fade_in          float: time in seconds track where fade-in ends</p>
 <p>id                      str: Echo Nest Track ID, e.g. &#8216;TRTOBXJ1296BCDA33B&#8217;</p>
 <p>key                     int: between 0 (key of C) and 11 (key of B flat) inclusive</p>
 <p>key_confidence          float: confidence that key detection was accurate</p>
+<p>liveness                float: confidence the track is &#8220;live&#8221; (0.0 to 1.0)</p>
 <p>loudness                float: overall loudness in decibels (dB)</p>
-<p>md5                     str: 32-character checksum of the input mp3</p>
-<p>meta                    dict: other track metainfo</p>
+<p>md5                     str: 32-character checksum of the original audio file, if available</p>
+<p>meta                    dict: other track metainfo (bitrate, album, genre, etc.)</p>
 <p>mode                    int: 0 (major) or 1 (minor)</p>
 <p>mode_confidence         float: confidence that mode detection was accurate</p>
 <p>num_samples             int: total samples in the decoded track</p>
-<p>release                 str or None: the album name</p>
+<p>offset_seconds          unused, always 0</p>
 <p>sample_md5              str: 32-character checksum of the decoded audio file</p>
-<p>samplerate              int: sample rate of input mp3</p>
 <p>sections                list of dicts: larger sections of song (chorus, bridge, solo, etc.)</p>
 <p>segments                list of dicts: timing, pitch, loudness and timbre for each segment</p>
+<p>song_id                 The Echo Nest song ID for the track, if known</p>
+<p>speechiness             float: likelihood the track contains speech (0.0 to 1.0)</p>
 <p>start_of_fade_out       float: time in seconds where fade out begins</p>
-<p>status                  str: analysis status, e.g. &#8216;complete&#8217;, &#8216;pending&#8217;, &#8216;error&#8217;</p>
+<p>status                  str: analysis status, e.g. &#8216;complete&#8217;</p>
+<p>synchstring             string providing synchronization points throughout the track</p>
+<p>synch_version           version of the synch string algorithm</p>
 <p>tatums                  list of dicts: the smallest metrical unit (subdivision of a beat)</p>
 <p>tempo                   float: overall BPM (beats per minute)</p>
 <p>tempo_confidence        float: confidence that tempo detection was accurate</p>
+<p>time_signature          beats per measure (e.g. 3, 4, 5, 7)</p>
+<p>time_signature_confidence float: confidence that time_signature detection was accurate</p>
 <p>title                   str or None: song title</p>
+<p>window_seconds          unused, always 0</p>
 </div></blockquote>
 <p>Each bar, beat, section, segment and tatum has a start time, a duration, and a confidence,
 in addition to whatever other data is given.</p>
 <p>Examples:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">track_from_id</span><span class="p">(</span><span class="s">&#39;TRXXHTJ1294CD8F3B3&#39;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">track_from_id</span><span class="p">(</span><span class="s">&#39;TRJSEBQ1390EC0B548&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
-<span class="go">&lt;track - Neverwas Restored (from Neverwas Soundtrack)&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">track_from_md5</span><span class="p">(</span><span class="s">&#39;b8abf85746ab3416adabca63141d8c2d&#39;</span><span class="p">)</span>
+<span class="go">&lt;track - Dark Therapy&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">track_from_md5</span><span class="p">(</span><span class="s">&#39;96fa0180d225f14e9f8cbfffbf5eb81d&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
-<span class="go">&lt;track - Neverwas Restored (from Neverwas Soundtrack)&gt;</span>
+<span class="go">&lt;track - Spoonful - Live At Winterland&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span>
 </pre></div>
 </div>
@@ -132,12 +151,13 @@ in addition to whatever other data is given.</p>
 
 <dl class="staticmethod">
 <dt id="pyechonest.track.track_from_file">
-<em class="property">static </em><tt class="descclassname">track.</tt><tt class="descname">track_from_file</tt><big>(</big><em>file_object</em>, <em>filetype</em><big>)</big><a class="headerlink" href="#pyechonest.track.track_from_file" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descclassname">track.</tt><tt class="descname">track_from_file</tt><big>(</big><em>file_object</em>, <em>filetype</em>, <em>timeout=60</em>, <em>force_upload=False</em><big>)</big><a class="headerlink" href="#pyechonest.track.track_from_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a track object from a file-like object.</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd>file_object: a file-like Python object
-filetype: the file type (ex. mp3, ogg, wav)</dd>
+filetype: the file type. Supported types include mp3, ogg, wav, m4a, mp4, au
+force_upload: skip the MD5 shortcut path, force an upload+analysis</dd>
 <dt>Example:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&quot;Miaow-01-Tempered-song.mp3&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">track_from_file</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s">&#39;mp3&#39;</span><span class="p">)</span>
@@ -152,12 +172,13 @@ filetype: the file type (ex. mp3, ogg, wav)</dd>
 
 <dl class="staticmethod">
 <dt id="pyechonest.track.track_from_filename">
-<em class="property">static </em><tt class="descclassname">track.</tt><tt class="descname">track_from_filename</tt><big>(</big><em>filename</em>, <em>filetype=None</em><big>)</big><a class="headerlink" href="#pyechonest.track.track_from_filename" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descclassname">track.</tt><tt class="descname">track_from_filename</tt><big>(</big><em>filename</em>, <em>filetype=None</em>, <em>timeout=60</em>, <em>force_upload=False</em><big>)</big><a class="headerlink" href="#pyechonest.track.track_from_filename" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a track object from a filename.</p>
 <dl class="docutils">
 <dt>Args:</dt>
 <dd>filename: A string containing the path to the input file.
-filetype: A string indicating the filetype; Defaults to None (type determined by file extension).</dd>
+filetype: A string indicating the filetype; Defaults to None (type determined by file extension).
+force_upload: skip the MD5 shortcut path, force an upload+analysis</dd>
 <dt>Example:</dt>
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">track_from_filename</span><span class="p">(</span><span class="s">&quot;Miaow-01-Tempered-song.mp3&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
@@ -171,7 +192,7 @@ filetype: A string indicating the filetype; Defaults to None (type determined by
 
 <dl class="staticmethod">
 <dt id="pyechonest.track.track_from_url">
-<em class="property">static </em><tt class="descclassname">track.</tt><tt class="descname">track_from_url</tt><big>(</big><em>url</em><big>)</big><a class="headerlink" href="#pyechonest.track.track_from_url" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descclassname">track.</tt><tt class="descname">track_from_url</tt><big>(</big><em>url</em>, <em>timeout=60</em><big>)</big><a class="headerlink" href="#pyechonest.track.track_from_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a track object from a public http URL.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -189,7 +210,7 @@ filetype: A string indicating the filetype; Defaults to None (type determined by
 
 <dl class="staticmethod">
 <dt id="pyechonest.track.track_from_id">
-<em class="property">static </em><tt class="descclassname">track.</tt><tt class="descname">track_from_id</tt><big>(</big><em>identifier</em><big>)</big><a class="headerlink" href="#pyechonest.track.track_from_id" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descclassname">track.</tt><tt class="descname">track_from_id</tt><big>(</big><em>identifier</em>, <em>timeout=60</em><big>)</big><a class="headerlink" href="#pyechonest.track.track_from_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a track object from an Echo Nest track ID.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -207,7 +228,7 @@ filetype: A string indicating the filetype; Defaults to None (type determined by
 
 <dl class="staticmethod">
 <dt id="pyechonest.track.track_from_md5">
-<em class="property">static </em><tt class="descclassname">track.</tt><tt class="descname">track_from_md5</tt><big>(</big><em>md5</em><big>)</big><a class="headerlink" href="#pyechonest.track.track_from_md5" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descclassname">track.</tt><tt class="descname">track_from_md5</tt><big>(</big><em>md5</em>, <em>timeout=60</em><big>)</big><a class="headerlink" href="#pyechonest.track.track_from_md5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a track object from an md5 hash.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -216,24 +237,6 @@ filetype: A string indicating the filetype; Defaults to None (type determined by
 <dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">track_from_md5</span><span class="p">(</span><span class="s">&#39;b8abf85746ab3416adabca63141d8c2d&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
 <span class="go">&lt;track - Neverwas Restored (from Neverwas Soundtrack)&gt;</span>
-<span class="go">&gt;&gt;&gt;</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="pyechonest.track.track_from_reanalyzing_md5">
-<em class="property">static </em><tt class="descclassname">track.</tt><tt class="descname">track_from_reanalyzing_md5</tt><big>(</big><em>md5</em><big>)</big><a class="headerlink" href="#pyechonest.track.track_from_reanalyzing_md5" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create a track object from an md5 hash, reanalyzing the track first.</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>md5 (str): A string containing the md5 of a previously analyzed track</dd>
-<dt>Example:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">track_from_reanalyzing_md5</span><span class="p">(</span><span class="s">&#39;b8abf85746ab3416adabca63141d8c2d&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
-<span class="go">&lt;track - Neverwas Restored&gt;</span>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
@@ -266,7 +269,7 @@ filetype: A string indicating the filetype; Defaults to None (type determined by
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -305,7 +308,7 @@ filetype: A string indicating the filetype; Defaults to None (type determined by
     </div>
     <div class="footer">
         &copy; Copyright 2010, The Echo Nest.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>

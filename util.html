@@ -3,13 +3,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Util – utility functions &mdash; pyechonest v4 documentation</title>
+    <title>Util – utility functions &mdash; pyechonest 4 documentation</title>
+    
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
@@ -22,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="pyechonest v4 documentation" href="index.html" />
+    <link rel="top" title="pyechonest 4 documentation" href="index.html" />
     <link rel="next" title="Config – configuration file" href="config.html" />
     <link rel="prev" title="Catalog – catalog methods" href="catalog.html" />
  
@@ -72,11 +75,33 @@ Created by Tyler Williams on 2010-04-25.</p>
 <p>Utility functions to support the Echo Nest web API interface.</p>
 <dl class="exception">
 <dt id="pyechonest.util.EchoNestAPIError">
-<em class="property">exception </em><tt class="descclassname">pyechonest.util.</tt><tt class="descname">EchoNestAPIError</tt><big>(</big><em>code</em>, <em>message</em><big>)</big><a class="headerlink" href="#pyechonest.util.EchoNestAPIError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generic API errors.</p>
+<em class="property">exception </em><tt class="descclassname">pyechonest.util.</tt><tt class="descname">EchoNestAPIError</tt><big>(</big><em>code</em>, <em>message</em>, <em>headers</em><big>)</big><a class="headerlink" href="#pyechonest.util.EchoNestAPIError" title="Permalink to this definition">¶</a></dt>
+<dd><p>API Specific Errors.</p>
 <dl class="method">
 <dt id="pyechonest.util.EchoNestAPIError.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>code</em>, <em>message</em><big>)</big><a class="headerlink" href="#pyechonest.util.EchoNestAPIError.__init__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__init__</tt><big>(</big><em>code</em>, <em>message</em>, <em>headers</em><big>)</big><a class="headerlink" href="#pyechonest.util.EchoNestAPIError.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="pyechonest.util.EchoNestException">
+<em class="property">exception </em><tt class="descclassname">pyechonest.util.</tt><tt class="descname">EchoNestException</tt><big>(</big><em>code</em>, <em>message</em>, <em>headers</em><big>)</big><a class="headerlink" href="#pyechonest.util.EchoNestException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parent exception class.  Catches API and URL/HTTP errors.</p>
+<dl class="method">
+<dt id="pyechonest.util.EchoNestException.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>code</em>, <em>message</em>, <em>headers</em><big>)</big><a class="headerlink" href="#pyechonest.util.EchoNestException.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="pyechonest.util.EchoNestIOError">
+<em class="property">exception </em><tt class="descclassname">pyechonest.util.</tt><tt class="descname">EchoNestIOError</tt><big>(</big><em>code=None, error=None, headers=[('User-Agent', 'Pyechonest 6.0.0')]</em><big>)</big><a class="headerlink" href="#pyechonest.util.EchoNestIOError" title="Permalink to this definition">¶</a></dt>
+<dd><p>URL and HTTP errors.</p>
+<dl class="method">
+<dt id="pyechonest.util.EchoNestIOError.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>code=None, error=None, headers=[('User-Agent', 'Pyechonest 6.0.0')]</em><big>)</big><a class="headerlink" href="#pyechonest.util.EchoNestIOError.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -123,6 +148,11 @@ put them in a list.</p>
 <dl class="function">
 <dt id="pyechonest.util.get_successful_response">
 <tt class="descclassname">pyechonest.util.</tt><tt class="descname">get_successful_response</tt><big>(</big><em>raw_json</em><big>)</big><a class="headerlink" href="#pyechonest.util.get_successful_response" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="pyechonest.util.oauthgetm">
+<tt class="descclassname">pyechonest.util.</tt><tt class="descname">oauthgetm</tt><big>(</big><em>method</em>, <em>param_dict</em>, <em>socket_timeout=None</em><big>)</big><a class="headerlink" href="#pyechonest.util.oauthgetm" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="function">
@@ -175,7 +205,7 @@ basis on urllib2).</p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -214,7 +244,7 @@ basis on urllib2).</p>
     </div>
     <div class="footer">
         &copy; Copyright 2010, The Echo Nest.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>
