@@ -92,15 +92,18 @@ class Song(SongProxy):
         Example:
             >>> s = song.Song('SOGNMKX12B0B806320')
             >>> s.audio_summary
-            {u'analysis_url': u'https://echonest-analysis.s3.amazonaws.com:443/TR/TRCPUOG123E85891F2/3/full.json?Signature=wcML1ZKsl%2F2FU4k68euHJcF7Jbc%3D&Expires=1287518562&AWSAccessKeyId=AKIAIAFEHLM3KJ2XMHRA',
-             u'danceability': 0.20964757782725996,
-             u'duration': 472.63301999999999,
-             u'energy': 0.64265230549809549,
-             u'key': 0,
-             u'loudness': -9.6820000000000004,
-             u'mode': 1,
-             u'tempo': 126.99299999999999,
-             u'time_signature': 4}
+             {u'analysis_url': u'https://echonest-analysis.s3.amazonaws.com/TR/RnMKCg47J5LgQZr0SISyoPuRxKVQx3Z_YSuhVa/3/full.json?Signature=KBUbewLiP3sZ2X6rRZzXhrgh8fw%3D&Expires=1349809604&AWSAccessKeyId=AKIAJRDFEY23UEVW42BQ',
+              u'audio_md5': u'ca3fdfa72eed23d5ad89872c38cecc0e',
+              u'danceability': 0.33712086491871546,
+              u'duration': 470.70666999999997,
+              u'energy': 0.58186979146361684,
+              u'key': 0,
+              u'liveness': 0.08676759933615498,
+              u'loudness': -9.5960000000000001,
+              u'mode': 1,
+              u'speechiness': 0.036938896635994867,
+              u'tempo': 126.949,
+              u'time_signature': 4}
             >>> 
             
         """
@@ -140,6 +143,33 @@ class Song(SongProxy):
         return self.cache['song_hotttnesss']
     
     song_hotttnesss = property(get_song_hotttnesss)
+
+    def get_song_type(self, cache=True):
+        """Get the types of a song.
+        
+        Args:
+            cache (boolean): A boolean indicating whether or not the cached value should be used
+            (if available). Defaults to True.
+        
+        Returns:
+            A list of strings, each representing a song type:  'christmas', for example.
+        
+        Example:
+            >>> s = song.Song('SOQKVPH12A58A7AF4D')
+            >>> s.song_type
+            [u'christmas']
+            >>> 
+
+        """ 
+        if not (cache and ('song_type' in self.cache)):
+            response = self.get_attribute('profile', bucket='song_type')
+            if response['songs'][0].has_key('song_type'):
+                self.cache['song_type'] = response['songs'][0]['song_type']
+            else:
+                self.cache['song_type'] = []
+        return self.cache['song_type']
+
+    song_type = property(get_song_type)
     
     def get_artist_hotttnesss(self, cache=True):
         """Get our numerical description of how hottt a song's artist currently is
@@ -279,29 +309,6 @@ class Song(SongProxy):
         return filter(lambda tr: tr['catalog']==catalog, self.cache['tracks'])
 
 
-    def get_song_type(self, cache=True):
-        """Get the types of a song.
-
-        Args:
-            cache (boolean): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
-
-        Returns:
-            A list of strings, each representing a song type:  'christmas', for example.
-
-        Example:
-            >>> s = song.Song('SOQKVPH12A58A7AF4D')
-            >>> s.song_type
-            [u'christmas']
-            >>>
-
-        """
-        if not (cache and ('song_type' in self.cache)):
-            response = self.get_attribute('profile', bucket='song_type')
-            self.cache['song_type'] = response['songs'][0]['song_type']
-        return self.cache['song_type']
-
-    song_type = property(get_song_type)
-
 def identify(filename=None, query_obj=None, code=None, artist=None, title=None, release=None, duration=None, genre=None, buckets=None, version=None, codegen_start=0, codegen_duration=30):
     """Identify a song.
     
@@ -413,8 +420,9 @@ def search(title=None, artist=None, artist_id=None, combined=None, description=N
                 artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, mode=None, \
                 min_energy=None, max_energy=None, min_danceability=None, max_danceability=None, \
                 key=None, max_latitude=None, min_latitude=None, max_longitude=None, min_longitude=None, \
-                sort=None, buckets = None, limit=False, test_new_things=None, rank_type=None,
-                artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None,song_type=None):
+                sort=None, buckets=None, limit=False, test_new_things=None, rank_type=None,
+                artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, \
+                artist_end_year_before=None,song_type=None):
     """Search for songs by name, description, or constraint.
 
     Args:
@@ -539,25 +547,26 @@ def profile(ids=None, track_ids=None, buckets=None, limit=False):
     
     Example:
 
-    >>> song_ids = [u'SOGNMKX12B0B806320', u'SOLUHKP129F0698D49', u'SOOLGAZ127F3E1B87C', u'SOQKVPH12A58A7AF4D', u'SOHKEEM1288D3ED9F5']
+    >>> song_ids = ['SOBSLVH12A8C131F38', 'SOXMSGY1338A5D5873', 'SOJPHZO1376210AFE5', 'SOBHNKR12AB0186218', 'SOSJAHD13770F4D40C']
     >>> songs = song.profile(song_ids, buckets=['audio_summary'])
-    [<song - chickfactor>,
-     <song - One Step Closer>,
-     <song - And I Am Telling You I'm Not Going (Glee Cast Version)>,
-     <song - In This Temple As In The Hearts Of Man For Whom He Saved The Earth>,
-     <song - Octet>]
+    [<song - Say It Ain't So>,
+     <song - Island In The Sun>,
+     <song - My Name Is Jonas>,
+     <song - Buddy Holly>]
     >>> songs[0].audio_summary
-    {u'analysis_url': u'https://echonest-analysis.s3.amazonaws.com:443/TR/TRKHTDL123E858AC4B/3/full.json?Signature=sE6OwAzg6UvrtiX6nJJW1t7E6YI%3D&Expires=1287585351&AWSAccessKeyId=AKIAIAFEHLM3KJ2XMHRA',
-     u'danceability': None,
-     u'duration': 211.90485000000001,
-     u'energy': None,
-     u'key': 7,
-     u'loudness': -16.736999999999998,
+    {u'analysis_url': u'https://echonest-analysis.s3.amazonaws.com/TR/7VRBNguufpHAQQ4ZjJ0eWsIQWl2S2_lrK-7Bp2azHOvPN4VFV-YnU7uO0dXgYtOKT-MTEa/3/full.json?Signature=hmNghHwfEsA4JKWFXnRi7mVP6T8%3D&Expires=1349809918&AWSAccessKeyId=AKIAJRDFEY23UEVW42BQ',
+     u'audio_md5': u'b6079b2b88f8265be8bdd5fe9702e05c',
+     u'danceability': 0.64540643050283253,
+     u'duration': 255.92117999999999,
+     u'energy': 0.30711665772260549,
+     u'key': 8,
+     u'liveness': 0.088994423525370583,
+     u'loudness': -9.7799999999999994,
      u'mode': 1,
-     u'tempo': 94.957999999999998,
+     u'speechiness': 0.031970700260699259,
+     u'tempo': 76.049999999999997,
      u'time_signature': 4}
     >>> 
-    
     """
     kwargs = {}
 
