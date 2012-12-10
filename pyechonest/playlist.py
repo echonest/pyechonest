@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# encoding: utf-8
+# -*- coding: utf-8 -*-
 
 """
 Copyright (c) 2010 The Echo Nest. All rights reserved.
@@ -10,13 +10,16 @@ Refer to the official api documentation if you are unsure about something.
 """
 
 import util
-from proxies import PlaylistProxy, BetaPlaylistProxy
+from proxies import DeprecatedPlaylistProxy, PlaylistProxy
 from song import Song
 import catalog
+import logging
+logger = logging.getLogger(__name__)
 
-class Playlist(PlaylistProxy):
+
+class DeprecatedPlaylist(DeprecatedPlaylistProxy):
     """
-    A Dynamic Playlist object
+    A Deprecated Dynamic Playlist object
     
     Attributes:
         session_id (str): Playlist Session ID
@@ -26,9 +29,9 @@ class Playlist(PlaylistProxy):
         info (dictionary): Information about this playlist
     
     Example:
-        >>> p = Playlist(type='artist-radio', artist=['ida maria', 'florence + the machine'])
+        >>> p = DeprecatedPlaylist(type='artist-radio', artist=['ida maria', 'florence + the machine'])
         >>> p
-        <Dynamic Playlist - 9c210205d4784144b4fa90770fa55d0b>
+        <Deprecated Dynamic Playlist - 9c210205d4784144b4fa90770fa55d0b>
         >>> p.song
         <song - Later On>
         >>> p.get_next_song()
@@ -36,18 +39,18 @@ class Playlist(PlaylistProxy):
         >>> 
 
     """
-    
-    def __init__(self, session_id=None, type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist_id=None, artist=None, \
-                        song_id=None, track_id=None, description=None, style=None, mood=None, \
-                        max_tempo=None, min_tempo=None, max_duration=None, \
-                        min_duration=None, max_loudness=None, min_loudness=None, max_danceability=None, min_danceability=None, \
-                        max_energy=None, min_energy=None, artist_max_familiarity=None, artist_min_familiarity=None, \
-                        artist_max_hotttnesss=None, artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, \
-                        min_longitude=None, max_longitude=None, min_latitude=None, max_latitude=None, adventurousness=0.2, \
-                        mode=None, key=None, buckets=[], sort=None, limit=False, 
-                        dmca=False, chain_xspf=False, \
-                        seed_catalog=None, steer=None, source_catalog=None, steer_description=None, test_new_things=None, rank_type=None,
-                        artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None):
+
+    def __init__(self, session_id=None, type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist_id=None,
+                 artist=None, song_id=None, track_id=None, description=None, style=None, mood=None, max_tempo=None,
+                 min_tempo=None, max_duration=None, min_duration=None, max_loudness=None, min_loudness=None,
+                 max_danceability=None, min_danceability=None, max_energy=None, min_energy=None,
+                 artist_max_familiarity=None, artist_min_familiarity=None, artist_max_hotttnesss=None,
+                 artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, min_longitude=None,
+                 max_longitude=None, min_latitude=None, max_latitude=None, adventurousness=0.2, mode=None, key=None,
+                 buckets=None, sort=None, limit=False, dmca=False, chain_xspf=False, seed_catalog=None, steer=None,
+                 source_catalog=None, steer_description=None, test_new_things=None, rank_type=None,
+                 artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None,
+                 artist_end_year_before=None):
         """
         Args:
 
@@ -102,9 +105,9 @@ class Playlist(PlaylistProxy):
 
             min_energy (float): The min energy of song results
 
-            max_dancibility (float): The max dancibility of song results
+            max_danceability (float): The max danceability of song results
 
-            min_dancibility (float): The min dancibility of song results
+            min_danceability (float): The min danceability of song results
 
             mode (int): 0 or 1 (minor or major)
 
@@ -136,13 +139,13 @@ class Playlist(PlaylistProxy):
             
             rank_type (str): A string denoting the desired ranking for description searches, either 'relevance' or 'familiarity'
             
-            artist_start_year_before (int): Returned songs's artists will have started recording music before this year.
+            artist_start_year_before (int): Returned song's artists will have started recording music before this year.
             
-            artist_start_year_after (int): Returned songs's artists will have started recording music after this year.
+            artist_start_year_after (int): Returned song's artists will have started recording music after this year.
             
-            artist_end_year_before (int): Returned songs's artists will have stopped recording music before this year.
+            artist_end_year_before (int): Returned song's artists will have stopped recording music before this year.
             
-            artist_end_year_after (int): Returned songs's artists will have stopped recording music after this year.
+            artist_end_year_after (int): Returned song's artists will have stopped recording music after this year.
             
         Returns:
             A dynamic playlist object
@@ -152,7 +155,7 @@ class Playlist(PlaylistProxy):
         limit = str(limit).lower()
         dmca = str(dmca).lower()
         chain_xspf = str(chain_xspf).lower()
-        
+
         if isinstance(seed_catalog, catalog.Catalog):
             seed_catalog = seed_catalog.id
 
@@ -160,19 +163,19 @@ class Playlist(PlaylistProxy):
             source_catalog = source_catalog.id
 
         kwargs = locals()
-        kwargs['bucket'] = kwargs['buckets']
+        kwargs['bucket'] = kwargs['buckets'] or []
         del kwargs['buckets']
         del kwargs['self']
         del kwargs['session_id']
-        
-        super(Playlist, self).__init__(session_id, **kwargs)
-    
+
+        super(DeprecatedPlaylist, self).__init__(session_id, **kwargs)
+
     def __repr__(self):
-        return "<Dynamic Playlist - %s>" % self.session_id.encode('utf-8')
-    
+        return "<Deprecated Dynamic Playlist - %s>" % self.session_id.encode('utf-8')
+
     # def __str__(self):
     #     return self.name.encode('utf-8')
-    
+
     def get_next_song(self, **kwargs):
         """Get the next song in the playlist
         
@@ -185,7 +188,7 @@ class Playlist(PlaylistProxy):
         
         Example:
         
-        >>> p = playlist.Playlist(type='artist-radio', artist=['ida maria', 'florence + the machine'])
+        >>> p = playlist.DeprecatedPlaylist(type='artist-radio', artist=['ida maria', 'florence + the machine'])
         >>> p.get_next_song()
         <song - She Said>
         >>>
@@ -199,7 +202,7 @@ class Playlist(PlaylistProxy):
             return Song(**fix(self.cache['songs'][0]))
         else:
             return None
-    
+
     def get_current_song(self):
         """Get the current song in the playlist
         
@@ -212,7 +215,7 @@ class Playlist(PlaylistProxy):
         
         Example:
         
-        >>> p = playlist.Playlist(type='artist-radio', artist=['ida maria', 'florence + the machine'])
+        >>> p = playlist.DeprecatedPlaylist(type='artist-radio', artist=['ida maria', 'florence + the machine'])
         >>> p.song
         <song - Later On>
         >>> p.get_current_song()
@@ -229,7 +232,7 @@ class Playlist(PlaylistProxy):
             return None
 
     song = property(get_current_song)
-    
+
     def session_info(self):
         """Get information about the playlist
         
@@ -242,7 +245,7 @@ class Playlist(PlaylistProxy):
         
         Example:
         
-        >>> p = playlist.Playlist(type='artist-radio', artist=['ida maria', 'florence + the machine'])
+        >>> p = playlist.DeprecatedPlaylist(type='artist-radio', artist=['ida maria', 'florence + the machine'])
         >>> p.info
         {
             u 'terms': [{
@@ -301,12 +304,12 @@ class Playlist(PlaylistProxy):
 
         """
         return self.get_attribute("session_info", session_id=self.session_id)
-    
+
     info = property(session_info)
 
 
-def basic(type='artist-radio', artist_id=None, artist=None, song_id=None, song=None, track_id=None,
-          dmca=False, results=15, buckets=None, limit=False):
+def basic(type='artist-radio', artist_id=None, artist=None, song_id=None, song=None, track_id=None, dmca=False,
+          results=15, buckets=None, limit=False):
     """Get a basic playlist
     
     Args:
@@ -332,27 +335,28 @@ def basic(type='artist-radio', artist_id=None, artist=None, song_id=None, song=N
         
         limit (bool): Whether results should be restricted to any idspaces given in the buckets parameter
     """
-    
+
     limit = str(limit).lower()
     dmca = str(dmca).lower()
-    
+
     kwargs = locals()
     kwargs['bucket'] = kwargs['buckets']
     del kwargs['buckets']
-    
+
     result = util.callm("%s/%s" % ('playlist', 'basic'), kwargs)
-    return [Song(**util.fix(s_dict)) for s_dict in result['response']['songs']]    
+    return [Song(**util.fix(s_dict)) for s_dict in result['response']['songs']]
 
 
-def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist_id=None, artist=None, \
-                    song_id=None, track_id=None, description=None, style=None, mood=None, \
-                    results=15, max_tempo=None, min_tempo=None, max_duration=None, \
-                    min_duration=None, max_loudness=None, min_loudness=None, max_danceability=None, min_danceability=None, \
-                    max_energy=None, min_energy=None, artist_max_familiarity=None, artist_min_familiarity=None, \
-                    artist_max_hotttnesss=None, artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, \
-                    min_longitude=None, max_longitude=None, min_latitude=None, max_latitude=None, adventurousness=0.2, \
-                    mode=None, key=None, buckets=[], sort=None, limit=False, seed_catalog=None, source_catalog=None, rank_type=None, test_new_things=None,
-                    artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None,dmca=False, distribution=None, song_type=None):
+def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist_id=None, artist=None, song_id=None,
+           track_id=None, description=None, style=None, mood=None, results=15, max_tempo=None, min_tempo=None,
+           max_duration=None, min_duration=None, max_loudness=None, min_loudness=None, max_danceability=None,
+           min_danceability=None, max_energy=None, min_energy=None, artist_max_familiarity=None,
+           artist_min_familiarity=None, artist_max_hotttnesss=None, artist_min_hotttnesss=None,
+           song_max_hotttnesss=None, song_min_hotttnesss=None, min_longitude=None, max_longitude=None,
+           min_latitude=None, max_latitude=None, adventurousness=0.2, mode=None, key=None, buckets=None, sort=None,
+           limit=False, seed_catalog=None, source_catalog=None, rank_type=None, test_new_things=None,
+           artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None,
+           artist_end_year_before=None, dmca=False, distribution=None, song_type=None):
     """Get a static playlist
     
     Args:
@@ -408,9 +412,9 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
     
         min_energy (float): The min energy of song results
     
-        max_dancibility (float): The max dancibility of song results
+        max_danceability (float): The max danceability of song results
     
-        min_dancibility (float): The min dancibility of song results
+        min_danceability (float): The min danceability of song results
     
         mode (int): 0 or 1 (minor or major)
     
@@ -438,15 +442,15 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
 
         rank_type (str): A string denoting the desired ranking for description searches, either 'relevance' or 'familiarity'    
         
-        artist_start_year_before (int): Returned songs's artists will have started recording music before this year.
+        artist_start_year_before (int): Returned song's artists will have started recording music before this year.
         
-        artist_start_year_after (int): Returned songs's artists will have started recording music after this year.
+        artist_start_year_after (int): Returned song's artists will have started recording music after this year.
         
-        artist_end_year_before (int): Returned songs's artists will have stopped recording music before this year.
+        artist_end_year_before (int): Returned song's artists will have stopped recording music before this year.
         
-        artist_end_year_after (int): Returned songs's artists will have stopped recording music after this year.
+        artist_end_year_after (int): Returned song's artists will have stopped recording music after this year.
 
-        distribution (str): Affects the range of artists returned and how many songs each artsits will have in the playlist realative to how similar they are to the seed. (wandering, focused)
+        distribution (str): Affects the range of artists returned and how many songs each artist will have in the playlist relative to how similar they are to the seed. (wandering, focused)
 
         song_type (str):  A string or list of strings of the type of songs allowed.  The only valid song type at the moment is 'christmas'.
                           Valid formats are 'song_type', 'song_type:true', 'song_type:false', or 'song_type:any'.
@@ -485,15 +489,16 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
         source_catalog = source_catalog.id
     dmca = str(dmca).lower()
     kwargs = locals()
-    kwargs['bucket'] = kwargs['buckets']
+    kwargs['bucket'] = kwargs['buckets'] or []
     del kwargs['buckets']
-    
+
     result = util.callm("%s/%s" % ('playlist', 'static'), kwargs)
     return [Song(**util.fix(s_dict)) for s_dict in result['response']['songs']]
-    
-class BetaPlaylist(BetaPlaylistProxy):
+
+class Playlist(PlaylistProxy):
     """
-    A Beta Dynamic Playlist object.
+    A Dynamic Playlist object.
+    http://developer.echonest.com/docs/v4/playlist.html#dynamic-create
 
     Attributes:
 
@@ -501,56 +506,16 @@ class BetaPlaylist(BetaPlaylistProxy):
     """
 
     def __init__(
-        self,
-        session_id=None,
-        type=None,
-        artist_pick=None,
-        variety=None,
-        artist_id=None,
-        artist=None,
-        song_id=None,
-        track_id=None,
-        description=None,
-        style=None,
-        mood=None,
-        max_tempo=None,
-        min_tempo=None,
-        max_duration=None,
-        min_duration=None,
-        max_loudness=None,
-        min_loudness=None,
-        max_danceability=None,
-        min_danceability=None,
-        max_energy=None,
-        min_energy=None,
-        artist_max_familiarity=None,
-        artist_min_familiarity=None,
-        artist_max_hotttnesss=None,
-        artist_min_hotttnesss=None,
-        song_max_hotttnesss=None,
-        song_min_hotttnesss=None,
-        min_longitude=None,
-        max_longitude=None,
-        min_latitude=None,
-        max_latitude=None,
-        adventurousness=None,
-        mode=None,
-        key=None,
-        buckets=[],
-        sort=None,
-        limit=False,
-        seed_catalog=None,
-        source_catalog=None,
-        rank_type=None,
-        test_new_things=None,
-        artist_start_year_after=None,
-        artist_start_year_before=None,
-        artist_end_year_after=None,
-        artist_end_year_before=None,
-        dmca=False,
-        distribution=None,
-        song_type=None,
-        ):
+            self, session_id=None, type=None, artist_pick=None, variety=None, artist_id=None, artist=None, song_id=None,
+            track_id=None, description=None, style=None, mood=None, max_tempo=None, min_tempo=None, max_duration=None,
+            min_duration=None, max_loudness=None, min_loudness=None, max_danceability=None, min_danceability=None,
+            max_energy=None, min_energy=None, artist_max_familiarity=None, artist_min_familiarity=None,
+            artist_max_hotttnesss=None, artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None,
+            min_longitude=None, max_longitude=None, min_latitude=None, max_latitude=None, adventurousness=None,
+            mode=None, key=None, buckets=None, sort=None, limit=False, seed_catalog=None, source_catalog=None,
+            rank_type=None, test_new_things=None, artist_start_year_after=None, artist_start_year_before=None,
+            artist_end_year_after=None, artist_end_year_before=None, dmca=False, distribution=None, song_type=None,
+            session_catalog=None):
 
         limit = str(limit).lower()
         dmca = str(dmca).lower()
@@ -558,7 +523,7 @@ class BetaPlaylist(BetaPlaylistProxy):
         if isinstance(seed_catalog, catalog.Catalog):
             seed_catalog = seed_catalog.id
 
-        super(BetaPlaylist, self).__init__(
+        super(Playlist, self).__init__(
             session_id=session_id,
             type=type,
             artist_pick=artist_pick,
@@ -607,10 +572,12 @@ class BetaPlaylist(BetaPlaylistProxy):
             dmca=dmca,
             distribution=distribution,
             song_type=song_type,
-            )
+            session_catalog=session_catalog
+        )
+
 
     def __repr__(self):
-        return "<Beta Dynamic Playlist - %s>" % self.session_id.encode('utf-8')
+        return "<Dynamic Playlist - %s>" % self.session_id.encode('utf-8')
 
     def get_next_songs(self, results=None, lookahead=None):
         response = self.get_attribute(
@@ -618,7 +585,7 @@ class BetaPlaylist(BetaPlaylistProxy):
             session_id=self.session_id,
             results=results,
             lookahead=lookahead
-            )
+        )
         self.cache['songs'] = response['songs']
         self.cache['lookahead'] = response['lookahead']
         if len(self.cache['songs']):
@@ -652,7 +619,7 @@ class BetaPlaylist(BetaPlaylistProxy):
 
     songs = property(get_current_songs)
 
-    def info(self):        
+    def info(self):
         return self.get_attribute("info", session_id=self.session_id)
 
     def delete(self):
@@ -694,7 +661,7 @@ class BetaPlaylist(BetaPlaylistProxy):
         adventurousness=None,
         mode=None,
         key=None,
-        buckets=[],
+        buckets=None,
         sort=None,
         limit=False,
         seed_catalog=None,
@@ -707,8 +674,8 @@ class BetaPlaylist(BetaPlaylistProxy):
         artist_end_year_before=None,
         dmca=False,
         distribution=None,
-        song_type=None,
-        ):
+        song_type=None
+    ):
         limit = str(limit).lower()
         dmca = str(dmca).lower()
 
@@ -765,8 +732,8 @@ class BetaPlaylist(BetaPlaylistProxy):
             artist_end_year_before=artist_end_year_before,
             dmca=dmca,
             distribution=distribution,
-            song_type=song_type,
-            )
+            song_type=song_type
+        )
 
     def steer(
         self,
@@ -801,7 +768,7 @@ class BetaPlaylist(BetaPlaylistProxy):
         description=None,
         style=None,
         mood=None,
-        song_type=None,
+        song_type=None
         ):
 
         response = self.get_attribute(
@@ -872,3 +839,22 @@ class BetaPlaylist(BetaPlaylistProxy):
         self.cache['lookahead'] = []
         return True
 
+class DeprecationHelper(object):
+
+    def __init__(self, new_target):
+        self.new_target = new_target
+
+    def _warn(self):
+        from warnings import warn
+        warn("BetaPlaylist is no longer in Beta and has been moved to Playlist", DeprecationWarning, stacklevel=2)
+        logger.warn("BetaPlaylist is no longer in Beta and has been moved to Playlist")
+
+    def __call__(self, *args, **kwargs):
+        self._warn()
+        return self.new_target(*args, **kwargs)
+
+    def __getattr__(self, attr):
+        self._warn()
+        return getattr(self.new_target, attr)
+
+BetaPlaylist = DeprecationHelper(Playlist)
