@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Playlist – playlist methods &mdash; pyechonest 4 documentation</title>
+    <title>Playlist – playlist methods &mdash; pyechonest 7.0.0 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '4',
+        VERSION:     '7.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="pyechonest 4 documentation" href="index.html" />
+    <link rel="top" title="pyechonest 7.0.0 documentation" href="index.html" />
     <link rel="next" title="Catalog – catalog methods" href="catalog.html" />
     <link rel="prev" title="Track – track methods" href="track.html" />
  
@@ -72,8 +72,171 @@
 <h1>Playlist &#8211; playlist methods<a class="headerlink" href="#playlist-playlist-methods" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="pyechonest.playlist.Playlist">
-<em class="property">class </em><tt class="descclassname">pyechonest.playlist.</tt><tt class="descname">Playlist</tt><big>(</big><em>session_id=None</em>, <em>type='artist'</em>, <em>artist_pick='song_hotttnesss-desc'</em>, <em>variety=0.5</em>, <em>artist_id=None</em>, <em>artist=None</em>, <em>song_id=None</em>, <em>track_id=None</em>, <em>description=None</em>, <em>style=None</em>, <em>mood=None</em>, <em>max_tempo=None</em>, <em>min_tempo=None</em>, <em>max_duration=None</em>, <em>min_duration=None</em>, <em>max_loudness=None</em>, <em>min_loudness=None</em>, <em>max_danceability=None</em>, <em>min_danceability=None</em>, <em>max_energy=None</em>, <em>min_energy=None</em>, <em>artist_max_familiarity=None</em>, <em>artist_min_familiarity=None</em>, <em>artist_max_hotttnesss=None</em>, <em>artist_min_hotttnesss=None</em>, <em>song_max_hotttnesss=None</em>, <em>song_min_hotttnesss=None</em>, <em>min_longitude=None</em>, <em>max_longitude=None</em>, <em>min_latitude=None</em>, <em>max_latitude=None</em>, <em>adventurousness=0.20000000000000001</em>, <em>mode=None</em>, <em>key=None</em>, <em>buckets=</em><span class="optional">[</span><span class="optional">]</span>, <em>sort=None</em>, <em>limit=False</em>, <em>dmca=False</em>, <em>chain_xspf=False</em>, <em>seed_catalog=None</em>, <em>steer=None</em>, <em>source_catalog=None</em>, <em>steer_description=None</em>, <em>test_new_things=None</em>, <em>rank_type=None</em>, <em>artist_start_year_after=None</em>, <em>artist_start_year_before=None</em>, <em>artist_end_year_after=None</em>, <em>artist_end_year_before=None</em><big>)</big><a class="headerlink" href="#pyechonest.playlist.Playlist" title="Permalink to this definition">¶</a></dt>
-<dd><p>A Dynamic Playlist object</p>
+<em class="property">class </em><tt class="descclassname">pyechonest.playlist.</tt><tt class="descname">Playlist</tt><big>(</big><em>session_id=None</em>, <em>type=None</em>, <em>artist_pick=None</em>, <em>variety=None</em>, <em>artist_id=None</em>, <em>artist=None</em>, <em>song_id=None</em>, <em>track_id=None</em>, <em>description=None</em>, <em>style=None</em>, <em>mood=None</em>, <em>max_tempo=None</em>, <em>min_tempo=None</em>, <em>max_duration=None</em>, <em>min_duration=None</em>, <em>max_loudness=None</em>, <em>min_loudness=None</em>, <em>max_danceability=None</em>, <em>min_danceability=None</em>, <em>max_energy=None</em>, <em>min_energy=None</em>, <em>artist_max_familiarity=None</em>, <em>artist_min_familiarity=None</em>, <em>artist_max_hotttnesss=None</em>, <em>artist_min_hotttnesss=None</em>, <em>song_max_hotttnesss=None</em>, <em>song_min_hotttnesss=None</em>, <em>min_longitude=None</em>, <em>max_longitude=None</em>, <em>min_latitude=None</em>, <em>max_latitude=None</em>, <em>adventurousness=None</em>, <em>mode=None</em>, <em>key=None</em>, <em>buckets=None</em>, <em>sort=None</em>, <em>limit=False</em>, <em>seed_catalog=None</em>, <em>source_catalog=None</em>, <em>rank_type=None</em>, <em>test_new_things=None</em>, <em>artist_start_year_after=None</em>, <em>artist_start_year_before=None</em>, <em>artist_end_year_after=None</em>, <em>artist_end_year_before=None</em>, <em>dmca=False</em>, <em>distribution=None</em>, <em>song_type=None</em>, <em>session_catalog=None</em><big>)</big><a class="headerlink" href="#pyechonest.playlist.Playlist" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Dynamic Playlist object.
+<a class="reference external" href="http://developer.echonest.com/docs/v4/playlist.html#dynamic-create">http://developer.echonest.com/docs/v4/playlist.html#dynamic-create</a></p>
+<p>Attributes:</p>
+<p>Example:</p>
+<dl class="method">
+<dt id="pyechonest.playlist.Playlist.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>session_id=None</em>, <em>type=None</em>, <em>artist_pick=None</em>, <em>variety=None</em>, <em>artist_id=None</em>, <em>artist=None</em>, <em>song_id=None</em>, <em>track_id=None</em>, <em>description=None</em>, <em>style=None</em>, <em>mood=None</em>, <em>max_tempo=None</em>, <em>min_tempo=None</em>, <em>max_duration=None</em>, <em>min_duration=None</em>, <em>max_loudness=None</em>, <em>min_loudness=None</em>, <em>max_danceability=None</em>, <em>min_danceability=None</em>, <em>max_energy=None</em>, <em>min_energy=None</em>, <em>artist_max_familiarity=None</em>, <em>artist_min_familiarity=None</em>, <em>artist_max_hotttnesss=None</em>, <em>artist_min_hotttnesss=None</em>, <em>song_max_hotttnesss=None</em>, <em>song_min_hotttnesss=None</em>, <em>min_longitude=None</em>, <em>max_longitude=None</em>, <em>min_latitude=None</em>, <em>max_latitude=None</em>, <em>adventurousness=None</em>, <em>mode=None</em>, <em>key=None</em>, <em>buckets=None</em>, <em>sort=None</em>, <em>limit=False</em>, <em>seed_catalog=None</em>, <em>source_catalog=None</em>, <em>rank_type=None</em>, <em>test_new_things=None</em>, <em>artist_start_year_after=None</em>, <em>artist_start_year_before=None</em>, <em>artist_end_year_after=None</em>, <em>artist_end_year_before=None</em>, <em>dmca=False</em>, <em>distribution=None</em>, <em>song_type=None</em>, <em>session_catalog=None</em><big>)</big><a class="headerlink" href="#pyechonest.playlist.Playlist.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.playlist.Playlist.__repr__">
+<tt class="descname">__repr__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.playlist.Playlist.__repr__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.playlist.Playlist.delete">
+<tt class="descname">delete</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.playlist.Playlist.delete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.playlist.Playlist.feedback">
+<tt class="descname">feedback</tt><big>(</big><em>ban_artist=None</em>, <em>ban_song=None</em>, <em>skip_song=None</em>, <em>favorite_artist=None</em>, <em>favorite_song=None</em>, <em>play_song=None</em>, <em>unplay_song=None</em>, <em>rate_song=None</em><big>)</big><a class="headerlink" href="#pyechonest.playlist.Playlist.feedback" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.playlist.Playlist.get_current_songs">
+<tt class="descname">get_current_songs</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.playlist.Playlist.get_current_songs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.playlist.Playlist.get_lookahead_songs">
+<tt class="descname">get_lookahead_songs</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.playlist.Playlist.get_lookahead_songs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.playlist.Playlist.get_next_songs">
+<tt class="descname">get_next_songs</tt><big>(</big><em>results=None</em>, <em>lookahead=None</em><big>)</big><a class="headerlink" href="#pyechonest.playlist.Playlist.get_next_songs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.playlist.Playlist.info">
+<tt class="descname">info</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.playlist.Playlist.info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.playlist.Playlist.restart">
+<tt class="descname">restart</tt><big>(</big><em>type=None</em>, <em>artist_pick=None</em>, <em>variety=None</em>, <em>artist_id=None</em>, <em>artist=None</em>, <em>song_id=None</em>, <em>track_id=None</em>, <em>description=None</em>, <em>style=None</em>, <em>mood=None</em>, <em>max_tempo=None</em>, <em>min_tempo=None</em>, <em>max_duration=None</em>, <em>min_duration=None</em>, <em>max_loudness=None</em>, <em>min_loudness=None</em>, <em>max_danceability=None</em>, <em>min_danceability=None</em>, <em>max_energy=None</em>, <em>min_energy=None</em>, <em>artist_max_familiarity=None</em>, <em>artist_min_familiarity=None</em>, <em>artist_max_hotttnesss=None</em>, <em>artist_min_hotttnesss=None</em>, <em>song_max_hotttnesss=None</em>, <em>song_min_hotttnesss=None</em>, <em>min_longitude=None</em>, <em>max_longitude=None</em>, <em>min_latitude=None</em>, <em>max_latitude=None</em>, <em>adventurousness=None</em>, <em>mode=None</em>, <em>key=None</em>, <em>buckets=None</em>, <em>sort=None</em>, <em>limit=False</em>, <em>seed_catalog=None</em>, <em>source_catalog=None</em>, <em>rank_type=None</em>, <em>test_new_things=None</em>, <em>artist_start_year_after=None</em>, <em>artist_start_year_before=None</em>, <em>artist_end_year_after=None</em>, <em>artist_end_year_before=None</em>, <em>dmca=False</em>, <em>distribution=None</em>, <em>song_type=None</em><big>)</big><a class="headerlink" href="#pyechonest.playlist.Playlist.restart" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="pyechonest.playlist.Playlist.steer">
+<tt class="descname">steer</tt><big>(</big><em>max_tempo=None</em>, <em>min_tempo=None</em>, <em>target_tempo=None</em>, <em>max_duration=None</em>, <em>min_duration=None</em>, <em>target_duration=None</em>, <em>max_loudness=None</em>, <em>min_loudness=None</em>, <em>target_loudness=None</em>, <em>max_danceability=None</em>, <em>min_danceability=None</em>, <em>target_danceability=None</em>, <em>max_energy=None</em>, <em>min_energy=None</em>, <em>target_energy=None</em>, <em>max_artist_familiarity=None</em>, <em>min_artist_familiarity=None</em>, <em>target_artist_familiarity=None</em>, <em>max_artist_hotttnesss=None</em>, <em>min_artist_hotttnesss=None</em>, <em>target_artist_hotttnesss=None</em>, <em>max_song_hotttnesss=None</em>, <em>min_song_hotttnesss=None</em>, <em>target_song_hotttnesss=None</em>, <em>more_like_this=None</em>, <em>less_like_this=None</em>, <em>adventurousness=None</em>, <em>variety=None</em>, <em>description=None</em>, <em>style=None</em>, <em>mood=None</em>, <em>song_type=None</em><big>)</big><a class="headerlink" href="#pyechonest.playlist.Playlist.steer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pyechonest.playlist.basic">
+<em class="property">static </em><tt class="descclassname">playlist.</tt><tt class="descname">basic</tt><big>(</big><em>type='artist-radio'</em>, <em>artist_id=None</em>, <em>artist=None</em>, <em>song_id=None</em>, <em>song=None</em>, <em>track_id=None</em>, <em>dmca=False</em>, <em>results=15</em>, <em>buckets=None</em>, <em>limit=False</em><big>)</big><a class="headerlink" href="#pyechonest.playlist.basic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a basic playlist</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">type (str): a string representing the playlist type (&#8216;artist-radio&#8217; or &#8216;song-radio&#8217;)</p>
+<p>artist_id (str): the artist_id to seed the playlist</p>
+<p>artist (str): the name of an artist to seed the playlist</p>
+<p>song_id (str): a song_id to seed the playlist</p>
+<p>song (str): the name of a song to seed the playlist</p>
+<p>track_id (str): the name of a track to seed the playlist</p>
+<p>dmca (bool): make the playlist dmca-compliant</p>
+<p>results (int): desired length of the playlist</p>
+<p>buckets (list): A list of strings specifying which buckets to retrieve</p>
+<p class="last">limit (bool): Whether results should be restricted to any idspaces given in the buckets parameter</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="pyechonest.playlist.static">
+<em class="property">static </em><tt class="descclassname">playlist.</tt><tt class="descname">static</tt><big>(</big><em>type='artist'</em>, <em>artist_pick='song_hotttnesss-desc'</em>, <em>variety=0.5</em>, <em>artist_id=None</em>, <em>artist=None</em>, <em>song_id=None</em>, <em>track_id=None</em>, <em>description=None</em>, <em>style=None</em>, <em>mood=None</em>, <em>results=15</em>, <em>max_tempo=None</em>, <em>min_tempo=None</em>, <em>max_duration=None</em>, <em>min_duration=None</em>, <em>max_loudness=None</em>, <em>min_loudness=None</em>, <em>max_danceability=None</em>, <em>min_danceability=None</em>, <em>max_energy=None</em>, <em>min_energy=None</em>, <em>artist_max_familiarity=None</em>, <em>artist_min_familiarity=None</em>, <em>artist_max_hotttnesss=None</em>, <em>artist_min_hotttnesss=None</em>, <em>song_max_hotttnesss=None</em>, <em>song_min_hotttnesss=None</em>, <em>min_longitude=None</em>, <em>max_longitude=None</em>, <em>min_latitude=None</em>, <em>max_latitude=None</em>, <em>adventurousness=0.2</em>, <em>mode=None</em>, <em>key=None</em>, <em>buckets=None</em>, <em>sort=None</em>, <em>limit=False</em>, <em>seed_catalog=None</em>, <em>source_catalog=None</em>, <em>rank_type=None</em>, <em>test_new_things=None</em>, <em>artist_start_year_after=None</em>, <em>artist_start_year_before=None</em>, <em>artist_end_year_after=None</em>, <em>artist_end_year_before=None</em>, <em>dmca=False</em>, <em>distribution=None</em>, <em>song_type=None</em><big>)</big><a class="headerlink" href="#pyechonest.playlist.static" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a static playlist</p>
+<p>Args:</p>
+<dl class="docutils">
+<dt>Kwargs:</dt>
+<dd><p class="first">type (str): a string representing the playlist type (&#8216;artist&#8217;, &#8216;artist-radio&#8217;, ...)</p>
+<p>artist_pick (str): How songs should be chosen for each artist</p>
+<p>variety (float): A number between 0 and 1 specifying the variety of the playlist</p>
+<p>artist_id (str): the artist_id</p>
+<p>artist (str): the name of an artist</p>
+<p>song_id (str): the song_id</p>
+<p>track_id (str): the track id</p>
+<p>description (str): A string describing the artist and song</p>
+<p>style (str): A string describing the style/genre of the artist and song</p>
+<p>mood (str): A string describing the mood of the artist and song</p>
+<p>results (int): An integer number of results to return</p>
+<p>max_tempo (float): The max tempo of song results</p>
+<p>min_tempo (float): The min tempo of song results</p>
+<p>max_duration (float): The max duration of song results</p>
+<p>min_duration (float): The min duration of song results</p>
+<p>max_loudness (float): The max loudness of song results</p>
+<p>min_loudness (float): The min loudness of song results</p>
+<p>artist_max_familiarity (float): A float specifying the max familiarity of artists to search for</p>
+<p>artist_min_familiarity (float): A float specifying the min familiarity of artists to search for</p>
+<p>artist_max_hotttnesss (float): A float specifying the max hotttnesss of artists to search for</p>
+<p>artist_min_hotttnesss (float): A float specifying the max hotttnesss of artists to search for</p>
+<p>song_max_hotttnesss (float): A float specifying the max hotttnesss of songs to search for</p>
+<p>song_min_hotttnesss (float): A float specifying the max hotttnesss of songs to search for</p>
+<p>max_energy (float): The max energy of song results</p>
+<p>min_energy (float): The min energy of song results</p>
+<p>max_danceability (float): The max danceability of song results</p>
+<p>min_danceability (float): The min danceability of song results</p>
+<p>mode (int): 0 or 1 (minor or major)</p>
+<p>key (int): 0-11 (c, c-sharp, d, e-flat, e, f, f-sharp, g, a-flat, a, b-flat, b)</p>
+<p>max_latitude (float): A float specifying the max latitude of artists to search for</p>
+<p>min_latitude (float): A float specifying the min latitude of artists to search for</p>
+<p>max_longitude (float): A float specifying the max longitude of artists to search for</p>
+<p>min_longitude (float): A float specifying the min longitude of artists to search for</p>
+<p>adventurousness (float): A float ranging from 0 for old favorites to 1.0 for unheard music according to a seed_catalog</p>
+<p>sort (str): A string indicating an attribute and order for sorting the results</p>
+<p>buckets (list): A list of strings specifying which buckets to retrieve</p>
+<p>limit (bool): A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets</p>
+<p>seed_catalog (str or Catalog): An Artist Catalog object or Artist Catalog id to use as a seed</p>
+<p>source_catalog (str or Catalog): A Catalog object or catalog id</p>
+<p>rank_type (str): A string denoting the desired ranking for description searches, either &#8216;relevance&#8217; or &#8216;familiarity&#8217;</p>
+<p>artist_start_year_before (int): Returned song&#8217;s artists will have started recording music before this year.</p>
+<p>artist_start_year_after (int): Returned song&#8217;s artists will have started recording music after this year.</p>
+<p>artist_end_year_before (int): Returned song&#8217;s artists will have stopped recording music before this year.</p>
+<p>artist_end_year_after (int): Returned song&#8217;s artists will have stopped recording music after this year.</p>
+<p>distribution (str): Affects the range of artists returned and how many songs each artist will have in the playlist relative to how similar they are to the seed. (wandering, focused)</p>
+<dl class="last docutils">
+<dt>song_type (str):  A string or list of strings of the type of songs allowed.  The only valid song type at the moment is &#8216;christmas&#8217;.</dt>
+<dd>Valid formats are &#8216;song_type&#8217;, &#8216;song_type:true&#8217;, &#8216;song_type:false&#8217;, or &#8216;song_type:any&#8217;.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>A list of Song objects</dd>
+</dl>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">playlist</span><span class="o">.</span><span class="n">static</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s">&#39;artist-radio&#39;</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;ida maria&#39;</span><span class="p">,</span> <span class="s">&#39;florence + the machine&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span>
+<span class="go">[&lt;song - Pickpocket&gt;,</span>
+<span class="go"> &lt;song - Self-Taught Learner&gt;,</span>
+<span class="go"> &lt;song - Maps&gt;,</span>
+<span class="go"> &lt;song - Window Blues&gt;,</span>
+<span class="go"> &lt;song - That&#39;s Not My Name&gt;,</span>
+<span class="go"> &lt;song - My Lover Will Go&gt;,</span>
+<span class="go"> &lt;song - Home Sweet Home&gt;,</span>
+<span class="go"> &lt;song - Stella &amp; God&gt;,</span>
+<span class="go"> &lt;song - Don&#39;t You Want To Share The Guilt?&gt;,</span>
+<span class="go"> &lt;song - Forget About It&gt;,</span>
+<span class="go"> &lt;song - Dull Life&gt;,</span>
+<span class="go"> &lt;song - This Trumpet In My Head&gt;,</span>
+<span class="go"> &lt;song - Keep Your Head&gt;,</span>
+<span class="go"> &lt;song - One More Time&gt;,</span>
+<span class="go"> &lt;song - Knights in Mountain Fox Jackets&gt;]</span>
+<span class="gp">&gt;&gt;&gt; </span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyechonest.playlist.DeprecatedPlaylist">
+<em class="property">class </em><tt class="descclassname">pyechonest.playlist.</tt><tt class="descname">DeprecatedPlaylist</tt><big>(</big><em>session_id=None</em>, <em>type='artist'</em>, <em>artist_pick='song_hotttnesss-desc'</em>, <em>variety=0.5</em>, <em>artist_id=None</em>, <em>artist=None</em>, <em>song_id=None</em>, <em>track_id=None</em>, <em>description=None</em>, <em>style=None</em>, <em>mood=None</em>, <em>max_tempo=None</em>, <em>min_tempo=None</em>, <em>max_duration=None</em>, <em>min_duration=None</em>, <em>max_loudness=None</em>, <em>min_loudness=None</em>, <em>max_danceability=None</em>, <em>min_danceability=None</em>, <em>max_energy=None</em>, <em>min_energy=None</em>, <em>artist_max_familiarity=None</em>, <em>artist_min_familiarity=None</em>, <em>artist_max_hotttnesss=None</em>, <em>artist_min_hotttnesss=None</em>, <em>song_max_hotttnesss=None</em>, <em>song_min_hotttnesss=None</em>, <em>min_longitude=None</em>, <em>max_longitude=None</em>, <em>min_latitude=None</em>, <em>max_latitude=None</em>, <em>adventurousness=0.2</em>, <em>mode=None</em>, <em>key=None</em>, <em>buckets=None</em>, <em>sort=None</em>, <em>limit=False</em>, <em>dmca=False</em>, <em>chain_xspf=False</em>, <em>seed_catalog=None</em>, <em>steer=None</em>, <em>source_catalog=None</em>, <em>steer_description=None</em>, <em>test_new_things=None</em>, <em>rank_type=None</em>, <em>artist_start_year_after=None</em>, <em>artist_start_year_before=None</em>, <em>artist_end_year_after=None</em>, <em>artist_end_year_before=None</em><big>)</big><a class="headerlink" href="#pyechonest.playlist.DeprecatedPlaylist" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Deprecated Dynamic Playlist object</p>
 <dl class="docutils">
 <dt>Attributes:</dt>
 <dd><p class="first">session_id (str): Playlist Session ID</p>
@@ -81,9 +244,9 @@
 <p class="last">info (dictionary): Information about this playlist</p>
 </dd>
 <dt>Example:</dt>
-<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Playlist</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s">&#39;artist-radio&#39;</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;ida maria&#39;</span><span class="p">,</span> <span class="s">&#39;florence + the machine&#39;</span><span class="p">])</span>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">DeprecatedPlaylist</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s">&#39;artist-radio&#39;</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;ida maria&#39;</span><span class="p">,</span> <span class="s">&#39;florence + the machine&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span>
-<span class="go">&lt;Dynamic Playlist - 9c210205d4784144b4fa90770fa55d0b&gt;</span>
+<span class="go">&lt;Deprecated Dynamic Playlist - 9c210205d4784144b4fa90770fa55d0b&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">song</span>
 <span class="go">&lt;song - Later On&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">get_next_song</span><span class="p">()</span>
@@ -94,8 +257,8 @@
 </dd>
 </dl>
 <dl class="method">
-<dt id="pyechonest.playlist.Playlist.__init__">
-<tt class="descname">__init__</tt><big>(</big><em>session_id=None</em>, <em>type='artist'</em>, <em>artist_pick='song_hotttnesss-desc'</em>, <em>variety=0.5</em>, <em>artist_id=None</em>, <em>artist=None</em>, <em>song_id=None</em>, <em>track_id=None</em>, <em>description=None</em>, <em>style=None</em>, <em>mood=None</em>, <em>max_tempo=None</em>, <em>min_tempo=None</em>, <em>max_duration=None</em>, <em>min_duration=None</em>, <em>max_loudness=None</em>, <em>min_loudness=None</em>, <em>max_danceability=None</em>, <em>min_danceability=None</em>, <em>max_energy=None</em>, <em>min_energy=None</em>, <em>artist_max_familiarity=None</em>, <em>artist_min_familiarity=None</em>, <em>artist_max_hotttnesss=None</em>, <em>artist_min_hotttnesss=None</em>, <em>song_max_hotttnesss=None</em>, <em>song_min_hotttnesss=None</em>, <em>min_longitude=None</em>, <em>max_longitude=None</em>, <em>min_latitude=None</em>, <em>max_latitude=None</em>, <em>adventurousness=0.20000000000000001</em>, <em>mode=None</em>, <em>key=None</em>, <em>buckets=</em><span class="optional">[</span><span class="optional">]</span>, <em>sort=None</em>, <em>limit=False</em>, <em>dmca=False</em>, <em>chain_xspf=False</em>, <em>seed_catalog=None</em>, <em>steer=None</em>, <em>source_catalog=None</em>, <em>steer_description=None</em>, <em>test_new_things=None</em>, <em>rank_type=None</em>, <em>artist_start_year_after=None</em>, <em>artist_start_year_before=None</em>, <em>artist_end_year_after=None</em>, <em>artist_end_year_before=None</em><big>)</big><a class="headerlink" href="#pyechonest.playlist.Playlist.__init__" title="Permalink to this definition">¶</a></dt>
+<dt id="pyechonest.playlist.DeprecatedPlaylist.__init__">
+<tt class="descname">__init__</tt><big>(</big><em>session_id=None</em>, <em>type='artist'</em>, <em>artist_pick='song_hotttnesss-desc'</em>, <em>variety=0.5</em>, <em>artist_id=None</em>, <em>artist=None</em>, <em>song_id=None</em>, <em>track_id=None</em>, <em>description=None</em>, <em>style=None</em>, <em>mood=None</em>, <em>max_tempo=None</em>, <em>min_tempo=None</em>, <em>max_duration=None</em>, <em>min_duration=None</em>, <em>max_loudness=None</em>, <em>min_loudness=None</em>, <em>max_danceability=None</em>, <em>min_danceability=None</em>, <em>max_energy=None</em>, <em>min_energy=None</em>, <em>artist_max_familiarity=None</em>, <em>artist_min_familiarity=None</em>, <em>artist_max_hotttnesss=None</em>, <em>artist_min_hotttnesss=None</em>, <em>song_max_hotttnesss=None</em>, <em>song_min_hotttnesss=None</em>, <em>min_longitude=None</em>, <em>max_longitude=None</em>, <em>min_latitude=None</em>, <em>max_latitude=None</em>, <em>adventurousness=0.2</em>, <em>mode=None</em>, <em>key=None</em>, <em>buckets=None</em>, <em>sort=None</em>, <em>limit=False</em>, <em>dmca=False</em>, <em>chain_xspf=False</em>, <em>seed_catalog=None</em>, <em>steer=None</em>, <em>source_catalog=None</em>, <em>steer_description=None</em>, <em>test_new_things=None</em>, <em>rank_type=None</em>, <em>artist_start_year_after=None</em>, <em>artist_start_year_before=None</em>, <em>artist_end_year_after=None</em>, <em>artist_end_year_before=None</em><big>)</big><a class="headerlink" href="#pyechonest.playlist.DeprecatedPlaylist.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Args:</p>
 <dl class="docutils">
 <dt>Kwargs:</dt>
@@ -124,8 +287,8 @@
 <p>song_min_hotttnesss (float): A float specifying the max hotttnesss of songs to search for</p>
 <p>max_energy (float): The max energy of song results</p>
 <p>min_energy (float): The min energy of song results</p>
-<p>max_dancibility (float): The max dancibility of song results</p>
-<p>min_dancibility (float): The min dancibility of song results</p>
+<p>max_danceability (float): The max danceability of song results</p>
+<p>min_danceability (float): The min danceability of song results</p>
 <p>mode (int): 0 or 1 (minor or major)</p>
 <p>key (int): 0-11 (c, c-sharp, d, e-flat, e, f, f-sharp, g, a-flat, a, b-flat, b)</p>
 <p>max_latitude (float): A float specifying the max latitude of artists to search for</p>
@@ -141,10 +304,10 @@
 <p>steer (str): A steering value to determine the target song attributes</p>
 <p>steer_description (str): A steering value to determine the target song description term attributes</p>
 <p>rank_type (str): A string denoting the desired ranking for description searches, either &#8216;relevance&#8217; or &#8216;familiarity&#8217;</p>
-<p>artist_start_year_before (int): Returned songs&#8217;s artists will have started recording music before this year.</p>
-<p>artist_start_year_after (int): Returned songs&#8217;s artists will have started recording music after this year.</p>
-<p>artist_end_year_before (int): Returned songs&#8217;s artists will have stopped recording music before this year.</p>
-<p class="last">artist_end_year_after (int): Returned songs&#8217;s artists will have stopped recording music after this year.</p>
+<p>artist_start_year_before (int): Returned song&#8217;s artists will have started recording music before this year.</p>
+<p>artist_start_year_after (int): Returned song&#8217;s artists will have started recording music after this year.</p>
+<p>artist_end_year_before (int): Returned song&#8217;s artists will have stopped recording music before this year.</p>
+<p class="last">artist_end_year_after (int): Returned song&#8217;s artists will have stopped recording music after this year.</p>
 </dd>
 <dt>Returns:</dt>
 <dd>A dynamic playlist object</dd>
@@ -152,13 +315,13 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="pyechonest.playlist.Playlist.__repr__">
-<tt class="descname">__repr__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.playlist.Playlist.__repr__" title="Permalink to this definition">¶</a></dt>
+<dt id="pyechonest.playlist.DeprecatedPlaylist.__repr__">
+<tt class="descname">__repr__</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.playlist.DeprecatedPlaylist.__repr__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="pyechonest.playlist.Playlist.get_current_song">
-<tt class="descname">get_current_song</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.playlist.Playlist.get_current_song" title="Permalink to this definition">¶</a></dt>
+<dt id="pyechonest.playlist.DeprecatedPlaylist.get_current_song">
+<tt class="descname">get_current_song</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.playlist.DeprecatedPlaylist.get_current_song" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the current song in the playlist</p>
 <p>Args:</p>
 <p>Kwargs:</p>
@@ -167,7 +330,7 @@
 <dd>A song object</dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">playlist</span><span class="o">.</span><span class="n">Playlist</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s">&#39;artist-radio&#39;</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;ida maria&#39;</span><span class="p">,</span> <span class="s">&#39;florence + the machine&#39;</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">playlist</span><span class="o">.</span><span class="n">DeprecatedPlaylist</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s">&#39;artist-radio&#39;</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;ida maria&#39;</span><span class="p">,</span> <span class="s">&#39;florence + the machine&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">song</span>
 <span class="go">&lt;song - Later On&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">get_current_song</span><span class="p">()</span>
@@ -178,8 +341,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="pyechonest.playlist.Playlist.get_next_song">
-<tt class="descname">get_next_song</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pyechonest.playlist.Playlist.get_next_song" title="Permalink to this definition">¶</a></dt>
+<dt id="pyechonest.playlist.DeprecatedPlaylist.get_next_song">
+<tt class="descname">get_next_song</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#pyechonest.playlist.DeprecatedPlaylist.get_next_song" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the next song in the playlist</p>
 <p>Args:</p>
 <p>Kwargs:</p>
@@ -188,7 +351,7 @@
 <dd>A song object</dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">playlist</span><span class="o">.</span><span class="n">Playlist</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s">&#39;artist-radio&#39;</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;ida maria&#39;</span><span class="p">,</span> <span class="s">&#39;florence + the machine&#39;</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">playlist</span><span class="o">.</span><span class="n">DeprecatedPlaylist</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s">&#39;artist-radio&#39;</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;ida maria&#39;</span><span class="p">,</span> <span class="s">&#39;florence + the machine&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">get_next_song</span><span class="p">()</span>
 <span class="go">&lt;song - She Said&gt;</span>
 <span class="go">&gt;&gt;&gt;</span>
@@ -197,8 +360,8 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="pyechonest.playlist.Playlist.session_info">
-<tt class="descname">session_info</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.playlist.Playlist.session_info" title="Permalink to this definition">¶</a></dt>
+<dt id="pyechonest.playlist.DeprecatedPlaylist.session_info">
+<tt class="descname">session_info</tt><big>(</big><big>)</big><a class="headerlink" href="#pyechonest.playlist.DeprecatedPlaylist.session_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get information about the playlist</p>
 <p>Args:</p>
 <p>Kwargs:</p>
@@ -207,7 +370,7 @@
 <dd>A dict with diagnostic information about the currently running playlist</dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">playlist</span><span class="o">.</span><span class="n">Playlist</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s">&#39;artist-radio&#39;</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;ida maria&#39;</span><span class="p">,</span> <span class="s">&#39;florence + the machine&#39;</span><span class="p">])</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">playlist</span><span class="o">.</span><span class="n">DeprecatedPlaylist</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s">&#39;artist-radio&#39;</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;ida maria&#39;</span><span class="p">,</span> <span class="s">&#39;florence + the machine&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">info</span>
 <span class="go">{</span>
 <span class="go">    u &#39;terms&#39;: [{</span>
@@ -268,110 +431,6 @@
 </div>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="pyechonest.playlist.basic">
-<em class="property">static </em><tt class="descclassname">playlist.</tt><tt class="descname">basic</tt><big>(</big><em>type='artist-radio'</em>, <em>artist_id=None</em>, <em>artist=None</em>, <em>song_id=None</em>, <em>song=None</em>, <em>track_id=None</em>, <em>dmca=False</em>, <em>results=15</em>, <em>buckets=None</em>, <em>limit=False</em><big>)</big><a class="headerlink" href="#pyechonest.playlist.basic" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a basic playlist</p>
-<p>Args:</p>
-<dl class="docutils">
-<dt>Kwargs:</dt>
-<dd><p class="first">type (str): a string representing the playlist type (&#8216;artist-radio&#8217; or &#8216;song-radio&#8217;)</p>
-<p>artist_id (str): the artist_id to seed the playlist</p>
-<p>artist (str): the name of an artist to seed the playlist</p>
-<p>song_id (str): a song_id to seed the playlist</p>
-<p>song (str): the name of a song to seed the playlist</p>
-<p>track_id (str): the name of a track to seed the playlist</p>
-<p>dmca (bool): make the playlist dmca-compliant</p>
-<p>results (int): desired length of the playlist</p>
-<p>buckets (list): A list of strings specifying which buckets to retrieve</p>
-<p class="last">limit (bool): Whether results should be restricted to any idspaces given in the buckets parameter</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="pyechonest.playlist.static">
-<em class="property">static </em><tt class="descclassname">playlist.</tt><tt class="descname">static</tt><big>(</big><em>type='artist'</em>, <em>artist_pick='song_hotttnesss-desc'</em>, <em>variety=0.5</em>, <em>artist_id=None</em>, <em>artist=None</em>, <em>song_id=None</em>, <em>track_id=None</em>, <em>description=None</em>, <em>style=None</em>, <em>mood=None</em>, <em>results=15</em>, <em>max_tempo=None</em>, <em>min_tempo=None</em>, <em>max_duration=None</em>, <em>min_duration=None</em>, <em>max_loudness=None</em>, <em>min_loudness=None</em>, <em>max_danceability=None</em>, <em>min_danceability=None</em>, <em>max_energy=None</em>, <em>min_energy=None</em>, <em>artist_max_familiarity=None</em>, <em>artist_min_familiarity=None</em>, <em>artist_max_hotttnesss=None</em>, <em>artist_min_hotttnesss=None</em>, <em>song_max_hotttnesss=None</em>, <em>song_min_hotttnesss=None</em>, <em>min_longitude=None</em>, <em>max_longitude=None</em>, <em>min_latitude=None</em>, <em>max_latitude=None</em>, <em>adventurousness=0.20000000000000001</em>, <em>mode=None</em>, <em>key=None</em>, <em>buckets=</em><span class="optional">[</span><span class="optional">]</span>, <em>sort=None</em>, <em>limit=False</em>, <em>seed_catalog=None</em>, <em>source_catalog=None</em>, <em>rank_type=None</em>, <em>test_new_things=None</em>, <em>artist_start_year_after=None</em>, <em>artist_start_year_before=None</em>, <em>artist_end_year_after=None</em>, <em>artist_end_year_before=None</em>, <em>dmca=False</em>, <em>distribution=None</em>, <em>song_type=None</em><big>)</big><a class="headerlink" href="#pyechonest.playlist.static" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a static playlist</p>
-<p>Args:</p>
-<dl class="docutils">
-<dt>Kwargs:</dt>
-<dd><p class="first">type (str): a string representing the playlist type (&#8216;artist&#8217;, &#8216;artist-radio&#8217;, ...)</p>
-<p>artist_pick (str): How songs should be chosen for each artist</p>
-<p>variety (float): A number between 0 and 1 specifying the variety of the playlist</p>
-<p>artist_id (str): the artist_id</p>
-<p>artist (str): the name of an artist</p>
-<p>song_id (str): the song_id</p>
-<p>track_id (str): the track id</p>
-<p>description (str): A string describing the artist and song</p>
-<p>style (str): A string describing the style/genre of the artist and song</p>
-<p>mood (str): A string describing the mood of the artist and song</p>
-<p>results (int): An integer number of results to return</p>
-<p>max_tempo (float): The max tempo of song results</p>
-<p>min_tempo (float): The min tempo of song results</p>
-<p>max_duration (float): The max duration of song results</p>
-<p>min_duration (float): The min duration of song results</p>
-<p>max_loudness (float): The max loudness of song results</p>
-<p>min_loudness (float): The min loudness of song results</p>
-<p>artist_max_familiarity (float): A float specifying the max familiarity of artists to search for</p>
-<p>artist_min_familiarity (float): A float specifying the min familiarity of artists to search for</p>
-<p>artist_max_hotttnesss (float): A float specifying the max hotttnesss of artists to search for</p>
-<p>artist_min_hotttnesss (float): A float specifying the max hotttnesss of artists to search for</p>
-<p>song_max_hotttnesss (float): A float specifying the max hotttnesss of songs to search for</p>
-<p>song_min_hotttnesss (float): A float specifying the max hotttnesss of songs to search for</p>
-<p>max_energy (float): The max energy of song results</p>
-<p>min_energy (float): The min energy of song results</p>
-<p>max_dancibility (float): The max dancibility of song results</p>
-<p>min_dancibility (float): The min dancibility of song results</p>
-<p>mode (int): 0 or 1 (minor or major)</p>
-<p>key (int): 0-11 (c, c-sharp, d, e-flat, e, f, f-sharp, g, a-flat, a, b-flat, b)</p>
-<p>max_latitude (float): A float specifying the max latitude of artists to search for</p>
-<p>min_latitude (float): A float specifying the min latitude of artists to search for</p>
-<p>max_longitude (float): A float specifying the max longitude of artists to search for</p>
-<p>min_longitude (float): A float specifying the min longitude of artists to search for</p>
-<p>adventurousness (float): A float ranging from 0 for old favorites to 1.0 for unheard music according to a seed_catalog</p>
-<p>sort (str): A string indicating an attribute and order for sorting the results</p>
-<p>buckets (list): A list of strings specifying which buckets to retrieve</p>
-<p>limit (bool): A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets</p>
-<p>seed_catalog (str or Catalog): An Artist Catalog object or Artist Catalog id to use as a seed</p>
-<p>source_catalog (str or Catalog): A Catalog object or catalog id</p>
-<p>rank_type (str): A string denoting the desired ranking for description searches, either &#8216;relevance&#8217; or &#8216;familiarity&#8217;</p>
-<p>artist_start_year_before (int): Returned songs&#8217;s artists will have started recording music before this year.</p>
-<p>artist_start_year_after (int): Returned songs&#8217;s artists will have started recording music after this year.</p>
-<p>artist_end_year_before (int): Returned songs&#8217;s artists will have stopped recording music before this year.</p>
-<p>artist_end_year_after (int): Returned songs&#8217;s artists will have stopped recording music after this year.</p>
-<p>distribution (str): Affects the range of artists returned and how many songs each artsits will have in the playlist realative to how similar they are to the seed. (wandering, focused)</p>
-<dl class="last docutils">
-<dt>song_type (str):  A string or list of strings of the type of songs allowed.  The only valid song type at the moment is &#8216;christmas&#8217;.</dt>
-<dd>Valid formats are &#8216;song_type&#8217;, &#8216;song_type:true&#8217;, &#8216;song_type:false&#8217;, or &#8216;song_type:any&#8217;.</dd>
-</dl>
-</dd>
-<dt>Returns:</dt>
-<dd>A list of Song objects</dd>
-</dl>
-<p>Example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">playlist</span><span class="o">.</span><span class="n">static</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s">&#39;artist-radio&#39;</span><span class="p">,</span> <span class="n">artist</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;ida maria&#39;</span><span class="p">,</span> <span class="s">&#39;florence + the machine&#39;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span>
-<span class="go">[&lt;song - Pickpocket&gt;,</span>
-<span class="go"> &lt;song - Self-Taught Learner&gt;,</span>
-<span class="go"> &lt;song - Maps&gt;,</span>
-<span class="go"> &lt;song - Window Blues&gt;,</span>
-<span class="go"> &lt;song - That&#39;s Not My Name&gt;,</span>
-<span class="go"> &lt;song - My Lover Will Go&gt;,</span>
-<span class="go"> &lt;song - Home Sweet Home&gt;,</span>
-<span class="go"> &lt;song - Stella &amp; God&gt;,</span>
-<span class="go"> &lt;song - Don&#39;t You Want To Share The Guilt?&gt;,</span>
-<span class="go"> &lt;song - Forget About It&gt;,</span>
-<span class="go"> &lt;song - Dull Life&gt;,</span>
-<span class="go"> &lt;song - This Trumpet In My Head&gt;,</span>
-<span class="go"> &lt;song - Keep Your Head&gt;,</span>
-<span class="go"> &lt;song - One More Time&gt;,</span>
-<span class="go"> &lt;song - Knights in Mountain Fox Jackets&gt;]</span>
-<span class="gp">&gt;&gt;&gt; </span>
-</pre></div>
-</div>
 </dd></dl>
 
 </div>
@@ -437,7 +496,7 @@
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010, The Echo Nest.
+        &copy; Copyright 2012, The Echo Nest.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
