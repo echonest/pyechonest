@@ -64,11 +64,8 @@ class CatalogProxy(GenericProxy):
         core_attrs = ['name']
         if not all(ca in kwargs for ca in core_attrs):
             if util.short_regex.match(self.id) or util.long_regex.match(self.id) or util.foreign_regex.match(self.id):
-                try:
-                    profile = self.get_attribute('profile')
-                    kwargs.update(profile['catalog'])
-                except util.EchoNestAPIError:
-                    raise Exception('Catalog %s does not exist' % (identifier))
+                profile = self.get_attribute('profile')
+                kwargs.update(profile['catalog'])
             else:
                 if not type:
                     raise Exception('You must specify a "type"!')
