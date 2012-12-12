@@ -101,9 +101,9 @@ class CatalogProxy(GenericProxy):
         return super(CatalogProxy, self).post_attribute(*args, **kwargs)
     
 
-class PlaylistProxy(GenericProxy):
+class DeprecatedPlaylistProxy(GenericProxy):
     def __init__(self, session_id, buckets = None, **kwargs):
-        super(PlaylistProxy, self).__init__()
+        super(DeprecatedPlaylistProxy, self).__init__()
         buckets = buckets or []
         self._object_type = 'playlist'
         kwargs = dict((str(k), v) for (k,v) in kwargs.iteritems())
@@ -115,18 +115,18 @@ class PlaylistProxy(GenericProxy):
             profile = self.get_attribute('dynamic', **kwargs)
             kwargs.update(profile)
         [self.__dict__.update({ca:kwargs.pop(ca)}) for ca in core_attrs if ca in kwargs]        
-        self.cache.update(kwargs)
+        if not session_id:
+            self.cache.update(kwargs)
     
     def get_attribute(self, *args, **kwargs):
-        return super(PlaylistProxy, self).get_attribute(*args, **kwargs)
+        return super(DeprecatedPlaylistProxy, self).get_attribute(*args, **kwargs)
     
-class BetaPlaylistProxy(GenericProxy):
-    def __init__(self,session_id = None, buckets = None, **kwargs):
-        super(BetaPlaylistProxy, self).__init__()
+class PlaylistProxy(GenericProxy):
+    def __init__(self, session_id = None, buckets = None, **kwargs):
+        super(PlaylistProxy, self).__init__()
         core_attrs = ['session_id']
         self._object_type = 'playlist'
         if session_id:
-            response = self.get_attribute('info', session_id=session_id)
             self.session_id=session_id
         else:
             buckets = buckets or []
@@ -141,7 +141,7 @@ class BetaPlaylistProxy(GenericProxy):
             self.cache.update(kwargs)
         
     def get_attribute(self, method, **kwargs):
-        return super(BetaPlaylistProxy, self).get_attribute('dynamic/' + method, **kwargs)
+        return super(PlaylistProxy, self).get_attribute('dynamic/' + method, **kwargs)
 
 class SongProxy(GenericProxy):
     def __init__(self, identifier, buckets = None, **kwargs):

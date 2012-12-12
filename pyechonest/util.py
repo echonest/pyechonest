@@ -64,13 +64,37 @@ class MyErrorProcessor(urllib2.HTTPErrorProcessor):
 opener = urllib2.build_opener(MyBaseHandler(), MyErrorProcessor())
 opener.addheaders = headers
 
-class EchoNestAPIError(Exception):
+class EchoNestException(Exception):
     """
-    Generic API errors. 
+    Parent exception class.  Catches API and URL/HTTP errors.
     """
-    def __init__(self, code, message,headers):
-        self.args = ('Echo Nest API Error %d: %s' % (code, message),)
-        self.headers = headers 
+    def __init__(self, code, message, headers):
+        if code is None:
+            code = -1
+            message = 'Echo Nest Unknown Error'
+
+        if message is None:
+            super(EchoNestException, self).__init__('Echo Nest Error %d' % code,)
+        else:
+            super(EchoNestException, self).__init__(message,)
+        self.headers = headers
+        self.code = code
+
+class EchoNestAPIError(EchoNestException):
+    """
+    API Specific Errors.
+    """
+    def __init__(self, code, message, headers):
+        formatted_message = ('Echo Nest API Error %d: %s' % (code, message),)
+        super(EchoNestAPIError, self).__init__(code, formatted_message, headers)
+
+class EchoNestIOError(EchoNestException):
+    """
+    URL and HTTP errors.
+    """
+    def __init__(self, code=None, error=None, headers=headers):
+        formatted_message = ('Echo Nest IOError: %s' % headers,)
+        super(EchoNestIOError, self).__init__(code, formatted_message, headers)
 
 def get_successful_response(raw_json):
     if hasattr(raw_json,'headers'):
@@ -85,12 +109,12 @@ def get_successful_response(raw_json):
         message = status_dict['message']
         if (code != 0):
             # do some cute exception handling
-            raise EchoNestAPIError(code, message,headers)
+            raise EchoNestAPIError(code, message, headers)
         del response_dict['response']['status']
         return response_dict
     except ValueError:
         logger.debug(traceback.format_exc())
-        raise EchoNestAPIError(-1, "Unknown error.",headers)
+        raise EchoNestAPIError(-1, "Unknown error.", headers)
 
 
 # These two functions are to deal with the unknown encoded output of codegen (varies by platform and ID3 tag)
@@ -150,72 +174,85 @@ def callm(method, param_dict, POST=False, socket_timeout=None, data=None):
     
     ** note, if we require 2.6, we can get rid of this timeout munging.
     """
-    param_dict['api_key'] = config.ECHO_NEST_API_KEY
-    param_list = []
-    if not socket_timeout:
-        socket_timeout = config.CALL_TIMEOUT
-    
-    for key,val in param_dict.iteritems():
-        if isinstance(val, list):
-            param_list.extend( [(key,subval) for subval in val] )
-        elif val is not None:
-            if isinstance(val, unicode):
-                val = val.encode('utf-8')
-            param_list.append( (key,val) )
+    try:
+        param_dict['api_key'] = config.ECHO_NEST_API_KEY
+        param_list = []
+        if not socket_timeout:
+            socket_timeout = config.CALL_TIMEOUT
 
-    params = urllib.urlencode(param_list)
-    
-    orig_timeout = socket.getdefaulttimeout()
-    socket.setdefaulttimeout(socket_timeout)
+        for key,val in param_dict.iteritems():
+            if isinstance(val, list):
+                param_list.extend( [(key,subval) for subval in val] )
+            elif val is not None:
+                if isinstance(val, unicode):
+                    val = val.encode('utf-8')
+                param_list.append( (key,val) )
 
-    if(POST):
-        if (not method == 'track/upload') or ((method == 'track/upload') and 'url' in param_dict):
-            """
-            this is a normal POST call
-            """
-            url = 'http://%s/%s/%s/%s' % (config.API_HOST, config.API_SELECTOR, 
-                                        config.API_VERSION, method)
-            
-            if data is None:
-                data = ''
-            data = urllib.urlencode(data)
-            data = "&".join([data, params])
+        params = urllib.urlencode(param_list)
 
-            f = opener.open(url, data=data)
+        orig_timeout = socket.getdefaulttimeout()
+        socket.setdefaulttimeout(socket_timeout)
+
+        if(POST):
+            if (not method == 'track/upload') or ((method == 'track/upload') and 'url' in param_dict):
+                """
+                this is a normal POST call
+                """
+                url = 'http://%s/%s/%s/%s' % (config.API_HOST, config.API_SELECTOR,
+                                            config.API_VERSION, method)
+
+                if data is None:
+                    data = ''
+                data = urllib.urlencode(data)
+                data = "&".join([data, params])
+
+                f = opener.open(url, data=data)
+            else:
+                """
+                upload with a local file is special, as the body of the request is the content of the file,
+                and the other parameters stay on the URL
+                """
+                url = '/%s/%s/%s?%s' % (config.API_SELECTOR, config.API_VERSION,
+                                            method, params)
+
+                if ':' in config.API_HOST:
+                    host, port = config.API_HOST.split(':')
+                else:
+                    host = config.API_HOST
+                    port = 80
+
+                if config.TRACE_API_CALLS:
+                    logger.info("%s/%s" % (host+':'+str(port), url,))
+                conn = httplib.HTTPConnection(host, port = port)
+                conn.request('POST', url, body = data, headers = dict([('Content-Type', 'application/octet-stream')]+headers))
+                f = conn.getresponse()
+
         else:
             """
-            upload with a local file is special, as the body of the request is the content of the file,
-            and the other parameters stay on the URL
+            just a normal GET call
             """
-            url = '/%s/%s/%s?%s' % (config.API_SELECTOR, config.API_VERSION, 
-                                        method, params)
+            url = 'http://%s/%s/%s/%s?%s' % (config.API_HOST, config.API_SELECTOR, config.API_VERSION,
+                                            method, params)
 
-            if ':' in config.API_HOST:
-                host, port = config.API_HOST.split(':')
-            else:
-                host = config.API_HOST
-                port = 80
-                
-            if config.TRACE_API_CALLS:
-                logger.info("%s/%s" % (host+':'+str(port), url,))
-            conn = httplib.HTTPConnection(host, port = port)
-            conn.request('POST', url, body = data, headers = dict([('Content-Type', 'application/octet-stream')]+headers))
-            f = conn.getresponse()
+            f = opener.open(url)
 
-    else:
-        """
-        just a normal GET call
-        """
-        url = 'http://%s/%s/%s/%s?%s' % (config.API_HOST, config.API_SELECTOR, config.API_VERSION, 
-                                        method, params)
+        socket.setdefaulttimeout(orig_timeout)
 
-        f = opener.open(url)
-            
-    socket.setdefaulttimeout(orig_timeout)
-    
-    # try/except
-    response_dict = get_successful_response(f)
-    return response_dict
+        # try/except
+        response_dict = get_successful_response(f)
+        return response_dict
+
+    except IOError, e:
+        if hasattr(e, 'reason'):
+            print 'Failed to reach the Echo Nest server.'
+            print 'Reason: ', e.reason
+            raise EchoNestIOError(error=e.reason)
+        elif hasattr(e, 'code'):
+            print 'Echo Nest server couldn\'t fulfill the request.'
+            print 'Error code: ', e.code
+            raise EchoNestIOError(code=e.code)
+        else:
+            raise
 
 def oauthgetm(method, param_dict, socket_timeout=None):
     try:

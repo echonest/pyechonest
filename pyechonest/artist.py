@@ -334,9 +334,10 @@ class Artist(ArtistProxy):
             return self.cache['images']
         else:
             response = self.get_attribute('images', results=results, start=start, license=license)
+            total = response.get('total') or 0
             if results==15 and start==0 and license==None:
-                self.cache['images'] = ResultList(response['images'], 0, response['total'])
-            return ResultList(response['images'], start, response['total'])
+                self.cache['images'] = ResultList(response['images'], 0, total)
+            return ResultList(response['images'], start, total)
     
     images = property(get_images)    
 

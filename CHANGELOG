@@ -1,0 +1,76 @@
+Deprecate the legacy Playlist, move BetaPlaylist to Playlist, add in support for new session catalog feature
+
+more doc and .gitignore tweaks
+
+fix up some minor doc issues
+
+Delete old GITMOVE doc file.
+
+bump version + update CHANGELOG
+
+Bump version number for deletion of track/analyze methods.
+
+Fixup comment and code in get_song_type. Improve/update comments on audio profile.
+
+Eliminate track/analyze methods track_from_reanalyzing_id and track_from_reanalyzing_md5. Merge pull requests for timeout handling on profile calls. Fixup exception messages.
+
+Merge pull request #12 from andreasjansson/master
+
+Respect timeouts in track._wait_for_pending_track. Improve exception strings.
+respect timeout in _wait_for_pending_track
+
+This really bothered me, sorry
+
+list_catalogs instead of list, resultlist response from catalog/list
+
+bump version
+
+don't override builtin list, return ResultList for catalog list call
+
+Update changelog, bump version to 4.3
+
+Support for song_type in song and playlist;  bump version, update changelog
+
+bump version
+
+add a changelog, fix some spacing
+
+debugging:  The 'info' playlist call is unnecessary unless a user wants debug information
+
+exception-handling:  Encapsulate URL/HTTP errors in a new general class
+Added EchoNestException and EchoNestIOError so that a user can use a single point for exception handling.
+Note, I maintained the self.code, which was truncated before.
+
+Merge pull request #7 from psobot/patch-1
+
+Renamed call to non-existent function (_track_from_string) in exception handler.
+Fixed bad function name (_track_from_string)
+Make all track/analyze calls async.
+
+Guard against empty song results when getting an audio summary.
+
+Bump version to 4.2.21
+
+Support tracks that do not have audio analysis.
+
+Adding twitter functionality.
+
+Adding qupdate functionality and get_item_dicts().
+
+add manifest, bump release
+
+beta playlist support for new dynamic playlist api, move version parameter to a single place
+
+Added distribution parameter to static playlists, some extra info when errors are thrown, and basic playlist docs.
+
+Add speechiness
+
+Add sandbox methods.
+
+don't choke if an artist does not have songs.
+Don't send None to server
+
+Fix item_id bug.
+
+Add track_id parameters to playlist and song profile calls, add adventurousness, and catalog/read item ids.
+

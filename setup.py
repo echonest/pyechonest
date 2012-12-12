@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-__version__ = "4.2.21"
+__version__ = "7.0.0"
 
 # $Source$
 from sys import version
@@ -26,8 +26,8 @@ setup(
     long_description=read('README.md'),
     author='Tyler Williams',
     author_email='tyler@echonest.com',
-    maintainer='Tyler Williams',
-    maintainer_email='tyler@echonest.com',
+    maintainer='David DesRoches',
+    maintainer_email='delicious@echonest.com',
     url='https://github.com/echonest/pyechonest',
     download_url='https://github.com/echonest/pyechonest',
     package_dir={'pyechonest':'pyechonest'},
