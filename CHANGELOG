@@ -1,3 +1,15 @@
+Merge branch 'master' of github.com:echonest/pyechonest
+
+don't wrap in a try/except, let the exception bubble up
+
+Merge pull request #13 from sebpiq/master
+
+minor doc fix
+small doc fix
+dont crash if total isn't provided
+Add some current contributors
+bump version + update CHANGELOG
+
 Deprecate the legacy Playlist, move BetaPlaylist to Playlist, add in support for new session catalog feature
 
 more doc and .gitignore tweaks
