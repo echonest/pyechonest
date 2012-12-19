@@ -350,6 +350,9 @@ class Catalog(CatalogProxy):
     def skip(self, items, skips=None):
         return self.get_attribute("skip", item=items, skips=skips)
 
+    def keyvalues(self):
+        return self.get_attribute("keyvalues")['keyvalues']
+
     def favorite(self, items, favorite=None):
         if favorite != None:
             favorite = str(favorite).lower()
