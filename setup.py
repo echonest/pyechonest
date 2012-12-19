@@ -23,7 +23,11 @@ setup(
     name='pyechonest',
     version=__version__,
     description='Python interface to The Echo Nest APIs.',
-    long_description=read('README.md'),
+    long_description="""
+    Tap into The Echo Nest's Musical Brain for the best music search, information, recommendations and remix tools on the web.
+    Pyechonest is an open source Python library for the Echo Nest API.  With Pyechonest you have Python access to the entire set of API methods.
+    See: http://developer.echonest.com
+    """,
     author='Tyler Williams',
     author_email='tyler@echonest.com',
     maintainer='David DesRoches',
