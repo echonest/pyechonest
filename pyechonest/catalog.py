@@ -365,6 +365,17 @@ class Catalog(CatalogProxy):
 
     def rate(self, items, rating=None):
         return self.get_attribute("rate", item=items, rating=rating)
+        
+def get_catalog_by_name(name):
+    """
+    Grabs a catalog by name, if its there on the api key.
+    Otherwise, an error is thrown (mirroring the API)
+    """
+    kwargs = {
+            'name' : name,
+        }
+    result = util.callm("%s/%s" % ('catalog', 'profile'), kwargs)
+    return Catalog(**util.fix(result['response']['catalog']))
 
 def list_catalogs(results=30, start=0):
     """
