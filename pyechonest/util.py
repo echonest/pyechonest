@@ -25,7 +25,6 @@ try:
 except ImportError:
     import simplejson as json
 
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 TYPENAMES = (
     ('AR', 'artist'),
