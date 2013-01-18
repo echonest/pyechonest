@@ -309,7 +309,7 @@ class DeprecatedPlaylist(DeprecatedPlaylistProxy):
 
 
 def basic(type='artist-radio', artist_id=None, artist=None, song_id=None, song=None, track_id=None, dmca=False,
-          results=15, buckets=None, limit=False):
+          results=15, buckets=None, limit=False,genres=None,):
     """Get a basic playlist
     
     Args:
@@ -342,6 +342,8 @@ def basic(type='artist-radio', artist_id=None, artist=None, song_id=None, song=N
     kwargs = locals()
     kwargs['bucket'] = kwargs['buckets']
     del kwargs['buckets']
+    kwargs['genre'] = kwargs['genres']
+    del kwargs['genres']
 
     result = util.callm("%s/%s" % ('playlist', 'basic'), kwargs)
     return [Song(**util.fix(s_dict)) for s_dict in result['response']['songs']]
@@ -356,7 +358,7 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
            min_latitude=None, max_latitude=None, adventurousness=0.2, mode=None, key=None, buckets=None, sort=None,
            limit=False, seed_catalog=None, source_catalog=None, rank_type=None, test_new_things=None,
            artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None,
-           artist_end_year_before=None, dmca=False, distribution=None, song_type=None):
+           artist_end_year_before=None, dmca=False, distribution=None, song_type=None, genres=None):
     """Get a static playlist
     
     Args:
@@ -491,6 +493,8 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
     kwargs = locals()
     kwargs['bucket'] = kwargs['buckets'] or []
     del kwargs['buckets']
+    kwargs['genre'] = kwargs['genres']
+    del kwargs['genres']
 
     result = util.callm("%s/%s" % ('playlist', 'static'), kwargs)
     return [Song(**util.fix(s_dict)) for s_dict in result['response']['songs']]
@@ -515,7 +519,7 @@ class Playlist(PlaylistProxy):
             mode=None, key=None, buckets=None, sort=None, limit=False, seed_catalog=None, source_catalog=None,
             rank_type=None, test_new_things=None, artist_start_year_after=None, artist_start_year_before=None,
             artist_end_year_after=None, artist_end_year_before=None, dmca=False, distribution=None, song_type=None,
-            session_catalog=None):
+            session_catalog=None,genres=None,):
 
         limit = str(limit).lower()
         dmca = str(dmca).lower()
@@ -572,7 +576,8 @@ class Playlist(PlaylistProxy):
             dmca=dmca,
             distribution=distribution,
             song_type=song_type,
-            session_catalog=session_catalog
+            session_catalog=session_catalog,
+            genres=genres
         )
 
 
@@ -674,7 +679,8 @@ class Playlist(PlaylistProxy):
         artist_end_year_before=None,
         dmca=False,
         distribution=None,
-        song_type=None
+        song_type=None,
+        genres=None,
     ):
         limit = str(limit).lower()
         dmca = str(dmca).lower()
@@ -732,7 +738,8 @@ class Playlist(PlaylistProxy):
             artist_end_year_before=artist_end_year_before,
             dmca=dmca,
             distribution=distribution,
-            song_type=song_type
+            song_type=song_type,
+            genres=genres,
         )
 
     def steer(
@@ -768,7 +775,8 @@ class Playlist(PlaylistProxy):
         description=None,
         style=None,
         mood=None,
-        song_type=None
+        song_type=None,
+        genres=None
         ):
 
         response = self.get_attribute(
@@ -805,7 +813,8 @@ class Playlist(PlaylistProxy):
             description=description,
             style=style,
             mood=mood,
-            song_type=song_type
+            song_type=song_type,
+            genres=genres,
             )
 
         self.cache['lookahead'] = []
