@@ -243,12 +243,8 @@ def callm(method, param_dict, POST=False, socket_timeout=None, data=None):
 
     except IOError, e:
         if hasattr(e, 'reason'):
-            print 'Failed to reach the Echo Nest server.'
-            print 'Reason: ', e.reason
             raise EchoNestIOError(error=e.reason)
         elif hasattr(e, 'code'):
-            print 'Echo Nest server couldn\'t fulfill the request.'
-            print 'Error code: ', e.code
             raise EchoNestIOError(code=e.code)
         else:
             raise

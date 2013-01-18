@@ -1,3 +1,7 @@
+add support for Catalog.keyvalues(); version upped to 7.1.0
+
+CHANGELOG and setup.py updates
+
 Merge branch 'master' of github.com:echonest/pyechonest
 
 don't wrap in a try/except, let the exception bubble up
