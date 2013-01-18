@@ -131,6 +131,8 @@ class PlaylistProxy(GenericProxy):
         else:
             buckets = buckets or []
             kwargs['bucket'] = buckets
+            kwargs['genre'] = kwargs['genres']
+            del kwargs['genres']
             kwargs = dict((str(k), v) for (k,v) in kwargs.iteritems())
             
             if not all(ca in kwargs for ca in core_attrs):
