@@ -889,6 +889,23 @@ def list_terms(type):
     kwargs = {'type': type}
     result = util.callm("%s/%s" % ('artist', 'list_terms'), kwargs)
     return result['response']['terms']
+    
+def list_genres():
+    """Get a list of best genres to use with genre-radio playlisting
+    
+    Args:
+    
+    Example:
+    
+    >>> best_terms = artist.list_genres()
+    >>> best_terms
+    [{u'name': u'pop'},
+     {u'name': u'rock'},
+     {u'name': u'country'},
+    """
+    kwargs = {}
+    result = util.callm("%s/%s" % ('artist', 'list_genres'), kwargs)
+    return result['response']['genres']
 
 def similar(names=None, ids=None, start=0, results=15, buckets=None, limit=False, max_familiarity=None, min_familiarity=None,
             max_hotttnesss=None, min_hotttnesss=None, seed_catalog=None,artist_start_year_before=None, \
