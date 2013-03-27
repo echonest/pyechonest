@@ -22,6 +22,17 @@ import artist, song
 # deal with datetime in json
 dthandler = lambda obj: obj.isoformat() if isinstance(obj, datetime.datetime) else None
 
+def create_catalog_by_name(name, T="general"):
+    """
+    Creates a catalog object, with a given name. Does not check to see if the catalog already exists.
+
+    Create a catalog object like
+    """
+    result = util.callm("catalog/create", {}, POST=True, 
+                            data={"name":name, "type":T})
+    result = result['response']
+    return Catalog(result['id'], **dict( (k,result[k]) for k in ('name', 'type')))
+
 class Catalog(CatalogProxy):
     """
     A Catalog object
