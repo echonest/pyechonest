@@ -1,3 +1,27 @@
+Rev 7.1.0 to 7.1.1
+
+Merge pull request #18 from njl/create_catalog_by_name_factory_function
+
+Factory function to create a catalog by name, avoiding the profile call.
+Adds a factory function to create a catalog by name, avoiding the profile call.
+
+add list_genres
+genres fix in proxies.py
+genres field
+Merge branch 'master' of github.com:echonest/pyechonest
+
+do not do logger.basicConfig
+
+Merge pull request #14 from alex/patch-1
+
+Removed print statements
+
+Update pyechonest/catalog.py
+
+get_catalog_by_name
+Returning cat.
+fix up long_description, README.md
+
 add support for Catalog.keyvalues(); version upped to 7.1.0
 
 CHANGELOG and setup.py updates
