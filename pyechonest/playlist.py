@@ -830,6 +830,8 @@ class Playlist(PlaylistProxy):
         play_song=None,
         unplay_song=None,
         rate_song=None,
+        invalidate_song=None,
+        invalidate_artist=None,
         ):
 
         response = self.get_attribute(
@@ -843,6 +845,8 @@ class Playlist(PlaylistProxy):
             play_song=play_song,
             unplay_song=unplay_song,
             rate_song=rate_song,
+            invalidate_song=invalidate_song,
+            invalidate_artist=invalidate_artist,
             )
 
         self.cache['lookahead'] = []
