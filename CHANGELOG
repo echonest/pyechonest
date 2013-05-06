@@ -1,3 +1,6 @@
+invalidate_song _artist
+update changelog and configuration for version 7.1.1
+
 Rev 7.1.0 to 7.1.1
 
 Merge pull request #18 from njl/create_catalog_by_name_factory_function
@@ -15,7 +18,9 @@ do not do logger.basicConfig
 Merge pull request #14 from alex/patch-1
 
 Removed print statements
+Removed print statements
 
+It's inappropriate for a library to be printing to stdout.
 Update pyechonest/catalog.py
 
 get_catalog_by_name
