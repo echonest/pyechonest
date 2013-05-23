@@ -101,26 +101,6 @@ class CatalogProxy(GenericProxy):
         return super(CatalogProxy, self).post_attribute(*args, **kwargs)
     
 
-class DeprecatedPlaylistProxy(GenericProxy):
-    def __init__(self, session_id, buckets = None, **kwargs):
-        super(DeprecatedPlaylistProxy, self).__init__()
-        buckets = buckets or []
-        self._object_type = 'playlist'
-        kwargs = dict((str(k), v) for (k,v) in kwargs.iteritems())
-        if session_id:
-            kwargs['session_id'] = session_id
-        # the following are integral to all playlist objects... the rest is up to you!
-        core_attrs = ['session_id']
-        if not all(ca in kwargs for ca in core_attrs):
-            profile = self.get_attribute('dynamic', **kwargs)
-            kwargs.update(profile)
-        [self.__dict__.update({ca:kwargs.pop(ca)}) for ca in core_attrs if ca in kwargs]        
-        if not session_id:
-            self.cache.update(kwargs)
-    
-    def get_attribute(self, *args, **kwargs):
-        return super(DeprecatedPlaylistProxy, self).get_attribute(*args, **kwargs)
-    
 class PlaylistProxy(GenericProxy):
     def __init__(self, session_id = None, buckets = None, **kwargs):
         super(PlaylistProxy, self).__init__()
