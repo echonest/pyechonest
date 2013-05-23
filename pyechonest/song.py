@@ -272,6 +272,52 @@ class Song(SongProxy):
             self.cache['foreign_ids'] = self.cache.get('foreign_ids', []) + foreign_ids
         cval = filter(lambda d: d.get('catalog') == idspace, self.cache.get('foreign_ids'))
         return cval[0].get('foreign_id') if cval else None
+
+    def get_song_discovery(self, cache=True):
+        """
+        Args:
+            cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+
+        Returns:
+            A float representing a song's discovery rank.
+
+        Example:
+            >>> s = song.Song('SOQKVPH12A58A7AF4D')
+            >>> s.get_song_discovery()
+            0.639626025843539
+            >>> s.song_discovery
+            0.639626025843539
+            >>>
+        """
+        if not (cache and ('song_discovery' in self.cache)):
+            response = self.get_attribute('profile', bucket='song_discovery')
+            self.cache['song_discovery'] = response['songs'][0]['song_discovery']
+        return self.cache['song_discovery']
+
+    song_discovery = property(get_song_discovery)
+
+    def get_song_currency(self, cache=True):
+        """
+        Args:
+            cache (bool): A boolean indicating whether or not the cached value should be used (if available). Defaults to True.
+        
+        Returns:
+            A float representing a song's currency rank.
+            
+        Example:
+            >>> s = song.Song('SOQKVPH12A58A7AF4D')
+            >>> s.get_song_currency()
+            0.639626025843539
+            >>> s.song_currency
+            0.639626025843539
+            >>>
+        """
+        if not (cache and ('song_currency' in self.cache)):
+            response = self.get_attribute('profile', bucket='song_currency')
+            self.cache['song_currency'] = response['songs'][0]['song_currency']
+        return self.cache['song_currency']
+
+    song_currency = property(get_song_currency)
     
     def get_tracks(self, catalog, cache=True):
         """Get the tracks for a song given a catalog.
@@ -413,97 +459,70 @@ def identify(filename=None, query_obj=None, code=None, artist=None, title=None, 
         return [Song(**util.fix(s_dict)) for s_dict in result['response'].get('songs',[])]
 
 
-def search(title=None, artist=None, artist_id=None, combined=None, description=None, style=None, mood=None, \
-                results=None, start=None, max_tempo=None, min_tempo=None, \
-                max_duration=None, min_duration=None, max_loudness=None, min_loudness=None, \
-                artist_max_familiarity=None, artist_min_familiarity=None, artist_max_hotttnesss=None, \
-                artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, mode=None, \
-                min_energy=None, max_energy=None, min_danceability=None, max_danceability=None, \
-                key=None, max_latitude=None, min_latitude=None, max_longitude=None, min_longitude=None, \
-                sort=None, buckets=None, limit=False, test_new_things=None, rank_type=None,
-                artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, \
-                artist_end_year_before=None,song_type=None):
+def search(title=None, artist=None, artist_id=None, combined=None, description=None, style=None, mood=None,
+           results=None, start=None, max_tempo=None, min_tempo=None,
+           max_duration=None, min_duration=None, max_loudness=None, min_loudness=None,
+           artist_max_familiarity=None, artist_min_familiarity=None, artist_max_hotttnesss=None,
+           artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, mode=None,
+           min_energy=None, max_energy=None, min_danceability=None, max_danceability=None,
+           key=None, max_latitude=None, min_latitude=None, max_longitude=None, min_longitude=None,
+           sort=None, buckets=None, limit=False, test_new_things=None, rank_type=None,
+           artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None,
+           artist_end_year_before=None,song_type=None,min_song_currency=None,max_song_currency=None,
+           min_song_discovery=None, max_song_discovery=None, max_acousticness=None, min_acousticness=None,
+           max_liveness=None, min_liveness=None, max_speechiness=None, min_speechiness=None,
+           max_valence=None, min_valence=None):
     """Search for songs by name, description, or constraint.
 
     Args:
 
     Kwargs:
         title (str): the name of a song
-        
         artist (str): the name of an artist
-
         artist_id (str): the artist_id
-        
         combined (str): the artist name and song title
-        
         description (str): A string describing the artist and song
-        
         style (str): A string describing the style/genre of the artist and song
-
         mood (str): A string describing the mood of the artist and song
-        
         results (int): An integer number of results to return
-        
+        max_acousticness (float): The max acousticness of song results
+        min_acousticness (float): The min acousticness of song results
         max_tempo (float): The max tempo of song results
-        
         min_tempo (float): The min tempo of song results
-        
         max_duration (float): The max duration of song results
-        
         min_duration (float): The min duration of song results
-
+        max_liveness (float): The max liveness of song results
+        min_liveness (float): The min liveness of song results
         max_loudness (float): The max loudness of song results
-        
         min_loudness (float): The min loudness of song results
-        
+        max_speechiness (float): The max speechiness of song results        
+        min_speechiess (float): The min speechiness of song results
+        max_valence (float): The max valence of song results
+        min_valence (float): The min valence of song results
         artist_max_familiarity (float): A float specifying the max familiarity of artists to search for
-
         artist_min_familiarity (float): A float specifying the min familiarity of artists to search for
-
         artist_max_hotttnesss (float): A float specifying the max hotttnesss of artists to search for
-
         artist_min_hotttnesss (float): A float specifying the max hotttnesss of artists to search for
-
         song_max_hotttnesss (float): A float specifying the max hotttnesss of songs to search for
-
         song_min_hotttnesss (float): A float specifying the max hotttnesss of songs to search for
-        
         max_energy (float): The max energy of song results
-
         min_energy (float): The min energy of song results
-
         max_dancibility (float): The max dancibility of song results
-
         min_dancibility (float): The min dancibility of song results
-        
         mode (int): 0 or 1 (minor or major)
-        
         key (int): 0-11 (c, c-sharp, d, e-flat, e, f, f-sharp, g, a-flat, a, b-flat, b)
-        
         max_latitude (float): A float specifying the max latitude of artists to search for
-        
         min_latitude (float): A float specifying the min latitude of artists to search for
-        
         max_longitude (float): A float specifying the max longitude of artists to search for
-
         min_longitude (float): A float specifying the min longitude of artists to search for                        
-
         sort (str): A string indicating an attribute and order for sorting the results
-        
         buckets (list): A list of strings specifying which buckets to retrieve
-
         limit (bool): A boolean indicating whether or not to limit the results to one of the id spaces specified in buckets
-
         rank_type (str): A string denoting the desired ranking for description searches, either 'relevance' or 'familiarity
-        
         artist_start_year_before (int): Returned songs's artists will have started recording music before this year.
-        
         artist_start_year_after (int): Returned songs's artists will have started recording music after this year.
-        
         artist_end_year_before (int): Returned songs's artists will have stopped recording music before this year.
-        
         artist_end_year_after (int): Returned songs's artists will have stopped recording music after this year.
-
         song_type (string): A string or list of strings specifiying the type of song to search for.
 
     Returns:
