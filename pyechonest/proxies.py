@@ -119,7 +119,7 @@ class PlaylistProxy(GenericProxy):
                 kwargs = dict((str(k), v) for (k,v) in kwargs.iteritems())
                 profile = self.get_attribute('create', **kwargs)
                 kwargs.update(profile)
-            [self.__dict__.update({ca:kwargs.pop(ca)}) for ca in core_attrs if ca in kwargs]        
+            [self.__dict__.update({ca:kwargs.pop(ca)}) for ca in core_attrs if ca in kwargs]
             self.cache.update(kwargs)
         
     def get_attribute(self, method, **kwargs):
@@ -169,6 +169,7 @@ class TrackProxy(GenericProxy):
         super(TrackProxy, self).__init__()
         self.id = identifier
         self.md5 = md5
+        self.analysis_url = None
         self._object_type = 'track'
         self.__dict__.update(properties)
     
