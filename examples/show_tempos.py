@@ -1,21 +1,19 @@
-# Shows the tempos for all of the songs in a director
+# Shows the tempos for all of the songs in a directory
 # requires eyeD3, available from http://eyed3.nicfit.net/
 
 import sys
 import os
-import eyeD3
 import tempo
 
+from pyechonest import track
 
 def show_tempo(mp3):
     "given an mp3, print out the artist, title and tempo of the song"
-    tag = eyeD3.Tag()
-    tag.link(mp3)
-    my_tempo = tempo.get_tempo(tag.getArtist(), tag.getTitle())
+    pytrack = track.track_from_filename(mp3)
     print 'File:  ', mp3
-    print 'Artist:', tag.getArtist()
-    print 'Title: ', tag.getTitle()
-    print 'Tempo: ', my_tempo
+    print 'Artist:', pytrack.artist if hasattr(pytrack, 'artist') else 'Unknown'
+    print 'Title: ', pytrack.title if hasattr(pytrack, 'title') else 'Unknown'
+    print 'Tempo: ', pytrack.tempo 
     print
 
 

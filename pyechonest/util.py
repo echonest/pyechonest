@@ -55,7 +55,7 @@ class MyErrorProcessor(urllib2.HTTPErrorProcessor):
         code = response.code
         if config.TRACE_API_CALLS:
             logger.info("took %2.2fs: (%i)" % (time.time()-request.start_time,code))
-        if code in [200, 400, 401, 403, 500]:
+        if code/100 in (2, 4, 5):
             return response
         else:
             urllib2.HTTPErrorProcessor.http_response(self, request, response)

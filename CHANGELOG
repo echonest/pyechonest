@@ -1,3 +1,14 @@
+Rev 7.1.1 to 8.0.0
+
+Delete old deprecated playlist functions.
+Support new Track attributes 'valence' and 'acousticness'.
+No longer return Track attributes as 0 if they don't exist on the track.
+Audio attributes can now be None.
+No longer always get track analysis details (bars, beats, meta, etc.). You now
+need to call Track.get_analysis() to populate those attributes. See track.py for
+details. (This makes track.track_from_XXX methods much faster for most uses.)
+Handle all 2XX, 4XX, and 5XX response codes from the API.
+
 Rev 7.1.0 to 7.1.1
 
 Merge pull request #18 from njl/create_catalog_by_name_factory_function

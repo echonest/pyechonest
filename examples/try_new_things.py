@@ -113,7 +113,7 @@ def lookup_seeds(seed_artist_names):
     seed_ids = []
     for artist_name in seed_artist_names:
         try:
-            seed_ids.append("-%s" % (artist.Artist(artist_name).id,))
+            seed_ids.append("%s" % (artist.Artist(artist_name).id,))
         except Exception:
             logger.info('artist "%s" not found.' % (artist_name,))
             # we could try to do full artist search here
@@ -125,7 +125,7 @@ def lookup_seeds(seed_artist_names):
 def find_playlist(seed_artist_ids, playable=False):
     if playable:
         logger.info("finding playlist with audio...")
-        p = playlist.static(type='artist-radio', artist_id=seed_artist_ids, variety=1, buckets=['id:7digital', 'tracks'], limit=True)
+        p = playlist.static(type='artist-radio', artist_id=seed_artist_ids, variety=1, buckets=['id:7digital-US', 'tracks'], limit=True)
     else:
         logger.info("finding playlist without audio...")
         p = playlist.static(type='artist-radio', artist_id=seed_artist_ids, variety=1)
@@ -180,7 +180,7 @@ if __name__ == "__main__":
         title = s.title
         url = ""
         if options.audio:
-            url = s.get_tracks('7digital', [{}])[0].get('preview_url')
+            url = s.get_tracks('7digital-US', [{}])[0].get('preview_url')
         tuple_plist.append((name,title,url))
 
     # write to stdout or file specified
