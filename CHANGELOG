@@ -8,6 +8,7 @@ No longer always get track analysis details (bars, beats, meta, etc.). You now
 need to call Track.get_analysis() to populate those attributes. See track.py for
 details. (This makes track.track_from_XXX methods much faster for most uses.)
 Handle all 2XX, 4XX, and 5XX response codes from the API.
+Fix some examples for Tracks from mp3s. Use 7digital-US as preview catalog.
 
 Rev 7.1.0 to 7.1.1
 
