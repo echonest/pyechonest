@@ -11,7 +11,7 @@ def get_tempo(artist, title):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) <> 3:
+    if len(sys.argv) != 3:
         print "Usage: python tempo.py 'artist name' 'song title'"
     else:
         tempo = get_tempo(sys.argv[1], sys.argv[2])
