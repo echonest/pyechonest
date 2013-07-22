@@ -83,8 +83,15 @@ class EchoNestAPIError(EchoNestException):
     """
     API Specific Errors.
     """
-    def __init__(self, code, message, headers):
-        formatted_message = ('Echo Nest API Error %d: %s' % (code, message),)
+    def __init__(self, code, message, headers, http_status):
+        if http_status:
+            http_status_message_part = ' [HTTP %d]' % http_status
+        else:
+            http_status_message_part = ''
+        self.http_status = http_status
+
+        formatted_message = ('Echo Nest API Error %d: %s%s' %
+                             (code, message, http_status_message_part),)
         super(EchoNestAPIError, self).__init__(code, formatted_message, headers)
 
 class EchoNestIOError(EchoNestException):
@@ -96,10 +103,14 @@ class EchoNestIOError(EchoNestException):
         super(EchoNestIOError, self).__init__(code, formatted_message, headers)
 
 def get_successful_response(raw_json):
-    if hasattr(raw_json,'headers'):
+    if hasattr(raw_json, 'headers'):
         headers = raw_json.headers
     else:
         headers = {'Headers':'No Headers'}
+    if hasattr(raw_json, 'getcode'):
+        http_status = raw_json.getcode()
+    else:
+        http_status = None
     raw_json = raw_json.read()
     try:
         response_dict = json.loads(raw_json)
@@ -108,12 +119,12 @@ def get_successful_response(raw_json):
         message = status_dict['message']
         if (code != 0):
             # do some cute exception handling
-            raise EchoNestAPIError(code, message, headers)
+            raise EchoNestAPIError(code, message, headers, http_status)
         del response_dict['response']['status']
         return response_dict
     except ValueError:
         logger.debug(traceback.format_exc())
-        raise EchoNestAPIError(-1, "Unknown error.", headers)
+        raise EchoNestAPIError(-1, "Unknown error.", headers, http_status)
 
 
 # These two functions are to deal with the unknown encoded output of codegen (varies by platform and ID3 tag)
