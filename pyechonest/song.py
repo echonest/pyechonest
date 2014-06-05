@@ -263,6 +263,7 @@ class Song(SongProxy):
         
         >>> 
         """
+        idspace = util.map_idspace(idspace)
         if not (cache and ('foreign_ids' in self.cache) and filter(lambda d: d.get('catalog') == idspace, self.cache['foreign_ids'])):
             response = self.get_attribute('profile', bucket=['id:'+idspace])
             rsongs = response['songs']
@@ -352,7 +353,7 @@ class Song(SongProxy):
             existing_track_ids = [tr['foreign_id'] for tr in self.cache['tracks']]
             new_tds = filter(lambda tr: tr['foreign_id'] not in existing_track_ids, potential_tracks)
             self.cache['tracks'].extend(new_tds)
-        return filter(lambda tr: tr['catalog']==catalog, self.cache['tracks'])
+        return filter(lambda tr: tr['catalog']==util.map_idspace(catalog), self.cache['tracks'])
 
 
 def identify(filename=None, query_obj=None, code=None, artist=None, title=None, release=None, duration=None, genre=None, buckets=None, version=None, codegen_start=0, codegen_duration=30):

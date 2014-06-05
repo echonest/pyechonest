@@ -346,3 +346,8 @@ def fix(x):
     assert(isinstance(x,dict))
     return dict((str(k), v) for (k,v) in x.iteritems())
 
+
+def map_idspace(input_idspace):
+    if input_idspace == 'spotify-WW' or input_idspace == 'spotifyv2-ZZ':
+        return 'spotify'
+    return input_idspace

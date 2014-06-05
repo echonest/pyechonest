@@ -252,7 +252,8 @@ class Artist(ArtistProxy):
             response = self.get_attribute('profile', bucket=['id:'+idspace])
             foreign_ids = response['artist'].get("foreign_ids", [])
             self.cache['foreign_ids'] = self.cache.get('foreign_ids', []) + foreign_ids
-        cval = filter(lambda d: d.get('catalog') == idspace, self.cache.get('foreign_ids'))
+        cval = filter(lambda d: d.get('catalog') == util.map_idspace(idspace),
+                      self.cache.get('foreign_ids'))
         return cval[0].get('foreign_id') if cval else None
     
     def get_twitter_id(self, cache=True):
