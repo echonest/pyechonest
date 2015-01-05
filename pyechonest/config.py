@@ -46,8 +46,3 @@ CALL_TIMEOUT = 10
 """
 The API call timeout (seconds)
 """
-
-CODEGEN_BINARY_OVERRIDE = None
-"""
-Location of your codegen binary. If not given, we will guess codegen.platform-architecture on your system path, e.g. codegen.Darwin, codegen.Linux-i386
-"""

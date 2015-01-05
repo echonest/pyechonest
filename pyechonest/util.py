@@ -127,55 +127,6 @@ def get_successful_response(raw_json):
         raise EchoNestAPIError(-1, "Unknown error.", headers, http_status)
 
 
-# These two functions are to deal with the unknown encoded output of codegen (varies by platform and ID3 tag)
-def reallyunicode(s, encoding="utf-8"):
-    if type(s) is StringType:
-        for args in ((encoding,), ('utf-8',), ('latin-1',), ('ascii', 'replace')):
-            try:
-                s = s.decode(*args)
-                break
-            except UnicodeDecodeError:
-                continue
-    if type(s) is not UnicodeType:
-        raise ValueError, "%s is not a string at all." % s
-    return s
-
-def reallyUTF8(s):
-    return reallyunicode(s).encode("utf-8")
-
-def codegen(filename, start=0, duration=30):
-    # Run codegen on the file and return the json. If start or duration is -1 ignore them.
-    cmd = config.CODEGEN_BINARY_OVERRIDE
-    if not cmd:
-        # Is this is posix platform, or is it windows?
-        if hasattr(os, 'uname'):
-            if(os.uname()[0] == "Darwin"):
-                cmd = "codegen.Darwin"
-            else:
-                cmd = 'codegen.'+os.uname()[0]+'-'+os.uname()[4]
-        else:
-            cmd = "codegen.windows.exe"
-
-    if not os.path.exists(cmd):
-        raise Exception("Codegen binary not found.")
-
-    command = cmd + " \"" + filename + "\" " 
-    if start >= 0:
-        command = command + str(start) + " "
-    if duration >= 0:
-        command = command + str(duration)
-        
-    p = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    (json_block, errs) = p.communicate()
-    json_block = reallyUTF8(json_block)
-
-    try:
-        return json.loads(json_block)
-    except ValueError:
-        logger.debug("No JSON object came out of codegen: error was %s" % (errs))
-        return None
-
-
 def callm(method, param_dict, POST=False, socket_timeout=None, data=None):
     """
     Call the api! 
