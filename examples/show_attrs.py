@@ -20,17 +20,18 @@ def _is_audio(f):
     ext = ext[1:] # drop leading '.'
     return ext in AUDIO_EXTENSIONS
     
-def _show_one(audiofile):
-    "given an mp3, print out the artist, title and tempo of the song"
-    print 'File:        ', audiofile
-    pytrack = track.track_from_filename(audiofile)
+def _show_one(audio_file):
+    "given an audio file, print out the artist, title and some audio attributes of the song"
+    print 'File:        ', audio_file
+    pytrack = track.track_from_filename(audio_file)
     print 'Artist:      ', pytrack.artist if hasattr(pytrack, 'artist') else 'Unknown'
     print 'Title:       ', pytrack.title if hasattr(pytrack, 'title') else 'Unknown'
+    print 'Track ID:    ', pytrack.id
     print 'Tempo:       ', pytrack.tempo
     print 'Energy:       %1.3f %s' % (pytrack.energy, _bar(pytrack.energy))
     if not pytrack.valence:
         # Track hasn't had latest attributes computed. Force an upload.
-        pytrack = track.track_from_filename(audiofile, force_upload=True)
+        pytrack = track.track_from_filename(audio_file, force_upload=True)
     print 'Valence:      %1.3f %s' % (pytrack.valence, _bar(pytrack.valence)) 
     print 'Acousticness: %1.3f %s' % (pytrack.acousticness, _bar(pytrack.acousticness))
     print
