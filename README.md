@@ -12,7 +12,7 @@ Pyechonest is an open source Python library for the Echo Nest API.  With Pyechon
 There are a few different ways you can install pyechonest:
 
 * Use setuptools: `easy_install -U pyechonest`
-* Download the zipfile from the [downloads](https://github.com/echonest/pyechonest/archives/master) page and install it. 
+* Download the zipfile from the [releases](https://github.com/echonest/pyechonest/releases) page and install it. 
 * Checkout the source: `git clone git://github.com/echonest/pyechonest.git` and install it yourself.
    
 ## Getting Started
@@ -83,9 +83,9 @@ print 'tempo:',karma_police.audio_summary['tempo'],'duration:',karma_police.audi
 Get a song's audio_url and analysis_url:
 ```python
 from pyechonest import song
-ss_results = song.search(artist='the national', title='slow show', buckets=['id:7digital', 'tracks'], limit=True)
+ss_results = song.search(artist='the national', title='slow show', buckets=['id:7digital-US', 'tracks'], limit=True)
 slow_show = ss_results[0]
-ss_tracks = slow_show.get_tracks('7digital')
+ss_tracks = slow_show.get_tracks('7digital-US')
 print ss_tracks[0].get('preview_url')
 ```
 
