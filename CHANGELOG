@@ -1,4 +1,4 @@
-Rev 8.0.2 to 8.1.0
+Rev 8.0.2 to 9.0.0
 
 Eliminate song.identify, util.codegen, and related utilities now that the song/identify API is no longer supported.
 

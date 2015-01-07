@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-__version__ = "8.1.0"
+__version__ = "9.0.0"
 
 # $Source$
 from sys import version
