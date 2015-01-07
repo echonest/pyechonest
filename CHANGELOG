@@ -1,26 +1,42 @@
-Rev 8.0.2 to 9.0.0
+Bump version to 9.0.0 since we're eliminating an API.
 
-Eliminate song.identify, util.codegen, and related utilities now that the song/identify API is no longer supported.
+Update for release 8.1.0.
 
-Rev 8.0.1 to 8.0.2
+Remove song.identify, util.codegen, and related utilities. With the elimination of the song/identify API, these are no longer supported.
 
-Support for spotify id space.
+Merge branch 'master' of github.com:echonest/pyechonest
 
-Rev 8.0.0 to 8.0.1
+Update show attrs example for more audio attributes.
 
-EchoNestAPIError now reports the HTTP status code of the failed request.
+Bump version
 
-Rev 7.1.1 to 8.0.0
+Map spotify idspaces
 
-Delete old deprecated playlist functions.
-Support new Track attributes 'valence' and 'acousticness'.
-No longer return Track attributes as 0 if they don't exist on the track.
-Audio attributes can now be None.
-No longer always get track analysis details (bars, beats, meta, etc.). You now
-need to call Track.get_analysis() to populate those attributes. See track.py for
-details. (This makes track.track_from_XXX methods much faster for most uses.)
-Handle all 2XX, 4XX, and 5XX response codes from the API.
-Fix some examples for Tracks from mp3s. Use 7digital-US as preview catalog.
+Updating links to downloads
+
+no more 7digital alone bucket
+Surface HTTP status codes in EchoNestAPIError; bump version to 8.0.1
+
+Rename show_tempos to show_attrs and highlight more attributes. Fix some pylint noise.
+
+Add more notes about changes in 8.0.0
+
+Touch versions in conf.py
+
+Update CHANGELOG for 8.0.0 changes. Fix examples to work without eyeD3 and to use 7digital-US catalog. Handle all 2xx, 4xx, 5xx response codes.
+
+Don't create detailed analysis unless requested. Saves a bunch of time. Get attributes from the audio_summary, not by name.
+
+Roll version to 8.0.0 since we are deleting the deprecated playlist methods.
+
+Bump version to 7.3.0 for playlist deletions, new audio attributes.
+
+Integrate valence, acousticness attributes for songs and tracks.
+
+remove DeprecatedPlaylist
+
+invalidate_song _artist
+update changelog and configuration for version 7.1.1
 
 Rev 7.1.0 to 7.1.1
 
@@ -39,7 +55,9 @@ do not do logger.basicConfig
 Merge pull request #14 from alex/patch-1
 
 Removed print statements
+Removed print statements
 
+It's inappropriate for a library to be printing to stdout.
 Update pyechonest/catalog.py
 
 get_catalog_by_name
@@ -137,4 +155,152 @@ Don't send None to server
 Fix item_id bug.
 
 Add track_id parameters to playlist and song profile calls, add adventurousness, and catalog/read item ids.
+
+static playlist method static now accepts dmca parameter
+
+Edited pyechonest/catalog.py via GitHub
+
+Merge pull request #1 from echonest/setup-readme-fix
+
+Fix README.md name in setup.py.
+Fix README.md name in setup.py.
+
+update doc source
+
+Merge branch 'master' of github.com:echonest/pyechonest
+
+Edited README.md via GitHub
+update gitmove
+
+update with info about gh-pages
+
+build documentation
+
+added gh-pages submodule
+
+remove submodule
+
+updated submodule?
+
+Merge branch 'master' of github.com:echonest/pyechonest
+
+Edited README.md via GitHub
+update
+
+spell scotty's name correctly, know the alphabet, re-order readme a teensy bit
+
+better example
+
+fix up readme a bit
+
+add GITMOVE info
+
+mkrelease works for real now
+
+update docs
+
+increment version for initial github release
+
+update setup.py with new github deets
+
+fix mkrelease script for git
+
+bringing built html into project
+
+add gh-pages submodule
+
+remove doc/build/html
+
+Add version parameter to song/identify, new release
+
+
+Increment version number.
+
+Bugfix for de-pluralization of the bucket parameter.
+
+--username
+
+--username
+
+add back in until we fix remix
+
+updated to include artist.list_terms()
+
+
+updated docs for new version
+
+
+mimetypes
+
+
+latest version updates
+
+
+update 4.2.10
+
+
+updates
+
+
+increment minor version
+
+rm old gen_docs script, fix sphinx docs to compile cleanly
+
+don't munge socket timeout
+
+by default, use any license type 
+
+
+propset for html viewing
+
+add clean docs
+
+remove docs to add clean set
+
+release-maker script
+
+
+updated version # and catalog.py
+
+
+remove old documentation in favor of sphinx docs
+
+remove old documentation in favor of sphinx docs
+
+reformat
+
+fix examples and README
+
+update to 4.2.7
+
+
+updates
+
+
+version no
+
+
+mime types
+
+
+mime type for javascript
+
+
+newest release version no
+
+
+mime types for doc
+
+
+propset html for docs
+
+
+pyechonest documentation
+
+
+removed docs
+
+
+pyechonest documentation
+
 
